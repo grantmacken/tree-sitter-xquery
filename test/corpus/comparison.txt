@@ -1,0 +1,65 @@
+3.7 Comparison Expressions
+==================
+Comparison - general comp 
+==================
+
+2 < 3
+
+---
+
+(module
+ (comparison_expr 
+  (integer_literal) 
+  (integer_literal)
+ ))
+
+==================
+Comparison -  Value comp 
+==================
+
+2 lt 3
+
+---
+
+(module
+ (comparison_expr 
+  (integer_literal) 
+  (integer_literal)
+ ))
+
+
+==================
+ -  xxnode comp TODO
+==================
+
+a is b
+
+---
+
+
+(module 
+ (comparison_expr (identifier)
+)
+
+
+---
+
+(module 
+  (numeric_literal) (value_comp_op) (numeric_literal)
+)
+
+==================
+Unary
+==================
+
+-2 div 2
+
+---
+
+(module 
+ (multiplicative_expr
+  (unary_expr (integer_literal))
+  (integer_literal)
+ ))
+
+

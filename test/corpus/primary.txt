@@ -1,0 +1,329 @@
+==================
+3.1.1 Literal: numeric integer
+==================
+
+12
+
+---
+
+(xpath (integer_literal))
+
+==================
+3.1.1 Literal: numeric decimal
+==================
+
+.5
+
+---
+
+(xpath (decimal_literal))
+
+==================
+3.1.1 Literal: numeric double
+==================
+
+5125E2
+
+---
+
+(xpath (double_literal))
+
+==================
+3.1.1 Literal: numeric double
+==================
+
+ .25 
+ .5
+---
+
+  (xpath
+   (decimal_literal)
+   (decimal_literal)
+  )
+
+==================
+3.1.1 Literal: string double quotes
+==================
+
+ "hello world"
+
+---
+
+ (xpath (string_literal))
+
+==================
+3.1.1 Literal: string single quotes
+==================
+
+ 'hello world'
+
+---
+
+(xpath  (string_literal))
+
+==================
+ 3.1.1 Literal: string with escaped quotes
+==================
+
+"He said, ""I don't like it."""
+---
+
+(xpath  (string_literal))
+
+==================
+3.1.1 Literal: string with escape apos
+==================
+
+'He said, ''I don''t like it.'''
+
+---
+
+(xpath  (string_literal))
+
+=================
+3.1.1 Literal: string with predefined entity ref
+==================
+
+"Ben &amp; Jerry&apos;s"
+
+---
+
+(xpath  (string_literal))
+
+==================
+3.1.1 Literal: string with character reference
+==================
+
+"&#8364;99.50"
+
+---
+
+(xpath  (string_literal))
+
+==================
+3.1.2 Variable References: NCName
+==================
+
+$x
+
+---
+
+(xpath
+  (var_ref (EQName))
+)
+
+==================
+3.1.2 Variable References: QName
+==================
+
+$example:fruit
+
+---
+
+(xpath 
+ (var_ref (EQName))
+)
+
+==================
+3.1.2 Variable References: URIQualifiedName 	
+==================
+
+$Q{http://example.com/ns}invoice
+
+-------------------
+
+(xpath (var_ref (EQName)))
+
+==================
+3.1.3 Parenthesized Expressions: constructed empty sequence
+==================
+
+()
+
+-------------------
+
+(xpath 
+ (parenthesized_expr)
+ )
+
+==================
+3.1.3 Parenthesized Expressions:  constructed sequence one item 
+==================
+
+( 1 )
+
+---
+
+(xpath 
+  (parenthesized_expr (integer_literal))
+)
+
+==================
+3.1.3 Parenthesized Expressions: constructed sequence comma separated items
+==================
+
+( 1, 2 )
+
+---
+
+(xpath 
+ (parenthesized_expr 
+   (integer_literal)
+   (integer_literal)
+  )
+ )
+
+==================
+3.1.3 Parenthesized Expressions: embeded sequences 5 items
+==================
+
+(10, (1, 2), (), (3, 4))
+
+---
+
+(xpath 
+ (parenthesized_expr 
+   (integer_literal) 
+   (parenthesized_expr (integer_literal) (integer_literal)) 
+   (parenthesized_expr) 
+   (parenthesized_expr (integer_literal) (integer_literal))
+))
+
+==================
+3.1.4 Context Item Expression
+==================
+
+. 
+
+---
+
+(xpath 
+   (context_item_expr) 
+)
+
+==================
+3.1.5 Static Function Calls: QName without arg
+==================
+
+fn:empty()
+
+---
+
+(xpath
+ (function_call 
+  (EQName) 
+  (argument_list)
+ )) 
+
+==================
+Primary: 3.1.5 Static Function Calls - QName with arg
+==================
+
+empty( $foo )
+---
+
+(xpath
+ (function_call 
+  (EQName)
+    (argument_list (argument (var_ref (EQName))
+))))
+
+==================
+Primary: 3.1.5 Static Function Calls - EQName with hyphen
+==================
+
+my:hyphen-function( $foo )
+---
+
+(xpath
+ (function_call 
+  (EQName)
+    (argument_list (argument (var_ref (EQName))
+))))
+
+==================
+3.1.6 Named Function References:
+==================
+
+fn:abs#1
+
+---
+
+(xpath
+ (named_function_ref 
+  (EQName) 
+  (integer_literal)
+ )) 
+
+==================
+3.1.7 Inline Function Expressions: simple
+==================
+
+function()  { 'hello world' }
+
+---
+
+(xpath
+ (inline_function_expr 
+   (param_list)
+   (enclosed_expr (string_literal))
+)) 
+
+==================
+3.1.7 Inline Function: with arg
+==================
+
+function ( $param1, $param2 )  {()}
+
+---
+
+(xpath
+ (inline_function_expr
+  (param_list (param (EQName)) (param (EQName)) )
+  (enclosed_expr (parenthesized_expr)
+)))
+
+==================
+3.1.7 Inline Function: with arg type declaration
+==================
+
+function( $a as empty-sequence() )  { () }
+
+---
+
+(xpath
+(inline_function_expr
+(param_list (param (EQName) (sequence_type)))
+(enclosed_expr (parenthesized_expr)
+)))
+
+==================
+3.1.7 Inline Function:  with return type declaration
+==================
+
+function( $a as item() ) as item()  { () }
+
+---
+
+(xpath
+ (inline_function_expr
+  (param_list (param (EQName) (sequence_type)))
+  (sequence_type) 
+  (enclosed_expr (parenthesized_expr)
+)))
+
+==================
+3.1.7 Inline Function: sequence type occurrance indicator
+==================
+
+function( $a as item()* ) as item()+  { () }
+
+---
+
+(xpath
+ (inline_function_expr
+  (param_list (param (EQName) (sequence_type (occurrence_indicator)))) 
+  (sequence_type (occurrence_indicator))
+  (enclosed_expr (parenthesized_expr)
+)))
+

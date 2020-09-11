@@ -1,0 +1,45 @@
+3.5 Arithmetic Expressions 
+==================
+3.5 Arithmetic Expressions: additive 
+==================
+
+ 1 + 4 
+
+---
+
+(xpath 
+  (additive_expr 
+    (integer_literal) 
+    (additive_op)
+    (integer_literal)
+))
+
+==================
+3.5 Arithmetic Expressions: multiplicative
+==================
+
+4 div 2 
+
+---
+
+(xpath 
+  (multiplicative_expr 
+    (integer_literal) 
+    (multiplicative_op)
+    (integer_literal)
+))
+
+==================
+3.5 Arithmetic Expressions: unary
+==================
+
+-3
+
+---
+
+(xpath 
+  (unary_expr 
+    (unary_op)
+    (integer_literal)
+))
+

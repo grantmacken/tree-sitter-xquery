@@ -1,0 +1,50 @@
+3.12 FLWOR Expressions 
+==================
+3.12.3 Let Clause: single var
+==================
+
+let $x := $expr1
+
+---
+
+(module 
+ (let_clause 
+  (let_binding 
+   (var_ref (EQName)) 
+   (var_ref (EQName)))
+))
+
+==================
+3.12.3 Let Clause: multiple var 
+==================
+
+let $x := $expr1, $y := $expr2
+
+---
+
+(module 
+ (let_clause 
+  (let_binding 
+   (var_ref (EQName)) 
+   (var_ref (EQName)))
+  (let_binding 
+   (var_ref (EQName)) 
+   (var_ref (EQName)))
+))
+
+==================
+3.12.3 Let Clause: type declaration
+==================
+
+let $x as item() := $expr1
+
+---
+
+(module 
+ (let_clause 
+  (let_binding 
+   (var_ref (EQName)) 
+   (type_declaration (sequence_type)) 
+   (var_ref (EQName)))
+))
+

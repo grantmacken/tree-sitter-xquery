@@ -1,0 +1,81 @@
+3.2 Postfix Expressions 
+- 3.2.1 Filter Expressions
+- 3.2.2 Dynamic Function Calls
+
+==================
+3.2.1 Filter Expr with predicate TODO more
+==================
+
+$products[1]
+
+---
+
+(xpath 
+ (postfix_expr 
+  (var_ref (EQName)) 
+  (predicate  (integer_literal ))
+ ))
+
+
+==================
+3.2.2 Dynamic Function Calls:
+==================
+
+$f(1)
+
+---
+
+(xpath 
+ (postfix_expr 
+  (var_ref (EQName)) 
+  (argument_list (argument (integer_literal))
+)))
+
+
+==================
+3.2.2 Dynamic Function Calls: filter result with predicate
+==================
+
+$f()[1]
+
+---
+
+(xpath 
+ (postfix_expr 
+  (var_ref (EQName)) 
+  (argument_list)
+  (predicate (integer_literal)
+)))
+
+==================
+3.2.2 Dynamic Function: pass arg to function item TODO WRONG  
+==================
+
+$f[1]( 'should be a postfix arg')
+
+---
+
+(xpath 
+ (postfix_expr 
+  (var_ref (EQName)) 
+  (predicate (integer_literal))) 
+ (parenthesized_expr (string_literal)
+ ))
+
+==================
+3.2.2 Dynamic Function - pass argument_placeholder
+==================
+
+$f(?, 0, '.')
+
+---
+
+(xpath 
+ (postfix_expr 
+  (var_ref (EQName)) 
+  (argument_list 
+   (argument (argument_placeholder)) 
+   (argument (integer_literal)) 
+   (argument (string_literal)
+))))
+

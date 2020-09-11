@@ -1,0 +1,29 @@
+3.8 Logical Expressions
+==================
+Logical Or Expression 
+==================
+
+ 1 or 2
+
+---
+
+(module 
+  (or_expr 
+    (integer_literal) 
+    (integer_literal)
+))
+
+==================
+Logical And Expression 
+==================
+
+ 1 and 2
+
+---
+
+(module 
+  (and_expr 
+    (integer_literal) 
+    (integer_literal)
+))
+

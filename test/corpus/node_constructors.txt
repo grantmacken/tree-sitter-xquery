@@ -1,0 +1,105 @@
+3.9 Node Constructors 
+3.9.3 Computed Constructors
+==================
+Node: 3.9.3 Computed Constructor - doc
+==================
+
+document {  } 
+
+---
+
+(module 
+ (node_constructor 
+  (computed_constructor 
+   (comp_doc_constructor 
+    (enclosed_expr)
+))))
+
+==================
+Node: 3.9.3 Computed Constructor - element with EQName
+==================
+
+element div { 'string'  } 
+
+---
+
+(module 
+ (node_constructor 
+  (computed_constructor 
+   (comp_elem_constructor (EQName (identifier)) 
+    (enclosed_content_expr 
+     (enclosed_expr (string_literal)
+))))))
+
+
+==================
+Node: 3.9.3 Computed Constructor - element with braced expr
+==================
+
+element {'str'} { 'string'  } 
+
+---
+
+(module 
+ (node_constructor 
+  (computed_constructor 
+   (comp_elem_constructor 
+    (string_literal) 
+    (enclosed_content_expr 
+     (enclosed_expr (string_literal)
+     ))))))
+
+==================
+Node: 3.9.3 Computed Constructor - attribute
+==================
+
+element div { 
+attribute class { 'hero' },
+'string'  
+} 
+
+---
+
+(module 
+ (node_constructor 
+  (computed_constructor 
+   (comp_elem_constructor 
+    (EQName (identifier))
+    (enclosed_content_expr 
+     (enclosed_expr 
+      (node_constructor 
+       (computed_constructor 
+	(comp_attr_constructor (EQName (identifier)) 
+	 (enclosed_expr (string_literal))))) 
+	 (string_literal)))))))
+
+==================
+Node: 3.9.3 Computed Constructor - text
+==================
+
+text { } 
+
+---
+
+(module 
+ (node_constructor 
+  (computed_constructor 
+   (comp_text_constructor 
+    (enclosed_expr)
+))))
+
+==================
+Node: 3.9.3 Computed Constructor - comment
+==================
+
+comment { } 
+
+---
+
+(module 
+ (node_constructor 
+  (computed_constructor 
+   (comp_comment_constructor 
+    (enclosed_expr)
+))))
+

@@ -1,0 +1,6 @@
+2.5.4 SequenceType Syntax
+Whenever it is necessary to refer to a type in an XQuery 3.1 expression, 
+the SequenceType syntax is used. 
+
+
+
