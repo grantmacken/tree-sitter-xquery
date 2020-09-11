@@ -25,9 +25,9 @@ is on your PATH.
 
 The project consists of 
  - grammar.js  the tree-sitter grammar for xQuery.
- - test/corpus: some tests for the grammar with based on **sections** in the xQuery 3.1 spec
- - queries: the highlight queries 
- - Makefile: tree-sitter shortcut commands
+ - test/corpus/:  based on **numbered sections** in the xQuery 3.1 spec
+ - queries/: the highlight queries the current working file being `example.xq`
+ - Makefile: some tree-sitter shortcut commands, helped by a dot env file
    - make: tree-sitter generate
    - make test  
    - make parse
@@ -45,7 +45,7 @@ Although there is a lot to digest the guides I have found useful are
 
 ### TODO list
 
-- TODO
+- [ ] TODO
 
 <!--
 @see https://www.w3.org/2013/01/xquery-30-use-cases/xquery-30-example-queries.txt
