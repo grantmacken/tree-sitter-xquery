@@ -41,15 +41,52 @@ PREC = {
 
 module.exports = grammar({
   name: 'xQuery',
-  word: $ => $.identifier,
+  word: $ => $.keyword,
   rules: {
-    module:  $ =>  repeat($._expr), // 1
+    module:  $ => seq(
+      optional( $.version_declaration ),
+      choice( $.library_module, $._main_module )    
+    ),
+    library_module: $ => seq(
+      'TODO'
+      //$.module_declaration,
+      //optional( $._prolog )
+    ),
+    _main_module: $ => seq(
+      //optional( $._prolog ),
+      $._query_body
+    ),
+    version_declaration: $ => seq(
+      'xquery',
+      $.version, 
+      optional( $.encoding ),
+      ';'
+    ),
+    // version declaration
+    version: $ =>  seq( 
+      'version', 
+      $.string_literal
+    ), 
+    encoding: $ => seq( 
+      'encoding', 
+      $.string_literal
+    ),
+    // 
+    _query_body:  $ => seq(
+     commaSep1( $._expr )
+    ),
     _expr:  $ => choice( 
-      $._primary,
+      //statement_like
+      $.flwor_expr,
+      // conditionals 
+      $.switch_expr,
+      $.if_expr,
+      $.typeswitch_expr,
+
       // might split postfix up into 'expr_filter' | 'expr_dynamic-function_call' | 'expr_lookup'"
       $.postfix_expr,
       $.unary_expr, // prefix  // 97 prec: 21 rl
-      // left op right - binary
+      // binary: lhs op rhs 
       $.or_expr,               // 83 prec: 3
       $.and_expr,              // 84 prec: 4
       $.comparison_expr,       // 85 prec: 5
@@ -68,8 +105,7 @@ module.exports = grammar({
       $.bang_expr,//simple map // 107 prec: 18 l 
       $.bang_expr,
       $.arrow_expr,
-      //statement_like
-      $._flwor_expr
+      $._primary,
       ),
 // 3.1 Primary Expressions 
     _primary: $ => choice(
@@ -99,9 +135,10 @@ module.exports = grammar({
       $.decimal_literal, 
       $.double_literal, 
     ),
-    integer_literal: $ => token(Integer), 
-    decimal_literal: $ => token(Decimal),
-    double_literal: $ =>  token(Double),
+    integer_literal: $ => Integer, 
+    decimal_literal: $ => Decimal,
+    double_literal:  $ => Double,
+
 //3.1.2 Variable References
     var_ref: $ => field('name', seq('$' ,$.EQName )),
 // 3.1.3 Parenthesized Expressions 
@@ -303,10 +340,10 @@ module.exports = grammar({
     //##########################
     //
 // 3.12 FLWOR Expressions 
-    _flwor_expr: $ => seq( 
+  flwor_expr: $ => seq( 
       $._initial_clause, 
       //optional( $._intermediate_clause ), 
-      //$.return_clause 
+      $.return_clause 
     ), // 41
     _initial_clause: $ => choice (
       $.for_clause, // 44
@@ -367,46 +404,36 @@ module.exports = grammar({
     ordered_expr: $ => seq( 'ordered', $.enclosed_expr ),  // 135
     unordered_expr: $ => seq('unordered',$.enclosed_expr), // 136
 // 3.14 Conditional Expressions 
-    if_expr: $ => prec(PREC.statement, seq(
-      'if', 
-      $.if_condition, 
-      $.if_consequence,
-      $.if_alternative
+    if_expr: $ => prec.left(PREC.statement, seq(
+     $.if_condition,
+     $.then_consequence,
+     $.else_alternative
     )),
-    if_condition: $ => seq(
-      '(', 
-      field('condition', $._expr),
-      ')'
-    ),
-    if_consequence: $ => seq(
-      'then', 
-      field('consequence', $._expr)
-    ),
-    if_alternative: $ => seq(
-      'else', 
-      field('alternative', $._expr)
-    ),
-// 3.15 Switch Expression
-    switch_expr: $ => prec(PREC.statement, seq( 'switch', 
+    if_condition: $ => seq( 'if', '(', $._expr, ')', ), 
+    then_consequence: $ => seq( 'then', $._expr ),
+    else_alternative: $ => seq( 'else', $._expr ),
+    // 3.15 Switch Expression
+    switch_expr: $ => prec(PREC.statement, seq( 
+      'switch', 
       $.switch_value, 
-      repeat1( $.switch_case ),
+      repeat1( $.switch_clause ),
       $.switch_default
     )), // 71
     switch_value: $ => seq(
       '(',  
-      commaSep( $._expr ), 
+      commaSep1( $._expr ), 
       ')'
     ), // 72
-    switch_case: $ => seq( 
+    switch_clause: $ => seq( 
       'case',
-      field( 'case_operand', $._expr ),
+      field( 'operand', $._expr ),
       'return', 
-      field('case_return', $._expr )
+      field( 'return', $._expr )
     ), // 72
     switch_default: $ => seq( 
       'default', 
       'return', 
-      field('default_return', $._expr)
+      field( 'return', $._expr)
     ),
 // 3.16 Quantified Expressions 
     quantified_expr: $ => prec(PREC.statement,seq(
@@ -448,26 +475,33 @@ module.exports = grammar({
       'of'
     ),
 // 3.18 Expressions on SequenceTypes 
-    typeswitch_expr: $ => prec.left(PREC.instance, seq(
+    typeswitch_expr: $ => prec.left(PREC.statement, seq(
       'typeswitch',
-      $.typeswitch_value,
-      repeat1( $.typeswitch_case ),
+      $.typeswitch_operand,
+      repeat1( $.typeswitch_clause ),
       $.typeswitch_default
-      //repeat1( seq('case', $.var_ref, 'return', $._expr)),
-      //'default', optional( $.var_ref ), 'return', $._expr 
     )), 
-    typeswitch_value: $ => seq(
+    // commaSep1( $._expr ), 
+    typeswitch_operand: $ => seq(
       '(',  
-      commaSep( $._expr ), 
+       field( 'operand', commaSep1( $._expr ) ),
       ')'
     ), // 72
-    typeswitch_case:  $ => seq( 
-      'case',
-      optional( seq( $.var_ref, 'as' )), $.sequence_type , // TODO repeat
-      'return', 
-      field('case_return', $._expr )
+    typeswitch_clause:  $ => seq( 
+      $.typeswitch_case_type,
+      $.typeswitch_case_return,
     ), // 72
-    typeswitch_default: $ => seq( 'default',
+    typeswitch_case_type: $ => seq(
+      'case',
+      optional( seq( $.var_ref, 'as' )), 
+      $.sequence_type
+    ),
+    typeswitch_case_return: $ => seq(
+      'return', 
+      $._expr 
+    ),
+    typeswitch_default: $ => seq( 
+      'default',
       optional( $.var_ref ),
       'return',
       $._expr
@@ -604,6 +638,7 @@ _kind_test: $ =>
 // END SequenceType Syntax
 // 2 Basics
 // instances of the grammatical production EQName.
+// EQName is identifier
  EQName: $ => choice( $._QName , $._uri_qualified_name), // 112
   _QName: $ => prec.left(choice( $._prefixed_name, $._unprefixed_name)), // 122
   _prefixed_name: $ =>  /[\w][\w-]+:[\w][\w-]+/,
@@ -615,7 +650,8 @@ _kind_test: $ =>
   ), // 224
     //comma: $ => token(','),
     // delimit: $ => choice('!'),
-    identifier: $ =>  /[a-z][a-z\-]+/
+    keyword:  $ =>  token(/[a-z][a-z\-]+/),
+    // identifier: $ =>  /[a-z][a-z\-]+/
   }
 });
 

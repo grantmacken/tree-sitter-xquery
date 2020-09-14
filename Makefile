@@ -13,7 +13,7 @@ generate: src/grammar.json
 src/grammar.json: grammar.js
 	@echo '==========================================='
 	@tree-sitter generate
-	@tree-sitter parse examples/*.xq --quiet
+	@# tree-sitter parse examples/*.xq --quiet
 	@echo '==========================================='
 
 .PHONY: watch-grammar
@@ -25,15 +25,25 @@ watch-grammar:
 
 .PHONY: test
 test:
-	@tree-sitter test -f '$(TEST)'
+	@tree-sitter test -f '$(TEST_SECTION)'
 
 .PHONY: parse
 parse:
-	@tree-sitter parse examples/$(PARSE).xq
+	@tree-sitter parse examples/$(EXAMPLE).xq
 
 .PHONY: query
 query:
-	@tree-sitter query --captures queries/highlights.scm examples/$(QUERY).xq
+	@tree-sitter query --captures queries/highlights.scm examples/$(EXAMPLE).xq
+
+.PHONY: hl
+hl:
+	@tree-sitter highlight  --scope source.xQuery examples/$(EXAMPLE).xq
+
+.PHONY: stow-config
+stow-config:
+	@pushd _config
+	@stow -v -t ~/.tree-sitter .
+	@popd
 
 .PHONY: getTreeSitter
 getTreeSitter:

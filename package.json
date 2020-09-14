@@ -1,0 +1,15 @@
+{ 
+  "name": "tree-sitter-xQuery",
+  "version": "0.0.1",
+  "description": "xQuery grammar for tree-sitter",
+  "main": "index.js",
+  "repository": "https://github.com/tree-sitter/tree-sitter-ruby",
+  "tree-sitter": [
+    {
+      "scope": "source.xQuery",
+      "file-types": [
+        "xq" ,"xql", "xqm"
+      ]
+    }
+  ]
+}
