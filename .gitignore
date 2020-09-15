@@ -3,3 +3,4 @@ binding.gyp
 .git
 src
 _hold
+tree-sitter-xQuery.wasm

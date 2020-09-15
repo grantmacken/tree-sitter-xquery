@@ -41,7 +41,6 @@ The project consists of
  `make test` var TEST_SECTION: will test my current working **section** under test.  
  For `make parse`, `make test`, `make query` and `make highlight`, will use the EXAMPLE file in the examples folder
 
-
 ## xQuery Grammar
 
 Although there is a lot to digest the guides I have found useful are
@@ -53,7 +52,9 @@ Although there is a lot to digest the guides I have found useful are
 
 - [ ] branch for main module and library modules 
 - [x] main module example and highlight tests
-- [x] if, switch and typeswitch expressions
+- [x] conditionals: if, switch and typeswitch expressions
+- [x] arrow, bang, try catch, quantified, 
+- [x] cast, castable and treat 
 
 <!--
 @see https://www.w3.org/2013/01/xquery-30-use-cases/xquery-30-example-queries.txt

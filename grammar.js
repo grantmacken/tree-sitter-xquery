@@ -78,11 +78,12 @@ module.exports = grammar({
     _expr:  $ => choice( 
       //statement_like
       $.flwor_expr,
+      $.quantified_expr,
       // conditionals 
       $.switch_expr,
       $.if_expr,
       $.typeswitch_expr,
-
+      $.try_catch_expr,
       // might split postfix up into 'expr_filter' | 'expr_dynamic-function_call' | 'expr_lookup'"
       $.postfix_expr,
       $.unary_expr, // prefix  // 97 prec: 21 rl
@@ -102,8 +103,7 @@ module.exports = grammar({
       $.cast_as_expr,          // 95 prec: 15 lr
       $.arrow_expr,            // 96 prec: 16 lr
       $.path_expr,
-      $.bang_expr,//simple map // 107 prec: 18 l 
-      $.bang_expr,
+      $.bang_expr,             //simple map // 107 prec: 18 l 
       $.arrow_expr,
       $._primary,
       ),
@@ -140,7 +140,7 @@ module.exports = grammar({
     double_literal:  $ => Double,
 
 //3.1.2 Variable References
-    var_ref: $ => field('name', seq('$' ,$.EQName )),
+    var_ref: $ => seq('$' ,$.EQName ),
 // 3.1.3 Parenthesized Expressions 
     parenthesized_expr: $ => prec(PREC.comma,seq( 
       '(', 
@@ -438,7 +438,7 @@ module.exports = grammar({
 // 3.16 Quantified Expressions 
     quantified_expr: $ => prec(PREC.statement,seq(
       choice( 'some', 'every'),
-      $.quantified_in, //TODO repeat without conflict
+      repeat1($.quantified_in),
       $.quantified_satisfies
     )), 
     quantified_in: $ => seq( 
@@ -460,21 +460,22 @@ module.exports = grammar({
     ),  // 78
     catch_clause: $ => seq(
       'catch', 
-      barSep($._name_test), 
+      $.catch_error_list,
       $.enclosed_expr 
     ), // 79
+    catch_error_list: $ =>  barSep1($._name_test), 
  // 3.18 Expressions on SequenceTypes
  // 3.18.1 Instance Of
     instance_of_expr: $ => prec.left(PREC.instance, seq( 
-      field('left',$._expr),
-      field('operator', $.instance_of_op), 
-      field('right', $.sequence_type )
+      field( 'rhs',$._expr),
+      field('operator',seq('instance', 'of')), 
+      field('type', $.sequence_type )
     )), // 92
     instance_of_op: $ => seq( 
       'instance', 
       'of'
     ),
-// 3.18 Expressions on SequenceTypes 
+// 3.18.2
     typeswitch_expr: $ => prec.left(PREC.statement, seq(
       'typeswitch',
       $.typeswitch_operand,
@@ -508,42 +509,48 @@ module.exports = grammar({
     ),
 //3.18.3 Cast 
     cast_as_expr: $ => prec(PREC.cast, seq(
-      field('left',$._expr),
-      field('operator', $.cast_as_op), 
-      field('right', $.single_type)
+      field('lhs',$._expr),
+      field('operator', seq( 'cast', 'as')), 
+      field('rhs', $.single_type)
     )), // 95
-    cast_as_op: $ => seq( 'cast', 'as'),
 //3.18.4 Castable 
     castable_as_expr: $ => prec(PREC.castable, seq( 
-      field('left',$._expr),
-      field('operator', $.castable_op), 
-      field('right', $.single_type)
+      field('lhs',$._expr),
+      field('operator', seq( 'castable', 'as')), 
+      field('rhs', $.single_type)
     )), // 94
-    castable_op: $ => seq( 'castable', 'as'),
-    single_type: $ => 'TODO 182', 
+    single_type: $ =>  seq(
+      field( 'type', $.EQName),
+      optional('?')
+    ),
+
 //3.18.5 Constructor Functions TODO
 //3.18.6 Treat
     treat_as_expr: $ => prec(PREC.treat, seq(
-      field('left',$._expr),
-      field('operator', $.treat_as), 
-      field('right', $.sequence_type)
+      field('lhs',$._expr),
+      field('operator', seq( 'treat', 'as')), 
+      field('rhs', $.sequence_type)
     )), // 92
-    treat_as: $ => seq( 'treat', 'as'),
 // 3.19 Simple map operator (!)
     bang_expr: $ => prec.left(PREC.bang, seq( 
-      field('left', $._primary ), // TODO
-      field('operator', $.bang_op ), 
-      field('right', $._primary )
+      field('lhs', $._primary ), // TODO
+      field('operator', '!' ), 
+      field('rhs', $._primary )
     )), // 107
-    bang_op: $ => '!',
 // 3.20 Arrow operator (=>) 
-  arrow_expr: $ => prec.left(PREC.arrow,seq(
-    field('left',$._expr), // TODO 
-    field('operator', $.arrow_op), 
-    field('right', seq( $._arrow_function_specifier, $.argument_list ))
-  )), // 94
-  arrow_op: $ => '=>',
-_arrow_function_specifier: $ => choice( $.EQName, $.var_ref, $.parenthesized_expr ), // 127
+    arrow_expr: $ => prec.left(PREC.arrow,seq(
+      field('rhs',$._expr), 
+      field('operator', '=>'), 
+      field('lhs', $.arrow_function_call )
+    )), // 94
+    arrow_function_call : $ => seq( 
+      choice(
+	$.EQName, 
+	$.var_ref,
+	$.parenthesized_expr 
+      ),
+      $.argument_list
+    ),    
 // 3.21 Validate Expressions TODO
 // 3.22 Extension Expressions TODO
 // 2.5.4 SequenceType Syntax 
@@ -590,14 +597,25 @@ _kind_test: $ =>
 	optional( choice($.element_test, $.schema_attribute_test)),
 	')'
     ), // 190
-  element_test: $ => 
-    seq('element',
-	'(', 
-	// TODO 
-	')'
-    ), // TODO 199
-
-    attribute_test: $ => 'TODO 195',
+    element_test: $ => seq(
+      'element',
+      '(', 
+      optional( seq(
+	choice( $.EQName, $.param_wildcard ) , 
+	optional( seq(',', $.EQName ) )  
+      )),
+      ')'
+    ), // 199
+    attribute_test: $ => seq(
+      'attribute',
+      '(', 
+      optional( seq(
+	choice( $.EQName, $.param_wildcard ) , 
+	optional( seq(',', $.EQName ) )  
+      )),
+      ')'
+    ), // 195
+    param_wildcard: $ => '*',
     schema_element_test: $ => 
     seq('schema-element',
       '(', 
