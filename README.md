@@ -52,9 +52,17 @@ Although there is a lot to digest the guides I have found useful are
 
 - [ ] branch for main module and library modules 
 - [x] main module example and highlight tests
-- [x] conditionals: if, switch and typeswitch expressions
-- [x] arrow, bang, try catch, quantified, 
-- [x] cast, castable and treat 
+
+- expressions 
+  - [x] conditionals: if, switch, typeswitch, quantified
+  - [x] arrow, bang, try/catch
+  - [x] type conversion: cast, castable and treat 
+
+- constructors
+  - [ ] computed node constructor (partial)
+  - [ ] direct XML constructors (partial)
+  - [ ] string constructor( partial )
+  - [x] map and array constructors
 
 <!--
 @see https://www.w3.org/2013/01/xquery-30-use-cases/xquery-30-example-queries.txt
