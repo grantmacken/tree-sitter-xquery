@@ -61,7 +61,7 @@ Although there is a lot to digest the guides I have found useful are
 - constructors
   - [ ] computed node constructor (partial)
   - [ ] direct XML constructors (partial)
-  - [ ] string constructor( partial )
+  - [ ] string constructor ( partial )
   - [x] map and array constructors
 
 <!--
