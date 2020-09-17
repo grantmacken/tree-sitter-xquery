@@ -3,21 +3,35 @@
 ;error for error (ERROR` nodes.
 ;punctuation.delimiter for `;` `.` `,`
 ;punctuation.bracket for `()` or `{}`
-[ "(" ")" "{" "}" ] @punctuation.bracket
+[ "(" ")" "{" "}" "[" "]"  ] @punctuation.bracket
+(direct_element
+  ["<" ">" "</" "/>" ] @punctuation.bracket)
+ 
+
+
+
 ;punctuation.special for symbols with special meaning like `{}` in string interpolation.
 
 ; CONSTANTS
+; names of the constructed nodes are constants
 ;constant
-;constant.builtin
-;constant.macro
+(direct_element
+  (QName) @constant)
 ;string
-(string_literal) @string
+[
+(string_literal) 
+(char_group)
+] @string
 ;string.regex
 ;string.escape
 ;string.special
 ;character
 ;number
-(integer_literal) @number
+[
+(lookup_digit)
+(integer_literal)
+]
+@number
 ;boolean
 ;float
  [
@@ -28,9 +42,9 @@
 ;FUNCTIONS
 ;function
 (function_call
-  name: (EQName) @function)
+  name: (QName) @function)
 (arrow_function_call
-   (EQName) @function)
+   (QName) @function)
 ;function.builtin
 ;function.macro
 ;parameter
@@ -38,6 +52,14 @@
 ;field
 ;property
 ;constructor
+[ "document" 
+  "element" 
+  "attribute"
+  "text"
+  "comment"
+  "map"
+  "array"
+  ] @constructor
 
 ;KEYWORDS
 ;conditional
@@ -50,7 +72,11 @@
 
 ;label for C/Lua-like labels
 ;operator (for symbolic operators, e.g. `+`, `*`)
-[ "!" "=>"] @operator
+[ 
+"!" 
+"=>"
+"?"
+] @operator
 
 ; Arithmetic Expressions
 (comparison_op) @operator.comparison
@@ -58,6 +84,7 @@
 (additive_op) @operator.additive
 
 [
+(lookup_wildcard)
 (param_wildcard)  
 (wildcard)
 ] @operator.wildcard
@@ -75,7 +102,10 @@
 ;include keywords for including modules (e.g. import/from in Python)
 ;Variables
 ;variable
-(var_ref) @variable
+[
+(NCName)
+(var_ref)
+] @variable
 ;variable.builtin
 
 [
