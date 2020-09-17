@@ -317,12 +317,13 @@ module.exports = grammar({
 // 3.7 Comparison Expressions
     comparison_expr: $ => prec.left(PREC.comparison, seq(
       field('lhs',$._expr),
-      field('operator', choice( 
-	'=', '!=', '<', '<=', '>', '>=', 'eq', 
-	'ne', 'lt', 'le', 'gt', 'ge','is', '<<', '>>' )
-      ), 
+      field('operator', $.comparison_op ), 
       field('rhs', $._expr)
     )), // 85
+    comparison_op: $ => choice( 
+      '=', '!=', '<', '<=', '>', '>=', 'eq', 
+      'ne', 'lt', 'le', 'gt', 'ge','is', '<<', '>>' 
+    ),
    //  comparison_op: $ => ,
 // 3.8 Logical Expressions 
     and_expr: $ => prec.left(PREC.and, seq( 
@@ -808,12 +809,12 @@ _kind_test: $ =>
  
 // instances of the grammatical production EQName.
 // EQName is identifier
-  _EQName: $ => choice( $.QName , $._uri_qualified_name), // 112
+  _EQName: $ => choice( $.QName , $.uri_qualified_name), // 112
   QName: $ => prec.left(choice( $._prefixed_name, $._unprefixed_name)), // 122
   _prefixed_name: $ =>  /[\w][\w-]+:[\w][\w-]+/,
   _unprefixed_name: $ => /[\w]([\w-])*/,
   NCName: $ => $._unprefixed_name, // 123
-  _uri_qualified_name: $ => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
+  uri_qualified_name: $ => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
   braced_uri_literal: $ => seq(
     'Q{',repeat1(choice( PredefinedEntityRef, CharRef, /[^&{}]/)),'}'
   ), // 224

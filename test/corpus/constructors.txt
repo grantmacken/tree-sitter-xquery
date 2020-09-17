@@ -224,7 +224,7 @@ $map[?name='Mike']
 
 (module 
   (postfix_expr (var_ref (QName))
-  (predicate (comparison_expr (unary_lookup (NCName)) (string_literal)))
+  (predicate (comparison_expr (unary_lookup (NCName)) (comparison_op) (string_literal)))
   ))
 
 ==================
@@ -235,14 +235,12 @@ $map[?name='Mike']
 
 ---
 
-(module
+(module 
  (comparison_expr 
-  (bang_expr 
-   (var_ref (QName))
-   (unary_lookup (NCName))) 
+  (bang_expr (var_ref (QName)) (unary_lookup (NCName))) 
+  (comparison_op) 
   (string_literal)
-))
-
+ ))
 
 ==================
 3.11.3.2 Postfix Lookup with array unary lookup

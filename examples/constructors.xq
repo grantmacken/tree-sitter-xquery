@@ -18,7 +18,5 @@ array { 'one', 'two' },
 $map[?name='Mike'],
 $maps ! ?name='Mike',
 [ 1,2 ]?1,
-<book isbn="isbn-0060229357">
- <title> xxx {$foo} </title>
-</book>
+ <title>Harold and the Purple Crayon</title>
 )

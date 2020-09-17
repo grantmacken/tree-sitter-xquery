@@ -1,4 +1,3 @@
-4 Modules and Prologs 
 ==================
 4.1: Version Declaration: main module with flwor expr
 ==================
@@ -12,18 +11,44 @@ return $bind
 (module 
     (version_declaration (version (string_literal)) (encoding (string_literal)))
     (flwor_expr
-    (let_clause (let_binding (var_ref (EQName)) (string_literal))) 
-    (return_clause (var_ref (EQName)))
+    (let_clause (let_binding (var_ref (QName)) (string_literal))) 
+    (return_clause (var_ref (QName)))
     ) 
 )
 
 ==================
-3.14 Conditional:  main module with if expr
+3.13 Unordered Expression 
+==================
+
+unordered { }
+
+---
+
+(module 
+ (unordered_expr (enclosed_expr))
+)
+
+==================
+3.13 Ordered Expression 
+==================
+
+ordered { }
+
+---
+
+(module 
+ (ordered_expr (enclosed_expr))
+)
+
+
+==================
+3.14 Conditional Expressions 
 ==================
 
 if ( 'text' )
   then 'this'   
   else 'that'
+
 ---
 
 (module 
@@ -69,7 +94,7 @@ switch ( $animal )
 
 (module 
     (switch_expr 
-	(switch_value (var_ref (EQName))) 
+	(switch_value (var_ref (QName))) 
 	(switch_clause (string_literal) (string_literal)) 
 	(switch_clause (string_literal) (string_literal)) 
 	(switch_clause (string_literal) (string_literal)) 
@@ -87,8 +112,8 @@ some $foo in $baa satisfies $boo
 
 (module 
  (quantified_expr 
-  (quantified_in (var_ref (EQName)) (var_ref (EQName)))
-  (quantified_satisfies (var_ref (EQName)))
+  (quantified_in (var_ref (QName)) (var_ref (QName)))
+  (quantified_satisfies (var_ref (QName)))
  ))
 
 ==================
@@ -101,8 +126,8 @@ every $foo in $baa satisfies $boo
 
 (module 
  (quantified_expr 
-  (quantified_in (var_ref (EQName)) (var_ref (EQName)))
-  (quantified_satisfies (var_ref (EQName)))
+  (quantified_in (var_ref (QName)) (var_ref (QName)))
+  (quantified_satisfies (var_ref (QName)))
  ))
 
 ==================
@@ -132,7 +157,7 @@ catch * {
 
 ---
 
-(module (instance_of_expr (integer_literal) (sequence_type (EQName))))
+(module (instance_of_expr (integer_literal) (sequence_type (QName))))
 
 ==================
 3.18.2 Typeswitch: main module with typeswitch expr
@@ -147,13 +172,13 @@ typeswitch ( $node )
 
 (module 
  (typeswitch_expr 
-  (typeswitch_operand (var_ref (EQName))) 
+  (typeswitch_operand (var_ref (QName))) 
   (typeswitch_clause 
    (typeswitch_case_type (sequence_type (text_test))) 
-   (typeswitch_case_return (var_ref (EQName)))) 
+   (typeswitch_case_return (var_ref (QName)))) 
   (typeswitch_clause 
    (typeswitch_case_type (sequence_type (element_test))) 
-   (typeswitch_case_return (var_ref (EQName)))) 
+   (typeswitch_case_return (var_ref (QName)))) 
   (typeswitch_default (string_literal))
   ))
 
@@ -167,8 +192,8 @@ $x cast as xs:integer
 
 (module 
  (cast_as_expr 
-  (var_ref (EQName)) 
-  (single_type (EQName))
+  (var_ref (QName)) 
+  (single_type (QName))
  ))
 
 
@@ -182,8 +207,8 @@ $x castable as xs:integer
 
 (module 
  (castable_as_expr 
-  (var_ref (EQName)) 
-  (single_type (EQName))
+  (var_ref (QName)) 
+  (single_type (QName))
  ))
 
 ==================
@@ -195,7 +220,7 @@ xs:date("2000-01-01")
 ---
 
 (module 
-  (function_call (EQName) 
+  (function_call (QName) 
   (argument_list (argument (string_literal)))
 ))
 
@@ -209,9 +234,9 @@ $myaddress treat as element(*, USAddress)
 
 (module 
  (treat_as_expr 
-  (var_ref (EQName)) 
+  (var_ref (QName)) 
   (sequence_type 
-   (element_test (param_wildcard) (EQName)))
+   (element_test (param_wildcard) (QName)))
  ))
 
 ==================
@@ -224,8 +249,8 @@ $emp ! ( $bang )
 
 (module 
  (bang_expr 
-  (var_ref (EQName)) 
-  (parenthesized_expr (var_ref (EQName)))
+  (var_ref (QName)) 
+  (parenthesized_expr (var_ref (QName)))
  ))
 
 ==================
@@ -236,8 +261,8 @@ $string => upper-case()
 -------------------
 
 (module 
-  (arrow_expr (var_ref (EQName)) 
-  (arrow_function_call (EQName) (argument_list))
+  (arrow_expr (var_ref (QName)) 
+  (arrow_function_call (QName) (argument_list))
 ))
 
 
