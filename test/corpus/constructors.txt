@@ -1,0 +1,261 @@
+3.9 Node Constructors 
+3.10 String Constructors 
+3.11 Maps and Arrays 
+
+
+==================
+3.9.1 Direct Element with plain text
+==================
+
+ <title>Harold and the Purple Crayon</title>
+
+-------------------
+
+  (module 
+   (direct_element (QName) 
+    (element_content 
+     (char_data))
+    (QName)
+   ))
+
+==================
+3.9.1 Direct Element with char reference
+==================
+
+ <div>&#8364;99.50</div>
+
+-------------------
+
+  (module 
+   (direct_element (QName) 
+    (element_content 
+     (char_ref)
+     (char_data)) 
+    (QName)
+   ))
+
+==================
+3.9.1 Direct Element with entities
+==================
+
+ <title>Ben &amp; Jerry&apos;s  </title>
+
+-------------------
+
+  (module 
+   (direct_element (QName) 
+    (element_content 
+     (char_data)
+     (predefined_entity_ref) 
+     (char_data) 
+     (predefined_entity_ref) 
+     (char_data)) 
+    (QName)
+   ))
+
+==================
+3.9.1 Direct Element with enclosed expression
+==================
+
+ <title>Harold and the { $item }</title>
+
+
+-------------------
+
+(module 
+ (direct_element 
+  (QName) 
+  (element_content (char_data) (enclosed_expr (var_ref (QName))))
+  (QName)
+ ))
+
+==================
+3.9.3.1 Computed Element Constructors 
+==================
+
+element book {
+   element { 'page' } { 'dummy' }
+}
+
+---
+
+(module 
+ (element_constructor 
+  (QName) 
+  (element_constructor (string_literal) (string_literal))
+ ))
+
+==================
+3.9.3.2 Computed Attribute Constructors 
+==================
+
+attribute size {4 + 3}
+
+---
+
+(module 
+ (attribute_constructor 
+  (QName) 
+  (additive_expr (integer_literal) (additive_op) (integer_literal))
+))
+
+
+==================
+3.9.3.3 Document Node Constructors
+==================
+
+document {  } 
+
+---
+
+(module 
+   (document_constructor 
+    (enclosed_expr)
+))
+
+
+==================
+3.9.3.4 Text Node Constructors 
+==================
+
+text { 'hello' } 
+
+---
+
+(module
+  (text_constructor (enclosed_expr (string_literal)))
+)
+
+==================
+3.9.3.6 Computed Comment Constructors
+==================
+
+comment { } 
+
+---
+
+(module 
+  (comment_constructor (enclosed_expr))
+)
+
+==================
+3.10 String Constructors 
+==================
+
+``[`{$s}` fish]``
+
+---
+
+(module 
+ (string_constructor 
+  (interpolation (var_ref (QName))) 
+  (char_group)
+ ))
+
+
+
+==================
+3.11.1.1 Map Constructors
+==================
+
+map { 
+'key1' : 'value1',
+'key2' : 'value2'
+} 
+
+---
+
+(module 
+ (map_constructor
+  (map_entry (string_literal) (string_literal)) 
+  (map_entry (string_literal) (string_literal)) 
+ ))
+
+==================
+3.11.2.1 Curly Array Constructor
+==================
+
+array { 'one', 'two' } 
+
+---
+
+(module 
+ (curly_array_constructor
+  (enclosed_expr  
+   (string_literal)
+   (string_literal)
+  )))
+
+==================
+3.11.2.1 Square Array Constructor
+==================
+
+[ 'one', 'two' ] 
+
+---
+
+(module 
+ (square_array_constructor
+  (string_literal)
+  (string_literal)
+ ))
+
+==================
+3.11.2.2 Array Lookup using Function Call Syntax 
+==================
+
+[ 'one', 'two' ](2) 
+
+---
+
+(module 
+ (postfix_expr 
+  (square_array_constructor (string_literal) (string_literal)) 
+  (argument_list (argument (integer_literal))))
+ )
+
+==================
+3.11.3.1 Unary Lookup with predicate
+==================
+
+$map[?name='Mike'] 
+
+---
+
+(module 
+  (postfix_expr (var_ref (QName))
+  (predicate (comparison_expr (unary_lookup (NCName)) (string_literal)))
+  ))
+
+==================
+3.11.3.1 Unary Lookup with bang
+==================
+
+ $maps ! ?name='Mike'
+
+---
+
+(module
+ (comparison_expr 
+  (bang_expr 
+   (var_ref (QName))
+   (unary_lookup (NCName))) 
+  (string_literal)
+))
+
+
+==================
+3.11.3.2 Postfix Lookup with array unary lookup
+==================
+
+[ 'one', 'two' ]?2
+
+---
+
+(module 
+ (postfix_expr 
+  (square_array_constructor (string_literal) (string_literal)) 
+  (unary_lookup (lookup_digit))
+ ))
+
+
