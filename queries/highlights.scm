@@ -1,14 +1,13 @@
-; MISC form nvim contributing
+; MISC from nvim contributing
 ;comment
 ;error for error (ERROR` nodes.
-;punctuation.delimiter for `;` `.` `,`
+;punctuation.delimiter for `;` `.` `,` 
+; xPath
+[ "/" "//"] @punctuation.delimiter
 ;punctuation.bracket for `()` or `{}`
 [ "(" ")" "{" "}" "[" "]"  ] @punctuation.bracket
 (direct_element
   ["<" ">" "</" "/>" ] @punctuation.bracket)
- 
-
-
 
 ;punctuation.special for symbols with special meaning like `{}` in string interpolation.
 
@@ -80,7 +79,7 @@
 
 ; Arithmetic Expressions
 (comparison_op) @operator.comparison
-(multiplicative_op) @operator.multiplicative
+;(multiplicative_op) @operator.multiplicative
 (additive_op) @operator.additive
 
 [
@@ -112,3 +111,6 @@
 (sequence_type)
 (single_type)
 ] @type
+
+;; Error
+(ERROR) @error
