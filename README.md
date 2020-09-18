@@ -48,6 +48,15 @@ Although there is a lot to digest the guides I have found useful are
 - [writing the grammar](http://tree-sitter.github.io/tree-sitter/creating-parsers#writing-the-grammar)
 - [grammar development guide](https://github.com/github/semantic/blob/master/docs/grammar-development-guide.md)
 
+## Known limitations
+
+Resolving rhs for xPath axis expressions
+
+`$node/descendant::toy[attribute::color = "red"]`
+ throws error as we require right hand side for axis expressions,
+`$node/descendant::toy[./attribute::color = "red"]`
+ solution is to use context expression 
+
 ### TODO list
 
 - [ ] branch for main module and library modules 
