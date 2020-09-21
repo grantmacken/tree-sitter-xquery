@@ -1,0 +1,19 @@
+name: continuous-integration
+on:
+  push:
+    branches:
+      - main
+env:
+  ghSha: ${{ github.sha }}
+  ghToken: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+      with:
+          fetch-depth: 1
+    - name: get tree-sitter cli
+      run: echo '::set-env name=TERM::xterm' && make getTreeSitter
