@@ -1,0 +1,155 @@
+4 Modules and Prologs 
+==================
+4.1 Version Declaration 
+==================
+
+xquery version "3.0" encoding "utf-8";
+(
+(:
+: here there be dragons 
+:)
+)
+
+---
+
+(module 
+  (version_declaration (version (string_literal)) (encoding (string_literal))) 
+  (parenthesized_expr (comment))
+)
+
+==================
+4.2 Module Declaration
+==================
+
+module namespace foo = "http://example.org/#foo";
+
+---
+
+(module 
+ (library_module 
+  (module_declaration (NCName) (string_literal))
+ ))
+
+==================
+4.13 Namespace Declaration 
+==================
+
+module namespace example = "http://example.org/#mod";
+declare namespace foo = "http://example.org/#foo";
+
+---
+
+(module 
+ (library_module 
+  (module_declaration (NCName) (string_literal)) 
+  (namespace_declaration (NCName) (string_literal))
+))
+
+==================
+TODO Default Namespace Declaration 
+==================
+
+module namespace foo = "http://example.org/#foo";
+declare default element namespace "http://example.org/names";
+
+---
+
+(module 
+ (library_module 
+  (module_declaration (NCName) (string_literal))
+ ))
+
+
+==================
+4.16 Variable Declaration 
+==================
+
+module namespace foo = "http://example.org/#foo";
+declare variable $x := 7.5;
+
+---
+
+(module 
+ (library_module 
+  (module_declaration (NCName) (string_literal))
+  (variable_declaration (QName) (decimal_literal))
+))
+
+
+==================
+4.18 Function Declaration with params, as types and return type
+==================
+
+module namespace foo = "http://example.org/#foo";
+declare 
+function foo:summary($emps as element(employee)*) as element(dept)* { 
+};
+
+---
+
+(module 
+ (library_module 
+  (module_declaration (NCName) (string_literal))
+  (function_declaration (QName)
+   (param_list (param (QName) (sequence_type (element_test (QName)) (occurrence_indicator)))) 
+   (sequence_type (element_test (QName)) (occurrence_indicator))
+   (enclosed_expr)
+  )))
+
+==================
+4.18 Function Declaration with annotations (baseX docs example )
+==================
+
+module namespace page = 'http://basex.org/examples/web-page';
+declare 
+%rest:path("hello/{$who}") 
+%rest:GET 
+function page:hello($who) {
+ <response>
+    <title>Hello { $who }!</title>
+  </response>
+};
+
+---
+
+(module 
+ (library_module 
+  (module_declaration (NCName) (string_literal)) 
+  (function_declaration 
+   (annotation (QName) (string_literal)) 
+   (annotation (QName)) 
+   (QName)
+   (param_list (param (QName))) 
+   (enclosed_expr 
+    (direct_element 
+     (start_tag (QName)) 
+     (char_data) 
+     (direct_element 
+      (start_tag (QName)) 
+      (char_data) 
+      (enclosed_expr (var_ref (QName)))
+      (char_data) 
+      (end_tag (QName))
+     ) (char_data)
+     (end_tag (QName))
+ )))))
+
+==================
+4.18 Function Declaration external
+==================
+
+
+module namespace foo = "http://example.org/#foo";
+declare  
+function smath:copySign( $magnitude, $sign ) 
+external;
+
+---
+
+(module 
+ (library_module 
+  (module_declaration (NCName) (string_literal)) 
+  (function_declaration (QName) 
+  (param_list (param (QName)) (param (QName)))
+  )))
+
