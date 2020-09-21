@@ -1,4 +1,4 @@
-name: continuous-integration
+name: 
 on:
   push:
     branches:
@@ -17,3 +17,5 @@ jobs:
           fetch-depth: 1
     - name: get tree-sitter cli
       run: echo '::set-env name=TERM::xterm' && make getTreeSitter
+    - name: run current test
+      run: make test
