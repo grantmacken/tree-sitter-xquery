@@ -3,51 +3,53 @@
     "/home/grantmacken/projects/grantmacken"
   ],
   "theme": {
-    "punctuation.delimiter": 239,
-    "string": 28,
-    "property": 124,
-    "function": 26,
-    "tag": 18,
-    "comment": {
-      "color": 245,
-      "italic": true
-    },
-    "variable.parameter": {
-      "underline": true
-    },
-    "attribute": {
-      "color": 124,
-      "italic": true
-    },
-    "number": {
-      "color": #B48EAD,
-      "bold": true
-    },
-    "function.builtin": {
-      "color": 26,
-      "bold": true
-    },
-    "punctuation.bracket": 239,
-    "string.special": 30,
-    "constant.builtin": {
-      "color": 94,
-      "bold": true
-    },
-    "variable.builtin": {
-      "bold": true
-    },
-    "constant": 94,
-    "embedded": null,
-    "operator": {
-      "bold": true,
-      "color": 239
-    },
-    "type": 23,
     "type.builtin": {
       "bold": true,
       "color": 23
     },
+    "variable.builtin": {
+      "bold": true
+    },
+    "type": 23,
+    "string":  { "color" : 4},
+    "embedded": null,
+    "property": 124,
+    "function.builtin": {
+      "bold": true,
+      "color": 26
+    },
+    "conditional": 6,
     "constructor": 136,
-    "keyword": 56
+    "keyword":  14,
+    "variable":  10,
+    "constant.builtin": {
+      "bold": true,
+      "color": 94
+    },
+    "operator": {
+      "bold": true,
+      "color": 239
+    },
+    "punctuation.bracket": { "color": "silver"} ,
+    "attribute": {
+      "italic": true,
+      "color": 124
+    },
+    "function": 26,
+    "number": {
+      "color": 94,
+      "bold": true
+    },
+    "constant": 94,
+    "punctuation.delimiter": 239,
+    "string.special": 30,
+    "tag": 18,
+    "variable.parameter": {
+      "underline": true
+    },
+    "comment": {
+      "color": 245,
+      "italic": true
+    }
   }
 }
