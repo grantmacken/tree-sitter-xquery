@@ -2,59 +2,58 @@
 3.10 String Constructors 
 3.11 Maps and Arrays 
 
-
 ==================
-3.9.1 Direct Element with plain text
+3.9.1: Direct Element with plain text
 ==================
 
  <title>Harold and the Purple Crayon</title>
 
 -------------------
 
-  (module 
-   (direct_element (QName) 
-    (element_content 
-     (char_data))
-    (QName)
-   ))
+(module 
+ (direct_element 
+  (start_tag (QName)) 
+  (char_data)
+  (end_tag (QName))
+ ))
 
 ==================
-3.9.1 Direct Element with char reference
+3.9.1: Direct Element with char reference
 ==================
 
  <div>&#8364;99.50</div>
 
 -------------------
 
-  (module 
-   (direct_element (QName) 
-    (element_content 
-     (char_ref)
-     (char_data)) 
-    (QName)
-   ))
+(module 
+ (direct_element
+  (start_tag (QName)) 
+  (char_ref)
+  (char_data)
+  (end_tag (QName))
+ ))
 
 ==================
-3.9.1 Direct Element with entities
+3.9.1: Direct Element with entities
 ==================
 
  <title>Ben &amp; Jerry&apos;s  </title>
 
 -------------------
 
-  (module 
-   (direct_element (QName) 
-    (element_content 
-     (char_data)
-     (predefined_entity_ref) 
-     (char_data) 
-     (predefined_entity_ref) 
-     (char_data)) 
-    (QName)
-   ))
+(module 
+ (direct_element 
+  (start_tag (QName)) 
+  (char_data) 
+  (predefined_entity_ref) 
+  (char_data) 
+  (predefined_entity_ref) 
+  (char_data) 
+  (end_tag (QName)
+)))
 
 ==================
-3.9.1 Direct Element with enclosed expression
+3.9.1: Direct Element with enclosed expression
 ==================
 
  <title>Harold and the { $item }</title>
@@ -64,11 +63,34 @@
 
 (module 
  (direct_element 
-  (QName) 
-  (element_content (char_data) (enclosed_expr (var_ref (QName))))
-  (QName)
+  (start_tag (QName)) 
+  (char_data) 
+  (enclosed_expr (var_ref (QName)))
+  (end_tag (QName))
  ))
 
+==================
+3.9.1: Direct Element with embeded element
+==================
+
+ <response>
+    <title>Hello Word</title>
+  </response>
+
+-------------------
+
+(module 
+ (direct_element 
+  (start_tag (QName))
+  (char_data) 
+  (direct_element 
+   (start_tag (QName))
+   (char_data) 
+   (end_tag (QName)))
+  (char_data) 
+  (end_tag (QName))
+ )) 
+ 
 ==================
 3.9.3.1 Computed Element Constructors 
 ==================
@@ -255,5 +277,3 @@ $map[?name='Mike']
   (square_array_constructor (string_literal) (string_literal)) 
   (unary_lookup (lookup_digit))
  ))
-
-
