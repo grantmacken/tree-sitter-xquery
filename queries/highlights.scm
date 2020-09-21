@@ -3,19 +3,30 @@
 ;error for error (ERROR` nodes.
 ;punctuation.delimiter for `;` `.` `,` 
 ; xPath
-[ "/" "//"] @punctuation.delimiter
+[ "/" "//" ";"] @punctuation.delimiter
 ;punctuation.bracket for `()` or `{}`
 [ "(" ")" "{" "}" "[" "]"  ] @punctuation.bracket
-(direct_element
-  ["<" ">" "</" "/>" ] @punctuation.bracket)
 
+
+; TAGS Used for xml-like tags
+(end_tag [ "</"  ">" ]  @tag.delimiter)
+(start_tag [ "<"  ">"] @tag.delimiter)
+(empty_tag [ "<" "/>" ] @tag.delimiter)
+(start_tag
+  name: (QName) @tag)
+(end_tag
+  name: (QName) @tag)
+(empty_tag
+  name: (QName) @tag)
 ;punctuation.special for symbols with special meaning like `{}` in string interpolation.
 
 ; CONSTANTS
 ; names of the constructed nodes are constants
 ;constant
-(direct_element
-  (QName) @constant)
+;(direct_element
+;  (QName) @constant)
+; not sure where to put annotation QName
+
 ;string
 [
 (string_literal) 
@@ -40,13 +51,21 @@
 
 ;FUNCTIONS
 ;function
+(function_declaration
+ name: (QName) @function)
 (function_call
   name: (QName) @function)
 (arrow_function_call
    (QName) @function)
+(annotation 
+  name: (QName) @function.annotation)
 ;function.builtin
 ;function.macro
 ;parameter
+  (param 
+    name: (QName) @parameter)
+
+
 ;method
 ;field
 ;property
@@ -75,11 +94,13 @@
 "!" 
 "=>"
 "?"
+"="
+"%"
 ] @operator
 
 ; Arithmetic Expressions
 (comparison_op) @operator.comparison
-;(multiplicative_op) @operator.multiplicative
+(multiplicative_op) @operator.multiplicative
 (additive_op) @operator.additive
 
 [
@@ -89,7 +110,17 @@
 ] @operator.wildcard
 
 ;keyword 
-[ "default" "return" ] @keyword
+[ 
+"default" 
+"return" 
+"xquery" 
+"version"
+"module"
+"namespace" 
+"declare"
+"variable"
+"function"
+] @keyword
 ;keyword.operator (for operators that are English words, e.g. `and`, `or`)
 [ "as" "in" "satisfies" "instance" "of"  "cast" 
   "castable" "treat" ] @keyword.operator
