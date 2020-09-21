@@ -47,33 +47,82 @@ const PREC = {
 
 module.exports = grammar({
   name: 'xQuery',
+  extras: $ => [$.comment, /\s/],
   word: $ => $.keyword,
   rules: {
     module: $ =>
       seq(
         optional($.version_declaration),
+        optional($.comment),
         choice($.library_module, $._main_module)
       ),
     library_module: $ =>
-      seq(
-        'TODO'
-        //$.module_declaration,
-        //optional( $._prolog )
-      ),
-    _main_module: $ =>
-      seq(
-        //optional( $._prolog ),
-        $._query_body
-      ),
+      seq($.module_declaration, optional(repeat1($._prolog))),
+    _main_module: $ => seq(optional(repeat1($._prolog)), $._query_body),
+    //4.1 Version Declaration
     version_declaration: $ =>
       seq('xquery', $.version, optional($.encoding), ';'),
-    // version declaration
+    // 2
     version: $ => seq('version', $.string_literal),
     encoding: $ => seq('encoding', $.string_literal),
-    //
+    //4.2 Module Declaration
+    module_declaration: $ =>
+      seq(
+        'module',
+        'namespace',
+        field('name', $.NCName),
+        '=',
+        field('value', $.string_literal),
+        ';'
+      ), // 5
+    _prolog: $ =>
+      choice(
+        $.namespace_declaration,
+        $.variable_declaration,
+        $.function_declaration
+      ), // 6
+    namespace_declaration: $ =>
+      seq(
+        'declare',
+        'namespace',
+        field('name', $.NCName),
+        '=',
+        field('value', $.string_literal),
+        ';'
+      ), // 24
+    // 4.16 Variable Declaration
+    variable_declaration: $ =>
+      seq(
+        'declare',
+        'variable',
+        '$',
+        field('name', $._EQName),
+        ':=',
+        field('value', $._expr),
+        ';'
+      ), // 26 TODO anno etc4.18 Function Declaration4.18 Function Declaration
+    function_declaration: $ =>
+      seq(
+        'declare',
+        optional(repeat1($.annotation)),
+        'function',
+        field('name', $._EQName),
+        field('params', $.param_list),
+        field('result', optional(seq('as', $.sequence_type))),
+        field('body', choice($.enclosed_expr, 'external')),
+        ';'
+      ),
+    annotation: $ =>
+      seq(
+        '%',
+        field('name', $._EQName),
+        field('body', optional(seq('(', commaSep($.string_literal), ')')))
+      ),
+
     _query_body: $ => seq(commaSep1($._expr)),
     _expr: $ =>
       choice(
+        $._primary,
         //statement_like
         $.flwor_expr,
         $.quantified_expr,
@@ -101,7 +150,6 @@ module.exports = grammar({
         $.bang_expr, //107 prec: 18 l
         $.path_expr, //108 prec: 19 lr
         $.arrow_expr,
-        $._primary,
         $.postfix_expr
       ),
 
@@ -408,33 +456,46 @@ module.exports = grammar({
       choice($._computed_constructor, $._direct_constructor),
     // 3.9.1 Direct Element Constructors
     _direct_constructor: $ =>
-      seq(
+      choice(
         $.direct_element
-        // ComputedConstructor
-        // DirectConstructor
+        // $.direct_element
+        // TODO dir_comment_constructor,
+        // TODO dir_pi_constructor
       ), //141  TODO
+    _direct_element_content: $ => choice($.direct_element, $._element_text),
     direct_element: $ =>
+      choice(
+        seq($.start_tag, repeat($._direct_element_content), $.end_tag),
+        $.empty_tag
+      ),
+    start_tag: $ =>
       seq(
         '<',
-        $.QName,
-        optional(repeat1($.direct_attribute)),
-        choice('/>', seq('>', optional($._direct_content), '</', $.QName, '>'))
-      ),
-    direct_attribute: $ =>
-      seq(
         field('name', $.QName),
-        field('operator', '='),
-        field('value', $.string_literal)
+        repeat(field('attribute', $.direct_attribute)),
+        '>'
       ),
-    _direct_content: $ => choice($.direct_element, $.element_content), // 'TODO 228',
-    element_content: $ =>
-      repeat1(
-        choice(
-          $.predefined_entity_ref,
-          $.char_ref,
-          $.escape_curly,
-          $.enclosed_expr,
-          $.char_data
+    end_tag: $ => seq('</', field('name', $.QName), '>'),
+    empty_tag: $ =>
+      seq(
+        '<',
+        field('name', $.QName),
+        repeat(field('attribute', $.direct_attribute)),
+        '/>'
+      ),
+
+    direct_attribute: $ =>
+      seq(field('name', $.QName), '=', field('value', $.string_literal)),
+    _element_text: $ =>
+      prec.left(
+        repeat1(
+          choice(
+            $.predefined_entity_ref,
+            $.char_ref,
+            $.escape_curly,
+            $.enclosed_expr,
+            $.char_data
+          )
         )
       ),
     char_data: $ => /[^{}<&]+/,
@@ -835,8 +896,10 @@ module.exports = grammar({
       seq('Q{', repeat1(choice(PredefinedEntityRef, CharRef, /[^&{}]/)), '}'), // 224
     //comma: $ => token(','),
     // delimit: $ => choice('!'),
-    keyword: $ => token(/[a-z][a-z\-]+/)
+
+    keyword: $ => token(/[a-z][a-z\-]+/),
     // identifier: $ =>  /[a-z][a-z\-]+/
+    comment: $ => token(/[(]:[^:]*:*([^(:][^:]*:+)*[)]/)
   }
 });
 
