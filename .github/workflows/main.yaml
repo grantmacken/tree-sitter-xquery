@@ -25,7 +25,6 @@ jobs:
           bin/tree-sitter test
           bin/tree-sitter parse examples/*.xq --quiet
     - name: parse examples
-      run: |
-          bin/tree-sitter parse examples/*.xq
-    - name: |
-          bin/tree-sitter query --captures queries/highlights.scm examples/lib.xq
+      run: bin/tree-sitter parse examples/*.xq
+    - name:
+      run: bin/tree-sitter query --captures queries/highlights.scm examples/lib.xq
