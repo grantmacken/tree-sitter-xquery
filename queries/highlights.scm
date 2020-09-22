@@ -1,9 +1,9 @@
 ; MISC from nvim contributing
-;comment
+
 ;error for error (ERROR` nodes.
 ;punctuation.delimiter for `;` `.` `,` 
 ; xPath
-[ "/" "//" ";"] @punctuation.delimiter
+[ "/" "//" ";" ","] @punctuation.delimiter
 ;punctuation.bracket for `()` or `{}`
 [ "(" ")" "{" "}" "[" "]"  ] @punctuation.bracket
 
@@ -18,6 +18,10 @@
   name: (QName) @tag)
 (empty_tag
   name: (QName) @tag)
+
+(direct_attribute
+  name: (QName) @tag)
+
 ;punctuation.special for symbols with special meaning like `{}` in string interpolation.
 
 ; CONSTANTS
@@ -143,5 +147,7 @@
 (single_type)
 ] @type
 
+;comment
+(comment) @comment
 ;; Error
 (ERROR) @error
