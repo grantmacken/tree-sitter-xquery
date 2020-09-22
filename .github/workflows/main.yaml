@@ -19,5 +19,13 @@ jobs:
       run: | 
           echo '::set-env name=TERM::xterm' 
           make getTreeSitter
-    - name: make then run current test
-      run: make && make test
+    - name: generate and test
+      run: |
+          bin/tree-sitter generate
+          bin/tree-sitter test
+          bin/tree-sitter parse examples/*.xq --quiet
+    - name: parse examples
+      run: |
+          bin/tree-sitter parse examples/*.xq
+    - name: |
+          bin/tree-sitter query --captures queries/highlights.scm examples/lib.xq
