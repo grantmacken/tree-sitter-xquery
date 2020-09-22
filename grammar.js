@@ -53,7 +53,6 @@ module.exports = grammar({
     module: $ =>
       seq(
         optional($.version_declaration),
-        optional($.comment),
         choice($.library_module, $._main_module)
       ),
     library_module: $ =>
