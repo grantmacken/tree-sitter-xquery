@@ -46,21 +46,6 @@ declare namespace foo = "http://example.org/#foo";
 ))
 
 ==================
-TODO Default Namespace Declaration 
-==================
-
-module namespace foo = "http://example.org/#foo";
-declare default element namespace "http://example.org/names";
-
----
-
-(module 
- (library_module 
-  (module_declaration (NCName) (string_literal))
- ))
-
-
-==================
 4.16 Variable Declaration 
 ==================
 
