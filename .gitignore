@@ -1,4 +1,5 @@
 index.js
+bin
 binding.gyp
 .git
 src
