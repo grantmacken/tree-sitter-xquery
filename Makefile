@@ -46,9 +46,11 @@ stow-config:
 	@popd
 
 .PHONY: getTreeSitter
-getTreeSitter:
+getTreeSitter:\
+  @echo 'get treesitter'
+  @mkdir -p $(HOME)/.local/bin
 	@wget -nc -O - $(ts_download_url)/$(TS_RELEASE)/tree-sitter-linux-x64.gz |
-	@gunzip - > tree-sitter
-	@chmod +x tree-sitter
-	@mv tree-sitter $(HOME)/.local/bin 
+	gunzip - > $(HOME)/.local/bin/tree-sitter
+	@chmod +x (HOME)/.local/bin/tree-sitter
+	@tree-sitter --version
 
