@@ -53,11 +53,39 @@ module.exports = grammar({
     module: $ =>
       seq(
         optional($.version_declaration),
-        choice($.library_module, $._main_module)
+        choice($._library_module, $._main_module)
       ),
-    library_module: $ =>
-      seq($.module_declaration, optional(repeat1($._prolog))),
-    _main_module: $ => seq(optional(repeat1($._prolog)), $._query_body),
+    _library_module: $ => seq($.module_declaration, $._prolog),
+    _main_module: $ => seq(optional($._prolog), $._query_body),
+    _prolog: $ =>
+      seq(
+        repeat(
+          choice(
+            $.default_namespace_declaration,
+            // setter
+            $.boundary_space_declaration,
+            $.default_collation_declaration,
+            $.base_uri_declaration,
+            $.construction_declaration,
+            $.ordering_mode_declaration,
+            $.empty_order_declaration,
+            $.copy_namespaces_declaration,
+            $.decimal_format_declaration,
+            // namespace and imports
+            $.namespace_declaration,
+            $.schema_import,
+            $.module_import
+          )
+        ),
+        repeat1(
+          choice(
+            $.context_item_declaration,
+            $.variable_declaration,
+            $.function_declaration,
+            $.option_declaration
+          )
+        )
+      ), // 6 TODO:
     //4.1 Version Declaration
     version_declaration: $ =>
       seq('xquery', $.version, optional($.encoding), ';'),
@@ -74,32 +102,165 @@ module.exports = grammar({
         field('value', $.string_literal),
         ';'
       ), // 5
-    _prolog: $ =>
+    // 4.3 Boundary-space Declaration
+    boundary_space_declaration: $ =>
+      seq('declare', 'boundary-space', choice('preserve', 'strip'), ';'),
+    // 4.4 Default Collation Declaration
+    default_collation_declaration: $ =>
+      seq(
+        'declare',
+        'default',
+        'collation',
+        field('uri', $.string_literal),
+        ';'
+      ),
+    // 4.5 Base URI Declaration
+    base_uri_declaration: $ =>
+      seq('declare', 'base-uri', field('uri', $.string_literal), ';'),
+    //4.6 Construction Declaration
+    construction_declaration: $ =>
+      seq('declare', 'construction', choice('preserve', 'strip'), ';'),
+    // 4.7 Ordering Mode Declaration
+    ordering_mode_declaration: $ =>
+      seq('declare', 'ordering', choice('ordered', 'unordered'), ';'),
+    // 4.8 Empty Order Declaration
+    empty_order_declaration: $ =>
+      seq(
+        'declare',
+        'default',
+        'order',
+        ',empty',
+        choice('greatest', 'least'),
+        ';'
+      ),
+
+    // 4.9 Copy-Namespaces Declaration
+    copy_namespaces_declaration: $ =>
+      seq(
+        'declare',
+        'copy-namespaces',
+        choice('preserve', 'no-preserve'),
+        ',',
+        choice('inherit', 'no-inherit'),
+        ';'
+      ),
+    // 4.10 Decimal Format Declaration
+    decimal_format_declaration: $ =>
+      seq(
+        'declare',
+        choice(
+          seq('decimal-format', $._EQName),
+          seq('default', 'decimal-format')
+        ),
+        optional(
+          seq(
+            field('name', $.df_property_name),
+            '=',
+            field('name', $.string_literal)
+          )
+        ),
+        ';'
+      ),
+    df_property_name: $ =>
       choice(
-        $.namespace_declaration,
-        $.variable_declaration,
-        $.function_declaration
-      ), // 6
+        'decimal-separator',
+        'grouping-separator',
+        'infinity',
+        'minus-sign',
+        'NaN',
+        'percent',
+        'per-mille',
+        'zero-digit',
+        'digit',
+        'pattern-separator',
+        'exponent-separator'
+      ),
+    //4.11 Schema Import
+    schema_import: $ =>
+      seq(
+        'import',
+        'schema',
+        optional($.schema_prefix),
+        field('uri', $.string_literal),
+        optional(seq('at', commaSep1($.string_literal))),
+        ';'
+      ), // 21
+    schema_prefix: $ =>
+      choice(
+        seq('namespace', $.NCName, '='),
+        seq('default', 'element', 'namespace')
+      ), //22',
+    // 4.12 Module Import // TODO
+    module_import: $ =>
+      seq(
+        'import',
+        'module',
+        optional(seq('namespace', $.NCName, '=')),
+        field('uri', $.string_literal),
+        optional(seq('at', commaSep1($.string_literal))),
+        ';'
+      ),
+    //4.13 Namespace Declaration
     namespace_declaration: $ =>
       seq(
         'declare',
         'namespace',
         field('name', $.NCName),
         '=',
-        field('value', $.string_literal),
+        field('uri', $.string_literal),
         ';'
       ), // 24
+    //4.14 Default Namespace Declaration
+    default_namespace_declaration: $ =>
+      seq(
+        'declare',
+        'default',
+        choice('element', 'function'),
+        'namespace',
+        field('uri', $.string_literal),
+        ';'
+      ), // 24
+
+    //4.15 Annotations
+    annotation: $ =>
+      seq(
+        '%',
+        field('name', $._EQName),
+        field('body', optional(seq('(', commaSep($.string_literal), ')')))
+      ), // 27
     // 4.16 Variable Declaration
     variable_declaration: $ =>
       seq(
         'declare',
+        optional(repeat1($.annotation)),
         'variable',
         '$',
         field('name', $._EQName),
+        optional($.type_declaration),
         ':=',
         field('value', $._expr),
         ';'
-      ), // 26 TODO anno etc4.18 Function Declaration4.18 Function Declaration
+      ), // 26
+    // 4.17 Context Item Declaration
+    context_item_declaration: $ =>
+      seq(
+        'declare',
+        'context',
+        'item',
+        optional( $.type_declaration ),
+        optional(
+          choice(
+            seq(':=', field('var_value', $._expr)),
+            seq(
+              'external',
+              optional(seq(':=', field('var_default_value', $._expr)))
+            )
+          )
+        ),
+        ';'
+      ),
+
+    // 4.18 Function Declaration
     function_declaration: $ =>
       seq(
         'declare',
@@ -111,11 +272,14 @@ module.exports = grammar({
         field('body', choice($.enclosed_expr, 'external')),
         ';'
       ),
-    annotation: $ =>
+    //4.19 Option Declaration
+    option_declaration: $ =>
       seq(
-        '%',
+        'declare',
+        'option',
         field('name', $._EQName),
-        field('body', optional(seq('(', commaSep($.string_literal), ')')))
+        field('value', $.string_literal),
+        ';'
       ),
 
     _query_body: $ => seq(commaSep1($._expr)),
