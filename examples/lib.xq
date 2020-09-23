@@ -1,11 +1,10 @@
-xquery version "3.1";
-(:
-: here there be dragons 
-:)
-module namespace foo = "http://example.org/#foo";
-declare namespace baa = "http://example.org/baa";
-declare variable $x := 'bar';
-
+module namespace mod = "http://example.org/#mod";
+declare namespace foo = "http://example.org/#foo";
+declare default element namespace "http://example.org/names";
+import schema namespace geometry = "http://example.org/geo-schema-declarations";
+import module namespace geo = "http://example.org/geo-functions";
+declare context item as item() external;
+declare variable $mod:bar := "main module dummy";
 declare 
 function foo:summary($emps as element(employee)*) as element(dept)* { 
  fn:distinct-values($emps/deptno)
