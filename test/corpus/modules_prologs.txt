@@ -21,45 +21,119 @@ xquery version "3.0" encoding "utf-8";
 4.2 Module Declaration
 ==================
 
-module namespace foo = "http://example.org/#foo";
+module namespace mod = "http://example.org/#mod";
+declare variable $mod:bar := 'main module dummy';
 
 ---
 
 (module 
- (library_module 
-  (module_declaration (NCName) (string_literal))
- ))
+  (module_declaration (NCName) (string_literal)) 
+  (variable_declaration (QName) (string_literal))
+)
+
+
+==================
+4.11 Schema Import 
+==================
+
+module namespace mod = "http://example.org/#mod";
+import schema namespace soap="http://www.w3.org/2003/05/soap-envelope";
+declare variable $mod:bar := 'main module dummy';
+
+---
+
+(module 
+  (module_declaration (NCName) (string_literal)) 
+  (schema_import (schema_prefix (NCName)) (string_literal)) 
+  (variable_declaration (QName) (string_literal))
+)
+
+==================
+4.12 Module Import  
+==================
+
+import schema namespace geometry = "http://example.org/geo-schema-declarations"; 
+import module namespace geo = "http://example.org/geo-functions"; 
+declare variable $t as geometry:triangle := geo:make-triangle(); 
+$t
+
+---
+
+(module 
+  (schema_import (schema_prefix (NCName)) (string_literal)) 
+  (module_import (NCName) (string_literal))
+  (variable_declaration (QName) 
+    (type_declaration (sequence_type (QName)))
+    (function_call (QName) (argument_list))) 
+  (var_ref (QName))
+)
 
 ==================
 4.13 Namespace Declaration 
 ==================
 
-module namespace example = "http://example.org/#mod";
+module namespace mod = "http://example.org/#mod";
 declare namespace foo = "http://example.org/#foo";
+declare variable $mod:bar := 'main module dummy';
 
 ---
 
 (module 
- (library_module 
   (module_declaration (NCName) (string_literal)) 
   (namespace_declaration (NCName) (string_literal))
-))
+  (variable_declaration (QName) (string_literal))
+)
+
+==================
+4.14 Default Namespace Declaration 
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare namespace foo = "http://example.org/#foo";
+declare default element namespace "http://example.org/names";
+declare variable $mod:bar := "main module dummy";
+
+---
+
+(module 
+  (module_declaration (NCName) (string_literal)) 
+  (namespace_declaration (NCName) (string_literal))
+  (default_namespace_declaration  (string_literal))
+  (variable_declaration (QName) (string_literal))
+)
+
+
+
 
 ==================
 4.16 Variable Declaration 
 ==================
 
 module namespace foo = "http://example.org/#foo";
-declare variable $x := 7.5;
+declare variable $foo:num := 7.5;
 
 ---
 
 (module 
- (library_module 
   (module_declaration (NCName) (string_literal))
   (variable_declaration (QName) (decimal_literal))
-))
+)
 
+==================
+4.17 Context Item Declaration 
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare context item as item() external;
+declare variable $mod:bar := "main module dummy";
+
+---
+
+(module 
+  (module_declaration (NCName) (string_literal)) 
+  (context_item_declaration (type_declaration (sequence_type))) 
+  (variable_declaration (QName) (string_literal))
+)
 
 ==================
 4.18 Function Declaration with params, as types and return type
@@ -73,13 +147,12 @@ function foo:summary($emps as element(employee)*) as element(dept)* {
 ---
 
 (module 
- (library_module 
   (module_declaration (NCName) (string_literal))
   (function_declaration (QName)
    (param_list (param (QName) (sequence_type (element_test (QName)) (occurrence_indicator)))) 
    (sequence_type (element_test (QName)) (occurrence_indicator))
    (enclosed_expr)
-  )))
+  ))
 
 ==================
 4.18 Function Declaration with annotations (baseX docs example )
@@ -98,7 +171,6 @@ function page:hello($who) {
 ---
 
 (module 
- (library_module 
   (module_declaration (NCName) (string_literal)) 
   (function_declaration 
    (annotation (QName) (string_literal)) 
@@ -117,7 +189,7 @@ function page:hello($who) {
       (end_tag (QName))
      ) (char_data)
      (end_tag (QName))
- )))))
+ ))))
 
 ==================
 4.18 Function Declaration external
@@ -132,9 +204,24 @@ external;
 ---
 
 (module 
- (library_module 
   (module_declaration (NCName) (string_literal)) 
   (function_declaration (QName) 
   (param_list (param (QName)) (param (QName)))
-  )))
+  ))
 
+==================
+4.19 Option Declaration 
+==================
+
+
+module namespace foo = "http://example.org/#foo";
+declare namespace output = 'http://www.w3.org/2010/xslt-xquery-serialization';
+declare option output:method 'text';
+
+---
+
+  (module 
+   (module_declaration (NCName) (string_literal)) 
+   (namespace_declaration (NCName) (string_literal))
+   (option_declaration  (QName) (string_literal))
+  )
