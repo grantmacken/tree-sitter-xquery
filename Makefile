@@ -39,10 +39,22 @@ query:
 hl:
 	@bin/tree-sitter highlight  --scope source.xQuery examples/$(EXAMPLE).xq
 
+playground: tree-sitter-xQuery.wasm
+
+tree-sitter-xQuery.wasm: grammar.js
+	@bin/tree-sitter build-wasm
+	@bin/tree-sitter web-ui
+
 .PHONY: stow-config
 stow-config:
 	@pushd _config
 	@stow -v -t ~/.tree-sitter .
+	@popd
+
+.PHONY: stow-queries
+stow-queries:
+	@pushd queries
+	@stow -v -t ~/.config/nvim/queries .
 	@popd
 
 getTreeSitter: bin/tree-sitter
