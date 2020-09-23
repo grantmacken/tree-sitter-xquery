@@ -11,17 +11,27 @@ validating parser, tree-sitter will not stop on-error, but continue to parse.
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
 - [awesome tree sitter](https://github.com/drom/awesome-tree-sitter)
 
-## some parse and query examples 
+## playground
 
-To peek at tree-sitter in action, I run some parse and query examples in 
+
+```
+# get tree-sitter cli
+make getTreeSitter
+#  generate the tree-sitter grammar  
+make
+# convert to web assembly and play with 
+# the result in the web ui interface
+make playground
+```
+
+To see highlighting in action check the query checkbox and
+paste the highlight query found in queries folder.
+
+To peek at tree-sitter in action, I also run some parse and query examples in 
 [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
-which you might want to look at.
-
-The parse examples should show what can be parsed into 
+which you might want to look at. The parse examples should show what can be parsed into 
 [S-expression](https://en.wikipedia.org/wiki/S-expression)
-nested list (tree-structured) data
-
-The query examples should show the capture items that can be highlighted in a
+nested list (tree-structured) data. The query examples should show the capture items that can be highlighted in a
 text editor.
 
 Please note: this is very much a work in progress. I am learning as I go, and may go down many dead end or wrong paths
