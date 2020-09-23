@@ -7,7 +7,6 @@
 ;punctuation.bracket for `()` or `{}`
 [ "(" ")" "{" "}" "[" "]"  ] @punctuation.bracket
 
-
 ; TAGS Used for xml-like tags
 (end_tag [ "</"  ">" ]  @tag.delimiter)
 (start_tag [ "<"  ">"] @tag.delimiter)
@@ -28,10 +27,6 @@
 
 ; CONSTANTS
 ; names of the constructed nodes are constants
-;constant
-;(direct_element
-;  (QName) @constant)
-; not sure where to put annotation QName
 
 ;string
 [
@@ -71,7 +66,6 @@
   (param 
     name: (QName) @parameter)
 
-
 ;method
 ;field
 ;property
@@ -85,7 +79,6 @@
   "array"
   ] @constructor
 
-;KEYWORDS
 ;conditional
 [ "some" "every" 
   "if" "else" "then" 
@@ -116,18 +109,19 @@
 (wildcard)
 ] @operator.wildcard
 
-;include keywords for including modules (e.g. import/from in Python)
-"import" @include
+;include for including modules
+
+["import" "external"] @include
 
 [ 
 "declare"
 "default" 
 "context"
-"external"
 "item"
 "function"
 "module"
 "namespace" 
+"option" 
 "return" 
 "schema"
 "variable"
