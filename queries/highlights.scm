@@ -20,7 +20,9 @@
   name: (QName) @tag)
 
 (direct_attribute
-  name: (QName) @tag)
+  name: (QName) @attribute)
+(direct_attribute
+  value: (QName) @string)
 
 ;punctuation.special for symbols with special meaning like `{}` in string interpolation.
 
@@ -100,6 +102,7 @@
 "?"
 "="
 "%"
+":="
 ] @operator
 
 ; Arithmetic Expressions
@@ -113,18 +116,25 @@
 (wildcard)
 ] @operator.wildcard
 
-;keyword 
+;include keywords for including modules (e.g. import/from in Python)
+"import" @include
+
 [ 
+"declare"
 "default" 
-"return" 
-"xquery" 
-"version"
+"context"
+"external"
+"item"
+"function"
 "module"
 "namespace" 
-"declare"
+"return" 
+"schema"
 "variable"
-"function"
+"version"
+"xquery" 
 ] @keyword
+
 ;keyword.operator (for operators that are English words, e.g. `and`, `or`)
 [ "as" "in" "satisfies" "instance" "of"  "cast" 
   "castable" "treat" ] @keyword.operator
@@ -133,7 +143,6 @@
 ;exception 
 [ "try" "catch" ] @exception
 
-;include keywords for including modules (e.g. import/from in Python)
 ;Variables
 ;variable
 [
@@ -146,6 +155,9 @@
 (sequence_type)
 (single_type)
 ] @type
+
+(default_namespace_declaration
+   ["element" "function" ] @type)
 
 ;comment
 (comment) @comment
