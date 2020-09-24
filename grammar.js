@@ -46,7 +46,7 @@ const PREC = {
   );
 
 module.exports = grammar({
-  name: 'xQuery',
+  name: 'xquery',
   extras: $ => [$.comment, /\s/],
   word: $ => $.keyword,
   rules: {

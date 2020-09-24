@@ -53,8 +53,9 @@ stow-config:
 
 .PHONY: stow-queries
 stow-queries:
+	@mkdir -p $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery
 	@pushd queries
-	@stow -v -t ~/.config/nvim/queries .
+	@stow -v -t $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery  .
 	@popd
 
 getTreeSitter: bin/tree-sitter
