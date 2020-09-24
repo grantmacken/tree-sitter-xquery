@@ -64,10 +64,10 @@ bin/tree-sitter:  .env
 	@mkdir -p bin
 	@wget -nc -O - $(ts_download_url)/$(TS_RELEASE)/tree-sitter-linux-x64.gz | gunzip - > bin/tree-sitter
 	@chmod +x bin/tree-sitter
-	@pushd bin
-	@mkdir -p $(HOME)/.local/bin
-	@stow -v -t $(HOME)/.local/bin .
-	@popd
+	@#pushd bin
+	@#mkdir -p $(HOME)/.local/bin
+	@#stow -v -t $(HOME)/.local/bin .
+	@#popd
 	@which tree-sitter
 	@bin/tree-sitter --version
 
