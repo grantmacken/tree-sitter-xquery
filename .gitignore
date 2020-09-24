@@ -1,5 +1,5 @@
 index.js
-bin
+bin/tree-sitter
 binding.gyp
 .git
 _hold
