@@ -6,12 +6,12 @@ import module namespace geo = "http://example.org/geo-functions";
 declare context item as item() external;
 declare variable $mod:bar := "main module dummy";
 declare 
-function foo:summary($emps as element(employee)*) as element(dept)* { 
+function mod:summary($emps as element(employee)*) as element(dept)* { 
  fn:distinct-values($emps/deptno)
 };
 
 declare  
-function foo:copySign( $magnitude, $sign ) 
+function mod:copySign( $magnitude, $sign ) 
 external;
 
 declare 
@@ -25,12 +25,15 @@ function foo:hello($who) {
 
 declare
 %rest:path("version3") 
-function foo:version3() {
+function mod:version3() {
   <rest:response>
     <output:serialization-parameters>
       <output:media-type value='text/plain'/>
     </output:serialization-parameters>
   </rest:response>,
+  (
+   1,
   'Not that simple anymore'
+  )
 };
 
