@@ -27,9 +27,8 @@ declare variable $mod:bar := 'main module dummy';
 ---
 
 (module 
-  (module_declaration (NCName) (string_literal)) 
-  (variable_declaration (QName) (string_literal))
-)
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
 
 ==================
@@ -43,10 +42,9 @@ declare variable $mod:bar := 'main module dummy';
 ---
 
 (module 
-  (module_declaration (NCName) (string_literal)) 
-  (schema_import (schema_prefix (NCName)) (string_literal)) 
-  (variable_declaration (QName) (string_literal))
-)
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (schema_import (schema_prefix (NCName (identifier))) (string_literal)) 
+  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
 ==================
 4.12 Module Import  
@@ -60,13 +58,13 @@ $t
 ---
 
 (module 
-  (schema_import (schema_prefix (NCName)) (string_literal)) 
-  (module_import (NCName) (string_literal))
-  (variable_declaration (QName) 
-    (type_declaration (sequence_type (QName)))
-    (function_call (QName) (argument_list))) 
-  (var_ref (QName))
-)
+  (schema_import (schema_prefix (NCName (identifier))) (string_literal)) 
+  (module_import (NCName (identifier)) (string_literal))
+  (variable_declaration 
+  (EQName (identifier)) 
+  (type_declaration (sequence_type (EQName (identifier) (identifier)))) 
+  (function_call (EQName (identifier) (identifier)) (argument_list))) 
+  (var_ref (EQName (identifier))))
 
 ==================
 4.13 Namespace Declaration 
@@ -79,10 +77,9 @@ declare variable $mod:bar := 'main module dummy';
 ---
 
 (module 
-  (module_declaration (NCName) (string_literal)) 
-  (namespace_declaration (NCName) (string_literal))
-  (variable_declaration (QName) (string_literal))
-)
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (namespace_declaration (NCName (identifier)) (string_literal)) 
+  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
 ==================
 4.14 Default Namespace Declaration 
@@ -96,12 +93,10 @@ declare variable $mod:bar := "main module dummy";
 ---
 
 (module 
-  (module_declaration (NCName) (string_literal)) 
-  (namespace_declaration (NCName) (string_literal))
-  (default_namespace_declaration  (string_literal))
-  (variable_declaration (QName) (string_literal))
-)
-
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (namespace_declaration (NCName (identifier)) (string_literal)) 
+  (default_namespace_declaration (string_literal)) 
+  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
 
 
@@ -115,9 +110,8 @@ declare variable $foo:num := 7.5;
 ---
 
 (module 
-  (module_declaration (NCName) (string_literal))
-  (variable_declaration (QName) (decimal_literal))
-)
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (variable_declaration (EQName (identifier) (identifier)) (decimal_literal)))
 
 ==================
 4.17 Context Item Declaration 
@@ -130,10 +124,9 @@ declare variable $mod:bar := "main module dummy";
 ---
 
 (module 
-  (module_declaration (NCName) (string_literal)) 
+  (module_declaration (NCName (identifier)) (string_literal))
   (context_item_declaration (type_declaration (sequence_type))) 
-  (variable_declaration (QName) (string_literal))
-)
+  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
 ==================
 4.18 Function Declaration with params, as types and return type
@@ -147,13 +140,17 @@ function foo:summary($emps as element(employee)*) as element(dept)* {
 ---
 
 (module 
-  (module_declaration (NCName) (string_literal))
-  (function_declaration (QName)
-   (param_list (param (QName) (sequence_type (element_test (QName)) (occurrence_indicator)))) 
-   (sequence_type (element_test (QName)) (occurrence_indicator))
-   (enclosed_expr)
-  ))
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (function_declaration 
+  (EQName (identifier) (identifier)) 
+  (param_list 
+    (param 
+    (EQName (identifier)) 
+    (sequence_type (element_test (EQName (identifier))) (occurrence_indicator)))) 
+  (sequence_type (element_test (EQName (identifier))) (occurrence_indicator)) 
+  (enclosed_expr)))
 
+  
 ==================
 4.18 Function Declaration with annotations (baseX docs example )
 ==================
@@ -170,26 +167,19 @@ function page:hello($who) {
 
 ---
 
-(module 
-  (module_declaration (NCName) (string_literal)) 
-  (function_declaration 
-   (annotation (QName) (string_literal)) 
-   (annotation (QName)) 
-   (QName)
-   (param_list (param (QName))) 
-   (enclosed_expr 
-    (direct_element 
-     (start_tag (QName)) 
-     (char_data) 
-     (direct_element 
-      (start_tag (QName)) 
-      (char_data) 
-      (enclosed_expr (var_ref (QName)))
-      (char_data) 
-      (end_tag (QName))
-     ) (char_data)
-     (end_tag (QName))
- ))))
+  (module 
+   (module_declaration (NCName (identifier)) (string_literal)) 
+   (function_declaration 
+    (annotation (EQName (identifier) (identifier)) (string_literal)) 
+    (annotation (EQName (identifier) (identifier))) 
+    (EQName (identifier) (identifier)) 
+    (param_list (param (EQName (identifier)))) 
+    (enclosed_expr (direct_element (start_tag (identifier)) (char_data) 
+    (direct_element (start_tag (identifier)) (char_data) 
+    (enclosed_expr (var_ref (EQName (identifier)))) 
+    (char_data) (end_tag (identifier))) 
+    (char_data) (end_tag (identifier))))))
+
 
 ==================
 4.18 Function Declaration external
@@ -204,10 +194,8 @@ external;
 ---
 
 (module 
-  (module_declaration (NCName) (string_literal)) 
-  (function_declaration (QName) 
-  (param_list (param (QName)) (param (QName)))
-  ))
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (function_declaration (EQName (identifier) (identifier)) (param_list (param (EQName (identifier))) (param (EQName (identifier)))))) 
 
 ==================
 4.19 Option Declaration 
@@ -220,8 +208,7 @@ declare option output:method 'text';
 
 ---
 
-  (module 
-   (module_declaration (NCName) (string_literal)) 
-   (namespace_declaration (NCName) (string_literal))
-   (option_declaration  (QName) (string_literal))
-  )
+(module 
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (namespace_declaration (NCName (identifier)) (string_literal)) 
+  (option_declaration (EQName (identifier) (identifier)) (string_literal)))

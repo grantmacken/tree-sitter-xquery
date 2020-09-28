@@ -3,7 +3,7 @@
 ;error for error (ERROR` nodes.
 ;punctuation.delimiter for `;` `.` `,` 
 ; xPath
-[ "/" "//" ";" ","] @punctuation.delimiter
+[ "/" "//" ";" "," ] @punctuation.delimiter
 ;punctuation.bracket for `()` or `{}`
 [ "(" ")" "{" "}" "[" "]"  ] @punctuation.bracket
 
@@ -11,17 +11,18 @@
 (end_tag [ "</"  ">" ]  @tag.delimiter)
 (start_tag [ "<"  ">"] @tag.delimiter)
 (empty_tag [ "<" "/>" ] @tag.delimiter)
-(start_tag
-  name: (QName) @tag)
-(end_tag
-  name: (QName) @tag)
-(empty_tag
-  name: (QName) @tag)
+;(start_tag
+;  name: (identifier) @tag)
+;(end_tag
+;  name: (identifier) @tag)
+;(empty_tag
+;  name: (identifier) @tag)
+;
+;(direct_attribute
+;  name: (identifier) @attribute)
 
-(direct_attribute
-  name: (QName) @attribute)
-(direct_attribute
-  value: (QName) @string)
+;(direct_attribute
+;  value: (QName) @string)
 
 ;punctuation.special for symbols with special meaning like `{}` in string interpolation.
 
@@ -52,19 +53,19 @@
 
 ;FUNCTIONS
 ;function
-(function_declaration
- name: (QName) @function)
-(function_call
-  name: (QName) @function)
-(arrow_function_call
-   (QName) @function)
-(annotation 
-  name: (QName) @function.annotation)
+;(function_declaration
+; name: (identifier) @function)
+;(function_call
+;  name: (identifier) @function)
+;(arrow_function_call
+;   (identifier) @function)
+;(annotation 
+;  name: (identifier) @function.annotation)
 ;function.builtin
 ;function.macro
 ;parameter
-  (param 
-    name: (QName) @parameter)
+;  (param 
+;    name: (identifier) @parameter)
 
 ;method
 ;field
@@ -80,9 +81,16 @@
   ] @constructor
 
 ;conditional
-[ "some" "every" 
-  "if" "else" "then" 
-  "typeswitch" "switch" "case"
+[ 
+"case"
+"else" 
+"every" 
+"if" 
+"some" 
+"switch" 
+"then" 
+"typeswitch" 
+"where" 
 ] @conditional
 ;repeat
 [ "for" ] @repeat
@@ -114,24 +122,50 @@
 ["import" "external"] @include
 
 [ 
+"allowing"
+"ascending"
+"by"
+"collation"
+"context"
+"count"
 "declare"
 "default" 
-"context"
-"item"
+"descending"
+"descending"
+"empty"
+"empty"
 "function"
+"greatest"
+"group"
+"item"
+"least"
 "module"
 "namespace" 
 "option" 
+"order"
 "return" 
 "schema"
+"stable"
 "variable"
 "version"
+"where"
 "xquery" 
+"ordered"
+"unordered"
 ] @keyword
 
 ;keyword.operator (for operators that are English words, e.g. `and`, `or`)
-[ "as" "in" "satisfies" "instance" "of"  "cast" 
-  "castable" "treat" ] @keyword.operator
+[ 
+  "as" 
+  "at"
+  "cast" 
+  "castable"
+  "in" 
+  "instance" 
+  "of"  
+  "satisfies" 
+  "treat" 
+  ] @keyword.operator
 
 ;keyword.function
 ;exception 
@@ -140,10 +174,12 @@
 ;Variables
 ;variable
 [
+
+(identifier) 
 (NCName)
 (var_ref)
 ] @variable
-;variable.builtin
+"$" @variable.prefix
 
 [
 (sequence_type)

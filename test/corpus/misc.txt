@@ -76,7 +76,7 @@ switch ( $animal )
 
 (module 
     (switch_expr 
-	(switch_value (var_ref (QName))) 
+	(switch_value (var_ref (EQName (identifier)))) 
 	(switch_clause (string_literal) (string_literal)) 
 	(switch_clause (string_literal) (string_literal)) 
 	(switch_clause (string_literal) (string_literal)) 
@@ -94,8 +94,8 @@ some $foo in $baa satisfies $boo
 
 (module 
  (quantified_expr 
-  (quantified_in (var_ref (QName)) (var_ref (QName)))
-  (quantified_satisfies (var_ref (QName)))
+  (quantified_in (var_ref (EQName (identifier))) (var_ref (EQName (identifier))))
+  (quantified_satisfies (var_ref (EQName (identifier))))
  ))
 
 ==================
@@ -108,8 +108,8 @@ every $foo in $baa satisfies $boo
 
 (module 
  (quantified_expr 
-  (quantified_in (var_ref (QName)) (var_ref (QName)))
-  (quantified_satisfies (var_ref (QName)))
+  (quantified_in (var_ref (EQName (identifier))) (var_ref (EQName (identifier))))
+  (quantified_satisfies (var_ref (EQName (identifier))))
  ))
 
 ==================
@@ -139,7 +139,8 @@ catch * {
 
 ---
 
-(module (instance_of_expr (integer_literal) (sequence_type (QName))))
+(module 
+  (instance_of_expr (integer_literal) (sequence_type (EQName (identifier) (identifier)))))
 
 ==================
 3.18.2 Typeswitch: main module with typeswitch expr
@@ -154,13 +155,13 @@ typeswitch ( $node )
 
 (module 
  (typeswitch_expr 
-  (typeswitch_operand (var_ref (QName))) 
+  (typeswitch_operand (var_ref (EQName (identifier)))) 
   (typeswitch_clause 
    (typeswitch_case_type (sequence_type (text_test))) 
-   (typeswitch_case_return (var_ref (QName)))) 
+   (typeswitch_case_return (var_ref (EQName (identifier))))) 
   (typeswitch_clause 
    (typeswitch_case_type (sequence_type (element_test))) 
-   (typeswitch_case_return (var_ref (QName)))) 
+   (typeswitch_case_return (var_ref (EQName (identifier))))) 
   (typeswitch_default (string_literal))
   ))
 
@@ -174,8 +175,8 @@ $x cast as xs:integer
 
 (module 
  (cast_as_expr 
-  (var_ref (QName)) 
-  (single_type (QName))
+  (var_ref (EQName (identifier))) 
+  (single_type (EQName (identifier) (identifier)))
  ))
 
 
@@ -189,37 +190,34 @@ $x castable as xs:integer
 
 (module 
  (castable_as_expr 
-  (var_ref (QName)) 
-  (single_type (QName))
- ))
+  (var_ref (EQName (identifier)))
+  (single_type (EQName (identifier) (identifier)))))
 
 ==================
 3.18.5 Constructor Functions
 ==================
 
-xs:date("2000-01-01")
+xs:date("2000")
 
 ---
 
 (module 
-  (function_call (QName) 
-  (argument_list (argument (string_literal)))
-))
+ (function_call 
+  (EQName (identifier) (identifier))
+  (argument_list (argument (string_literal)))))
 
 ==================
-3.18.6 Treat 
+3.18.6 Treat TODO 
 ==================
 
-$myaddress treat as element(*, USAddress)
+$myaddress treat as element(*)
 
 ---
 
 (module 
  (treat_as_expr 
-  (var_ref (QName)) 
-  (sequence_type 
-   (element_test (param_wildcard) (QName)))
- ))
+  (var_ref (EQName (identifier))) (sequence_type (element_test (param_wildcard)))))
+
 
 ==================
 3.19 Simple map operator
@@ -231,8 +229,8 @@ $emp ! ( $bang )
 
 (module 
  (bang_expr 
-  (var_ref (QName)) 
-  (parenthesized_expr (var_ref (QName)))
+  (var_ref (EQName (identifier))) 
+  (parenthesized_expr (var_ref (EQName (identifier))))
  ))
 
 ==================
@@ -243,8 +241,8 @@ $string => upper-case()
 -------------------
 
 (module 
-  (arrow_expr (var_ref (QName)) 
-  (arrow_function_call (QName) (argument_list))
+  (arrow_expr (var_ref (EQName (identifier))) 
+  (arrow_function_specifier (EQName (identifier)) (argument_list))
 ))
 
 

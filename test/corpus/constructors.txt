@@ -3,7 +3,7 @@
 3.11 Maps and Arrays 
 
 ==================
-3.9.1: Direct Element with plain text
+3.9.1 Direct Element with plain text
 ==================
 
  <title>Harold and the Purple Crayon</title>
@@ -12,13 +12,13 @@
 
 (module 
  (direct_element 
-  (start_tag (QName)) 
+  (start_tag (identifier)) 
   (char_data)
-  (end_tag (QName))
+  (end_tag (identifier))
  ))
 
 ==================
-3.9.1: Direct Element with char reference
+3.9.1 Direct Element with char reference
 ==================
 
  <div>&#8364;99.50</div>
@@ -27,14 +27,14 @@
 
 (module 
  (direct_element
-  (start_tag (QName)) 
+  (start_tag (identifier)) 
   (char_ref)
   (char_data)
-  (end_tag (QName))
+  (end_tag (identifier))
  ))
 
 ==================
-3.9.1: Direct Element with entities
+3.9.1 Direct Element with entities
 ==================
 
  <title>Ben &amp; Jerry&apos;s  </title>
@@ -43,34 +43,33 @@
 
 (module 
  (direct_element 
-  (start_tag (QName)) 
+  (start_tag (identifier)) 
   (char_data) 
   (predefined_entity_ref) 
   (char_data) 
   (predefined_entity_ref) 
   (char_data) 
-  (end_tag (QName)
+  (end_tag (identifier)
 )))
 
 ==================
-3.9.1: Direct Element with enclosed expression
+3.9.1 Direct Element with enclosed expression
 ==================
 
  <title>Harold and the { $item }</title>
-
 
 -------------------
 
 (module 
  (direct_element 
-  (start_tag (QName)) 
+  (start_tag (identifier)) 
   (char_data) 
-  (enclosed_expr (var_ref (QName)))
-  (end_tag (QName))
+  (enclosed_expr (var_ref (EQName (identifier))))
+  (end_tag (identifier))
  ))
 
 ==================
-3.9.1: Direct Element with embeded element
+3.9.1 Direct Element with embeded element
 ==================
 
  <response>
@@ -81,14 +80,14 @@
 
 (module 
  (direct_element 
-  (start_tag (QName))
+  (start_tag (identifier))
   (char_data) 
   (direct_element 
-   (start_tag (QName))
+   (start_tag (identifier))
    (char_data) 
-   (end_tag (QName)))
+   (end_tag (identifier)))
   (char_data) 
-  (end_tag (QName))
+  (end_tag (identifier))
  )) 
  
 ==================
@@ -103,7 +102,7 @@ element book {
 
 (module 
  (element_constructor 
-  (QName) 
+  (EQName (identifier)) 
   (element_constructor (string_literal) (string_literal))
  ))
 
@@ -117,7 +116,7 @@ attribute size {4 + 3}
 
 (module 
  (attribute_constructor 
-  (QName) 
+  (EQName (identifier)) 
   (additive_expr (integer_literal) (additive_op) (integer_literal))
 ))
 
@@ -170,7 +169,7 @@ comment { }
 
 (module 
  (string_constructor 
-  (interpolation (var_ref (QName))) 
+  (interpolation (var_ref (EQName (identifier)))) 
   (char_group)
  ))
 
@@ -245,8 +244,8 @@ $map[?name='Mike']
 ---
 
 (module 
-  (postfix_expr (var_ref (QName))
-  (predicate (comparison_expr (unary_lookup (NCName)) (comparison_op) (string_literal)))
+  (postfix_expr (var_ref (EQName (identifier)))
+  (predicate (comparison_expr (unary_lookup (NCName (identifier))) (comparison_op) (string_literal)))
   ))
 
 ==================
@@ -259,7 +258,7 @@ $map[?name='Mike']
 
 (module 
  (comparison_expr 
-  (bang_expr (var_ref (QName)) (unary_lookup (NCName))) 
+  (bang_expr (var_ref (EQName (identifier))) (unary_lookup (NCName (identifier)))) 
   (comparison_op) 
   (string_literal)
  ))
@@ -275,5 +274,4 @@ $map[?name='Mike']
 (module 
  (postfix_expr 
   (square_array_constructor (string_literal) (string_literal)) 
-  (unary_lookup (lookup_digit))
- ))
+  (unary_lookup (lookup_digit))))

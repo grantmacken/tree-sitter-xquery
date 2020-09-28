@@ -1,0 +1,163 @@
+3.12 FLWOR Expressions
+
+==================
+3.12.1 Variable Bindings single bind
+==================
+
+let $x := 47
+return $x
+
+---
+
+(module
+ (flwor_expr
+  (let_clause 
+   (let_binding (identifier) (integer_literal))) 
+  (return_clause (var_ref (EQName (identifier))))
+ ))
+
+==================
+3.12.1 Variable Bindings multiple
+==================
+
+let $x := 47, $y := f($x)
+return ( $x, $y)
+
+---
+
+(module 
+ (flwor_expr 
+  (let_clause 
+   (let_binding 
+    (identifier) 
+    (integer_literal)) 
+   (let_binding 
+    (identifier) 
+    (function_call (EQName (identifier)) (argument_list (argument (var_ref (EQName (identifier)))))))) 
+  (return_clause (parenthesized_expr (var_ref (EQName (identifier))) (var_ref (EQName (identifier))))))) 
+ 
+==================
+3.12.1 Variable Bindings accompanied by a type declaration
+==================
+
+let $salary as xs:decimal :=  "cat"
+return  $salary 
+
+---
+
+(module 
+ (flwor_expr 
+  (let_clause 
+   (let_binding (identifier) 
+    (type_declaration (sequence_type (EQName (identifier) (identifier)))) 
+    (string_literal))) 
+  (return_clause (var_ref (EQName (identifier))))))
+
+==================
+3.12.2 For Clause 
+==================
+
+for $x in $expr1
+return  $x 
+
+---
+
+(module 
+ (flwor_expr 
+  (for_clause 
+   (for_binding 
+    (identifier) 
+    (var_ref (EQName (identifier)))))
+    (return_clause (var_ref (EQName (identifier))))))
+
+==================
+3.12.5 Where Clause
+==================
+
+for $x at $i in $inputvalues
+where $i mod 100 = 0
+return $x 
+
+---
+
+(module 
+ (flwor_expr 
+  (for_clause 
+   (for_binding (identifier) (var_ref (EQName (identifier))) (var_ref (EQName (identifier))))) 
+  (where_clause 
+   (comparison_expr 
+    (multiplicative_expr 
+     (var_ref (EQName (identifier))) 
+     (multiplicative_op) 
+     (integer_literal)) 
+    (comparison_op) 
+    (integer_literal))) 
+  (return_clause (var_ref (EQName (identifier))))
+ ))
+
+==================
+3.12.6 Count Clause 
+==================
+
+for $p in $products
+order by $p/sales descending
+count $rank
+where $rank <= 3
+return
+   <product rank="{$rank}">
+      {$p/name, $p/sales}
+   </product>
+
+---
+
+(module 
+ (flwor_expr 
+  (for_clause (for_binding (identifier) (var_ref (EQName (identifier))))) 
+  (order_by_clause (path_expr (var_ref (EQName (identifier))) (abbrev_forward_step (EQName (identifier))))) 
+  (count_clause  (identifier)) 
+  (where_clause (comparison_expr (var_ref (EQName (identifier))) (comparison_op) (integer_literal))) 
+  (return_clause 
+   (direct_element (start_tag (identifier) (direct_attribute (identifier) (string_literal))) (char_data) 
+    (enclosed_expr 
+     (path_expr (var_ref (EQName (identifier))) (abbrev_forward_step (EQName (identifier)))) 
+     (path_expr (var_ref (EQName (identifier))) (abbrev_forward_step (EQName (identifier))))) (char_data) 
+    (end_tag (identifier))))
+ ))
+
+==================
+3.12.7 Group By Clause TODO more examples
+==================
+let $g2 := $expr1
+let $g3 := $expr2
+group by $g1, $g2, $g3 collation "Spanish"
+return $g1
+
+---
+
+(module 
+ (flwor_expr 
+  (let_clause (let_binding (identifier) (var_ref (EQName (identifier))))) 
+  (let_clause (let_binding (identifier) (var_ref (EQName (identifier))))) 
+  (group_by_clause (identifier) (identifier) (identifier) (string_literal)) 
+  (return_clause (var_ref (EQName (identifier))))))
+
+==================
+3.12.8 Order By Clause 
+==================
+
+for $e in $employees
+order by $e/salary descending
+return $e/name
+
+---
+
+(module 
+ (flwor_expr 
+  (for_clause (for_binding (identifier) (var_ref (EQName (identifier))))) 
+  (order_by_clause 
+   (path_expr (var_ref (EQName (identifier))) (abbrev_forward_step (EQName (identifier))))) 
+  (return_clause 
+   (path_expr (var_ref (EQName (identifier))) (abbrev_forward_step (EQName (identifier)))))))
+
+
+

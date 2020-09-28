@@ -1,13 +1,9 @@
-declare option output:method "csv";
-declare option output:csv "header=yes, separator=semicolon";
-<csv>
-  <record>
-    <Name>John</Name>
-    <City>Newton</City>
-  </record>
-  <record>
-    <Name>Jack</Name>
-    <City>Oldtown</City>
-  </record>
-</csv>
+for $p in $products
+order by $p/sales descending
+count $rank
+where $rank <= 3
+return
+  <product rank="{$rank}">
+    {$p/name, $p/sales}
+  </product>
 

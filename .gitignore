@@ -3,4 +3,5 @@ bin/tree-sitter
 binding.gyp
 .git
 _hold
+_notes
 tree-sitter-xQuery.wasm

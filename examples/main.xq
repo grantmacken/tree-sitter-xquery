@@ -10,11 +10,6 @@ switch ( $animal )
    default return "What's that odd noise?",
 every $foo in $baa satisfies $boo,
 5 instance of xs:integer,
-try { 
-
-} 
-catch * { 
-},
 typeswitch ( $node )
   case text() return $node
   case element() return $node

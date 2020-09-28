@@ -23,27 +23,31 @@ const PREC = {
     statement: 2,
     comma: 1
   },
-  Digit = /[0-9]/,
-  Integer = seq(Digit, optional(repeat(Digit))),
-  Decimal = choice(seq('.', Integer), seq(Integer, '.', optional(Integer))),
-  DecimalExponent = seq(choice('e', 'E'), optional(choice('+', '-')), Integer),
-  Double = choice(
-    seq(Integer, optional(seq('.', /[0-9]*/)), DecimalExponent),
-    seq(seq('.', Integer), DecimalExponent)
-  ),
-  NameStartChar = /[A-Za-z_]/,
-  NameChar = choice(NameStartChar, '-', '.', /[0-9]/),
-  EscapeApos = "''",
-  EscapeQuote = '""',
-  PredefinedEntityRef = seq(
+  DIGIT = /[0-9]/,
+  WHITESPACE = /[\u000d\u000a\u0020\u0009]/,
+  INTEGER = repeat1(DIGIT),
+  DOUBLE = seq(
+    repeat(DIGIT),
+    optional(seq('.', repeat(DIGIT))),
+    /[eE]/,
+    optional(/[+-]/),
+    repeat1(DIGIT)
+  ), // TODO check
+  DECIMAL = seq(repeat(DIGIT), '.', repeat(DIGIT)),
+  //
+  NAME_START_CHAR = /[^.\-,;:!?'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/,
+  NAME_CHAR = /[^,;:!?.'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/;
+(EscapeApos = "''"),
+  (EscapeQuote = '""'),
+  (PredefinedEntityRef = seq(
     '&',
     choice('lt', 'gt', 'amp', 'quot', 'apos'),
     ';'
-  ),
-  CharRef = choice(
+  )),
+  (CharRef = choice(
     seq('&#', repeat1(/[0-9]/), ';'),
     seq('&#x', repeat1(/[0-9a-fA-F]/), ';')
-  );
+  ));
 
 module.exports = grammar({
   name: 'xquery',
@@ -86,202 +90,6 @@ module.exports = grammar({
           )
         )
       ), // 6 TODO:
-    //4.1 Version Declaration
-    version_declaration: $ =>
-      seq('xquery', $.version, optional($.encoding), ';'),
-    // 2
-    version: $ => seq('version', $.string_literal),
-    encoding: $ => seq('encoding', $.string_literal),
-    //4.2 Module Declaration
-    module_declaration: $ =>
-      seq(
-        'module',
-        'namespace',
-        field('name', $.NCName),
-        '=',
-        field('value', $.string_literal),
-        ';'
-      ), // 5
-    // 4.3 Boundary-space Declaration
-    boundary_space_declaration: $ =>
-      seq('declare', 'boundary-space', choice('preserve', 'strip'), ';'),
-    // 4.4 Default Collation Declaration
-    default_collation_declaration: $ =>
-      seq(
-        'declare',
-        'default',
-        'collation',
-        field('uri', $.string_literal),
-        ';'
-      ),
-    // 4.5 Base URI Declaration
-    base_uri_declaration: $ =>
-      seq('declare', 'base-uri', field('uri', $.string_literal), ';'),
-    //4.6 Construction Declaration
-    construction_declaration: $ =>
-      seq('declare', 'construction', choice('preserve', 'strip'), ';'),
-    // 4.7 Ordering Mode Declaration
-    ordering_mode_declaration: $ =>
-      seq('declare', 'ordering', choice('ordered', 'unordered'), ';'),
-    // 4.8 Empty Order Declaration
-    empty_order_declaration: $ =>
-      seq(
-        'declare',
-        'default',
-        'order',
-        ',empty',
-        choice('greatest', 'least'),
-        ';'
-      ),
-
-    // 4.9 Copy-Namespaces Declaration
-    copy_namespaces_declaration: $ =>
-      seq(
-        'declare',
-        'copy-namespaces',
-        choice('preserve', 'no-preserve'),
-        ',',
-        choice('inherit', 'no-inherit'),
-        ';'
-      ),
-    // 4.10 Decimal Format Declaration
-    decimal_format_declaration: $ =>
-      seq(
-        'declare',
-        choice(
-          seq('decimal-format', $._EQName),
-          seq('default', 'decimal-format')
-        ),
-        optional(
-          seq(
-            field('name', $.df_property_name),
-            '=',
-            field('name', $.string_literal)
-          )
-        ),
-        ';'
-      ),
-    df_property_name: $ =>
-      choice(
-        'decimal-separator',
-        'grouping-separator',
-        'infinity',
-        'minus-sign',
-        'NaN',
-        'percent',
-        'per-mille',
-        'zero-digit',
-        'digit',
-        'pattern-separator',
-        'exponent-separator'
-      ),
-    //4.11 Schema Import
-    schema_import: $ =>
-      seq(
-        'import',
-        'schema',
-        optional($.schema_prefix),
-        field('uri', $.string_literal),
-        optional(seq('at', commaSep1($.string_literal))),
-        ';'
-      ), // 21
-    schema_prefix: $ =>
-      choice(
-        seq('namespace', $.NCName, '='),
-        seq('default', 'element', 'namespace')
-      ), //22',
-    // 4.12 Module Import // TODO
-    module_import: $ =>
-      seq(
-        'import',
-        'module',
-        optional(seq('namespace', $.NCName, '=')),
-        field('uri', $.string_literal),
-        optional(seq('at', commaSep1($.string_literal))),
-        ';'
-      ),
-    //4.13 Namespace Declaration
-    namespace_declaration: $ =>
-      seq(
-        'declare',
-        'namespace',
-        field('name', $.NCName),
-        '=',
-        field('uri', $.string_literal),
-        ';'
-      ), // 24
-    //4.14 Default Namespace Declaration
-    default_namespace_declaration: $ =>
-      seq(
-        'declare',
-        'default',
-        choice('element', 'function'),
-        'namespace',
-        field('uri', $.string_literal),
-        ';'
-      ), // 24
-
-    //4.15 Annotations
-    annotation: $ =>
-      seq(
-        '%',
-        field('name', $._EQName),
-        field('body', optional(seq('(', commaSep($.string_literal), ')')))
-      ), // 27
-    // 4.16 Variable Declaration
-    variable_declaration: $ =>
-      seq(
-        'declare',
-        optional(repeat1($.annotation)),
-        'variable',
-        '$',
-        field('name', $._EQName),
-        optional($.type_declaration),
-        ':=',
-        field('value', $._expr),
-        ';'
-      ), // 26
-    // 4.17 Context Item Declaration
-    context_item_declaration: $ =>
-      seq(
-        'declare',
-        'context',
-        'item',
-        optional( $.type_declaration ),
-        optional(
-          choice(
-            seq(':=', field('var_value', $._expr)),
-            seq(
-              'external',
-              optional(seq(':=', field('var_default_value', $._expr)))
-            )
-          )
-        ),
-        ';'
-      ),
-
-    // 4.18 Function Declaration
-    function_declaration: $ =>
-      seq(
-        'declare',
-        optional(repeat1($.annotation)),
-        'function',
-        field('name', $._EQName),
-        field('params', $.param_list),
-        field('result', optional(seq('as', $.sequence_type))),
-        field('body', choice($.enclosed_expr, 'external')),
-        ';'
-      ),
-    //4.19 Option Declaration
-    option_declaration: $ =>
-      seq(
-        'declare',
-        'option',
-        field('name', $._EQName),
-        field('value', $.string_literal),
-        ';'
-      ),
-
     _query_body: $ => seq(commaSep1($._expr)),
     _expr: $ =>
       choice(
@@ -295,25 +103,24 @@ module.exports = grammar({
         $.typeswitch_expr,
         $.try_catch_expr,
         // binary: lhs op rhs
-        $.or_expr, // 83 prec: 3
-        $.and_expr, // 84 prec: 4
-        $.comparison_expr, // 85 prec: 5
-        $.string_concat_expr, // 86 prec: 6 lr
-        $.range_expr, // 87 prec: 7 na
-        $.additive_expr, // 88 prec: 8 lr
-        $.multiplicative_expr, // 88 prec: 9 lr
-        $.union_expr, // 90 prec:  10 lr
-        $.intersect_except_expr, // 91 prec: 11 lr
-        $.instance_of_expr, // 92 prec: 12 lr
-        $.treat_as_expr, // 93 prec: 13 lr
-        $.castable_as_expr, // 94 prec: 14 lr
-        $.cast_as_expr, // 95 prec: 15 lr
-        $.arrow_expr, // 96 prec: 16 lr
         $.unary_expr, // prefix  // 97 prec: 21 rl
-        $.bang_expr, //107 prec: 18 l
+        $.postfix_expr, // predicate / lookup    20
         $.path_expr, //108 prec: 19 lr
-        $.arrow_expr,
-        $.postfix_expr
+        $.bang_expr, //107 prec: 18 l
+        $.arrow_expr, // 96 prec: 16 lr
+        $.cast_as_expr, // 95 prec: 15 lr
+        $.castable_as_expr, // 94 prec: 14 lr
+        $.treat_as_expr, // 93 prec: 13 lr
+        $.instance_of_expr, // 92 prec: 12 lr
+        $.intersect_except_expr, // 91 prec: 11 lr
+        $.union_expr, // 90 prec:  10 lr
+        $.multiplicative_expr, // 88 prec: 9 lr
+        $.additive_expr, // 88 prec: 8 lr
+        $.range_expr, // 87 prec: 7 na
+        $.string_concat_expr, // 86 prec: 6 lr
+        $.comparison_expr, // 85 prec: 5
+        $.and_expr, // 84 prec: 4
+        $.or_expr // 83 prec: 3
       ),
 
     // 3.1 Primary Expressions
@@ -360,31 +167,21 @@ module.exports = grammar({
       ),
     _numeric_literal: $ =>
       choice($.integer_literal, $.decimal_literal, $.double_literal),
-    integer_literal: $ => token(Integer),
-    decimal_literal: $ => token(Decimal),
-    double_literal: $ => token(Double),
 
-    //double_literal:  $ => Double,
-    //Integer = seq( Digit, optional(repeat(Digit))),
-    //Decimal = ,
-    //DecimalExponent = seq(choice('e', 'E'), optional(choice('+', '-')), Integer ),
-    //Double = choice(
-    //  seq( Integer, optional(seq('.', /[0-9]*/) ), DecimalExponent ),
-    //  seq(seq('.', Integer) , DecimalExponent )
     //),
     //3.1.2 Variable References
-    var_ref: $ => seq('$', $._EQName),
+    var_ref: $ => seq('$', field('var_name', $.EQName)),
     // 3.1.3 Parenthesized Expressions
     parenthesized_expr: $ => prec(PREC.comma, seq('(', commaSep($._expr), ')')), // 133
     //3.1.4 Context Item Expression
     context_item_expr: $ => '.',
     //3.1.5 Static Function Calls
     function_call: $ =>
-      seq(field('name', $._EQName), field('arguments', $.argument_list)), // 137
+      seq(field('name', $.EQName), field('arguments', $.argument_list)), // 137
     // 3.1.6 Named Function References
     named_function_ref: $ =>
       seq(
-        field('name', $._EQName),
+        field('name', $.EQName),
         field('delimiter', '#'),
         field('signature', $.integer_literal)
       ),
@@ -401,7 +198,7 @@ module.exports = grammar({
     param_list: $ => seq('(', commaSep($.param), ')'),
     param: $ =>
       seq(
-        field('name', seq('$', $._EQName)),
+        field('name', seq('$', $.EQName)),
         optional(field('type', seq('as', $.sequence_type)))
       ),
     // 3.1.8 Enclosed Expressions
@@ -634,21 +431,21 @@ module.exports = grammar({
     start_tag: $ =>
       seq(
         '<',
-        field('name', $.QName),
+        field('name', $._QName),
         repeat(field('attribute', $.direct_attribute)),
         '>'
       ),
-    end_tag: $ => seq('</', field('name', $.QName), '>'),
+    end_tag: $ => seq('</', field('name', $._QName), '>'),
     empty_tag: $ =>
       seq(
         '<',
-        field('name', $.QName),
+        field('name', $._QName),
         repeat(field('attribute', $.direct_attribute)),
         '/>'
       ),
 
     direct_attribute: $ =>
-      seq(field('name', $.QName), '=', field('value', $.string_literal)),
+      seq(field('name', $._QName), '=', field('value', $.string_literal)),
     _element_text: $ =>
       prec.left(
         repeat1(
@@ -685,13 +482,13 @@ module.exports = grammar({
     element_constructor: $ =>
       seq(
         'element',
-        field('name', choice($._EQName, seq('{', commaSep($._expr), '}'))),
+        field('name', choice($.EQName, seq('{', commaSep($._expr), '}'))),
         field('content', seq('{', commaSep($._expr), '}'))
       ), // 157
     attribute_constructor: $ =>
       seq(
         'attribute',
-        field('name', choice($._EQName, seq('{', commaSep($._expr), '}'))),
+        field('name', choice($.EQName, seq('{', commaSep($._expr), '}'))),
         field('content', seq('{', commaSep($._expr), '}'))
       ), // 157
     //comp_namespace_constructor: $ => seq('TODO'),
@@ -729,29 +526,34 @@ module.exports = grammar({
     //
     // 3.12 FLWOR Expressions
     flwor_expr: $ =>
-      seq(
-        $._initial_clause,
-        //optional( $._intermediate_clause ),
-        $.return_clause
-      ), // 41
+      seq($._initial_clause, optional($._intermediate_clause), $.return_clause), // 41
     _initial_clause: $ =>
       choice(
         $.for_clause, // 44
         $.let_clause // 48
       ),
-    for_clause: $ => prec.left(seq('for', commaSep($.for_binding))), // 44',
+    //3.12.2 For Clause
+    for_clause: $ => seq('for', commaSep($.for_binding)), // 44',
     for_binding: $ =>
       seq(
-        $.var_ref,
+        '$',
+        field('var_name', $.identifier),
         optional($.type_declaration),
         optional(seq('allowing', 'empty')),
         optional(seq('at', $.var_ref)),
         'in',
         $._expr
       ), // 49
-    let_clause: $ => prec.left(seq('let', commaSep1($.let_binding))),
+    // 3.12.3 Let Clause
+    let_clause: $ => seq('let', commaSep1($.let_binding)),
     let_binding: $ =>
-      seq($.var_ref, optional($.type_declaration), ':=', $._expr),
+      seq(
+        '$',
+        field('var_name', $.identifier),
+        optional($.type_declaration),
+        ':=',
+        $._expr
+      ),
     _intermediate_clause: $ =>
       repeat1(
         choice(
@@ -762,17 +564,19 @@ module.exports = grammar({
           $.count_clause
         )
       ), // 43',
+    // 3.12.4 Window Clause
     //3.12.5 Where Clause
     where_clause: $ => seq('where', $._expr), // 60
     // 3.12.6 Count Clause
-    count_clause: $ => seq('count', $.var_ref), //   59
+    count_clause: $ => seq('count', '$', field('var_name', $.identifier)), //   59
     // 3.12.7 Group By Clause
-    group_by_clause: $ => seq('group', 'by', commaSep($._grouping_spec)), // 61
+    group_by_clause: $ => seq('group', 'by', commaSep1($._grouping_spec)), // 61
     _grouping_spec: $ =>
       seq(
-        $.var_ref,
+        '$',
+        field('var_name', $.identifier),
         optional(seq(optional($.type_declaration), ':=', $._expr)),
-        optional(seq('collation', $.string_literal))
+        optional(seq('collation', field('uri', $.string_literal)))
       ), // 63
     // 3.12.8 Order By Clause
     order_by_clause: $ =>
@@ -784,10 +588,13 @@ module.exports = grammar({
       ), // 65
     _order_spec: $ =>
       seq(
-        $._expr,
-        optional(seq(choice('ascending', 'descending'))),
-        optional(seq('empty', choice('greatest', 'least'))),
-        optional(seq('collation', $.string_literal))
+        field('order_expr', $._expr),
+        field(
+          'order_modifier',
+          optional(seq(choice('ascending', 'descending'))),
+          optional(seq('empty', choice('greatest', 'least'))),
+          optional(seq('collation', field('uri', $.string_literal)))
+        )
       ),
     //3.12.9 Return Clause
     return_clause: $ => seq('return', $._expr), // 69
@@ -897,7 +704,7 @@ module.exports = grammar({
           field('rhs', $.single_type)
         )
       ), // 94
-    single_type: $ => seq(field('type', $._EQName), optional('?')),
+    single_type: $ => seq(field('simple_type_name', $.EQName), optional('?')),
 
     //3.18.5 Constructor Functions TODO
     //3.18.6 Treat
@@ -927,13 +734,209 @@ module.exports = grammar({
         seq(
           field('rhs', $._expr),
           field('operator', '=>'),
-          field('lhs', $.arrow_function_call)
+          field('lhs', $.arrow_function_specifier)
         )
       ), // 94
-    arrow_function_call: $ =>
-      seq(choice($._EQName, $.var_ref, $.parenthesized_expr), $.argument_list),
+    arrow_function_specifier: $ =>
+      seq(choice($.EQName, $.var_ref, $.parenthesized_expr), $.argument_list),
     // 3.21 Validate Expressions TODO
     // 3.22 Extension Expressions TODO
+    //4.1 Version Declaration
+    version_declaration: $ =>
+      seq('xquery', $.version, optional($.encoding), ';'),
+    // 2
+    version: $ => seq('version', $.string_literal),
+    encoding: $ => seq('encoding', $.string_literal),
+    //4.2 Module Declaration
+    module_declaration: $ =>
+      seq(
+        'module',
+        'namespace',
+        field('name', $.NCName),
+        '=',
+        field('value', $.string_literal),
+        ';'
+      ), // 5
+    // 4.3 Boundary-space Declaration
+    boundary_space_declaration: $ =>
+      seq('declare', 'boundary-space', choice('preserve', 'strip'), ';'),
+    // 4.4 Default Collation Declaration
+    default_collation_declaration: $ =>
+      seq(
+        'declare',
+        'default',
+        'collation',
+        field('uri', $.string_literal),
+        ';'
+      ),
+    // 4.5 Base URI Declaration
+    base_uri_declaration: $ =>
+      seq('declare', 'base-uri', field('uri', $.string_literal), ';'),
+    //4.6 Construction Declaration
+    construction_declaration: $ =>
+      seq('declare', 'construction', choice('preserve', 'strip'), ';'),
+    // 4.7 Ordering Mode Declaration
+    ordering_mode_declaration: $ =>
+      seq('declare', 'ordering', choice('ordered', 'unordered'), ';'),
+    // 4.8 Empty Order Declaration
+    empty_order_declaration: $ =>
+      seq(
+        'declare',
+        'default',
+        'order',
+        ',empty',
+        choice('greatest', 'least'),
+        ';'
+      ),
+
+    // 4.9 Copy-Namespaces Declaration
+    copy_namespaces_declaration: $ =>
+      seq(
+        'declare',
+        'copy-namespaces',
+        choice('preserve', 'no-preserve'),
+        ',',
+        choice('inherit', 'no-inherit'),
+        ';'
+      ),
+    // 4.10 Decimal Format Declaration
+    decimal_format_declaration: $ =>
+      seq(
+        'declare',
+        choice(
+          seq('decimal-format', $.EQName),
+          seq('default', 'decimal-format')
+        ),
+        optional(
+          seq(
+            field('name', $.df_property_name),
+            '=',
+            field('name', $.string_literal)
+          )
+        ),
+        ';'
+      ),
+    df_property_name: $ =>
+      choice(
+        'decimal-separator',
+        'grouping-separator',
+        'infinity',
+        'minus-sign',
+        'NaN',
+        'percent',
+        'per-mille',
+        'zero-digit',
+        'digit',
+        'pattern-separator',
+        'exponent-separator'
+      ),
+    //4.11 Schema Import
+    schema_import: $ =>
+      seq(
+        'import',
+        'schema',
+        optional($.schema_prefix),
+        field('uri', $.string_literal),
+        optional(seq('at', commaSep1($.string_literal))),
+        ';'
+      ), // 21
+    schema_prefix: $ =>
+      choice(
+        seq('namespace', $.NCName, '='),
+        seq('default', 'element', 'namespace')
+      ), //22',
+    // 4.12 Module Import // TODO
+    module_import: $ =>
+      seq(
+        'import',
+        'module',
+        optional(seq('namespace', $.NCName, '=')),
+        field('uri', $.string_literal),
+        optional(seq('at', commaSep1($.string_literal))),
+        ';'
+      ),
+    //4.13 Namespace Declaration
+    namespace_declaration: $ =>
+      seq(
+        'declare',
+        'namespace',
+        field('name', $.NCName),
+        '=',
+        field('uri', $.string_literal),
+        ';'
+      ), // 24
+    //4.14 Default Namespace Declaration
+    default_namespace_declaration: $ =>
+      seq(
+        'declare',
+        'default',
+        choice('element', 'function'),
+        'namespace',
+        field('uri', $.string_literal),
+        ';'
+      ), // 24
+
+    //4.15 Annotations
+    annotation: $ =>
+      seq(
+        '%',
+        field('name', $.EQName),
+        field('body', optional(seq('(', commaSep($.string_literal), ')')))
+      ), // 27
+    // 4.16 Variable Declaration
+    variable_declaration: $ =>
+      seq(
+        'declare',
+        optional(repeat1($.annotation)),
+        'variable',
+        '$',
+        field('name', $.EQName),
+        optional($.type_declaration),
+        ':=',
+        field('value', $._expr),
+        ';'
+      ), // 26
+    // 4.17 Context Item Declaration
+    context_item_declaration: $ =>
+      seq(
+        'declare',
+        'context',
+        'item',
+        optional($.type_declaration),
+        optional(
+          choice(
+            seq(':=', field('var_value', $._expr)),
+            seq(
+              'external',
+              optional(seq(':=', field('var_default_value', $._expr)))
+            )
+          )
+        ),
+        ';'
+      ),
+
+    // 4.18 Function Declaration
+    function_declaration: $ =>
+      seq(
+        'declare',
+        optional(repeat1($.annotation)),
+        'function',
+        field('name', $.EQName),
+        field('params', $.param_list),
+        field('result', optional(seq('as', $.sequence_type))),
+        field('body', choice($.enclosed_expr, 'external')),
+        ';'
+      ),
+    //4.19 Option Declaration
+    option_declaration: $ =>
+      seq(
+        'declare',
+        'option',
+        field('name', $.EQName),
+        field('value', $.string_literal),
+        ';'
+      ),
+
     // 2.5.4 SequenceType Syntax
     type_declaration: $ =>
       seq(field('operator', 'as'), field('type', $.sequence_type)),
@@ -954,7 +957,7 @@ module.exports = grammar({
         )
       ), // 186
     occurrence_indicator: $ => choice('?', '*', '+'), // 185
-    _atomic_or_union_type: $ => $._EQName, // 187
+    _atomic_or_union_type: $ => $.EQName, // 187
 
     _kind_test: $ =>
       choice(
@@ -982,10 +985,7 @@ module.exports = grammar({
         'element',
         '(',
         optional(
-          seq(
-            choice($._EQName, $.param_wildcard),
-            optional(seq(',', $._EQName))
-          )
+          seq(choice($.EQName, $.param_wildcard), optional(seq(',', $.EQName)))
         ),
         ')'
       ), // 199
@@ -994,10 +994,7 @@ module.exports = grammar({
         'attribute',
         '(',
         optional(
-          seq(
-            choice($._EQName, $.param_wildcard),
-            optional(seq(',', $._EQName))
-          )
+          seq(choice($.EQName, $.param_wildcard), optional(seq(',', $.EQName)))
         ),
         ')'
       ), // 195
@@ -1015,7 +1012,7 @@ module.exports = grammar({
     text_test: $ => token('text()'), // 191',
     namespace_node_test: $ => token('namespace-node()'), // 193',
     any_kind_test: $ => token('node()'), // 189',
-    _name_test: $ => prec.left(choice($._EQName, $.wildcard)), // TODO 199
+    _name_test: $ => prec.left(choice($.EQName, $.wildcard)), // TODO 199
     wildcard: $ =>
       choice(
         '*',
@@ -1046,22 +1043,30 @@ module.exports = grammar({
       ), // TODO TypedMapTest 213
     _parenthesized_item_type: $ => seq('(', $._item_type, ')'), // 216
     // END SequenceType Syntax
-
+    integer_literal: $ => token(INTEGER),
+    decimal_literal: $ => token(DECIMAL),
+    double_literal: $ => token(DOUBLE),
     // instances of the grammatical production EQName.
     // EQName is identifier
-    _EQName: $ => choice($.QName, $.uri_qualified_name), // 112
-    QName: $ => prec.left(choice($._prefixed_name, $._unprefixed_name)), // 122
-    _prefixed_name: $ => /[\w][\w-]+:[\w][\w-]+/,
-    _unprefixed_name: $ => /[\w]([\w-])*/,
-    NCName: $ => $._unprefixed_name, // 123
+    EQName: $ => choice($._QName, $.uri_qualified_name), // 112
+    _QName: $ =>
+      prec.right(
+        choice(
+          field('unprefixed', $.identifier),
+          seq(
+            field('prefix', $.identifier),
+            ':',
+            field('local_part', $.identifier)
+          )
+        )
+      ), // 122
+    NCName: $ => $.identifier, // 123
     uri_qualified_name: $ => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
     braced_uri_literal: $ =>
       seq('Q{', repeat1(choice(PredefinedEntityRef, CharRef, /[^&{}]/)), '}'), // 224
-    //comma: $ => token(','),
-    // delimit: $ => choice('!'),
-
-    keyword: $ => token(/[a-z][a-z\-]+/),
-    // identifier: $ =>  /[a-z][a-z\-]+/
+    //[A-Za-z_\\xC0-\\xD6][-a-zA-Zα-ωΑ-Ωµ0-9_']*/
+    identifier: $ => /[_A-Za-z]{1}[\-\w]*/,
+    keyword: $ => token(/\u00C0-\u00D6\u00D8-\u00F6/),
     comment: $ => token(/[(]:[^:]*:*([^(:][^:]*:+)*[)]/)
   }
 });

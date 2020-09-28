@@ -9,7 +9,8 @@ $node/
 
 ---
 
-(module (path_expr (var_ref (QName)))) 
+(module 
+ (path_expr (var_ref (EQName (identifier)))))
 
 ==================
 3.3.1.1 Path operator (/) wildcard
@@ -21,9 +22,8 @@ $node/*
 
 (module 
   (path_expr 
-    (var_ref (QName)) 
-    (abbrev_forward_step (wildcard))
-))
+    (var_ref (EQName (identifier))) 
+    (abbrev_forward_step (wildcard))))
 
 ==================
 3.3.1.1 Path operator (/) kind test
@@ -35,7 +35,7 @@ $node/text()
 
 (module 
   (path_expr 
-    (var_ref (QName)) 
+    (var_ref (EQName (identifier))) 
     (abbrev_forward_step (text_test))
 ))
 
@@ -48,9 +48,9 @@ $node/child::para
 ---
 
 (module 
-(path_expr (var_ref (QName)) 
-(forward_axis) (QName)
-))
+  (path_expr 
+    (var_ref (EQName (identifier))) 
+    (forward_axis) (EQName (identifier))))
 
 ==================
 3.3.1.1 Path operator (/) going down with comparison filter 
@@ -61,21 +61,24 @@ fn:doc("bib.xml")/books/book[fn:count(./author)>1]
 ---
 
 (module 
- (path_expr 
-  (function_call (QName) (argument_list (argument (string_literal)))) 
-  (abbrev_forward_step (QName)) 
-  (abbrev_forward_step (QName)) 
-  (predicate 
-	(comparison_expr 
-	  (function_call 
-	  (QName) (argument_list 
-	(argument (path_expr (context_item_expr) (abbrev_forward_step (QName)))))) 
-	  (comparison_op) 
-	  (integer_literal)
-	))))
+  (path_expr 
+    (function_call 
+      (EQName (identifier) (identifier)) 
+        (argument_list (argument (string_literal)))) 
+    (abbrev_forward_step (EQName (identifier)))
+    (abbrev_forward_step (EQName (identifier))) 
+    (predicate 
+      (comparison_expr 
+      (function_call (EQName (identifier) (identifier)) 
+      (argument_list 
+      (argument (path_expr 
+      (context_item_expr) 
+      (abbrev_forward_step (EQName (identifier))))))) 
+      (comparison_op) 
+      (integer_literal))))) 
 
 ==================
-3.3.2.1 Axes foward with Qname
+3.3.2.1 Axes foward with EQName (identifier)
 ==================
 
 $node/child::para
@@ -83,10 +86,9 @@ $node/child::para
 ---
 
 (module 
- (path_expr 
-  (var_ref (QName))
-  (forward_axis) (QName)
- ))
+  (path_expr 
+    (var_ref (EQName (identifier)))
+    (forward_axis) (EQName (identifier))))
 
 ==================
 3.3.2.2 Node Tests with wildcard
@@ -98,9 +100,8 @@ $node/child::*
 
 (module 
  (path_expr 
-  (var_ref (QName))
-  (forward_axis) (wildcard)
-))
+    (var_ref (EQName (identifier)))
+    (forward_axis) (wildcard)))
 
 ==================
 3.3.3 Predicates within Steps with filter predicate
@@ -112,10 +113,9 @@ $node/child::para[1]
 
 (module 
  (path_expr 
-  (var_ref (QName)) 
-  (forward_axis) (QName) 
-  (predicate (integer_literal))
- )) 
+    (var_ref (EQName (identifier)))
+    (forward_axis) (EQName (identifier)) 
+    (predicate (integer_literal))))
 
 ==================
 3.3.4 Unabbreviated Syntax with node test
@@ -127,7 +127,7 @@ $node/child::node()
 
 (module 
  (path_expr 
-  (var_ref (QName)) 
+  (var_ref (EQName (identifier))) 
   (forward_axis) 
   (any_kind_test)
  ))
@@ -143,17 +143,17 @@ $node/child::div1/child::para[1]
 
 (module 
  (path_expr 
-  (var_ref (QName))
+  (var_ref (EQName (identifier)))
   (forward_axis) 
-  (QName) 
+  (EQName (identifier)) 
   (forward_axis) 
-  (QName) 
+  (EQName (identifier)) 
   (predicate (integer_literal))
  ))
 
 
 ==================
-3.3.5 Abbreviated Syntax  with QName
+3.3.5 Abbreviated Syntax  with EQName (identifier)
 ==================
 
 ./para
@@ -163,7 +163,7 @@ $node/child::div1/child::para[1]
 (module 
  (path_expr 
   (context_item_expr) 
-  (abbrev_forward_step (QName)
+  (abbrev_forward_step (EQName (identifier))
 )))
 
 ==================
@@ -177,7 +177,7 @@ $node/child::div1/child::para[1]
 (module 
  (path_expr 
   (context_item_expr) 
-  (abbrev_forward_step (abbrev_attr) (QName))
+  (abbrev_forward_step (abbrev_attr) (EQName (identifier)))
 ))
 
 ==================
@@ -220,7 +220,7 @@ $node/child::div1/child::para[1]
  (path_expr 
   (context_item_expr) 
   (abbrev_reverse_step)
-  (abbrev_forward_step (abbrev_attr) (QName))
+  (abbrev_forward_step (abbrev_attr) (EQName (identifier)))
 ))
 
 ==================
@@ -232,10 +232,10 @@ $node/child::div1/child::para[1]
 ---
 
 (module 
-  (path_expr (context_item_expr) (abbrev_forward_step (QName)) 
+  (path_expr (context_item_expr) (abbrev_forward_step (EQName (identifier))) 
   (predicate 
 	(comparison_expr 
-	(path_expr (context_item_expr) (abbrev_forward_step (abbrev_attr) (QName))) 
+	(path_expr (context_item_expr) (abbrev_forward_step (abbrev_attr) (EQName (identifier)))) 
 	(comparison_op) 
 	(string_literal)
 	)) 
