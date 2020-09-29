@@ -60,10 +60,10 @@ stow-queries:
 
 getTreeSitter: bin/tree-sitter
 
-bin/tree-sitter:  .env
+bin/tree-sitter: .env
 	@mkdir -p bin
 	@wget -nc -O - $(TS_DOWNLOAD_URL)/$(TS_RELEASE)/tree-sitter-linux-x64.gz | gunzip - > bin/tree-sitter
 	@chmod +x bin/tree-sitter
-  @ls -al bin/tree-sitter
+	@ls -al bin/tree-sitter
 	@bin/tree-sitter --version
 
