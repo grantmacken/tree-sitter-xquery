@@ -1,22 +1,18 @@
-; MISC from nvim contributing
-
-;error for error (ERROR` nodes.
-;punctuation.delimiter for `;` `.` `,` 
-; xPath
+; include xPath steps
 [ "/" "//" ";" "," ] @punctuation.delimiter
-;punctuation.bracket for `()` or `{}`
+;enclosing bracket markers
 [ "(" ")" "{" "}" "[" "]"  ] @punctuation.bracket
-
-; TAGS Used for xml-like tags
+; XML tags
 (end_tag [ "</"  ">" ]  @tag.delimiter)
 (start_tag [ "<"  ">"] @tag.delimiter)
 (empty_tag [ "<" "/>" ] @tag.delimiter)
-;(start_tag
-;  name: (identifier) @tag)
-;(end_tag
-;  name: (identifier) @tag)
-;(empty_tag
-;  name: (identifier) @tag)
+(start_tag (identifier) @tag)
+(end_tag (identifier) @tag)
+(empty_tag (identifier) @tag)
+(direct_attribute (identifier) @attribute)
+(end_tag [ "</"  ">" ]  @tag.delimiter)
+(start_tag [ "<"  ">"] @tag.delimiter)
+(empty_tag [ "<" "/>" ] @tag.delimiter)
 ;
 ;(direct_attribute
 ;  name: (identifier) @attribute)

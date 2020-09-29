@@ -6,7 +6,7 @@ MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
 include .env
-ts_download_url := https://github.com/tree-sitter/tree-sitter/releases/download/
+TS_DOWNLOAD_URL := https://github.com/tree-sitter/tree-sitter/releases/download/
 
 generate: src/grammar.json
 
@@ -62,12 +62,8 @@ getTreeSitter: bin/tree-sitter
 
 bin/tree-sitter:  .env
 	@mkdir -p bin
-	@wget -nc -O - $(ts_download_url)/$(TS_RELEASE)/tree-sitter-linux-x64.gz | gunzip - > bin/tree-sitter
+	@wget -nc -O - $(TS_DOWNLOAD_URL)/$(TS_RELEASE)/tree-sitter-linux-x64.gz | gunzip - > bin/tree-sitter
 	@chmod +x bin/tree-sitter
-	@#pushd bin
-	@#mkdir -p $(HOME)/.local/bin
-	@#stow -v -t $(HOME)/.local/bin .
-	@#popd
 	@which tree-sitter
 	@bin/tree-sitter --version
 

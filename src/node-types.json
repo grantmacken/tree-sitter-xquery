@@ -13,6 +13,16 @@
           }
         ]
       },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "prefix": {
         "multiple": false,
         "required": false,
@@ -3484,7 +3494,7 @@
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "EQName",
             "named": true
           }
         ]
@@ -4731,12 +4741,22 @@
     "type": "for_binding",
     "named": true,
     "fields": {
+      "at_var_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      },
       "var_name": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "EQName",
             "named": true
           }
         ]
@@ -4975,7 +4995,7 @@
           }
         ]
       },
-      "name": {
+      "function_name": {
         "multiple": false,
         "required": true,
         "types": [
@@ -5070,7 +5090,7 @@
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "EQName",
             "named": true
           }
         ]
@@ -5274,6 +5294,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "if_condition",
@@ -5521,7 +5546,7 @@
           }
         ]
       },
-      "result": {
+      "result_type": {
         "multiple": true,
         "required": false,
         "types": [
@@ -6378,7 +6403,7 @@
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "EQName",
             "named": true
           }
         ]
@@ -7767,7 +7792,7 @@
           }
         ]
       },
-      "name": {
+      "function_name": {
         "multiple": false,
         "required": true,
         "types": [
@@ -8488,7 +8513,7 @@
     "type": "param",
     "named": true,
     "fields": {
-      "name": {
+      "param_name": {
         "multiple": true,
         "required": true,
         "types": [
@@ -8502,7 +8527,7 @@
           }
         ]
       },
-      "type": {
+      "param_type": {
         "multiple": true,
         "required": false,
         "types": [
@@ -14021,7 +14046,7 @@
     "type": "variable_declaration",
     "named": true,
     "fields": {
-      "name": {
+      "var_name": {
         "multiple": false,
         "required": true,
         "types": [
@@ -14031,7 +14056,21 @@
           }
         ]
       },
-      "value": {
+      "var_type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "as",
+            "named": false
+          },
+          {
+            "type": "sequence_type",
+            "named": true
+          }
+        ]
+      },
+      "var_value": {
         "multiple": false,
         "required": true,
         "types": [
@@ -14232,10 +14271,6 @@
       "types": [
         {
           "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "type_declaration",
           "named": true
         }
       ]
@@ -14858,6 +14893,10 @@
     "named": false
   },
   {
+    "type": "err",
+    "named": false
+  },
+  {
     "type": "every",
     "named": false
   },
@@ -14871,6 +14910,10 @@
   },
   {
     "type": "external",
+    "named": false
+  },
+  {
+    "type": "fn",
     "named": false
   },
   {
@@ -14908,10 +14951,6 @@
   {
     "type": "gt",
     "named": false
-  },
-  {
-    "type": "identifier",
-    "named": true
   },
   {
     "type": "idiv",
@@ -14978,6 +15017,10 @@
     "named": false
   },
   {
+    "type": "math",
+    "named": false
+  },
+  {
     "type": "minus-sign",
     "named": false
   },
@@ -15031,6 +15074,10 @@
   },
   {
     "type": "ordering",
+    "named": false
+  },
+  {
+    "type": "output",
     "named": false
   },
   {
@@ -15167,6 +15214,10 @@
   },
   {
     "type": "xquery",
+    "named": false
+  },
+  {
+    "type": "xs",
     "named": false
   },
   {

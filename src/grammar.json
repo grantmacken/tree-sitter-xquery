@@ -631,8 +631,13 @@
           "type": "FIELD",
           "name": "var_name",
           "content": {
-            "type": "SYMBOL",
-            "name": "EQName"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "var_name"
+            },
+            "named": true,
+            "value": "EQName"
           }
         }
       ]
@@ -696,7 +701,7 @@
       "members": [
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "function_name",
           "content": {
             "type": "SYMBOL",
             "name": "EQName"
@@ -717,7 +722,7 @@
       "members": [
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "function_name",
           "content": {
             "type": "SYMBOL",
             "name": "EQName"
@@ -758,7 +763,7 @@
         },
         {
           "type": "FIELD",
-          "name": "result",
+          "name": "result_type",
           "content": {
             "type": "CHOICE",
             "members": [
@@ -842,7 +847,7 @@
       "members": [
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "param_name",
           "content": {
             "type": "SEQ",
             "members": [
@@ -862,7 +867,7 @@
           "members": [
             {
               "type": "FIELD",
-              "name": "type",
+              "name": "param_type",
               "content": {
                 "type": "SEQ",
                 "members": [
@@ -2768,7 +2773,7 @@
       }
     },
     "unary_lookup": {
-      "type": "PREC_LEFT",
+      "type": "PREC_RIGHT",
       "value": 22,
       "content": {
         "type": "SEQ",
@@ -2912,7 +2917,7 @@
           "name": "var_name",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "EQName"
           }
         },
         {
@@ -2959,8 +2964,16 @@
                   "value": "at"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "var_ref"
+                  "type": "STRING",
+                  "value": "$"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "at_var_name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "EQName"
+                  }
                 }
               ]
             },
@@ -3025,7 +3038,7 @@
           "name": "var_name",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "EQName"
           }
         },
         {
@@ -3107,7 +3120,7 @@
           "name": "var_name",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "EQName"
           }
         }
       ]
@@ -3162,7 +3175,7 @@
           "name": "var_name",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "EQName"
           }
         },
         {
@@ -5015,23 +5028,36 @@
         },
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "var_name",
           "content": {
             "type": "SYMBOL",
             "name": "EQName"
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "type_declaration"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "FIELD",
+          "name": "var_type",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "as"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "sequence_type"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
         },
         {
           "type": "STRING",
@@ -5039,7 +5065,7 @@
         },
         {
           "type": "FIELD",
-          "name": "value",
+          "name": "var_value",
           "content": {
             "type": "SYMBOL",
             "name": "_expr"
@@ -5986,7 +6012,7 @@
         ]
       }
     },
-    "EQName": {
+    "var_name": {
       "type": "CHOICE",
       "members": [
         {
@@ -6040,6 +6066,82 @@
           }
         ]
       }
+    },
+    "EQName": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "ns_builtin",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "ns_builtin"
+                },
+                "named": true,
+                "value": "identifier"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": ":"
+            },
+            {
+              "type": "FIELD",
+              "name": "local_part",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_QName"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "uri_qualified_name"
+        }
+      ]
+    },
+    "ns_builtin": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "xs"
+        },
+        {
+          "type": "STRING",
+          "value": "fn"
+        },
+        {
+          "type": "STRING",
+          "value": "map"
+        },
+        {
+          "type": "STRING",
+          "value": "array"
+        },
+        {
+          "type": "STRING",
+          "value": "math"
+        },
+        {
+          "type": "STRING",
+          "value": "err"
+        },
+        {
+          "type": "STRING",
+          "value": "output"
+        }
+      ]
     },
     "NCName": {
       "type": "SYMBOL",
@@ -6162,11 +6264,8 @@
       "value": "[_A-Za-z]{1}[\\-\\w]*"
     },
     "keyword": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\u00C0-\\u00D6\\u00D8-\\u00F6"
-      }
+      "type": "PATTERN",
+      "value": "[a-z]+([-][a-z]+)*"
     },
     "comment": {
       "type": "TOKEN",

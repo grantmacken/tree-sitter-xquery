@@ -191,10 +191,10 @@ $Q{http://example.com/ns}invoice
 )
 
 ==================
-3.1.5 Static Function Call with identifier without arg TODO nsName
+3.1.5 Static Function Call with identifier without arg
 ==================
 
-fn:empty()
+array:size()
 
 ---
 
@@ -214,10 +214,8 @@ empty( $foo )
    (function_call (EQName (identifier)) 
     (argument_list (argument (var_ref (EQName (identifier)))))))
 
-
-
 ==================
-3.1.5 Static Function Call with identifier with hyphen  TODO
+3.1.5 Static Function Call with identifier with hyphen
 ==================
 
 my:hyphen-function( $foo )

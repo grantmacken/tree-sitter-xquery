@@ -56,13 +56,10 @@ declare variable $t as geometry:triangle := geo:make-triangle();
 $t
 
 ---
-
 (module 
   (schema_import (schema_prefix (NCName (identifier))) (string_literal)) 
-  (module_import (NCName (identifier)) (string_literal))
-  (variable_declaration 
-  (EQName (identifier)) 
-  (type_declaration (sequence_type (EQName (identifier) (identifier)))) 
+  (module_import (NCName (identifier)) (string_literal)) 
+  (variable_declaration (EQName (identifier)) (sequence_type (EQName (identifier) (identifier))) 
   (function_call (EQName (identifier) (identifier)) (argument_list))) 
   (var_ref (EQName (identifier))))
 
@@ -98,8 +95,6 @@ declare variable $mod:bar := "main module dummy";
   (default_namespace_declaration (string_literal)) 
   (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
-
-
 ==================
 4.16 Variable Declaration 
 ==================
@@ -113,6 +108,25 @@ declare variable $foo:num := 7.5;
   (module_declaration (NCName (identifier)) (string_literal)) 
   (variable_declaration (EQName (identifier) (identifier)) (decimal_literal)))
 
+==================
+4.16 Variable Declaration with type declaration
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare variable $mod:base as item() := array:size($arr);
+
+
+---
+
+(module 
+  (module_declaration (NCName (identifier)) (string_literal)) 
+  (variable_declaration 
+  (EQName (identifier) 
+  (identifier)) 
+  (sequence_type) 
+  (function_call (EQName (identifier) (identifier)) (argument_list (argument (var_ref (EQName (identifier))))))))
+
+  
 ==================
 4.17 Context Item Declaration 
 ==================

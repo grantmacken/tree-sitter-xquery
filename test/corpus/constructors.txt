@@ -239,14 +239,17 @@ array { 'one', 'two' }
 3.11.3.1 Unary Lookup with predicate
 ==================
 
-$map[?name='Mike'] 
+$mp[?name='Mike'] 
 
 ---
 
-(module 
-  (postfix_expr (var_ref (EQName (identifier)))
-  (predicate (comparison_expr (unary_lookup (NCName (identifier))) (comparison_op) (string_literal)))
-  ))
+  (module 
+   (postfix_expr (var_ref (EQName (identifier))) 
+    (predicate 
+     (comparison_expr 
+      (unary_lookup (NCName (identifier))) 
+      (comparison_op) 
+      (string_literal)))))
 
 ==================
 3.11.3.1 Unary Lookup with bang

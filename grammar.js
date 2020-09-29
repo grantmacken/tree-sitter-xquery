@@ -167,21 +167,20 @@ module.exports = grammar({
       ),
     _numeric_literal: $ =>
       choice($.integer_literal, $.decimal_literal, $.double_literal),
-
-    //),
     //3.1.2 Variable References
-    var_ref: $ => seq('$', field('var_name', $.EQName)),
+    var_ref: $ => seq('$', field('var_name', alias( $.var_name, $.EQName ))),
+    //ref: $ => choice( /[_A-Za-z]{1}[\-\w]*(:[_A-Za-z]{1}[\-\w]*)*/, $.uri_qualified_name),
     // 3.1.3 Parenthesized Expressions
     parenthesized_expr: $ => prec(PREC.comma, seq('(', commaSep($._expr), ')')), // 133
     //3.1.4 Context Item Expression
     context_item_expr: $ => '.',
     //3.1.5 Static Function Calls
     function_call: $ =>
-      seq(field('name', $.EQName), field('arguments', $.argument_list)), // 137
+      seq(field('function_name', $.EQName), field('arguments', $.argument_list)), // 137
     // 3.1.6 Named Function References
     named_function_ref: $ =>
       seq(
-        field('name', $.EQName),
+        field('function_name', $.EQName),
         field('delimiter', '#'),
         field('signature', $.integer_literal)
       ),
@@ -192,14 +191,14 @@ module.exports = grammar({
         // optional( $.annotation ),
         'function',
         field('parameters', $.param_list),
-        field('result', optional(seq('as', $.sequence_type))),
+        field('result_type', optional(seq('as', $.sequence_type))),
         field('body', $.enclosed_expr)
       ), // 169
     param_list: $ => seq('(', commaSep($.param), ')'),
     param: $ =>
       seq(
-        field('name', seq('$', $.EQName)),
-        optional(field('type', seq('as', $.sequence_type)))
+        field('param_name', seq('$', $.EQName)),
+        optional(field('param_type', seq('as', $.sequence_type)))
       ),
     // 3.1.8 Enclosed Expressions
     enclosed_expr: $ => prec(PREC.comma, seq('{', commaSep($._expr), '}')), // 5
@@ -217,7 +216,6 @@ module.exports = grammar({
       ), // 49
     // 3.2.1 Filter Expressions TODO tests
     predicate: $ => prec(PREC.predicate, seq('[', $._expr, ']')), //124
-
     // 3.2.2 Dynamic Function Calls
     argument_list: $ => seq('(', commaSep($.argument), ')'), // 122
     argument: $ => choice($._expr, $.argument_placeholder), // 138
@@ -514,7 +512,7 @@ module.exports = grammar({
       prec.left(seq('[', commaSep($._expr), ']', optional('?'))),
     //3.11.3.1 Unary Lookup
     unary_lookup: $ =>
-      prec.left(
+      prec.right(
         PREC.unarylookup,
         seq('?', field('specifier', $._key_specifier))
       ), // 76
@@ -537,19 +535,19 @@ module.exports = grammar({
     for_binding: $ =>
       seq(
         '$',
-        field('var_name', $.identifier),
+        field('var_name',  $.EQName ),
         optional($.type_declaration),
         optional(seq('allowing', 'empty')),
-        optional(seq('at', $.var_ref)),
+        optional(seq('at', '$', field('at_var_name', $.EQName))),
         'in',
         $._expr
-      ), // 49
+      ), // 45
     // 3.12.3 Let Clause
     let_clause: $ => seq('let', commaSep1($.let_binding)),
     let_binding: $ =>
       seq(
         '$',
-        field('var_name', $.identifier),
+        field('var_name', $.EQName ),
         optional($.type_declaration),
         ':=',
         $._expr
@@ -568,13 +566,13 @@ module.exports = grammar({
     //3.12.5 Where Clause
     where_clause: $ => seq('where', $._expr), // 60
     // 3.12.6 Count Clause
-    count_clause: $ => seq('count', '$', field('var_name', $.identifier)), //   59
+    count_clause: $ => seq('count', '$', field('var_name', $.EQName )), //   59
     // 3.12.7 Group By Clause
     group_by_clause: $ => seq('group', 'by', commaSep1($._grouping_spec)), // 61
     _grouping_spec: $ =>
       seq(
         '$',
-        field('var_name', $.identifier),
+        field('var_name', $.EQName ),
         optional(seq(optional($.type_declaration), ':=', $._expr)),
         optional(seq('collation', field('uri', $.string_literal)))
       ), // 63
@@ -890,10 +888,10 @@ module.exports = grammar({
         optional(repeat1($.annotation)),
         'variable',
         '$',
-        field('name', $.EQName),
-        optional($.type_declaration),
+        field('var_name', $.EQName),
+        field('var_type', optional(seq('as', $.sequence_type))),
         ':=',
-        field('value', $._expr),
+        field('var_value', $._expr),
         ';'
       ), // 26
     // 4.17 Context Item Declaration
@@ -1048,25 +1046,35 @@ module.exports = grammar({
     double_literal: $ => token(DOUBLE),
     // instances of the grammatical production EQName.
     // EQName is identifier
-    EQName: $ => choice($._QName, $.uri_qualified_name), // 112
-    _QName: $ =>
-      prec.right(
-        choice(
-          field('unprefixed', $.identifier),
-          seq(
-            field('prefix', $.identifier),
-            ':',
-            field('local_part', $.identifier)
-          )
-        )
-      ), // 122
+    var_name: $ => choice(
+     $._QName,
+      $.uri_qualified_name
+    ),
+    _QName: $ => prec.right( choice(
+      field('unprefixed', $.identifier),
+      seq(
+        field('prefix', $.identifier),
+        ':',
+        field('local_part', $.identifier)
+      )
+    )),
+    EQName: $ => choice(
+      seq( 
+        field( 'ns_builtin', alias( $.ns_builtin, $.identifier)),
+        ':',
+        field('local_part', $.identifier)
+      ),
+       $._QName,
+      $.uri_qualified_name
+    ), // 112
+    ns_builtin: $ => choice('xs', 'fn', 'map', 'array', 'math', 'err', 'output'),
     NCName: $ => $.identifier, // 123
     uri_qualified_name: $ => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
     braced_uri_literal: $ =>
       seq('Q{', repeat1(choice(PredefinedEntityRef, CharRef, /[^&{}]/)), '}'), // 224
     //[A-Za-z_\\xC0-\\xD6][-a-zA-Zα-ωΑ-Ωµ0-9_']*/
     identifier: $ => /[_A-Za-z]{1}[\-\w]*/,
-    keyword: $ => token(/\u00C0-\u00D6\u00D8-\u00F6/),
+    keyword: $ => /[a-z]+([-][a-z]+)*/,
     comment: $ => token(/[(]:[^:]*:*([^(:][^:]*:+)*[)]/)
   }
 });
