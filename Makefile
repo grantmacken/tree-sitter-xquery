@@ -63,6 +63,6 @@ getTreeSitter: bin/tree-sitter
 bin/tree-sitter: .env
 	@mkdir -p bin
 	@wget -O - $(TS_DOWNLOAD_URL)/$(TS_RELEASE)/tree-sitter-linux-x64.gz | gunzip - > bin/tree-sitter
-	ls -lR ./
+	@chmod +x bin/tree-sitter
 	@bin/tree-sitter --version
 
