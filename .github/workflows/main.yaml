@@ -18,5 +18,7 @@ jobs:
     - name: get tree-sitter cli
       run: | 
           echo '::set-env name=TERM::xterm' 
-          make getTreeSitter
+          mkdir -p bin
+          source  .env
+          echo '${TS_DOWNLOAD_URL}/${TS_RELEASE}/tree-sitter-linux-x64.gz'
 
