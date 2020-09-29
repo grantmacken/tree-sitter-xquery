@@ -18,7 +18,6 @@ jobs:
     - name: get tree-sitter cli
       run: | 
           echo '::set-env name=TERM::xterm' 
-          mkdir -p bin
-          ls -alR  ./
-
+          make bin/tree-sitter
+          
 
