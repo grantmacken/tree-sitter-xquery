@@ -19,9 +19,6 @@ jobs:
       run: | 
           echo '::set-env name=TERM::xterm' 
           mkdir -p bin
-          source  .env
-          echo "${TS_DOWNLOAD_URL}/${TS_RELEASE}/tree-sitter-linux-x64.gz"
-          wget -O - ${TS_DOWNLOAD_URL}/${TS_RELEASE}/tree-sitter-linux-x64.gz | gunzip - > bin/tree-sitter
-          ls -al  bin/tree-sitter
+          ls -alR  ./
 
 
