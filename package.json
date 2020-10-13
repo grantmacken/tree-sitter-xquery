@@ -1,6 +1,8 @@
-{ 
+{
   "name": "tree-sitter-xquery",
   "version": "0.0.1",
+  "author": "grantmacken",
+  "license": "ISC",
   "description": "xquery grammar for tree-sitter",
   "main": "index.js",
   "repository": "https://github.com/tree-sitter/tree-sitter-xquery",
@@ -17,7 +19,9 @@
     {
       "scope": "source.xquery",
       "file-types": [
-        "xq" ,"xql", "xqm"
+        "xq",
+        "xql",
+        "xqm"
       ]
     }
   ]

@@ -122,7 +122,6 @@ module.exports = grammar({
         $.and_expr, // 84 prec: 4
         $.or_expr // 83 prec: 3
       ),
-
     // 3.1 Primary Expressions
     _primary: $ =>
       prec.left(

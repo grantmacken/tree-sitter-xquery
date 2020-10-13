@@ -7,12 +7,13 @@ MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
 include .env
 TS_DOWNLOAD_URL := https://github.com/tree-sitter/tree-sitter/releases/download/
+TS=node_modules/.bin/tree-sitter
 
 generate: src/grammar.json
 
 src/grammar.json: grammar.js
 	@echo '==========================================='
-	@bin/tree-sitter generate
+	@$(TS) generate
 	@#bin/tree-sitter parse examples/*.xq --quiet
 	@echo '==========================================='
 
@@ -25,37 +26,30 @@ watch-grammar:
 
 .PHONY: test
 test:
-	@bin/tree-sitter test -f '$(TEST_SECTION)'
+	@$(TS) -f '$(TEST_SECTION)'
 
 .PHONY: parse
 parse:
-	@bin/tree-sitter parse examples/$(EXAMPLE).xq
+	@$(TS) parse examples/$(EXAMPLE).xq
 
 .PHONY: query
 query:
-	@bin/tree-sitter query --captures queries/highlights.scm examples/$(EXAMPLE).xq
+	@$(TS) query --captures queries/highlights.scm examples/$(EXAMPLE).xq
 
 .PHONY: hl
 hl:
-	@bin/tree-sitter highlight  --scope source.xQuery examples/$(EXAMPLE).xq
+	@$(TS) highlight  --scope source.xquery examples/$(EXAMPLE).xq
 
 playground: tree-sitter-xQuery.wasm
 
 tree-sitter-xQuery.wasm: grammar.js
-	@bin/tree-sitter build-wasm
-	@bin/tree-sitter web-ui
+	@$(TS) build-wasm
+	@$(TS) web-ui
 
 .PHONY: stow-config
 stow-config:
 	@pushd _config
 	@stow -v -t ~/.tree-sitter .
-	@popd
-
-.PHONY: stow-queries
-stow-queries:
-	@mkdir -p $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery
-	@pushd queries
-	@stow -v -t $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery  .
 	@popd
 
 getTreeSitter: bin/tree-sitter

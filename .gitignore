@@ -1,7 +1,6 @@
-index.js
-bin/tree-sitter
-binding.gyp
+bin
+.local
+node_modules
 .git
-_hold
-_notes
 tree-sitter-xquery.wasm
+build
