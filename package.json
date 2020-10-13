@@ -1,12 +1,21 @@
 { 
-  "name": "tree-sitter-xQuery",
+  "name": "tree-sitter-xquery",
   "version": "0.0.1",
-  "description": "xQuery grammar for tree-sitter",
+  "description": "xquery grammar for tree-sitter",
   "main": "index.js",
-  "repository": "https://github.com/tree-sitter/tree-sitter-ruby",
+  "repository": "https://github.com/tree-sitter/tree-sitter-xquery",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "nan": "^2.14.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.16.9"
+  },
   "tree-sitter": [
     {
-      "scope": "source.xQuery",
+      "scope": "source.xquery",
       "file-types": [
         "xq" ,"xql", "xqm"
       ]
