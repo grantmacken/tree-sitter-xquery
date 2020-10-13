@@ -3,4 +3,3 @@ bin
 node_modules
 .git
 tree-sitter-xquery.wasm
-build
