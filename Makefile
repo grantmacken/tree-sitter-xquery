@@ -26,7 +26,7 @@ watch-grammar:
 
 .PHONY: test
 test:
-	@$(TS) -f '$(TEST_SECTION)'
+	@$(TS) test -f '$(TEST_SECTION)'
 
 .PHONY: parse
 parse:
