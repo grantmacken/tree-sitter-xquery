@@ -6288,6 +6288,8 @@
   "conflicts": [],
   "externals": [],
   "inline": [],
-  "supertypes": []
+  "supertypes": [
+    "_expr"
+  ]
 }
 

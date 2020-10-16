@@ -3,6 +3,7 @@ declare namespace foo = "http://example.org/#foo";
 declare default element namespace "http://example.org/names";
 import schema namespace geometry = "http://example.org/geo-schema-declarations";
 import module namespace geo = "http://example.org/geo-functions";
+
 declare context item as item() external;
 declare variable $mod:bar := "main module dummy";
 declare 

@@ -60,3 +60,17 @@ bin/tree-sitter: .env
 	@chmod +x bin/tree-sitter
 	@bin/tree-sitter --version
 
+.PHONY: after-push
+after-push: cp
+	echo $@
+	@pushd $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter
+	@nvim --headless -c "luafile ./scripts/write-lockfile.lua"
+	@jq '.' lockfile.json 
+	@popd
+
+.PHONY: cp
+cp: $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery/highlights.scm  
+
+$(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery/%.scm: queries/%.scm
+	@mkdir -p $(dir $@)
+@cp -v $< $@:qa

@@ -1,0 +1,16 @@
+2.5 Types 
+==================
+3.1.1 Literal: numeric integer
+==================
+
+12
+
+---
+
+(module (integer_literal))
+
+==================
+3.1.1 Literal: numeric decimal
+==================
+
+.5

@@ -1,3 +1,36 @@
+; Modules
+;--------
+; module namespace newBase60  = "http://gmack.nz/#newBase60";
+(NCName) @namespace
+(EQName
+  prefix: (identifier) @namespace
+  ns_builtin: (identifier) @namespace
+  local_part: (identifier) @variable
+  unprefixed: (identifier) @constant
+  (uri_qualified_name)  @constant
+  (braced_uri_literal)  @constant
+  )
+
+"$" @variable.prefix
+
+; Types
+
+[
+(sequence_type)
+(single_type)
+] @type
+
+(default_namespace_declaration
+   ["element" "function" ] @type)
+
+; diff wildcard from multiplicative times op
+; TODO name_test wildcard
+[
+(lookup_wildcard)
+(param_wildcard)  
+(wildcard)
+] @operator.wildcard
+
 ; include xPath steps
 [ "/" "//" ";" "," ] @punctuation.delimiter
 ;enclosing bracket markers
@@ -107,11 +140,7 @@
 (multiplicative_op) @operator.multiplicative
 (additive_op) @operator.additive
 
-[
-(lookup_wildcard)
-(param_wildcard)  
-(wildcard)
-] @operator.wildcard
+
 
 ;include for including modules
 
@@ -167,23 +196,7 @@
 ;exception 
 [ "try" "catch" ] @exception
 
-;Variables
-;variable
-[
 
-(identifier) 
-(NCName)
-(var_ref)
-] @variable
-"$" @variable.prefix
-
-[
-(sequence_type)
-(single_type)
-] @type
-
-(default_namespace_declaration
-   ["element" "function" ] @type)
 
 ;comment
 (comment) @comment
