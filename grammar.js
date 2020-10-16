@@ -53,6 +53,9 @@ module.exports = grammar({
   name: 'xquery',
   extras: $ => [$.comment, /\s/],
   word: $ => $.keyword,
+  supertypes: $ => [
+    $._expr,
+  ],
   rules: {
     module: $ =>
       seq(
