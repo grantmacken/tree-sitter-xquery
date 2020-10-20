@@ -32,9 +32,15 @@ test:
 parse:
 	@$(TS) parse examples/$(EXAMPLE).xq
 
+QUERIES_XQUERY_PATH := $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery
+
 .PHONY: query
-query:
-	@$(TS) query --captures queries/highlights.scm examples/$(EXAMPLE).xq
+query:  $(addprefix $(QUERIES_XQUERY_PATH)/, $(notdir $(wildcard queries/*)))
+
+$(QUERIES_XQUERY_PATH)/%.scm: queries/%.scm
+	@mkdir -p $(dir $@)
+	@cp $< $@
+	@$(TS) query --captures $< examples/$(EXAMPLE).xq
 
 .PHONY: hl
 hl:
@@ -69,8 +75,6 @@ after-push: cp
 	@popd
 
 .PHONY: cp
-cp: $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery/highlights.scm  
+cp: 
 
-$(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery/%.scm: queries/%.scm
-	@mkdir -p $(dir $@)
-@cp -v $< $@:qa
+

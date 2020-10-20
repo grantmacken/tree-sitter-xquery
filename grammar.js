@@ -53,9 +53,7 @@ module.exports = grammar({
   name: 'xquery',
   extras: $ => [$.comment, /\s/],
   word: $ => $.keyword,
-  supertypes: $ => [
-    $._expr,
-  ],
+  supertypes: $ => [$._expr, $._item_type, $._node_test],
   rules: {
     module: $ =>
       seq(
@@ -109,6 +107,7 @@ module.exports = grammar({
         $.unary_expr, // prefix  // 97 prec: 21 rl
         $.postfix_expr, // predicate / lookup    20
         $.path_expr, //108 prec: 19 lr
+
         $.bang_expr, //107 prec: 18 l
         $.arrow_expr, // 96 prec: 16 lr
         $.cast_as_expr, // 95 prec: 15 lr
@@ -170,7 +169,7 @@ module.exports = grammar({
     _numeric_literal: $ =>
       choice($.integer_literal, $.decimal_literal, $.double_literal),
     //3.1.2 Variable References
-    var_ref: $ => seq('$', field('var_name', alias( $.var_name, $.EQName ))),
+    var_ref: $ => seq('$', field('var_name', alias($.var_name, $.EQName))),
     //ref: $ => choice( /[_A-Za-z]{1}[\-\w]*(:[_A-Za-z]{1}[\-\w]*)*/, $.uri_qualified_name),
     // 3.1.3 Parenthesized Expressions
     parenthesized_expr: $ => prec(PREC.comma, seq('(', commaSep($._expr), ')')), // 133
@@ -178,7 +177,10 @@ module.exports = grammar({
     context_item_expr: $ => '.',
     //3.1.5 Static Function Calls
     function_call: $ =>
-      seq(field('function_name', $.EQName), field('arguments', $.argument_list)), // 137
+      seq(
+        field('function_name', $.EQName),
+        field('arguments', $.argument_list)
+      ), // 137
     // 3.1.6 Named Function References
     named_function_ref: $ =>
       seq(
@@ -287,8 +289,8 @@ module.exports = grammar({
     //3.3.2.2 Node Tests
     _node_test: $ =>
       choice(
-        field('kind_test', $._kind_test),
-        field('name_test', $._name_test)
+        field('node_kind_test', $._kind_test),
+        field('node_name_test', $._name_test)
       ), // 118'
     // 3.4 Sequence Expressions
     // 3.4.1 Constructing Sequences
@@ -296,54 +298,55 @@ module.exports = grammar({
       prec.left(
         PREC.range,
         seq(
-          field('left', $._expr),
-          field('operator', $.range_op),
-          field('right', $._expr)
+          field('lhs', $._expr),
+          field('range', alias('to', $.operator)),
+          field('rhs', $._expr)
         )
       ), // 87
-    range_op: $ => 'to',
     //3.4.2 Combining Node Sequences
     union_expr: $ =>
       prec.left(
         PREC.union,
         seq(
-          field('left', $._expr),
-          field('operator', $.union_op),
-          field('right', $._expr)
+          field('lhs', $._expr),
+          field('union', alias(choice('union', '|'), $.operator)),
+          field('rhs', $._expr)
         )
       ), // 90
-    union_op: $ => choice('union', '|'),
     intersect_except_expr: $ =>
       prec.left(
         PREC.intersect,
         seq(
-          field('left', $._expr),
-          field('operator', $.intersect_except_op),
-          field('right', $._expr)
+          field('lhs', $._expr),
+          field(
+            'intersect_except',
+            alias(choice('intersect', 'except'), $.operator)
+          ),
+          field('rhs', $._expr)
         )
       ), // 91
-    intersect_except_op: $ => choice('intersect', 'except'),
     // 3.5 Arithmetic Expressions  ( additive,multiplicative, unary )
     additive_expr: $ =>
       prec.left(
         PREC.additive,
         seq(
           field('left', $._expr),
-          field('operator', $.additive_op),
+          field('additive', alias(choice('+', '-'), $.operator)),
           field('right', $._expr)
         )
       ),
-    additive_op: $ => choice('+', '-'),
     multiplicative_expr: $ =>
       prec.left(
         PREC.multiplicative,
         seq(
           field('left', $._expr),
-          field('operator', $.multiplicative_op),
+          field(
+            'multiplicative',
+            alias(choice('*', 'div', 'idiv', 'mod'), $.operator)
+          ),
           field('right', $._expr)
         )
       ),
-    multiplicative_op: $ => choice('*', 'div', 'idiv', 'mod'),
     unary_expr: $ =>
       prec.right(
         PREC.unary,
@@ -367,50 +370,51 @@ module.exports = grammar({
         PREC.comparison,
         seq(
           field('lhs', $._expr),
-          field('operator', $.comparison_op),
+          field(
+            'comparison',
+            alias(
+              choice(
+                '=',
+                '!=',
+                '<',
+                '<=',
+                '>',
+                '>=',
+                'eq',
+                'ne',
+                'lt',
+                'le',
+                'gt',
+                'ge',
+                'is',
+                '<<',
+                '>>'
+              ),
+              $.operator
+            )
+          ),
           field('rhs', $._expr)
         )
       ), // 85
-    comparison_op: $ =>
-      choice(
-        '=',
-        '!=',
-        '<',
-        '<=',
-        '>',
-        '>=',
-        'eq',
-        'ne',
-        'lt',
-        'le',
-        'gt',
-        'ge',
-        'is',
-        '<<',
-        '>>'
-      ),
-    //  comparison_op: $ => ,
     // 3.8 Logical Expressions
     and_expr: $ =>
       prec.left(
         PREC.and,
         seq(
-          field('left', $._expr),
-          field('operator', $.and_op),
-          field('right', $._expr)
+          field('lhs', $._expr),
+          field('and',alias('and', $.operator)),
+          field('rhs', $._expr)
         )
       ), // 84
-    and_op: $ => 'and',
     or_expr: $ =>
       prec.left(
         PREC.or,
         seq(
-          field('left', $._expr),
-          field('operator', $.or_op),
-          field('right', $._expr)
+          field('lhs', $._expr),
+          field('or',alias('or', $.operator)),
+          field('rhs', $._expr)
         )
       ), // 83
-    or_op: $ => 'or',
     //3.9 Node Constructors
     node_constructor: $ =>
       choice($._computed_constructor, $._direct_constructor),
@@ -523,7 +527,6 @@ module.exports = grammar({
     lookup_digit: $ => repeat1(/\d/),
     lookup_wildcard: $ => '*',
     //##########################
-    //
     // 3.12 FLWOR Expressions
     flwor_expr: $ =>
       seq($._initial_clause, optional($._intermediate_clause), $.return_clause), // 41
@@ -537,7 +540,7 @@ module.exports = grammar({
     for_binding: $ =>
       seq(
         '$',
-        field('var_name',  $.EQName ),
+        field('var_name', $.EQName),
         optional($.type_declaration),
         optional(seq('allowing', 'empty')),
         optional(seq('at', '$', field('at_var_name', $.EQName))),
@@ -549,7 +552,7 @@ module.exports = grammar({
     let_binding: $ =>
       seq(
         '$',
-        field('var_name', $.EQName ),
+        field('var_name', $.EQName),
         optional($.type_declaration),
         ':=',
         $._expr
@@ -568,13 +571,13 @@ module.exports = grammar({
     //3.12.5 Where Clause
     where_clause: $ => seq('where', $._expr), // 60
     // 3.12.6 Count Clause
-    count_clause: $ => seq('count', '$', field('var_name', $.EQName )), //   59
+    count_clause: $ => seq('count', '$', field('var_name', $.EQName)), //   59
     // 3.12.7 Group By Clause
     group_by_clause: $ => seq('group', 'by', commaSep1($._grouping_spec)), // 61
     _grouping_spec: $ =>
       seq(
         '$',
-        field('var_name', $.EQName ),
+        field('var_name', $.EQName),
         optional(seq(optional($.type_declaration), ':=', $._expr)),
         optional(seq('collation', field('uri', $.string_literal)))
       ), // 63
@@ -657,12 +660,11 @@ module.exports = grammar({
       prec.left(
         PREC.instance,
         seq(
-          field('rhs', $._expr),
-          field('operator', seq('instance', 'of')),
-          field('type', $.sequence_type)
+          field('lhs', $._expr),
+          seq('instance', 'of'),
+          field('rhs', $.sequence_type)
         )
       ), // 92
-    instance_of_op: $ => seq('instance', 'of'),
     // 3.18.2
     typeswitch_expr: $ =>
       prec.left(
@@ -938,26 +940,28 @@ module.exports = grammar({
       ),
 
     // 2.5.4 SequenceType Syntax
-    type_declaration: $ =>
-      seq(field('operator', 'as'), field('type', $.sequence_type)),
-    sequence_type: $ => choice(seq('empty-sequence', '(', ')'), $._item_type), // 184
-    _item_type: $ =>
-      prec.right(
-        seq(
-          choice(
-            $._kind_test,
-            seq('item', '(', ')'),
-            $._function_test,
-            $._map_test,
-            $._array_test,
-            $._atomic_or_union_type,
-            $._parenthesized_item_type
-          ),
-          optional($.occurrence_indicator)
+    type_declaration: $ => seq('as', $.sequence_type),
+    sequence_type: $ =>
+      prec.left(
+        choice(
+          seq('empty-sequence', '(', ')'),
+          seq($._item_type, optional($.occurrence_indicator))
         )
+      ), // 184
+    _item_type: $ =>
+      choice(
+        $._kind_test,
+        $.any_type_test,
+        $.function_test,
+        $.map_test,
+        $.array_test,
+        $.atomic_or_union_type,
+        $.parenthesized_item_type
       ), // 186
+    //type_empty: $ => seq('empty-sequence', '(', ')'),
+    any_type_test: $ => seq('item', '(', ')'),
     occurrence_indicator: $ => choice('?', '*', '+'), // 185
-    _atomic_or_union_type: $ => $.EQName, // 187
+    atomic_or_union_type: $ => $.EQName, // 187
 
     _kind_test: $ =>
       choice(
@@ -1020,56 +1024,58 @@ module.exports = grammar({
         seq('*:', $.NCName),
         seq($.braced_uri_literal, '*')
       ), // 120
-    _function_test: $ =>
-      choice(
-        $.any_function_test,
-        seq(
-          'function',
-          '(',
-          commaSep1($.sequence_type),
-          ')',
-          'as',
-          $.sequence_type
-        ) // TODO TypedFunctionTest
-      ), // 207
-    any_function_test: $ => seq('function', '(', '*', ')'),
-    _map_test: $ =>
-      choice(
-        seq('map', '(', '*', ')') // AnyMapTest
-      ), // TODO type TypedMapTest 210
-    _array_test: $ =>
-      choice(
-        seq('array', '(', '*', ')') // AnyArrayTest
-      ), // TODO TypedMapTest 213
-    _parenthesized_item_type: $ => seq('(', $._item_type, ')'), // 216
+    function_test: $ =>
+      seq(
+        optional(field('anno', $.annotation)),
+        field('type', alias('function', $.keyword)),
+        field('test', choice($.any_type, $.typed_function))
+      ), //  // 207
+    typed_function: $ =>
+      seq('(', commaSep1($.sequence_type), ')', 'as', $.sequence_type),
+    map_test: $ =>
+      seq(
+        field('type', alias('map', $.keyword)),
+        field('test', choice($.any_type, $.typed_map))
+      ), // 210
+    typed_map: $ => seq('(', $.atomic_or_union_type, ',', $.sequence_type, ')'), // 212
+    array_test: $ =>
+      seq(
+        field('type', alias('array', $.keyword)),
+        field('test', choice($.any_type, $.typed_array))
+      ),
+    any_type: $ => seq('(', '*', ')'),
+    typed_array: $ => seq('(', $.sequence_type, ')'),
+    parenthesized_item_type: $ => seq('(', $._item_type, ')'), // 216
     // END SequenceType Syntax
     integer_literal: $ => token(INTEGER),
     decimal_literal: $ => token(DECIMAL),
     double_literal: $ => token(DOUBLE),
     // instances of the grammatical production EQName.
     // EQName is identifier
-    var_name: $ => choice(
-     $._QName,
-      $.uri_qualified_name
-    ),
-    _QName: $ => prec.right( choice(
-      field('unprefixed', $.identifier),
-      seq(
-        field('prefix', $.identifier),
-        ':',
-        field('local_part', $.identifier)
-      )
-    )),
-    EQName: $ => choice(
-      seq( 
-        field( 'ns_builtin', alias( $.ns_builtin, $.identifier)),
-        ':',
-        field('local_part', $.identifier)
+    var_name: $ => choice($._QName, $.uri_qualified_name),
+    _QName: $ =>
+      prec.right(
+        choice(
+          field('unprefixed', $.identifier),
+          seq(
+            field('prefix', $.identifier),
+            token.immediate(':'),
+            field('local_part', $.identifier)
+          )
+        )
       ),
-       $._QName,
-      $.uri_qualified_name
-    ), // 112
-    ns_builtin: $ => choice('xs', 'fn', 'map', 'array', 'math', 'err', 'output'),
+    EQName: $ =>
+      choice(
+        seq(
+          field('ns_builtin', alias($.ns_builtin, $.identifier)),
+          token.immediate(':'),
+          field('local_part', $.identifier)
+        ),
+        $._QName,
+        $.uri_qualified_name
+      ), // 112
+    ns_builtin: $ =>
+      choice('xs', 'fn', 'map', 'array', 'math', 'err', 'output'),
     NCName: $ => $.identifier, // 123
     uri_qualified_name: $ => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
     braced_uri_literal: $ =>
@@ -1077,6 +1083,37 @@ module.exports = grammar({
     //[A-Za-z_\\xC0-\\xD6][-a-zA-Zα-ωΑ-Ωµ0-9_']*/
     identifier: $ => /[_A-Za-z]{1}[\-\w]*/,
     keyword: $ => /[a-z]+([-][a-z]+)*/,
+    operator: $ =>
+      choice(
+        'to',
+        'intersect',
+        'except',
+        'union',
+        '|',
+        '+',
+        '-',
+        '*',
+        'div',
+        'idiv',
+        'mod',
+        '=',
+        '!=',
+        '<',
+        '<=',
+        '>',
+        '>=',
+        'eq',
+        'ne',
+        'lt',
+        'le',
+        'gt',
+        'ge',
+        'is',
+        '<<',
+        '>>',
+        'and',
+        'or'
+      ),
     comment: $ => token(/[(]:[^:]*:*([^(:][^:]*:+)*[)]/)
   }
 });
