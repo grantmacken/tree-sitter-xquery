@@ -2,23 +2,33 @@
 ;--------
 ; module namespace newBase60  = "http://gmack.nz/#newBase60";
 (NCName) @namespace
+(var_ref
+ "$" @variable.prefix)
+ 
 (EQName
-  prefix: (identifier) @namespace
-  ns_builtin: (identifier) @namespace
-  local_part: (identifier) @variable
-  unprefixed: (identifier) @constant
-  (uri_qualified_name)  @constant
-  (braced_uri_literal)  @constant
-  )
+ prefix: (identifier) @namespace
+ local_part: (identifier) @variable)
 
-"$" @variable.prefix
+(EQName
+ ns_builtin: (identifier) @namespace
+ local_part: (identifier) @variable)
+
+(EQName
+ unprefixed: (identifier) @variable)
 
 ; Types
+(
+  (_)
+    type: (keyword) @type
+    test: (_) @type.test
+)
 
-[
-(sequence_type)
-(single_type)
-] @type
+(single_type) @type
+
+;constructor
+(square_array_constructor
+  ["["  "]"] @constructor )
+
 
 (default_namespace_declaration
    ["element" "function" ] @type)
@@ -99,15 +109,18 @@
 ;method
 ;field
 ;property
-;constructor
-[ "document" 
+
+
+
+[ 
+  "document" 
   "element" 
   "attribute"
   "text"
   "comment"
   "map"
-  "array"
-  ] @constructor
+ ]
+@constructor
 
 ;conditional
 [ 
@@ -135,10 +148,7 @@
 ":="
 ] @operator
 
-; Arithmetic Expressions
-(comparison_op) @operator.comparison
-(multiplicative_op) @operator.multiplicative
-(additive_op) @operator.additive
+(operator) @operator
 
 
 
