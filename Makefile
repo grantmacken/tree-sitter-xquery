@@ -6,15 +6,14 @@ MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
 include .env
-TS_DOWNLOAD_URL := https://github.com/tree-sitter/tree-sitter/releases/download/
-TS=node_modules/.bin/tree-sitter
+TS=bin/tree-sitter
 
 generate: src/grammar.json
 
 src/grammar.json: grammar.js
 	@echo '==========================================='
 	@$(TS) generate
-	@#bin/tree-sitter parse examples/*.xq --quiet
+	@#$(TS) parse examples/*.xq --quiet
 	@echo '==========================================='
 
 .PHONY: watch-grammar
@@ -60,10 +59,20 @@ stow-config:
 
 getTreeSitter: bin/tree-sitter
 
-bin/tree-sitter: .env
+bin/tree-sitter:
 	@mkdir -p bin
-	@wget -O - $(TS_DOWNLOAD_URL)/$(TS_RELEASE)/tree-sitter-linux-x64.gz | gunzip - > bin/tree-sitter
-	@chmod +x bin/tree-sitter
+	if [ -e node_modules/.bin/tree-sitter ]
+	then 
+	npm update
+	else
+	npm install
+	fi
+	if ! [ -L bin/tree-sitter ]
+	then
+	pushd bin
+	ln -s ../node_modules/.bin/tree-sitter
+	popd
+	fi
 	@bin/tree-sitter --version
 
 .PHONY: after-push

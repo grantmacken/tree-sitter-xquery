@@ -194,130 +194,6 @@
     ]
   },
   {
-    "type": "_item_type",
-    "named": true,
-    "subtypes": [
-      {
-        "type": "any_kind_test",
-        "named": true
-      },
-      {
-        "type": "any_type_test",
-        "named": true
-      },
-      {
-        "type": "array_test",
-        "named": true
-      },
-      {
-        "type": "atomic_or_union_type",
-        "named": true
-      },
-      {
-        "type": "attribute_test",
-        "named": true
-      },
-      {
-        "type": "comment_test",
-        "named": true
-      },
-      {
-        "type": "document_test",
-        "named": true
-      },
-      {
-        "type": "element_test",
-        "named": true
-      },
-      {
-        "type": "function_test",
-        "named": true
-      },
-      {
-        "type": "map_test",
-        "named": true
-      },
-      {
-        "type": "namespace_node_test",
-        "named": true
-      },
-      {
-        "type": "parenthesized_item_type",
-        "named": true
-      },
-      {
-        "type": "pi_test",
-        "named": true
-      },
-      {
-        "type": "schema_attribute_test",
-        "named": true
-      },
-      {
-        "type": "schema_element_test",
-        "named": true
-      },
-      {
-        "type": "text_test",
-        "named": true
-      }
-    ]
-  },
-  {
-    "type": "_node_test",
-    "named": true,
-    "subtypes": [
-      {
-        "type": "EQName",
-        "named": true
-      },
-      {
-        "type": "any_kind_test",
-        "named": true
-      },
-      {
-        "type": "attribute_test",
-        "named": true
-      },
-      {
-        "type": "comment_test",
-        "named": true
-      },
-      {
-        "type": "document_test",
-        "named": true
-      },
-      {
-        "type": "element_test",
-        "named": true
-      },
-      {
-        "type": "namespace_node_test",
-        "named": true
-      },
-      {
-        "type": "pi_test",
-        "named": true
-      },
-      {
-        "type": "schema_attribute_test",
-        "named": true
-      },
-      {
-        "type": "schema_element_test",
-        "named": true
-      },
-      {
-        "type": "text_test",
-        "named": true
-      },
-      {
-        "type": "wildcard",
-        "named": true
-      }
-    ]
-  },
-  {
     "type": "EQName",
     "named": true,
     "fields": {
@@ -391,15 +267,72 @@
   {
     "type": "abbrev_forward_step",
     "named": true,
-    "fields": {},
+    "fields": {
+      "node_kind_test": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "any_kind_test",
+            "named": true
+          },
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "comment_test",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
+            "type": "namespace_node_test",
+            "named": true
+          },
+          {
+            "type": "pi_test",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          },
+          {
+            "type": "text_test",
+            "named": true
+          }
+        ]
+      },
+      "node_name_test": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "_node_test",
-          "named": true
-        },
         {
           "type": "abbrev_attr",
           "named": true
@@ -518,14 +451,41 @@
     }
   },
   {
-    "type": "any_type",
+    "type": "any_func_type",
     "named": true,
     "fields": {}
   },
   {
-    "type": "any_type_test",
+    "type": "any_item_test",
     "named": true,
-    "fields": {}
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "any_kind_test",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "argument",
@@ -575,7 +535,7 @@
         "required": true,
         "types": [
           {
-            "type": "any_type",
+            "type": "any_func_type",
             "named": true
           },
           {
@@ -589,7 +549,7 @@
         "required": true,
         "types": [
           {
-            "type": "keyword",
+            "type": "item_type",
             "named": true
           }
         ]
@@ -731,20 +691,31 @@
   {
     "type": "attribute_test",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "EQName",
-          "named": true
-        },
-        {
-          "type": "param_wildcard",
-          "named": true
-        }
-      ]
+    "fields": {
+      "test": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "by_attr_name",
+            "named": true
+          },
+          {
+            "type": "by_attr_wildcard",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -986,6 +957,162 @@
     "fields": {}
   },
   {
+    "type": "by_attr_name",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      },
+      "type_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "by_attr_wildcard",
+    "named": true,
+    "fields": {
+      "type_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      },
+      "wildcard": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "param_wildcard",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "by_attribute_declaration",
+    "named": true,
+    "fields": {
+      "attribute_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "by_element_declaration",
+    "named": true,
+    "fields": {
+      "element_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "by_element_name",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      },
+      "option": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "nilled",
+            "named": true
+          }
+        ]
+      },
+      "type_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "by_element_wildcard",
+    "named": true,
+    "fields": {
+      "option": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "nilled",
+            "named": true
+          }
+        ]
+      },
+      "type_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      },
+      "wildcard": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "param_wildcard",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "cast_as_expr",
     "named": true,
     "fields": {
@@ -1126,6 +1253,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "comment_test",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1433,7 +1576,18 @@
   {
     "type": "document_test",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": false,
@@ -1443,7 +1597,7 @@
           "named": true
         },
         {
-          "type": "schema_attribute_test",
+          "type": "schema_element_test",
           "named": true
         }
       ]
@@ -1506,20 +1660,31 @@
   {
     "type": "element_test",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "EQName",
-          "named": true
-        },
-        {
-          "type": "param_wildcard",
-          "named": true
-        }
-      ]
+    "fields": {
+      "test": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "by_element_name",
+            "named": true
+          },
+          {
+            "type": "by_element_wildcard",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1539,6 +1704,11 @@
   },
   {
     "type": "empty_order_declaration",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "empty_sequence",
     "named": true,
     "fields": {}
   },
@@ -1895,7 +2065,7 @@
         "required": true,
         "types": [
           {
-            "type": "any_type",
+            "type": "any_func_type",
             "named": true
           },
           {
@@ -1909,7 +2079,7 @@
         "required": true,
         "types": [
           {
-            "type": "keyword",
+            "type": "item_type",
             "named": true
           }
         ]
@@ -2221,7 +2391,7 @@
         "required": true,
         "types": [
           {
-            "type": "any_type",
+            "type": "any_func_type",
             "named": true
           },
           {
@@ -2235,7 +2405,7 @@
         "required": true,
         "types": [
           {
-            "type": "keyword",
+            "type": "item_type",
             "named": true
           }
         ]
@@ -2484,6 +2654,22 @@
     }
   },
   {
+    "type": "namespace_node_test",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "occurrence_indicator",
     "named": true,
     "fields": {}
@@ -2670,21 +2856,6 @@
     }
   },
   {
-    "type": "parenthesized_item_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "_item_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "path_expr",
     "named": true,
     "fields": {
@@ -2693,7 +2864,7 @@
         "required": false,
         "types": [
           {
-            "type": "_node_test",
+            "type": "EQName",
             "named": true
           },
           {
@@ -2713,12 +2884,40 @@
             "named": false
           },
           {
+            "type": "any_kind_test",
+            "named": true
+          },
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "comment_test",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
             "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "namespace_node_test",
             "named": true
           },
           {
             "type": "parent::",
             "named": false
+          },
+          {
+            "type": "pi_test",
+            "named": true
           },
           {
             "type": "preceding-sibling::",
@@ -2730,6 +2929,22 @@
           },
           {
             "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          },
+          {
+            "type": "text_test",
+            "named": true
+          },
+          {
+            "type": "wildcard",
             "named": true
           }
         ]
@@ -2832,6 +3047,66 @@
           }
         ]
       },
+      "node_kind_test": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "any_kind_test",
+            "named": true
+          },
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "comment_test",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
+            "type": "namespace_node_test",
+            "named": true
+          },
+          {
+            "type": "pi_test",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          },
+          {
+            "type": "text_test",
+            "named": true
+          }
+        ]
+      },
+      "node_name_test": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      },
       "path": {
         "multiple": true,
         "required": true,
@@ -2859,7 +3134,7 @@
             "named": false
           },
           {
-            "type": "_node_test",
+            "type": "EQName",
             "named": true
           },
           {
@@ -2879,12 +3154,40 @@
             "named": false
           },
           {
+            "type": "any_kind_test",
+            "named": true
+          },
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "comment_test",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
             "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "namespace_node_test",
             "named": true
           },
           {
             "type": "parent::",
             "named": false
+          },
+          {
+            "type": "pi_test",
+            "named": true
           },
           {
             "type": "preceding-sibling::",
@@ -2896,6 +3199,22 @@
           },
           {
             "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          },
+          {
+            "type": "text_test",
+            "named": true
+          },
+          {
+            "type": "wildcard",
             "named": true
           }
         ]
@@ -2905,7 +3224,7 @@
         "required": false,
         "types": [
           {
-            "type": "_node_test",
+            "type": "EQName",
             "named": true
           },
           {
@@ -2925,12 +3244,40 @@
             "named": false
           },
           {
+            "type": "any_kind_test",
+            "named": true
+          },
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "comment_test",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
             "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "namespace_node_test",
             "named": true
           },
           {
             "type": "parent::",
             "named": false
+          },
+          {
+            "type": "pi_test",
+            "named": true
           },
           {
             "type": "preceding-sibling::",
@@ -2942,6 +3289,22 @@
           },
           {
             "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          },
+          {
+            "type": "text_test",
+            "named": true
+          },
+          {
+            "type": "wildcard",
             "named": true
           }
         ]
@@ -2951,7 +3314,7 @@
         "required": false,
         "types": [
           {
-            "type": "_node_test",
+            "type": "EQName",
             "named": true
           },
           {
@@ -2971,12 +3334,40 @@
             "named": false
           },
           {
+            "type": "any_kind_test",
+            "named": true
+          },
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "comment_test",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
             "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "namespace_node_test",
             "named": true
           },
           {
             "type": "parent::",
             "named": false
+          },
+          {
+            "type": "pi_test",
+            "named": true
           },
           {
             "type": "preceding-sibling::",
@@ -2988,6 +3379,48 @@
           },
           {
             "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          },
+          {
+            "type": "text_test",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "pi_test",
+    "named": true,
+    "fields": {
+      "test": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "NCName",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
             "named": true
           }
         ]
@@ -3241,9 +3674,56 @@
     }
   },
   {
+    "type": "schema_attribute_test",
+    "named": true,
+    "fields": {
+      "test": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "by_attribute_declaration",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "schema_element_test",
     "named": true,
-    "fields": {}
+    "fields": {
+      "test": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "by_element_declaration",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "schema_import",
@@ -3293,17 +3773,94 @@
   {
     "type": "sequence_type",
     "named": true,
-    "fields": {},
+    "fields": {
+      "test": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "empty_sequence",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "_item_type",
+          "type": "any_item_test",
+          "named": true
+        },
+        {
+          "type": "any_kind_test",
+          "named": true
+        },
+        {
+          "type": "array_test",
+          "named": true
+        },
+        {
+          "type": "atomic_or_union_type",
+          "named": true
+        },
+        {
+          "type": "attribute_test",
+          "named": true
+        },
+        {
+          "type": "comment_test",
+          "named": true
+        },
+        {
+          "type": "document_test",
+          "named": true
+        },
+        {
+          "type": "element_test",
+          "named": true
+        },
+        {
+          "type": "function_test",
+          "named": true
+        },
+        {
+          "type": "map_test",
+          "named": true
+        },
+        {
+          "type": "namespace_node_test",
           "named": true
         },
         {
           "type": "occurrence_indicator",
+          "named": true
+        },
+        {
+          "type": "pi_test",
+          "named": true
+        },
+        {
+          "type": "schema_attribute_test",
+          "named": true
+        },
+        {
+          "type": "schema_element_test",
+          "named": true
+        },
+        {
+          "type": "text_test",
           "named": true
         }
       ]
@@ -3553,6 +4110,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "text_test",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "item_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -4340,10 +4913,6 @@
     "named": false
   },
   {
-    "type": "any_kind_test",
-    "named": true
-  },
-  {
     "type": "apos",
     "named": false
   },
@@ -4416,10 +4985,6 @@
     "named": false
   },
   {
-    "type": "comment_test",
-    "named": true
-  },
-  {
     "type": "construction",
     "named": false
   },
@@ -4484,10 +5049,6 @@
     "named": false
   },
   {
-    "type": "document-node",
-    "named": false
-  },
-  {
     "type": "double_literal",
     "named": true
   },
@@ -4501,10 +5062,6 @@
   },
   {
     "type": "empty",
-    "named": false
-  },
-  {
-    "type": "empty-sequence",
     "named": false
   },
   {
@@ -4620,6 +5177,10 @@
     "named": false
   },
   {
+    "type": "item_type",
+    "named": true
+  },
+  {
     "type": "keyword",
     "named": true
   },
@@ -4664,12 +5225,12 @@
     "named": false
   },
   {
-    "type": "namespace_node_test",
-    "named": true
-  },
-  {
     "type": "ne",
     "named": false
+  },
+  {
+    "type": "nilled",
+    "named": true
   },
   {
     "type": "no-inherit",
@@ -4728,10 +5289,6 @@
     "named": false
   },
   {
-    "type": "pi_test",
-    "named": true
-  },
-  {
     "type": "preceding-sibling::",
     "named": false
   },
@@ -4760,14 +5317,6 @@
     "named": false
   },
   {
-    "type": "schema-element",
-    "named": false
-  },
-  {
-    "type": "schema_attribute_test",
-    "named": true
-  },
-  {
     "type": "self::",
     "named": false
   },
@@ -4794,10 +5343,6 @@
   {
     "type": "text",
     "named": false
-  },
-  {
-    "type": "text_test",
-    "named": true
   },
   {
     "type": "then",
