@@ -41,13 +41,13 @@ CFLAGS_CC_Debug := \
 	-std=gnu++1y
 
 INCS_Debug := \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/include/node \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/src \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/openssl/config \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/openssl/openssl/include \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/uv/include \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/zlib \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/v8/include \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/include/node \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/src \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/openssl/config \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/openssl/openssl/include \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/uv/include \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/zlib \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/v8/include \
 	-I$(srcdir)/node_modules/nan \
 	-I$(srcdir)/src
 
@@ -87,13 +87,13 @@ CFLAGS_CC_Release := \
 	-std=gnu++1y
 
 INCS_Release := \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/include/node \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/src \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/openssl/config \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/openssl/openssl/include \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/uv/include \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/zlib \
-	-I/home/grantmacken/.cache/node-gyp/14.13.1/deps/v8/include \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/include/node \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/src \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/openssl/config \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/openssl/openssl/include \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/uv/include \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/zlib \
+	-I/home/grantmacken/.cache/node-gyp/14.14.0/deps/v8/include \
 	-I$(srcdir)/node_modules/nan \
 	-I$(srcdir)/src
 

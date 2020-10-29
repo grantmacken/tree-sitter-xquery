@@ -23,6 +23,8 @@
     test: (_) @type.test
 )
 
+(occurrence_indicator) @type.occurance
+
 (single_type) @type
 
 ;constructor

@@ -1,12 +1,13 @@
 (
+$n instance of item(),
+$n instance of node(),
+$n instance of text(),
+$p instance of processing-instruction(),
+$p instance of processing-instruction(xml-stylesheet),
+$n instance of comment(),
+$n instance of namespace-node(),
+$n instance of document-node(),
+$n instance of  document-node(element(book)),
 map {} instance of map(*),
-[] instance of array(*),
-$f instance of function(*),
-$f instance of %assertion function(*),
-$f instance of function(int, int) as int,
-$f instance of %assertion function(int, int) as int,
-(:$f instance of function(xs:anyAtomicType) as item()*:)
+[] instance of array(*)
 )
-
-
-
