@@ -31,7 +31,7 @@ test:
 parse:
 	@$(TS) parse examples/$(EXAMPLE).xq
 
-QUERIES_XQUERY_PATH := $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/queries/xquery
+QUERIES_XQUERY_PATH := $(HOME)/home/grantmacken/.config/nvim/queries/xquery
 
 .PHONY: query
 query:  $(addprefix $(QUERIES_XQUERY_PATH)/, $(notdir $(wildcard queries/*)))
