@@ -8,6 +8,5 @@ $n instance of comment(),
 $n instance of namespace-node(),
 $n instance of document-node(),
 $n instance of  document-node(element(book)),
-map {} instance of map(*),
-[] instance of array(*)
+map {} instance of map(*)
 )

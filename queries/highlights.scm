@@ -17,15 +17,8 @@
  unprefixed: (identifier) @variable)
 
 ; Types
-(
-  (_)
-    type: (keyword) @type
-    test: (_) @type.test
-)
-
+(item_type) @type
 (occurrence_indicator) @type.occurance
-
-(single_type) @type
 
 ;constructor
 (square_array_constructor
@@ -111,8 +104,6 @@
 ;method
 ;field
 ;property
-
-
 
 [ 
   "document" 

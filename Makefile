@@ -31,14 +31,14 @@ test:
 parse:
 	@$(TS) parse examples/$(EXAMPLE).xq
 
-QUERIES_XQUERY_PATH := $(HOME)/home/grantmacken/.config/nvim/queries/xquery
+QUERIES_XQUERY_PATH := $(HOME)/.config/nvim/queries/xquery
 
 .PHONY: query
 query:  $(addprefix $(QUERIES_XQUERY_PATH)/, $(notdir $(wildcard queries/*)))
 
 $(QUERIES_XQUERY_PATH)/%.scm: queries/%.scm
 	@mkdir -p $(dir $@)
-	@cp $< $@
+	@cp -v $< $@
 	@$(TS) query --captures $< examples/$(EXAMPLE).xq
 
 .PHONY: hl
@@ -51,8 +51,8 @@ tree-sitter-xQuery.wasm: grammar.js
 	@$(TS) build-wasm
 	@$(TS) web-ui
 
-.PHONY: stow-config
-stow-config:
+.PHONY: stow
+stow:
 	@pushd _config
 	@stow -v -t ~/.tree-sitter .
 	@popd
