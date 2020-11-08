@@ -4184,18 +4184,19 @@
           "value": "xquery"
         },
         {
-          "type": "SYMBOL",
-          "name": "version"
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "encoding"
+              "name": "_encoding"
             },
             {
-              "type": "BLANK"
+              "type": "SYMBOL",
+              "name": "_version"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_encoding_version"
             }
           ]
         },
@@ -4205,7 +4206,20 @@
         }
       ]
     },
-    "version": {
+    "_encoding": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "encoding"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        }
+      ]
+    },
+    "_version": {
       "type": "SEQ",
       "members": [
         {
@@ -4218,16 +4232,16 @@
         }
       ]
     },
-    "encoding": {
+    "_encoding_version": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "encoding"
+          "type": "SYMBOL",
+          "name": "_version"
         },
         {
           "type": "SYMBOL",
-          "name": "string_literal"
+          "name": "_encoding"
         }
       ]
     },

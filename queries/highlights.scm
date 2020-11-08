@@ -18,7 +18,6 @@
 
 ; Types
 (item_type) @type
-(occurrence_indicator) @type.occurance
 
 ;constructor
 (square_array_constructor
@@ -162,6 +161,7 @@
 "descending"
 "empty"
 "empty"
+"encoding"
 "function"
 "greatest"
 "group"
