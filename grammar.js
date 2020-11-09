@@ -137,7 +137,7 @@ module.exports = grammar({
           $.inline_function_expr, // function item
           $.ordered_expr,
           $.unordered_expr,
-          $._computed_constructor, // node constructors
+          $.computed_constructor, // node constructors
           $._direct_constructor, // node constructors
           $.string_constructor,
           $.map_constructor, // 170
@@ -416,7 +416,7 @@ module.exports = grammar({
       ), // 83
     //3.9 Node Constructors
     node_constructor: $ =>
-      choice($._computed_constructor, $._direct_constructor),
+      choice($.computed_constructor, $._direct_constructor),
     // 3.9.1 Direct Element Constructors
     _direct_constructor: $ =>
       choice(
@@ -470,35 +470,40 @@ module.exports = grammar({
     escape_curly: $ => choice('{{', '}}'),
     predefined_entity_ref: $ =>
       seq('&', choice('lt', 'gt', 'amp', 'quot', 'apos'), ';'),
-    // 3.9.3 Computed Constructors
-    _computed_constructor: $ =>
+    // 3.9.3 Computed Constructors TODO make Computed Constructors a supertype
+    computed_constructor: $ =>
       choice(
-        $.document_constructor,
-        $.element_constructor,
-        $.attribute_constructor,
-        //$.comp_namespace_constructor, // TODO
-        $.text_constructor,
-        $.comment_constructor
-        //$.comp_pi_constructor, // TODO
-      ), // 156
-    document_constructor: $ => seq('document', $.enclosed_expr), // 156
-    element_constructor: $ =>
+        $._document_text_comment_constructor,
+        $._element_attr_constructor,
+        $._namespace_constructor,
+        $._pi_constructor
+      ), // 155
+    _document_text_comment_constructor: $ =>
       seq(
-        'element',
-        field('name', choice($.EQName, seq('{', commaSep($._expr), '}'))),
-        field('content', seq('{', commaSep($._expr), '}'))
-      ), // 157
-    attribute_constructor: $ =>
+        field(
+          'constructor',
+          alias(choice('document', 'text', 'comment'), $.keyword)
+        ),
+        field('content', $.enclosed_expr)
+      ), // 156 164 165
+    _element_attr_constructor: $ =>
       seq(
-        'attribute',
-        field('name', choice($.EQName, seq('{', commaSep($._expr), '}'))),
-        field('content', seq('{', commaSep($._expr), '}'))
-      ), // 157
-    //comp_namespace_constructor: $ => seq('TODO'),
-    text_constructor: $ => seq('text', $.enclosed_expr), // 164
-    comment_constructor: $ => seq('comment', $.enclosed_expr), // 165
-    //comp_pi_constructor: $ => seq('TODO'),
-
+        field('constructor', alias(choice('element', 'attribute'), $.keyword)),
+        field('name_expr', choice($.EQName, seq('{', commaSep($._expr), '}'))),
+        field('content', $.enclosed_expr)
+      ), // 157 159
+    _pi_constructor: $ =>
+      seq(
+        field('constructor', alias('processing-instruction', $.keyword)),
+        field('name_expr', choice($.NCName, seq('{', commaSep($._expr), '}'))),
+        field('content', $.enclosed_expr)
+      ), // 166
+    _namespace_constructor: $ =>
+      seq(
+        field('constructor', alias('namespace', $.keyword)),
+        field('name_expr', choice($.NCName, $.enclosed_expr)),
+        field('content', $.enclosed_expr)
+      ), // 160
     //3.10 String Constructors TODO
     string_constructor: $ => seq('``[', repeat($._string_content), ']``'), // 177
     // TODO this is not correct  string content is external in other tree sitters
@@ -507,14 +512,26 @@ module.exports = grammar({
     interpolation: $ => seq('`{', commaSep($._expr), '}`'), // 180',
     //3.11 Maps and Arrays
     map_constructor: $ =>
-      prec.left(seq('map', '{', commaSep($.map_entry), '}')), // 170
-    map_entry: $ => seq(field('key', $._expr), ':', field('value', $._expr)),
+        seq(
+        field('constructor', alias('map', $.keyword)),
+        field('content', seq('{', commaSep($.map_entry), '}'))
+      ), // 170
+    map_entry: $ => 
+    seq(
+      field('key', $._expr), 
+      ':', 
+      field('value', $._expr)),
     // 3.11.2 Arrays
     _array_constructor: $ =>
       choice($.curly_array_constructor, $.square_array_constructor), // 174 TODO ,
-    curly_array_constructor: $ => prec.left(seq('array', $.enclosed_expr)),
+    curly_array_constructor: $ =>
+      seq(
+        field('constructor', alias('array', $.keyword)),
+        field('content', $.enclosed_expr)
+      ),
     square_array_constructor: $ =>
-      prec.left(seq('[', commaSep($._expr), ']', optional('?'))),
+      seq('[', commaSep($._expr), ']'),
+      //seq('[', commaSep($._expr), ']', optional('?')),
     //3.11.3.1 Unary Lookup
     unary_lookup: $ =>
       prec.right(
@@ -744,7 +761,7 @@ module.exports = grammar({
     // 3.22 Extension Expressions TODO
     //4.1 Version Declaration
     version_declaration: $ =>
-      seq('xquery', choice($._encoding, $._version, $.version_encoding), ';'),
+      seq('xquery', choice($._encoding, $._version, $._version_encoding), ';'),
     _encoding: $ => seq('encoding', $.string_literal),
     _version: $ => seq('version', $.string_literal),
     _version_encoding: $ => seq($._version, $._encoding),
