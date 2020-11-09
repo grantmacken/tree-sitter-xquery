@@ -19,9 +19,7 @@
 ; Types
 (item_type) @type
 
-;constructor
-(square_array_constructor
-  ["["  "]"] @constructor )
+
 
 
 (default_namespace_declaration
@@ -38,7 +36,8 @@
 ; include xPath steps
 [ "/" "//" ";" "," ] @punctuation.delimiter
 ;enclosing bracket markers
-[ "(" ")" "{" "}" "[" "]"  ] @punctuation.bracket
+[ "(" ")" "{" "}"  ] @punctuation.bracket
+;"[" "]" 
 ; XML tags
 (end_tag [ "</"  ">" ]  @tag.delimiter)
 (start_tag [ "<"  ">"] @tag.delimiter)
@@ -102,17 +101,20 @@
 
 ;method
 ;field
-;property
+;CONSTRUCTORS
+(computed_constructor
+  constructor: (keyword) @constructor)
+(curly_array_constructor
+  constructor: (keyword) @constructor)
+(map_constructor
+  constructor: (keyword) @constructor)
+(square_array_constructor
+  ["["  "]"] @constructor )
+(string_constructor
+  ["``["  "]``"] @constructor )
+(interpolation
+  ["`{"  "}`"] @constructor )
 
-[ 
-  "document" 
-  "element" 
-  "attribute"
-  "text"
-  "comment"
-  "map"
- ]
-@constructor
 
 ;conditional
 [ 
@@ -141,8 +143,6 @@
 ] @operator
 
 (operator) @operator
-
-
 
 ;include for including modules
 
