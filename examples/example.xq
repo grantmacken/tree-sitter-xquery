@@ -1,2 +1,2 @@
-$seq1 union $seq2:xx
-
+for $s in ("one", "two", "red", "blue")
+return ``[`{$s}` fish]``

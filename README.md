@@ -1,33 +1,4 @@
 
-
-
-map {} instance of map(*),
-$n instance of element(),
-$n instance of element( person ),
-$n instance of  element(person, surgeon),
-$n instance of  element(person, surgeon? ),
-$n instance of  element(*),
-$n instance of  element(*, surgeon),
-$n instance of  element(*, surgeon?),
-$n instance of attribute(),
-$n instance of attribute(price),
-$n instance of attribute(price, currency),
-$n instance of attribute(*, currency),
-(: Schema Element Test:)
-$n instance of schema-element(customer),
-$n instance of schema-attribute(color)
-$n instance of item(),
-$n instance of node(),
-$n instance of text(),
-$p instance of processing-instruction(),
-$p instance of processing-instruction(xml-stylesheet),
-$n instance of comment(),
-$n instance of namespace-node(),
-$n instance of document-node(),
-$n instance of  document-node(element(book)),
-$n instance of  ( text() )
-)
-
 # WIP tree-sitter-xQuery
 
 A tree-sitter grammar is built for an as-you-type experience in a text editor.

@@ -53,7 +53,7 @@ module.exports = grammar({
   name: 'xquery',
   extras: $ => [$.comment, /\s/],
   word: $ => $.keyword,
-  supertypes: $ => [ $._expr ],
+  supertypes: $ => [$._expr],
   rules: {
     module: $ =>
       seq(
@@ -137,7 +137,7 @@ module.exports = grammar({
           $.inline_function_expr, // function item
           $.ordered_expr,
           $.unordered_expr,
-          $._computed_constructor, // node constructors
+          $.computed_constructor, // node constructors
           $._direct_constructor, // node constructors
           $.string_constructor,
           $.map_constructor, // 170
@@ -416,7 +416,7 @@ module.exports = grammar({
       ), // 83
     //3.9 Node Constructors
     node_constructor: $ =>
-      choice($._computed_constructor, $._direct_constructor),
+      choice($.computed_constructor, $._direct_constructor),
     // 3.9.1 Direct Element Constructors
     _direct_constructor: $ =>
       choice(
@@ -470,35 +470,40 @@ module.exports = grammar({
     escape_curly: $ => choice('{{', '}}'),
     predefined_entity_ref: $ =>
       seq('&', choice('lt', 'gt', 'amp', 'quot', 'apos'), ';'),
-    // 3.9.3 Computed Constructors
-    _computed_constructor: $ =>
+    // 3.9.3 Computed Constructors TODO make Computed Constructors a supertype
+    computed_constructor: $ =>
       choice(
-        $.document_constructor,
-        $.element_constructor,
-        $.attribute_constructor,
-        //$.comp_namespace_constructor, // TODO
-        $.text_constructor,
-        $.comment_constructor
-        //$.comp_pi_constructor, // TODO
-      ), // 156
-    document_constructor: $ => seq('document', $.enclosed_expr), // 156
-    element_constructor: $ =>
+        $._document_text_comment_constructor,
+        $._element_attr_constructor,
+        $._namespace_constructor,
+        $._pi_constructor
+      ), // 155
+    _document_text_comment_constructor: $ =>
       seq(
-        'element',
-        field('name', choice($.EQName, seq('{', commaSep($._expr), '}'))),
-        field('content', seq('{', commaSep($._expr), '}'))
-      ), // 157
-    attribute_constructor: $ =>
+        field(
+          'constructor',
+          alias(choice('document', 'text', 'comment'), $.keyword)
+        ),
+        field('content', $.enclosed_expr)
+      ), // 156 164 165
+    _element_attr_constructor: $ =>
       seq(
-        'attribute',
-        field('name', choice($.EQName, seq('{', commaSep($._expr), '}'))),
-        field('content', seq('{', commaSep($._expr), '}'))
-      ), // 157
-    //comp_namespace_constructor: $ => seq('TODO'),
-    text_constructor: $ => seq('text', $.enclosed_expr), // 164
-    comment_constructor: $ => seq('comment', $.enclosed_expr), // 165
-    //comp_pi_constructor: $ => seq('TODO'),
-
+        field('constructor', alias(choice('element', 'attribute'), $.keyword)),
+        field('name_expr', choice($.EQName, seq('{', commaSep($._expr), '}'))),
+        field('content', $.enclosed_expr)
+      ), // 157 159
+    _pi_constructor: $ =>
+      seq(
+        field('constructor', alias('processing-instruction', $.keyword)),
+        field('name_expr', choice($.NCName, seq('{', commaSep($._expr), '}'))),
+        field('content', $.enclosed_expr)
+      ), // 166
+    _namespace_constructor: $ =>
+      seq(
+        field('constructor', alias('namespace', $.keyword)),
+        field('name_expr', choice($.NCName, $.enclosed_expr)),
+        field('content', $.enclosed_expr)
+      ), // 160
     //3.10 String Constructors TODO
     string_constructor: $ => seq('``[', repeat($._string_content), ']``'), // 177
     // TODO this is not correct  string content is external in other tree sitters
@@ -507,14 +512,26 @@ module.exports = grammar({
     interpolation: $ => seq('`{', commaSep($._expr), '}`'), // 180',
     //3.11 Maps and Arrays
     map_constructor: $ =>
-      prec.left(seq('map', '{', commaSep($.map_entry), '}')), // 170
-    map_entry: $ => seq(field('key', $._expr), ':', field('value', $._expr)),
+        seq(
+        field('constructor', alias('map', $.keyword)),
+        field('content', seq('{', commaSep($.map_entry), '}'))
+      ), // 170
+    map_entry: $ => 
+    seq(
+      field('key', $._expr), 
+      ':', 
+      field('value', $._expr)),
     // 3.11.2 Arrays
     _array_constructor: $ =>
       choice($.curly_array_constructor, $.square_array_constructor), // 174 TODO ,
-    curly_array_constructor: $ => prec.left(seq('array', $.enclosed_expr)),
+    curly_array_constructor: $ =>
+      seq(
+        field('constructor', alias('array', $.keyword)),
+        field('content', $.enclosed_expr)
+      ),
     square_array_constructor: $ =>
-      prec.left(seq('[', commaSep($._expr), ']', optional('?'))),
+      seq('[', commaSep($._expr), ']'),
+      //seq('[', commaSep($._expr), ']', optional('?')),
     //3.11.3.1 Unary Lookup
     unary_lookup: $ =>
       prec.right(
@@ -744,10 +761,10 @@ module.exports = grammar({
     // 3.22 Extension Expressions TODO
     //4.1 Version Declaration
     version_declaration: $ =>
-      seq('xquery', $.version, optional($.encoding), ';'),
-    // 2
-    version: $ => seq('version', $.string_literal),
-    encoding: $ => seq('encoding', $.string_literal),
+      seq('xquery', choice($._encoding, $._version, $._version_encoding), ';'),
+    _encoding: $ => seq('encoding', $.string_literal),
+    _version: $ => seq('version', $.string_literal),
+    _version_encoding: $ => seq($._version, $._encoding),
     //4.2 Module Declaration
     module_declaration: $ =>
       seq(
@@ -957,16 +974,13 @@ module.exports = grammar({
         $.function_test,
         $.map_test,
         $.array_test,
-        $.atomic_or_union_type,
+        $.atomic_or_union_type
         // $.parenthesized_item_type TODO
       ), // 186
     empty_sequence: $ => $._test_brackets,
     _test_brackets: $ => seq('(', ')'),
     any_item_test: $ =>
-      seq(
-        field('type', alias('item', $.item_type)),
-        '(', ')'
-      ),
+      seq(field('type', alias('item', $.item_type)), '(', ')'),
     occurrence_indicator: $ => choice('?', '*', '+'), // 185
     atomic_or_union_type: $ => $.EQName, // 187
     _kind_test: $ =>
@@ -981,23 +995,23 @@ module.exports = grammar({
         $.any_kind_test,
         $.text_test,
         $.comment_test,
-        $.namespace_node_test,
+        $.namespace_node_test
         // elementname // 204
       ), //' TODO 188 '
     // TODO? 190 add a test field to be consistent
     document_test: $ =>
-    seq(
-      field('type', alias('document-node', $.item_type)),
-      '(',
-       optional(choice( $.element_test, $.schema_element_test)),
-       ')'
-    ), // 190
+      seq(
+        field('type', alias('document-node', $.item_type)),
+        '(',
+        optional(choice($.element_test, $.schema_element_test)),
+        ')'
+      ), // 190
     // wildcard - element() same as element(*)
-    // so decided to have parens as part of wildcard test pattern 
+    // so decided to have parens as part of wildcard test pattern
     element_test: $ =>
       seq(
         field('type', alias('element', $.item_type)),
-        field('test', choice( $.by_element_wildcard, $.by_element_name))
+        field('test', choice($.by_element_wildcard, $.by_element_name))
       ), // 199
 
     by_element_name: $ =>
@@ -1026,80 +1040,47 @@ module.exports = grammar({
     attribute_test: $ =>
       seq(
         field('type', alias('attribute', $.item_type)),
-        field('test', choice( $.by_attr_wildcard, $.by_attr_name))
+        field('test', choice($.by_attr_wildcard, $.by_attr_name))
       ), // 195
     by_attr_name: $ =>
-    seq('(', field('name', $.EQName), optional($._attr_type_name), ')'),
-    _attr_type_name: $ =>
-      seq(
-        ',',
-        field('type_name', $.EQName),
-      ),
+      seq('(', field('name', $.EQName), optional($._attr_type_name), ')'),
+    _attr_type_name: $ => seq(',', field('type_name', $.EQName)),
     by_attr_wildcard: $ =>
       seq(
         '(',
         optional(
-          seq(
-            field('wildcard', $.param_wildcard),
-            optional($._attr_type_name)
-          )
+          seq(field('wildcard', $.param_wildcard), optional($._attr_type_name))
         ),
         ')'
       ),
-    _attr_type_name: $ =>
-      seq(
-        ',',
-        field('type_name', $.EQName),
-      ),
+    _attr_type_name: $ => seq(',', field('type_name', $.EQName)),
     schema_element_test: $ =>
       seq(
         field('type', alias('schema-element', $.item_type)),
         field('test', $.by_element_declaration)
       ), // 201
-   by_element_declaration: $ =>
-      seq(
-        '(',
-        field('element_name', $.EQName),
-        ')'
-      ),
+    by_element_declaration: $ => seq('(', field('element_name', $.EQName), ')'),
     schema_attribute_test: $ =>
       seq(
         field('type', alias('schema-attribute', $.item_type)),
         field('test', $.by_attribute_declaration)
       ), // 197
-   by_attribute_declaration: $ =>
-      seq(
-        '(',
-        field('attribute_name', $.EQName),
-        ')'
-      ),
-    pi_test: $ => 
+    by_attribute_declaration: $ =>
+      seq('(', field('attribute_name', $.EQName), ')'),
+    pi_test: $ =>
       seq(
         field('type', alias('processing-instruction', $.item_type)),
         '(',
-        optional(field('test', choice( $.NCName), $.string_literal)),
+        optional(field('test', choice($.NCName), $.string_literal)),
         ')'
       ), // 194
-    comment_test: $ => 
-        seq(
-        field('type', alias('comment', $.item_type)),
-        '(', ')'
-        ), // 192',
-    text_test: $ => 
-        seq(
-        field('type', alias('text', $.item_type)),
-        '(', ')'
-        ), // 191'
-    namespace_node_test: $ => 
-        seq(
-        field('type', alias('namespace-node', $.item_type)),
-        '(', ')'
-    ), // 193',
+    comment_test: $ =>
+      seq(field('type', alias('comment', $.item_type)), '(', ')'), // 192',
+    text_test: $ => seq(field('type', alias('text', $.item_type)), '(', ')'), // 191'
+    namespace_node_test: $ =>
+      seq(field('type', alias('namespace-node', $.item_type)), '(', ')'), // 193',
     any_kind_test: $ =>
-      seq(
-        field('type', alias('node', $.item_type)),
-        '(', ')'
-      ), // 189',
+      seq(field('type', alias('node', $.item_type)), '(', ')'), // 189',
 
     _name_test: $ => prec.left(choice($.EQName, $.wildcard)), // TODO 199
     wildcard: $ =>

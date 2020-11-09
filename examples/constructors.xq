@@ -8,8 +8,6 @@ document {
     }
   }
 },
-for $s in ("one", "two", "red", "blue")
-return ``[`{$s}` fish]``,
 map { 
 'key1' : 'value1',
 'key2' : 'value2'
@@ -25,4 +23,7 @@ $maps ! ?name='Mike',
         <last>Johnson</last>
     </author>
 </book>
+,
+for $s in ("one", "two", "red", "blue")
+return ``[`{$s}` fish]``
 )

@@ -16,10 +16,6 @@
         "named": true
       },
       {
-        "type": "attribute_constructor",
-        "named": true
-      },
-      {
         "type": "bang_expr",
         "named": true
       },
@@ -32,11 +28,11 @@
         "named": true
       },
       {
-        "type": "comment_constructor",
+        "type": "comparison_expr",
         "named": true
       },
       {
-        "type": "comparison_expr",
+        "type": "computed_constructor",
         "named": true
       },
       {
@@ -56,15 +52,7 @@
         "named": true
       },
       {
-        "type": "document_constructor",
-        "named": true
-      },
-      {
         "type": "double_literal",
-        "named": true
-      },
-      {
-        "type": "element_constructor",
         "named": true
       },
       {
@@ -153,10 +141,6 @@
       },
       {
         "type": "switch_expr",
-        "named": true
-      },
-      {
-        "type": "text_constructor",
         "named": true
       },
       {
@@ -635,60 +619,6 @@
     }
   },
   {
-    "type": "attribute_constructor",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "_expr",
-            "named": true
-          },
-          {
-            "type": "{",
-            "named": false
-          },
-          {
-            "type": "}",
-            "named": false
-          }
-        ]
-      },
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "EQName",
-            "named": true
-          },
-          {
-            "type": "_expr",
-            "named": true
-          },
-          {
-            "type": "{",
-            "named": false
-          },
-          {
-            "type": "}",
-            "named": false
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "attribute_test",
     "named": true,
     "fields": {
@@ -727,11 +657,7 @@
         "required": true,
         "types": [
           {
-            "type": "attribute_constructor",
-            "named": true
-          },
-          {
-            "type": "comment_constructor",
+            "type": "computed_constructor",
             "named": true
           },
           {
@@ -751,15 +677,7 @@
             "named": true
           },
           {
-            "type": "document_constructor",
-            "named": true
-          },
-          {
             "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "element_constructor",
             "named": true
           },
           {
@@ -800,10 +718,6 @@
           },
           {
             "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "text_constructor",
             "named": true
           },
           {
@@ -835,11 +749,7 @@
         "required": true,
         "types": [
           {
-            "type": "attribute_constructor",
-            "named": true
-          },
-          {
-            "type": "comment_constructor",
+            "type": "computed_constructor",
             "named": true
           },
           {
@@ -859,15 +769,7 @@
             "named": true
           },
           {
-            "type": "document_constructor",
-            "named": true
-          },
-          {
             "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "element_constructor",
             "named": true
           },
           {
@@ -908,10 +810,6 @@
           },
           {
             "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "text_constructor",
             "named": true
           },
           {
@@ -1241,21 +1139,6 @@
     "fields": {}
   },
   {
-    "type": "comment_constructor",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enclosed_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "comment_test",
     "named": true,
     "fields": {
@@ -1302,6 +1185,66 @@
           {
             "type": "_expr",
             "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "computed_constructor",
+    "named": true,
+    "fields": {
+      "constructor": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword",
+            "named": true
+          }
+        ]
+      },
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      },
+      "name_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "EQName",
+            "named": true
+          },
+          {
+            "type": "NCName",
+            "named": true
+          },
+          {
+            "type": "_expr",
+            "named": true
+          },
+          {
+            "type": "enclosed_expr",
+            "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
           }
         ]
       }
@@ -1372,16 +1315,27 @@
   {
     "type": "curly_array_constructor",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enclosed_expr",
-          "named": true
-        }
-      ]
+    "fields": {
+      "constructor": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword",
+            "named": true
+          }
+        ]
+      },
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1559,21 +1513,6 @@
     }
   },
   {
-    "type": "document_constructor",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enclosed_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "document_test",
     "named": true,
     "fields": {
@@ -1601,60 +1540,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "element_constructor",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "_expr",
-            "named": true
-          },
-          {
-            "type": "{",
-            "named": false
-          },
-          {
-            "type": "}",
-            "named": false
-          }
-        ]
-      },
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "EQName",
-            "named": true
-          },
-          {
-            "type": "_expr",
-            "named": true
-          },
-          {
-            "type": "{",
-            "named": false
-          },
-          {
-            "type": "}",
-            "named": false
-          }
-        ]
-      }
     }
   },
   {
@@ -1782,21 +1667,6 @@
       "types": [
         {
           "type": "_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "encoding",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
           "named": true
         }
       ]
@@ -2344,16 +2214,39 @@
   {
     "type": "map_constructor",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "map_entry",
-          "named": true
-        }
-      ]
+    "fields": {
+      "constructor": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword",
+            "named": true
+          }
+        ]
+      },
+      "content": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "map_entry",
+            "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      }
     }
   },
   {
@@ -2954,11 +2847,7 @@
         "required": true,
         "types": [
           {
-            "type": "attribute_constructor",
-            "named": true
-          },
-          {
-            "type": "comment_constructor",
+            "type": "computed_constructor",
             "named": true
           },
           {
@@ -2978,15 +2867,7 @@
             "named": true
           },
           {
-            "type": "document_constructor",
-            "named": true
-          },
-          {
             "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "element_constructor",
             "named": true
           },
           {
@@ -3027,10 +2908,6 @@
           },
           {
             "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "text_constructor",
             "named": true
           },
           {
@@ -3436,11 +3313,7 @@
         "required": true,
         "types": [
           {
-            "type": "attribute_constructor",
-            "named": true
-          },
-          {
-            "type": "comment_constructor",
+            "type": "computed_constructor",
             "named": true
           },
           {
@@ -3460,15 +3333,7 @@
             "named": true
           },
           {
-            "type": "document_constructor",
-            "named": true
-          },
-          {
             "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "element_constructor",
             "named": true
           },
           {
@@ -3509,10 +3374,6 @@
           },
           {
             "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "text_constructor",
             "named": true
           },
           {
@@ -4098,21 +3959,6 @@
     }
   },
   {
-    "type": "text_constructor",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enclosed_expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "text_test",
     "named": true,
     "fields": {
@@ -4401,11 +4247,7 @@
         "required": true,
         "types": [
           {
-            "type": "attribute_constructor",
-            "named": true
-          },
-          {
-            "type": "comment_constructor",
+            "type": "computed_constructor",
             "named": true
           },
           {
@@ -4425,15 +4267,7 @@
             "named": true
           },
           {
-            "type": "document_constructor",
-            "named": true
-          },
-          {
             "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "element_constructor",
             "named": true
           },
           {
@@ -4474,10 +4308,6 @@
           },
           {
             "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "text_constructor",
             "named": true
           },
           {
@@ -4657,21 +4487,6 @@
     }
   },
   {
-    "type": "version",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "version_declaration",
     "named": true,
     "fields": {},
@@ -4680,11 +4495,7 @@
       "required": true,
       "types": [
         {
-          "type": "encoding",
-          "named": true
-        },
-        {
-          "type": "version",
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -4933,10 +4744,6 @@
     "named": false
   },
   {
-    "type": "attribute",
-    "named": false
-  },
-  {
     "type": "attribute::",
     "named": false
   },
@@ -4978,10 +4785,6 @@
   },
   {
     "type": "collation",
-    "named": false
-  },
-  {
-    "type": "comment",
     "named": false
   },
   {
@@ -5042,10 +4845,6 @@
   },
   {
     "type": "div",
-    "named": false
-  },
-  {
-    "type": "document",
     "named": false
   },
   {
@@ -5338,10 +5137,6 @@
   },
   {
     "type": "switch",
-    "named": false
-  },
-  {
-    "type": "text",
     "named": false
   },
   {
