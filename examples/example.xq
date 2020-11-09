@@ -1,3 +1,2 @@
-xquery version "3.0" encoding "utf-8";
-(
-)
+for $s in ("one", "two", "red", "blue")
+return ``[`{$s}` fish]``
