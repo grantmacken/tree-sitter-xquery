@@ -1,25 +1,6 @@
 ; Modules
 ;--------
 ; module namespace newBase60  = "http://gmack.nz/#newBase60";
-(NCName) @namespace
-(var_ref
- "$" @variable.prefix)
- 
-(EQName
- prefix: (identifier) @namespace
- local_part: (identifier) @variable)
-
-(EQName
- ns_builtin: (identifier) @namespace
- local_part: (identifier) @variable)
-
-(EQName
- unprefixed: (identifier) @variable)
-
-; Types
-(item_type) @type
-
-
 
 
 (default_namespace_declaration
@@ -29,7 +10,6 @@
 ; TODO name_test wildcard
 [
 (lookup_wildcard)
-(param_wildcard)  
 (wildcard)
 ] @operator.wildcard
 
@@ -87,8 +67,6 @@
 ;function
 ;(function_declaration
 ; name: (identifier) @function)
-;(function_call
-;  name: (identifier) @function)
 ;(arrow_function_call
 ;   (identifier) @function)
 ;(annotation 
@@ -101,7 +79,10 @@
 
 ;method
 ;field
-;CONSTRUCTORS
+
+
+
+; CONSTRUCTORS
 (computed_constructor
   constructor: (keyword) @constructor)
 (curly_array_constructor
@@ -200,7 +181,48 @@
 [ "try" "catch" ] @exception
 
 
+; NAMESPACES VARIABLES
+(var_ref
+  "$" @variable)
+ 
+(NCName) @namespace
 
+(EQName
+ prefix: (identifier) @namespace
+ [":"] @punctuation.delimiter
+ local_part: (identifier) @variable)
+
+(EQName
+ ns_builtin: (identifier) @namespace
+ [":"] @operator
+ local_part: (identifier) @variable)
+
+(EQName
+ unprefixed: (identifier) @variable)
+
+(EQName
+ unprefixed: (identifier) @variable)
+
+(function_call
+  function_name: (EQName
+    unprefixed: (identifier) @function))
+
+; TYPE TESTS
+(sequence_type
+  [
+   type: (keyword) @type
+   (_
+     [
+      type: (keyword) @type
+      param: (wildcard) @type
+      param: (occurrence_indicator) @type
+      ])
+   ]
+  )
+
+
+
+(occurrence_indicator) @type
 ;comment
 (comment) @comment
 ;; Error
