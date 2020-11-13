@@ -512,15 +512,11 @@ module.exports = grammar({
     interpolation: $ => seq('`{', commaSep($._expr), '}`'), // 180',
     //3.11 Maps and Arrays
     map_constructor: $ =>
-        seq(
+      seq(
         field('constructor', alias('map', $.keyword)),
         field('content', seq('{', commaSep($.map_entry), '}'))
       ), // 170
-    map_entry: $ => 
-    seq(
-      field('key', $._expr), 
-      ':', 
-      field('value', $._expr)),
+    map_entry: $ => seq(field('key', $._expr), ':', field('value', $._expr)),
     // 3.11.2 Arrays
     _array_constructor: $ =>
       choice($.curly_array_constructor, $.square_array_constructor), // 174 TODO ,
@@ -529,9 +525,8 @@ module.exports = grammar({
         field('constructor', alias('array', $.keyword)),
         field('content', $.enclosed_expr)
       ),
-    square_array_constructor: $ =>
-      seq('[', commaSep($._expr), ']'),
-      //seq('[', commaSep($._expr), ']', optional('?')),
+    square_array_constructor: $ => seq('[', commaSep($._expr), ']'),
+    //seq('[', commaSep($._expr), ']', optional('?')),
     //3.11.3.1 Unary Lookup
     unary_lookup: $ =>
       prec.right(
@@ -957,30 +952,23 @@ module.exports = grammar({
 
     // 2.5.4 SequenceType Syntax
     type_declaration: $ => seq('as', $.sequence_type),
-    sequence_type: $ =>
-      prec.left(
-        choice(
-          seq(
-            field('type', alias('empty-sequence', $.item_type)),
-            field('test', $.empty_sequence)
-          ),
-          seq($._item_type, optional($.occurrence_indicator))
-        )
-      ), // 184
+    sequence_type: $ => prec.left(choice($._empty, $._item)), // 184
+    _empty: $ =>
+      seq(field('type', alias('empty-sequence', $.keyword)), '(', ')'),
+    _item: $ => prec.right(seq($._item_type, optional($.occurrence_indicator))),
     _item_type: $ =>
       choice(
         $._kind_test,
-        $.any_item_test,
-        $.function_test,
-        $.map_test,
-        $.array_test,
+        seq(field('type', alias('item', $.keyword)), '(', ')'),
+        $.any_function_test,
+        $.typed_function_test,
+        $.any_map_test,
+        $.typed_map_test,
+        $.any_array_test,
+        $.typed_array_test,
         $.atomic_or_union_type
         // $.parenthesized_item_type TODO
       ), // 186
-    empty_sequence: $ => $._test_brackets,
-    _test_brackets: $ => seq('(', ')'),
-    any_item_test: $ =>
-      seq(field('type', alias('item', $.item_type)), '(', ')'),
     occurrence_indicator: $ => choice('?', '*', '+'), // 185
     atomic_or_union_type: $ => $.EQName, // 187
     _kind_test: $ =>
@@ -992,96 +980,82 @@ module.exports = grammar({
         $.schema_attribute_test,
         $.pi_test,
         //  simple test SUT()
-        $.any_kind_test,
-        $.text_test,
-        $.comment_test,
-        $.namespace_node_test
+        $.generic_kind_test
         // elementname // 204
       ), //' TODO 188 '
-    // TODO? 190 add a test field to be consistent
     document_test: $ =>
       seq(
-        field('type', alias('document-node', $.item_type)),
+        field('type', alias('document-node', $.keyword)),
         '(',
         optional(choice($.element_test, $.schema_element_test)),
         ')'
       ), // 190
     // wildcard - element() same as element(*)
-    // so decided to have parens as part of wildcard test pattern
     element_test: $ =>
       seq(
-        field('type', alias('element', $.item_type)),
-        field('test', choice($.by_element_wildcard, $.by_element_name))
-      ), // 199
-
-    by_element_name: $ =>
-      seq('(', field('name', $.EQName), optional($._element_type_name), ')'),
-    by_element_wildcard: $ =>
-      seq(
+        field('type', alias('element', $.keyword)),
         '(',
         optional(
           seq(
-            field('wildcard', $.param_wildcard),
-            optional($._element_type_name)
+            field('param', choice(alias('*', $.wildcard), $.EQName)),
+            optional(
+              seq(
+                ',',
+                field(
+                  'param',
+                  seq($.EQName, optional(alias('?', $.occurrence_indicator)))
+                )
+              )
+            )
           )
         ),
         ')'
-      ),
-    _element_type_name: $ =>
-      seq(
-        ',',
-        field('type_name', $.EQName),
-        optional(field('option', $.nilled))
-      ),
-
-    nilled: $ => /[?]{1}/,
-    param_wildcard: $ => '*',
-    // same as element but no nilled test as attributes don't have chidlres
+      ), // 199
+    // same as element but no nilled test as attributes don't have children
     attribute_test: $ =>
       seq(
-        field('type', alias('attribute', $.item_type)),
-        field('test', choice($.by_attr_wildcard, $.by_attr_name))
-      ), // 195
-    by_attr_name: $ =>
-      seq('(', field('name', $.EQName), optional($._attr_type_name), ')'),
-    _attr_type_name: $ => seq(',', field('type_name', $.EQName)),
-    by_attr_wildcard: $ =>
-      seq(
+        field('type', alias('attribute', $.keyword)),
         '(',
         optional(
-          seq(field('wildcard', $.param_wildcard), optional($._attr_type_name))
+          seq(
+            field('param', choice(alias('*', $.wildcard), $.EQName)),
+            optional(seq(',', field('param', $.EQName)))
+          )
         ),
         ')'
-      ),
-    _attr_type_name: $ => seq(',', field('type_name', $.EQName)),
+      ), // 195
     schema_element_test: $ =>
       seq(
-        field('type', alias('schema-element', $.item_type)),
-        field('test', $.by_element_declaration)
-      ), // 201
-    by_element_declaration: $ => seq('(', field('element_name', $.EQName), ')'),
+        field('type', alias(choice('schema-element'), $.keyword)),
+        '(',
+        field('param', $.EQName),
+        ')'
+      ), //197
     schema_attribute_test: $ =>
       seq(
-        field('type', alias('schema-attribute', $.item_type)),
-        field('test', $.by_attribute_declaration)
-      ), // 197
-    by_attribute_declaration: $ =>
-      seq('(', field('attribute_name', $.EQName), ')'),
+        field('type', alias('schema-attribute', $.keyword)),
+        '(',
+        field('param', $.EQName),
+        ')'
+      ), //201
     pi_test: $ =>
       seq(
-        field('type', alias('processing-instruction', $.item_type)),
-        '(',
-        optional(field('test', choice($.NCName), $.string_literal)),
-        ')'
+        field('type', alias('processing-instruction', $.keyword)),
+        seq(
+          '(',
+          optional(field('param', choice($.NCName, $.string_literal))),
+          ')'
+        )
       ), // 194
-    comment_test: $ =>
-      seq(field('type', alias('comment', $.item_type)), '(', ')'), // 192',
-    text_test: $ => seq(field('type', alias('text', $.item_type)), '(', ')'), // 191'
-    namespace_node_test: $ =>
-      seq(field('type', alias('namespace-node', $.item_type)), '(', ')'), // 193',
-    any_kind_test: $ =>
-      seq(field('type', alias('node', $.item_type)), '(', ')'), // 189',
-
+    generic_kind_test: $ =>
+      seq(
+        field(
+          'type',
+          alias(choice('node', 'comment', 'namespace-node', 'text'), $.keyword)
+        ),
+        '(',
+        ')'
+      ), // 189, 191, 192, 193
     _name_test: $ => prec.left(choice($.EQName, $.wildcard)), // TODO 199
     wildcard: $ =>
       choice(
@@ -1090,27 +1064,53 @@ module.exports = grammar({
         seq('*:', $.NCName),
         seq($.braced_uri_literal, '*')
       ), // 120
-    function_test: $ =>
+    any_function_test: $ =>
       seq(
         optional(field('anno', $.annotation)),
-        field('type', alias('function', $.item_type)),
-        field('test', choice($.any_func_type, $.typed_function))
+        field('type', alias('function', $.keyword)),
+        seq('(', field('param', alias('*', $.wildcard)), ')')
       ), //  // 207
-    typed_function: $ =>
-      seq('(', commaSep1($.sequence_type), ')', 'as', $.sequence_type),
-    map_test: $ =>
+    typed_function_test: $ =>
       seq(
-        field('type', alias('map', $.item_type)),
-        field('test', choice($.any_func_type, $.typed_map))
-      ), // 210
-    typed_map: $ => seq('(', $.atomic_or_union_type, ',', $.sequence_type, ')'), // 212
-    array_test: $ =>
-      seq(
-        field('type', alias('array', $.item_type)),
-        field('test', choice($.any_func_type, $.typed_array))
+        optional(field('anno', $.annotation)),
+        field('type', alias('function', $.keyword)),
+        '(',
+        $.signature_params,
+        ')',
+        $.signature_return
       ),
-    any_func_type: $ => seq('(', '*', ')'),
-    typed_array: $ => seq('(', $.sequence_type, ')'),
+    signature_params: $ => commaSep1($.sequence_type),
+    signature_return: $ => seq('as', $.sequence_type),
+    any_map_test: $ =>
+      seq(
+        field('type', alias('map', $.keyword)),
+        '(',
+        field('param', alias('*', $.wildcard)),
+        ')'
+      ), // 210
+    typed_map_test: $ =>
+      seq(
+        field('type', alias('map', $.keyword)),
+        '(',
+        field('param', $.atomic_or_union_type),
+        ',',
+        field('param', $.sequence_type),
+        ')'
+      ), // 212
+    any_array_test: $ =>
+      seq(
+        field('type', alias('array', $.keyword)),
+        '(',
+        field('param', alias('*', $.wildcard)),
+        ')'
+      ),
+    typed_array_test: $ =>
+      seq(
+        field('type', alias('array', $.keyword)),
+        '(',
+        field('param', $.sequence_type),
+        ')'
+      ),
     parenthesized_item_type: $ => seq('(', $._item_type, ')'), // 216
     // END SequenceType Syntax
     integer_literal: $ => token(INTEGER),

@@ -1,2 +1,2 @@
-for $s in ("one", "two", "red", "blue")
-return ``[`{$s}` fish]``
+$F instance of function(int, int) as int
+
