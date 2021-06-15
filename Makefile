@@ -57,20 +57,21 @@ stow:
 	@stow -v -t ~/.tree-sitter .
 	@popd
 
-getTreeSitter: bin/tree-sitter
-
-bin/tree-sitter:
-	@mkdir -p bin
-	if [ -e node_modules/.bin/tree-sitter ]
+.PHONY: getTreeSitter
+getTreeSitter:
+	if [ -L $(HOME)/.local/npm/bin/tree-sitter ]
 	then 
-	npm update
+	@echo ' - updating tree-sitter ... '
+	npm -g update tree-sitter-cli &>/dev/null
 	else
-	npm install
+	@echo ' - install tree sitter ... '
+	npm -g install tree-sitter-cli
 	fi
-	if ! [ -L bin/tree-sitter ]
+	if ! [ -L $(HOME)/.local/bin/tree-sitter ]
 	then
-	pushd bin
-	ln -s ../node_modules/.bin/tree-sitter
+	@echo ' - create link to my local bin '
+	pushd $(HOME)/.local/bin
+	ln -s $(HOME)/.local/npm/bin/tree-sitter
 	popd
 	fi
 	@bin/tree-sitter --version
