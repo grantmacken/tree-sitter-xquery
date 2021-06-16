@@ -224,18 +224,14 @@ module.exports = grammar({
     argument: $ => choice($._expr, $.argument_placeholder), // 138
     argument_placeholder: $ => token('?'), //  139
     // 3.3 Path Expressions
-    path_expr: $ =>
+    // https://docs.oracle.com/cd/E13190_01/liquiddata/docs81/xquery/query.html
+    path_expr: $ => seq(field('lhs', $.first_step), field('rhs', $.next_step)),
+    first_step: $ => $._primary,
+    next_step: $ =>
       prec.right(
-        PREC.path,
         choice(
-          seq(
-            field('lhs', $._primary),
-            choice(
-              field('path', '/'),
-              seq(field('path', choice('/', '//')), field('rhs', $._step_expr))
-              //  $._step_expr
-            )
-          )
+          field('path', alias('/', $.operator)),
+          seq(field('path', alias(choice('/', '//'), $.operator)), $._step_expr)
         )
       ),
     _step_expr: $ =>
@@ -244,11 +240,11 @@ module.exports = grammar({
         choice(
           field('step', $._axis_step),
           seq(
-            field('left_step', $._axis_step),
+            field('step', $._axis_step),
             repeat1(
               seq(
-                field('path', choice('/', '//')),
-                field('right_step', $._axis_step)
+                field('path', alias(choice('/', '//'), $.operator)),
+                field('step', $._axis_step)
               )
             )
           )
@@ -265,24 +261,42 @@ module.exports = grammar({
     abbrev_attr: $ => '@',
     // 3.3.2.1 Axes
     forward_axis: $ =>
-      choice(
-        token('child::'),
-        token('descendant::'),
-        token('attribute::'),
-        token('self::'),
-        token('descendant-or-self::'),
-        token('following-sibling::'),
-        token('following::')
+      seq(
+        field(
+          'axis',
+          alias(
+            choice(
+              'child',
+              'descendant',
+              'attribute',
+              'self',
+              'descendant-or-self',
+              'following-sibling',
+              'following'
+            ),
+            $.keyword
+          )
+        ),
+        '::'
       ), //113
     _reverse_step: $ =>
       choice(seq($._reverse_axis, $._node_test), $.abbrev_reverse_step), // 115
     _reverse_axis: $ =>
-      choice(
-        token('parent::'),
-        token('ancestor::'),
-        token('preceding-sibling::'),
-        token('preceding::'),
-        token('ancestor-or-self::')
+      seq(
+        field(
+          'axis',
+          alias(
+            choice(
+              'parent',
+              'ancestor',
+              'preceding-sibling',
+              'preceding',
+              'ancestor-or-self'
+            ),
+            $.keyword
+          )
+        ),
+        '::'
       ), //116
     abbrev_reverse_step: $ => token('..'), // 117
     //3.3.2.2 Node Tests
@@ -1056,13 +1070,13 @@ module.exports = grammar({
         '(',
         ')'
       ), // 189, 191, 192, 193
-    _name_test: $ => prec.left(choice($.EQName, $.wildcard)), // TODO 199
+    _name_test: $ => choice($.EQName, $.wildcard), // TODO 199
     wildcard: $ =>
       choice(
-        '*',
-        seq($.NCName, ':*'),
-        seq('*:', $.NCName),
-        seq($.braced_uri_literal, '*')
+        alias('*', $.operator),
+        seq($.NCName, alias(':*', $.operator)),
+        seq(alias('*:', $.operator), $.NCName),
+        seq($.braced_uri_literal, alias('*', $.operator))
       ), // 120
     any_function_test: $ =>
       seq(

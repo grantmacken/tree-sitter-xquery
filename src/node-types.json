@@ -1564,6 +1564,93 @@
     "fields": {}
   },
   {
+    "type": "first_step",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "computed_constructor",
+          "named": true
+        },
+        {
+          "type": "context_item_expr",
+          "named": true
+        },
+        {
+          "type": "curly_array_constructor",
+          "named": true
+        },
+        {
+          "type": "decimal_literal",
+          "named": true
+        },
+        {
+          "type": "direct_element",
+          "named": true
+        },
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "inline_function_expr",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "map_constructor",
+          "named": true
+        },
+        {
+          "type": "named_function_ref",
+          "named": true
+        },
+        {
+          "type": "ordered_expr",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expr",
+          "named": true
+        },
+        {
+          "type": "square_array_constructor",
+          "named": true
+        },
+        {
+          "type": "string_constructor",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_lookup",
+          "named": true
+        },
+        {
+          "type": "unordered_expr",
+          "named": true
+        },
+        {
+          "type": "var_ref",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "flwor_expr",
     "named": true,
     "fields": {},
@@ -1660,7 +1747,18 @@
   {
     "type": "forward_axis",
     "named": true,
-    "fields": {}
+    "fields": {
+      "axis": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "function_call",
@@ -2329,6 +2427,146 @@
     }
   },
   {
+    "type": "next_step",
+    "named": true,
+    "fields": {
+      "axis": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "keyword",
+            "named": true
+          }
+        ]
+      },
+      "node_kind_test": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
+            "type": "generic_kind_test",
+            "named": true
+          },
+          {
+            "type": "pi_test",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          }
+        ]
+      },
+      "node_name_test": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      },
+      "path": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "operator",
+            "named": true
+          }
+        ]
+      },
+      "step": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "::",
+            "named": false
+          },
+          {
+            "type": "EQName",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "abbrev_reverse_step",
+            "named": true
+          },
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "generic_kind_test",
+            "named": true
+          },
+          {
+            "type": "keyword",
+            "named": true
+          },
+          {
+            "type": "pi_test",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "occurrence_indicator",
     "named": true,
     "fields": {}
@@ -2513,466 +2751,22 @@
     "type": "path_expr",
     "named": true,
     "fields": {
-      "left_step": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "EQName",
-            "named": true
-          },
-          {
-            "type": "abbrev_forward_step",
-            "named": true
-          },
-          {
-            "type": "abbrev_reverse_step",
-            "named": true
-          },
-          {
-            "type": "ancestor-or-self::",
-            "named": false
-          },
-          {
-            "type": "ancestor::",
-            "named": false
-          },
-          {
-            "type": "attribute_test",
-            "named": true
-          },
-          {
-            "type": "document_test",
-            "named": true
-          },
-          {
-            "type": "element_test",
-            "named": true
-          },
-          {
-            "type": "forward_axis",
-            "named": true
-          },
-          {
-            "type": "generic_kind_test",
-            "named": true
-          },
-          {
-            "type": "parent::",
-            "named": false
-          },
-          {
-            "type": "pi_test",
-            "named": true
-          },
-          {
-            "type": "preceding-sibling::",
-            "named": false
-          },
-          {
-            "type": "preceding::",
-            "named": false
-          },
-          {
-            "type": "predicate",
-            "named": true
-          },
-          {
-            "type": "schema_attribute_test",
-            "named": true
-          },
-          {
-            "type": "schema_element_test",
-            "named": true
-          },
-          {
-            "type": "wildcard",
-            "named": true
-          }
-        ]
-      },
       "lhs": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "computed_constructor",
+            "type": "first_step",
             "named": true
-          },
-          {
-            "type": "context_item_expr",
-            "named": true
-          },
-          {
-            "type": "curly_array_constructor",
-            "named": true
-          },
-          {
-            "type": "decimal_literal",
-            "named": true
-          },
-          {
-            "type": "direct_element",
-            "named": true
-          },
-          {
-            "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "inline_function_expr",
-            "named": true
-          },
-          {
-            "type": "integer_literal",
-            "named": true
-          },
-          {
-            "type": "map_constructor",
-            "named": true
-          },
-          {
-            "type": "named_function_ref",
-            "named": true
-          },
-          {
-            "type": "ordered_expr",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expr",
-            "named": true
-          },
-          {
-            "type": "square_array_constructor",
-            "named": true
-          },
-          {
-            "type": "string_constructor",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "unary_lookup",
-            "named": true
-          },
-          {
-            "type": "unordered_expr",
-            "named": true
-          },
-          {
-            "type": "var_ref",
-            "named": true
-          }
-        ]
-      },
-      "node_kind_test": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "attribute_test",
-            "named": true
-          },
-          {
-            "type": "document_test",
-            "named": true
-          },
-          {
-            "type": "element_test",
-            "named": true
-          },
-          {
-            "type": "generic_kind_test",
-            "named": true
-          },
-          {
-            "type": "pi_test",
-            "named": true
-          },
-          {
-            "type": "schema_attribute_test",
-            "named": true
-          },
-          {
-            "type": "schema_element_test",
-            "named": true
-          }
-        ]
-      },
-      "node_name_test": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "EQName",
-            "named": true
-          },
-          {
-            "type": "wildcard",
-            "named": true
-          }
-        ]
-      },
-      "path": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "/",
-            "named": false
-          },
-          {
-            "type": "//",
-            "named": false
           }
         ]
       },
       "rhs": {
-        "multiple": true,
-        "required": false,
+        "multiple": false,
+        "required": true,
         "types": [
           {
-            "type": "/",
-            "named": false
-          },
-          {
-            "type": "//",
-            "named": false
-          },
-          {
-            "type": "EQName",
-            "named": true
-          },
-          {
-            "type": "abbrev_forward_step",
-            "named": true
-          },
-          {
-            "type": "abbrev_reverse_step",
-            "named": true
-          },
-          {
-            "type": "ancestor-or-self::",
-            "named": false
-          },
-          {
-            "type": "ancestor::",
-            "named": false
-          },
-          {
-            "type": "attribute_test",
-            "named": true
-          },
-          {
-            "type": "document_test",
-            "named": true
-          },
-          {
-            "type": "element_test",
-            "named": true
-          },
-          {
-            "type": "forward_axis",
-            "named": true
-          },
-          {
-            "type": "generic_kind_test",
-            "named": true
-          },
-          {
-            "type": "parent::",
-            "named": false
-          },
-          {
-            "type": "pi_test",
-            "named": true
-          },
-          {
-            "type": "preceding-sibling::",
-            "named": false
-          },
-          {
-            "type": "preceding::",
-            "named": false
-          },
-          {
-            "type": "predicate",
-            "named": true
-          },
-          {
-            "type": "schema_attribute_test",
-            "named": true
-          },
-          {
-            "type": "schema_element_test",
-            "named": true
-          },
-          {
-            "type": "wildcard",
-            "named": true
-          }
-        ]
-      },
-      "right_step": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "EQName",
-            "named": true
-          },
-          {
-            "type": "abbrev_forward_step",
-            "named": true
-          },
-          {
-            "type": "abbrev_reverse_step",
-            "named": true
-          },
-          {
-            "type": "ancestor-or-self::",
-            "named": false
-          },
-          {
-            "type": "ancestor::",
-            "named": false
-          },
-          {
-            "type": "attribute_test",
-            "named": true
-          },
-          {
-            "type": "document_test",
-            "named": true
-          },
-          {
-            "type": "element_test",
-            "named": true
-          },
-          {
-            "type": "forward_axis",
-            "named": true
-          },
-          {
-            "type": "generic_kind_test",
-            "named": true
-          },
-          {
-            "type": "parent::",
-            "named": false
-          },
-          {
-            "type": "pi_test",
-            "named": true
-          },
-          {
-            "type": "preceding-sibling::",
-            "named": false
-          },
-          {
-            "type": "preceding::",
-            "named": false
-          },
-          {
-            "type": "predicate",
-            "named": true
-          },
-          {
-            "type": "schema_attribute_test",
-            "named": true
-          },
-          {
-            "type": "schema_element_test",
-            "named": true
-          },
-          {
-            "type": "wildcard",
-            "named": true
-          }
-        ]
-      },
-      "step": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "EQName",
-            "named": true
-          },
-          {
-            "type": "abbrev_forward_step",
-            "named": true
-          },
-          {
-            "type": "abbrev_reverse_step",
-            "named": true
-          },
-          {
-            "type": "ancestor-or-self::",
-            "named": false
-          },
-          {
-            "type": "ancestor::",
-            "named": false
-          },
-          {
-            "type": "attribute_test",
-            "named": true
-          },
-          {
-            "type": "document_test",
-            "named": true
-          },
-          {
-            "type": "element_test",
-            "named": true
-          },
-          {
-            "type": "forward_axis",
-            "named": true
-          },
-          {
-            "type": "generic_kind_test",
-            "named": true
-          },
-          {
-            "type": "parent::",
-            "named": false
-          },
-          {
-            "type": "pi_test",
-            "named": true
-          },
-          {
-            "type": "preceding-sibling::",
-            "named": false
-          },
-          {
-            "type": "preceding::",
-            "named": false
-          },
-          {
-            "type": "predicate",
-            "named": true
-          },
-          {
-            "type": "schema_attribute_test",
-            "named": true
-          },
-          {
-            "type": "schema_element_test",
-            "named": true
-          },
-          {
-            "type": "wildcard",
+            "type": "next_step",
             "named": true
           }
         ]
@@ -4273,7 +4067,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
@@ -4282,6 +4076,10 @@
         },
         {
           "type": "braced_uri_literal",
+          "named": true
+        },
+        {
+          "type": "operator",
           "named": true
         }
       ]
@@ -4332,10 +4130,6 @@
     "named": false
   },
   {
-    "type": "*:",
-    "named": false
-  },
-  {
     "type": "+",
     "named": false
   },
@@ -4352,14 +4146,6 @@
     "named": false
   },
   {
-    "type": "/",
-    "named": false
-  },
-  {
-    "type": "//",
-    "named": false
-  },
-  {
     "type": "/>",
     "named": false
   },
@@ -4368,7 +4154,7 @@
     "named": false
   },
   {
-    "type": ":*",
+    "type": "::",
     "named": false
   },
   {
@@ -4464,14 +4250,6 @@
     "named": false
   },
   {
-    "type": "ancestor-or-self::",
-    "named": false
-  },
-  {
-    "type": "ancestor::",
-    "named": false
-  },
-  {
     "type": "and",
     "named": false
   },
@@ -4493,10 +4271,6 @@
   },
   {
     "type": "at",
-    "named": false
-  },
-  {
-    "type": "attribute::",
     "named": false
   },
   {
@@ -4532,12 +4306,12 @@
     "named": true
   },
   {
-    "type": "child::",
+    "type": "collation",
     "named": false
   },
   {
-    "type": "collation",
-    "named": false
+    "type": "comment",
+    "named": true
   },
   {
     "type": "construction",
@@ -4577,14 +4351,6 @@
   },
   {
     "type": "default",
-    "named": false
-  },
-  {
-    "type": "descendant-or-self::",
-    "named": false
-  },
-  {
-    "type": "descendant::",
     "named": false
   },
   {
@@ -4645,14 +4411,6 @@
   },
   {
     "type": "fn",
-    "named": false
-  },
-  {
-    "type": "following-sibling::",
-    "named": false
-  },
-  {
-    "type": "following::",
     "named": false
   },
   {
@@ -4816,10 +4574,6 @@
     "named": false
   },
   {
-    "type": "parent::",
-    "named": false
-  },
-  {
     "type": "pattern-separator",
     "named": false
   },
@@ -4829,14 +4583,6 @@
   },
   {
     "type": "percent",
-    "named": false
-  },
-  {
-    "type": "preceding-sibling::",
-    "named": false
-  },
-  {
-    "type": "preceding::",
     "named": false
   },
   {
@@ -4857,10 +4603,6 @@
   },
   {
     "type": "schema",
-    "named": false
-  },
-  {
-    "type": "self::",
     "named": false
   },
   {

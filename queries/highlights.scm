@@ -11,10 +11,9 @@
 [
 (lookup_wildcard)
 (wildcard)
-] @operator.wildcard
+] @method
 
-; include xPath steps
-[ "/" "//" ";" "," ] @punctuation.delimiter
+[  ";" "," ] @punctuation.delimiter
 ;enclosing bracket markers
 [ "(" ")" "{" "}"  ] @punctuation.bracket
 ;"[" "]" 
@@ -123,7 +122,9 @@
 ":="
 ] @operator
 
-(operator) @operator
+(comparison_expr
+   comparison: (_) @operator)
+ 
 
 ;include for including modules
 
@@ -180,7 +181,6 @@
 ;exception 
 [ "try" "catch" ] @exception
 
-
 ; NAMESPACES VARIABLES
 (var_ref
   "$" @variable)
@@ -206,6 +206,27 @@
 (function_call
   function_name: (EQName
     unprefixed: (identifier) @function))
+
+; XPATH EXPRESSIONS
+
+(context_item_expr) @property
+
+(path_expr
+  (next_step
+    [
+     path: (operator) @field
+     node_name_test: (_) @property
+     step: (_
+             [ 
+              axis: (keyword) @field
+              "::" @punctuation.delimiter
+              type: (keyword) @type
+              node_name_test: (_) @property
+              ]
+            )
+     ]))
+
+
 
 ; TYPE TESTS
 (sequence_type

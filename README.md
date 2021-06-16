@@ -12,6 +12,20 @@ validating parser, tree-sitter will not stop on-error, but continue to parse.
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
 - [awesome tree sitter](https://github.com/drom/awesome-tree-sitter)
 
+# building
+
+ All the work is done in the grammar.js file
+
+The repo contains a Makefile as I use `make` for treeitter aliases.
+The default `make` target is an alias for `tree-sitter generate` which will the tree-sitter files from the grammar
+
+To see other make targets type
+```
+make help
+```
+
+<!--
+
 ## playground
 
 
@@ -27,6 +41,7 @@ make playground
 
 To see highlighting in action check the query checkbox and
 paste the highlight query found in queries folder.
+-->
 
 To peek at tree-sitter in action, I also run some parse and query examples in 
 [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
