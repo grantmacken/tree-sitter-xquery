@@ -16,7 +16,6 @@ help: ## show this help
 	sort |
 	awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-
 .PHONY: clean 
 clean: ## remove tree-sitter generated artifacts
 	@rm -f Cargo.toml
@@ -42,6 +41,10 @@ watch-grammar: ## if changes in grammar.js then generate
 .PHONY: test
 test: ## test specific section nominated in .env
 	@$(TS) test -f '$(TEST_SECTION)'
+
+.PHONY: test-all
+test-all: ## test specific section nominated in .env
+	@$(TS) test
 
 .PHONY: parse
 parse:  ## parse specific example nominated in .env

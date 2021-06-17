@@ -12,23 +12,45 @@ validating parser, tree-sitter will not stop on-error, but continue to parse.
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
 - [awesome tree sitter](https://github.com/drom/awesome-tree-sitter)
 
+
+# [installing tree-sitter]( https://tree-sitter.github.io/tree-sitter/creating-parsers#installation )
+
+Clone and cd into this repo then run `make getTreeSitter` which will use npm to install the tree-sitter binary
+
 # building
 
  All the work is done in the grammar.js file
 
 The repo contains a Makefile as I use `make` for treeitter aliases.
-The default `make` target is an alias for `tree-sitter generate` which will the tree-sitter files from the grammar
+The default `make` target is an alias for `tree-sitter generate` which will create tree-sitter files from the grammar
 
 To see other make targets type
 ```
 make help
 ```
 
+# using tree-sitter with neovim
+
+[Video: Neovim Treesitter](https://www.youtube.com/watch?v=xQGbhiUbSmM)
+[Video: Tree sitter & LSP: Short Comparison](https://www.youtube.com/watch?v=c17j09vY5sw)
+
+[Github: nvim-treesitter ](https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers)
+
+```
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.xquery = {
+  install_info = {
+    url = "~/projects/grantmacken/tree-sitter-xquery", -- where you have cloned this project
+    files = {"src/parser.c"}
+  }
+}
+```
+
 <!--
 
 ## playground
 
-
+  
 ```
 # get tree-sitter cli
 make getTreeSitter
