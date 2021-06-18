@@ -4,18 +4,11 @@
 ==================
 
 xquery version "3.0" encoding "utf-8";
-(
-(:
-: here there be dragons 
-:)
-)
+()
 
 ---
 
-(module 
-  (version_declaration (version (string_literal)) (encoding (string_literal))) 
-  (parenthesized_expr (comment))
-)
+ (module (version_declaration (string_literal) (string_literal)) (parenthesized_expr))
 
 ==================
 4.2 Module Declaration
@@ -30,6 +23,126 @@ declare variable $mod:bar := 'main module dummy';
   (module_declaration (NCName (identifier)) (string_literal)) 
   (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
+==================
+4.3 Boundary-space Declaration 
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare boundary-space preserve;
+declare variable $mod:bar := 'main module dummy';
+
+
+---
+
+(module 
+(module_declaration (NCName (identifier)) (string_literal)) 
+(boundary_space_declaration) 
+(variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+
+==================
+4.4 Default Collation Declaration 
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare default collation "http://example.org/languages/Icelandic";
+declare variable $mod:bar := 'main module dummy';
+
+---
+
+ (module 
+ (module_declaration (NCName (identifier)) (string_literal)) 
+ (default_collation_declaration (string_literal)) 
+ (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+
+==================
+4.5 Base URI Declaration
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare base-uri "http://example.org";
+declare variable $mod:bar := 'main module dummy';
+
+---
+
+(module 
+(module_declaration (NCName (identifier)) (string_literal))
+(base_uri_declaration (string_literal))
+(variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+
+==================
+4.6  Construction Declaration 
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare construction strip;
+declare variable $mod:bar := 'main module dummy';
+
+---
+
+(module 
+(module_declaration (NCName (identifier)) (string_literal))
+(construction_declaration)
+(variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+
+==================
+4.7 Ordering Mode Declaration
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare ordering unordered;
+declare variable $mod:bar := 'main module dummy';
+
+---
+
+(module 
+(module_declaration (NCName (identifier)) (string_literal))
+(ordering_mode_declaration)
+(variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+
+==================
+4.8 Empty Order Declaration
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare default order empty least;
+declare variable $mod:bar := 'main module dummy';
+
+---
+
+  (module 
+   (module_declaration (NCName (identifier)) (string_literal)) 
+   (empty_order_declaration)
+   (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+
+==================
+4.9  Copy-Namespaces Declaration
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare copy-namespaces preserve, no-inherit;
+declare variable $mod:bar := 'main module dummy';
+
+---
+
+(module 
+ (module_declaration (NCName (identifier)) (string_literal)) 
+ (copy_namespaces_declaration) 
+ (variable_declaration (EQName (identifier) (identifier)) (string_literal))) 
+
+==================
+4.10 Decimal Format Declaration TODO! https://www.w3.org/TR/xquery-31/#id-module-declaration
+==================
+
+module namespace mod = "http://example.org/#mod";
+declare default decimal-format ;
+declare variable $mod:bar := 'main module dummy';
+
+---
+
+(module 
+ (module_declaration (NCName (identifier)) (string_literal)) 
+ (decimal_format_declaration)
+ (variable_declaration (EQName (identifier) (identifier)) (string_literal))) 
 
 ==================
 4.11 Schema Import 
@@ -59,7 +172,7 @@ $t
 (module 
   (schema_import (schema_prefix (NCName (identifier))) (string_literal)) 
   (module_import (NCName (identifier)) (string_literal)) 
-  (variable_declaration (EQName (identifier)) (sequence_type (EQName (identifier) (identifier))) 
+  (variable_declaration (EQName (identifier)) (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))) 
   (function_call (EQName (identifier) (identifier)) (argument_list))) 
   (var_ref (EQName (identifier))))
 
@@ -96,6 +209,24 @@ declare variable $mod:bar := "main module dummy";
   (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
 ==================
+4.15 Annotations TODO! more
+==================
+
+declare 
+ %private
+ variable $arg := 'xxx';
+()
+
+---
+
+(module
+ (variable_declaration 
+  (annotation (EQName (identifier)))
+  (EQName (identifier)) (string_literal))
+ (parenthesized_expr)
+)
+
+==================
 4.16 Variable Declaration 
 ==================
 
@@ -109,7 +240,7 @@ declare variable $foo:num := 7.5;
   (variable_declaration (EQName (identifier) (identifier)) (decimal_literal)))
 
 ==================
-4.16 Variable Declaration with type declaration
+4.16 Variable Declaration with type declaration TODO!
 ==================
 
 module namespace mod = "http://example.org/#mod";
@@ -118,14 +249,12 @@ declare variable $mod:base as item() := array:size($arr);
 
 ---
 
-(module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (variable_declaration 
-  (EQName (identifier) 
-  (identifier)) 
-  (sequence_type) 
-  (function_call (EQName (identifier) (identifier)) (argument_list (argument (var_ref (EQName (identifier))))))))
-
+  (module 
+   (module_declaration (NCName (identifier)) (string_literal)) 
+   (variable_declaration 
+    (EQName (identifier) (identifier)) 
+    (sequence_type (keyword)) 
+    (function_call (EQName (identifier) (identifier)) (argument_list (argument (var_ref (EQName (identifier))))))))
   
 ==================
 4.17 Context Item Declaration 
@@ -139,7 +268,7 @@ declare variable $mod:bar := "main module dummy";
 
 (module 
   (module_declaration (NCName (identifier)) (string_literal))
-  (context_item_declaration (type_declaration (sequence_type))) 
+  (context_item_declaration (type_declaration (sequence_type (keyword)))) 
   (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
 
 ==================
@@ -160,8 +289,8 @@ function foo:summary($emps as element(employee)*) as element(dept)* {
   (param_list 
     (param 
     (EQName (identifier)) 
-    (sequence_type (element_test (EQName (identifier))) (occurrence_indicator)))) 
-  (sequence_type (element_test (EQName (identifier))) (occurrence_indicator)) 
+    (sequence_type (element_test (keyword) (EQName (identifier))) (occurrence_indicator)))) 
+  (sequence_type (element_test (keyword) (EQName (identifier))) (occurrence_indicator)) 
   (enclosed_expr)))
 
   
