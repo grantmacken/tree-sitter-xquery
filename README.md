@@ -31,8 +31,8 @@ make help
 
 # using tree-sitter with neovim
 
-[Video: Neovim Treesitter](https://www.youtube.com/watch?v=xQGbhiUbSmM)
-[Video: Tree sitter & LSP: Short Comparison](https://www.youtube.com/watch?v=c17j09vY5sw)
+ -  [Video: Neovim Treesitter](https://www.youtube.com/watch?v=xQGbhiUbSmM)
+ - [Video: Tree sitter & LSP: Short Comparison](https://www.youtube.com/watch?v=c17j09vY5sw)
 
 
 Follow the instuctions at

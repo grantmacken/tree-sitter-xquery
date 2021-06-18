@@ -4450,7 +4450,7 @@
         },
         {
           "type": "STRING",
-          "value": ",empty"
+          "value": "empty"
         },
         {
           "type": "CHOICE",

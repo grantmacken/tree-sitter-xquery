@@ -811,7 +811,7 @@ module.exports = grammar({
         'declare',
         'default',
         'order',
-        ',empty',
+        'empty',
         choice('greatest', 'least'),
         ';'
       ),
