@@ -34,7 +34,10 @@ make help
 [Video: Neovim Treesitter](https://www.youtube.com/watch?v=xQGbhiUbSmM)
 [Video: Tree sitter & LSP: Short Comparison](https://www.youtube.com/watch?v=c17j09vY5sw)
 
+
+Follow the instuctions at
 [Github: nvim-treesitter ](https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers)
+to use the xquery treesitter
 
 ```
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
@@ -46,10 +49,18 @@ parser_config.xquery = {
 }
 ```
 
+## queries
+
+
+$(HOME)/.config/nvim/queries/xquery
+
+###
+
+
+
 <!--
 
 ## playground
-
   
 ```
 # get tree-sitter cli

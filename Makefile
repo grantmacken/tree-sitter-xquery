@@ -6,8 +6,18 @@ MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --dsilent
 include .env
+TS := bin/tree-sitter
+NVIM_QUERIES := $(HOME)/.config/nvim/queries
+Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
 
-generate: src/grammar.json ## default: generate tree-sitter grammar
+default: src/grammar.json $(Queries)
+
+# default: generate tree-sitter grammar
+generate: src/grammar.json ## generate tree-sitter files
+
+.PHONY: h
+hl: ## hightlight query specific example nominated in .env
+	@$(TS) query --captures queries/highlights.scm examples/$(EXAMPLE).xq
 
 .PHONY: help
 help: ## show this help	
@@ -50,19 +60,12 @@ test-all: ## test specific section nominated in .env
 parse:  ## parse specific example nominated in .env
 	@$(TS) parse examples/$(EXAMPLE).xq
 
-QUERIES_XQUERY_PATH := $(HOME)/.config/nvim/queries/xquery
 
-.PHONY: query 
-query:  $(addprefix $(QUERIES_XQUERY_PATH)/, $(notdir $(wildcard queries/*))) ## query specific example nominated in .env
 
-$(QUERIES_XQUERY_PATH)/%.scm: queries/%.scm
+
+$(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 	@mkdir -p $(dir $@)
 	@cp -v $< $@
-	@$(TS) query --captures $< examples/$(EXAMPLE).xq
-
-.PHONY: hl
-hl:
-	@$(TS) highlight  --scope source.xquery examples/$(EXAMPLE).xq
 
 # playground: tree-sitter-xQuery.wasm
 
