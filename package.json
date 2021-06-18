@@ -1,28 +1,36 @@
 {
   "name": "tree-sitter-xquery",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "tree-sitter xquery",
+  "main": "grammar.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tree-sitter test",
+    "install": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grantmacken/tree-sitter-xquery.git"
+  },
+  "keywords": [
+    "xquery",
+    "tree-sitter",
+    "treesitter"
+  ],
   "author": "grantmacken",
   "license": "ISC",
-  "description": "xquery grammar for tree-sitter",
-  "main": "index.js",
-  "repository": "https://github.com/tree-sitter/tree-sitter-xquery",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/grantmacken/tree-sitter-xquery/issues"
   },
+  "homepage": "https://github.com/grantmacken/tree-sitter-xquery#readme",
   "dependencies": {
-    "nan": "^2.14.1"
+    "nan": "^2.14.2"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.17.2"
-  },
-  "tree-sitter": [
-    {
-      "scope": "source.xquery",
-      "file-types": [
-        "xq",
-        "xql",
-        "xqm"
-      ]
-    }
-  ]
+    "tree-sitter-cli": "^0.19.5"
+  }
 }
