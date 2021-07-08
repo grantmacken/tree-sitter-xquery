@@ -16,6 +16,7 @@
 (multiplicative_expr [ "div" "idiv" "mod" ] @keyword.operator)
 (comparison_expr [ "eq" "ne" "lt" "le" "gt" "ge" "is" ] @keyword.operator)
 (comparison_expr [ "=" "!=" "<" "<=" ">" ">="  "<<" ">>" ] @operator)
+(unary_expr [ "-" "+"] @operator)
 (and_expr [ "and" ] @keyword.operator)
 (or_expr [ "or" ] @keyword.operator)
 
