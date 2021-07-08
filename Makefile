@@ -107,3 +107,13 @@ getTreeSitter:
 # 	@jq '.' lockfile.json 
 # 	@popd
 
+.PHONY: pr-create
+pr-create: 
+	gh pr create --help
+	gh pr create --fill
+
+.PHONY: pr-merge
+pr-merge: 
+	gh pr merge --help
+	gh pr merge -s -d
+	git pull
