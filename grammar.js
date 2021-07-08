@@ -105,7 +105,7 @@ module.exports = grammar({
         $._primary, // 121
         $._statement, // precident 2 statement_like expr
         $._binary_expr, // lhs expr op rhs expr
-        //$.unary_expr, // prefix  // 97 prec: 21 rl
+        $.unary_expr, // prefix  // 97 prec: 21 rl
         //$.path_expr, //108 prec: 19 lr
         $.bang_expr, //107 prec: 18 l
         $.arrow_expr, // 96 prec: 16 lr
@@ -297,12 +297,7 @@ module.exports = grammar({
     comparison_expr: $ => prec.left( PREC.comparison,seq(field('lhs',$._expr),choice('eq','ne','lt','le','gt','ge','=','!=','<','<=','>','>=','is','<<','>>'),field('rhs',$._expr))),
     and_expr: $ => prec.left( PREC.and,seq( field('lhs', $._expr), 'and', field('rhs', $._expr))),
     or_expr: $ => prec.left( PREC.or,seq( field('lhs', $._expr), 'or', field('rhs', $._expr))),
-    unary_expr: $ =>
-      prec.right(
-        PREC.unary,
-        seq(field('operator', $.unary_op), field('operand', $._primary))
-      ), // 97 choice primary | postfix
-    unary_op: $ => choice(token('+'), token('-')),
+    unary_expr: $ => prec.right( PREC.unary, seq( choice('+','-'), $._primary)), //TODO  97 choice primary | postfix
     // 3.6 String Concatenation Expressions
     string_concat_expr: $ => prec.left( PREC.concat,
       seq(
