@@ -279,9 +279,9 @@ function( $a as empty-sequence() )  { () }
 ---
 
 (module 
- (inline_function_expr 
-  (param_list (param (EQName (identifier)) (sequence_type)))
-  (enclosed_expr (parenthesized_expr))))
+(inline_function_expr 
+(param_list (param (EQName (identifier)) (sequence_type (empty_sequence))))
+(enclosed_expr (parenthesized_expr))))
 
 ==================
 3.1.7 Inline Function:  with return type declaration
@@ -293,8 +293,8 @@ function( $a as item() ) as item()  { () }
 
 (module 
  (inline_function_expr 
-  (param_list (param (EQName (identifier)) (sequence_type))) 
-  (sequence_type) 
+  (param_list (param (EQName (identifier)) (sequence_type (any_item)))) 
+  (sequence_type (any_item))
   (enclosed_expr (parenthesized_expr))))
 
 ==================
@@ -307,7 +307,6 @@ function( $a as item()* ) as item()+  { () }
 
 (module 
  (inline_function_expr 
-  (param_list 
-   (param (EQName (identifier)) (sequence_type (occurrence_indicator)))) 
-  (sequence_type (occurrence_indicator)) 
+  (param_list (param (EQName (identifier)) (sequence_type (any_item) (occurrence_indicator)))) 
+  (sequence_type (any_item) (occurrence_indicator))
   (enclosed_expr (parenthesized_expr))))
