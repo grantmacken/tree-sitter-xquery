@@ -1,3 +1,25 @@
+==================
+3.4 Sequence Expressions
+==================
+
+(10, 1 to 4)
+
+---
+
+(module 
+  (parenthesized_expr (integer_literal) 
+  (range_expr (integer_literal) (integer_literal))))
+
+==================
+3.5 Arithmetic Expressions
+==================
+
+ 3 div 2
+
+---
+
+(module (multiplicative_expr (integer_literal) (integer_literal)))
+
 
 ==================
 3.6 String Concatenation Expressions
