@@ -1,6 +1,4 @@
 (
-'3.6 String Concatenation Expressions',
-"con" || "cat" || "enate",
 '3.7 Comparison Expressions',
 $book1/author eq "Kennedy",
 [ "Kennedy" ] eq "Kennedy",
@@ -13,8 +11,8 @@ $book1/author = "Kennedy",
 [ "Obama", "Nixon", "Kennedy" ] = "Kennedy",
 (1, 2) = (2, 3),
 (1, 2) != (2, 3),
-'3.7.3 Node Comparisons'
-/books/book[isbn="1558604820"] is /books/book[call="QA76.9 C3845"],
+'3.7.3 Node Comparisons',
+' TODO /books/book[isbn="1558604820"] is /books/book[call="QA76.9 C3845"]',
 <a>5</a> is <a>5</a>,
-/transactions/purchase[parcel="28-451"] << /transactions/sale[parcel="33-870"]
+' TODO /transactions/purchase[parcel="28-451"] << /transactions/sale[parcel="33-870"]'
 )
