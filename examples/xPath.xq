@@ -1,5 +1,4 @@
 (
-$node/,
 $node/text(),
 $node/child::para/child::para/text(),
 $node/*,

@@ -1,1 +1,4 @@
-fn:doc("bib.xml")/books/book[fn:count( ./author ) > 1 ]
+(
+'3.6 String Concatenation Expressions',
+"con" || "cat" || "enate"
+)

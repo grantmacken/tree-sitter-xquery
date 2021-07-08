@@ -1,6 +1,7 @@
 (
-$N instance of element(),
-$N instance of element(*),
+$N instance of element(*)
+)
+(:
 $N instance of element(person),
 $N instance of element(person, xx),
 $N instance of element(person, xx ?),
@@ -14,7 +15,7 @@ $N instance of schema-attribute(color),
 'string' instance of item(),
 $N instance of node(),
 $N instance of processing-instruction(),
-$N instance of processing-instruction( foo )
+$N instance of processing-instruction( foo ),
 $F instance of function(*),
 $F instance of function(int, int) as int,
 $F instance of function(xs:anyAtomicType) as item(),
@@ -24,5 +25,4 @@ $M instance of map(xs:integer, xs:string),
 array {} instance of array(*),
 [] instance of array(*),
 [] instance of array(xs:integer)
-)
-
+:)

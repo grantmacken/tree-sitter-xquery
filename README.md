@@ -1,5 +1,5 @@
 
-# WIP tree-sitter-xQuery
+# WIP tree-sitter-xQuery WIP
 
 A tree-sitter grammar is built for an as-you-type experience in a text editor.
 It should provide identification of syntax tree parts that enable
@@ -11,7 +11,6 @@ validating parser, tree-sitter will not stop on-error, but continue to parse.
 - [tree-sitter presentation](https://www.youtube.com/watch?v=Jes3bD6P0To) - a new parsing system for programming tools
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
 - [awesome tree sitter](https://github.com/drom/awesome-tree-sitter)
-
 
 # [installing tree-sitter]( https://tree-sitter.github.io/tree-sitter/creating-parsers#installation )
 
@@ -50,7 +49,6 @@ parser_config.xquery = {
 ```
 
 ## queries
-
 
 $(HOME)/.config/nvim/queries/xquery
 

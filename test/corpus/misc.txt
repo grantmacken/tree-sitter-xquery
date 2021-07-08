@@ -1,3 +1,14 @@
+
+==================
+3.6 String Concatenation Expressions
+==================
+
+"con" || "cat" || "enate"
+
+---
+
+(module (string_concat_expr (string_literal) (string_concat_expr (string_literal) (string_literal))))
+
 ==================
 3.13 Unordered Expression 
 ==================
