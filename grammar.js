@@ -285,6 +285,7 @@ module.exports = grammar({
       $.additive_expr, // 88 prec: 8 lr
       $.multiplicative_expr, // 89 prec: 9 lr
       $.comparison_expr, // 85 prec: 5
+      // 3.8 Logical Expressions
       $.and_expr, // 84 prec: 4
       $.or_expr // 83 prec: 3
     ),
@@ -308,7 +309,6 @@ module.exports = grammar({
         field('lhs', $._expr),
         repeat1(seq('||',field('rhs', $._expr)))
       )), // 86
-     // 3.8 Logical Expressions
       //3.9 Node Constructors
     node_constructor: $ =>
       choice($.computed_constructor, $._direct_constructor),

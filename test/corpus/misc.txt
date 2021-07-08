@@ -9,6 +9,30 @@
 
 (module (string_concat_expr (string_literal) (string_concat_expr (string_literal) (string_literal))))
 
+
+==================
+3.7 Comparison Expressions
+==================
+
+1 = 2
+
+---
+
+(module (comparison_expr (integer_literal) (integer_literal)))
+
+==================
+3.8 Logical Expressions
+==================
+
+1 eq 1 and 2 eq 2
+
+---
+
+(module 
+  (and_expr 
+  (comparison_expr (integer_literal) (integer_literal))
+  (comparison_expr (integer_literal) (integer_literal))))
+
 ==================
 3.13 Unordered Expression 
 ==================
