@@ -9,6 +9,14 @@
 (function_call
   (EQName (identifier) @function))
 
+(_ 
+  [
+   ns_builtin: (identifier)
+   unprefixed: (identifier)
+   prefix: (identifier)
+   local_part: (identifier)
+] @property)
+
 ; binary exressions
 (range_expr [ "to" ] @keyword.operator)
 (additive_expr [ "-" "+"] @operator)

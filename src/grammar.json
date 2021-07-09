@@ -198,8 +198,25 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_primary"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_primary"
+                  },
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_postfix_expr"
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "type": "SYMBOL",
@@ -297,6 +314,10 @@
       "content": {
         "type": "CHOICE",
         "members": [
+          {
+            "type": "SYMBOL",
+            "name": "EQName"
+          },
           {
             "type": "SYMBOL",
             "name": "_literal"
@@ -1150,8 +1171,8 @@
       }
     },
     "step_expr": {
-      "type": "PREC_RIGHT",
-      "value": 0,
+      "type": "PREC_LEFT",
+      "value": 19,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -2163,30 +2184,21 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "constructor",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "document"
-                },
-                {
-                  "type": "STRING",
-                  "value": "text"
-                },
-                {
-                  "type": "STRING",
-                  "value": "comment"
-                }
-              ]
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "document"
             },
-            "named": true,
-            "value": "keyword"
-          }
+            {
+              "type": "STRING",
+              "value": "text"
+            },
+            {
+              "type": "STRING",
+              "value": "comment"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -5910,13 +5922,8 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "*"
-          },
-          "named": true,
-          "value": "operator"
+          "type": "STRING",
+          "value": "*"
         },
         {
           "type": "SEQ",
@@ -5926,13 +5933,8 @@
               "name": "NCName"
             },
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "STRING",
-                "value": ":*"
-              },
-              "named": true,
-              "value": "operator"
+              "type": "STRING",
+              "value": ":*"
             }
           ]
         },
@@ -5940,13 +5942,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "STRING",
-                "value": "*:"
-              },
-              "named": true,
-              "value": "operator"
+              "type": "STRING",
+              "value": "*:"
             },
             {
               "type": "SYMBOL",
@@ -5962,13 +5959,8 @@
               "name": "braced_uri_literal"
             },
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "STRING",
-                "value": "*"
-              },
-              "named": true,
-              "value": "operator"
+              "type": "STRING",
+              "value": "*"
             }
           ]
         }
@@ -6454,50 +6446,54 @@
       }
     },
     "EQName": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "ns_builtin",
-              "content": {
-                "type": "ALIAS",
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "ns_builtin",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "ns_builtin"
+                  },
+                  "named": true,
+                  "value": "identifier"
+                }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": ":"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "local_part",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ns_builtin"
-                },
-                "named": true,
-                "value": "identifier"
+                  "name": "identifier"
+                }
               }
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": ":"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "local_part",
-              "content": {
-                "type": "SYMBOL",
-                "name": "identifier"
-              }
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_QName"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "uri_qualified_name"
-        }
-      ]
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_QName"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "uri_qualified_name"
+          }
+        ]
+      }
     },
     "ns_builtin": {
       "type": "CHOICE",
@@ -6652,134 +6648,9 @@
       "type": "PATTERN",
       "value": "[_A-Za-z]{1}[\\-\\w]*"
     },
-    "item_type": {
-      "type": "SYMBOL",
-      "name": "keyword"
-    },
     "keyword": {
       "type": "PATTERN",
       "value": "[a-z]+([-][a-z]+)*"
-    },
-    "kind": {
-      "type": "STRING",
-      "value": "element"
-    },
-    "operator": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "to"
-        },
-        {
-          "type": "STRING",
-          "value": "intersect"
-        },
-        {
-          "type": "STRING",
-          "value": "except"
-        },
-        {
-          "type": "STRING",
-          "value": "union"
-        },
-        {
-          "type": "STRING",
-          "value": "|"
-        },
-        {
-          "type": "STRING",
-          "value": "+"
-        },
-        {
-          "type": "STRING",
-          "value": "-"
-        },
-        {
-          "type": "STRING",
-          "value": "*"
-        },
-        {
-          "type": "STRING",
-          "value": "div"
-        },
-        {
-          "type": "STRING",
-          "value": "idiv"
-        },
-        {
-          "type": "STRING",
-          "value": "mod"
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "STRING",
-          "value": "!="
-        },
-        {
-          "type": "STRING",
-          "value": "<"
-        },
-        {
-          "type": "STRING",
-          "value": "<="
-        },
-        {
-          "type": "STRING",
-          "value": ">"
-        },
-        {
-          "type": "STRING",
-          "value": ">="
-        },
-        {
-          "type": "STRING",
-          "value": "eq"
-        },
-        {
-          "type": "STRING",
-          "value": "ne"
-        },
-        {
-          "type": "STRING",
-          "value": "lt"
-        },
-        {
-          "type": "STRING",
-          "value": "le"
-        },
-        {
-          "type": "STRING",
-          "value": "gt"
-        },
-        {
-          "type": "STRING",
-          "value": "ge"
-        },
-        {
-          "type": "STRING",
-          "value": "is"
-        },
-        {
-          "type": "STRING",
-          "value": "<<"
-        },
-        {
-          "type": "STRING",
-          "value": ">>"
-        },
-        {
-          "type": "STRING",
-          "value": "and"
-        },
-        {
-          "type": "STRING",
-          "value": "or"
-        }
-      ]
     },
     "comment": {
       "type": "TOKEN",
@@ -6799,12 +6670,7 @@
       "value": "\\s"
     }
   ],
-  "conflicts": [
-    [
-      "function_call",
-      "_name_test"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [],

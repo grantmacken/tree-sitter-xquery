@@ -42,6 +42,10 @@
     "named": true,
     "subtypes": [
       {
+        "type": "EQName",
+        "named": true
+      },
+      {
         "type": "computed_constructor",
         "named": true
       },
@@ -311,6 +315,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -332,6 +340,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -371,6 +383,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -392,6 +408,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -425,6 +445,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -446,6 +470,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -632,6 +660,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "argument_placeholder",
           "named": true
         },
@@ -657,6 +689,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -725,6 +761,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -746,6 +786,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -927,6 +971,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -948,6 +996,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -997,6 +1049,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -1018,6 +1074,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1131,6 +1191,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -1152,6 +1216,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1185,6 +1253,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -1209,6 +1281,10 @@
             "named": true
           },
           {
+            "type": "predicate",
+            "named": true
+          },
+          {
             "type": "string_concat_expr",
             "named": true
           },
@@ -1230,7 +1306,7 @@
     "fields": {
       "constructor": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "keyword",
@@ -1257,10 +1333,6 @@
             "named": false
           },
           {
-            "type": "EQName",
-            "named": true
-          },
-          {
             "type": "NCName",
             "named": true
           },
@@ -1274,6 +1346,10 @@
           },
           {
             "type": "_statement",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -1302,6 +1378,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1354,6 +1434,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -1375,6 +1459,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1408,6 +1496,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -1429,6 +1521,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1787,6 +1883,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -1808,6 +1908,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -1916,6 +2020,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -1937,6 +2045,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -2090,6 +2202,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -2111,6 +2227,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -2295,6 +2415,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -2316,6 +2440,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -2363,6 +2491,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -2384,6 +2516,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -2485,6 +2621,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -2506,6 +2646,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2555,6 +2699,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -2576,6 +2724,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -2614,6 +2766,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -2635,6 +2791,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2668,6 +2828,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -2689,6 +2853,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2739,6 +2907,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -2760,6 +2932,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -2855,6 +3031,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -2876,6 +3056,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2909,6 +3093,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -2930,6 +3118,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2966,6 +3158,10 @@
         },
         {
           "type": "_statement",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -3050,6 +3246,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -3156,6 +3356,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -3177,6 +3381,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -3210,6 +3418,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -3231,6 +3443,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -3379,6 +3595,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -3400,6 +3620,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -3433,6 +3657,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -3454,6 +3682,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -3493,6 +3725,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -3514,6 +3750,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -3636,6 +3876,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -3657,6 +3901,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -3745,6 +3993,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -3766,6 +4018,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -3824,6 +4080,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -3845,6 +4105,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -3887,6 +4151,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -3908,6 +4176,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -3946,6 +4218,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -3967,6 +4243,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -4000,6 +4280,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -4021,6 +4305,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -4075,6 +4363,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -4096,6 +4388,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -4368,6 +4664,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -4389,6 +4689,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -4587,6 +4891,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -4608,6 +4916,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -4641,6 +4953,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -4662,6 +4978,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -4725,6 +5045,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -4746,6 +5070,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -4779,6 +5107,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -4800,6 +5132,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -4839,6 +5175,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -4860,6 +5200,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -4922,6 +5266,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -4943,6 +5291,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -4997,6 +5349,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -5018,6 +5374,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -5056,6 +5416,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -5077,6 +5441,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5271,6 +5639,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -5292,6 +5664,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -5368,6 +5744,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -5389,6 +5769,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -5454,6 +5838,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -5475,6 +5863,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5556,6 +5948,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -5577,6 +5973,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5610,6 +6010,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -5631,6 +6035,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5725,6 +6133,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -5746,6 +6158,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5810,6 +6226,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -5834,6 +6254,10 @@
           "named": true
         },
         {
+          "type": "predicate",
+          "named": true
+        },
+        {
           "type": "string_concat_expr",
           "named": true
         },
@@ -5853,7 +6277,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -5862,10 +6286,6 @@
         },
         {
           "type": "braced_uri_literal",
-          "named": true
-        },
-        {
-          "type": "operator",
           "named": true
         }
       ]
@@ -5916,6 +6336,10 @@
     "named": false
   },
   {
+    "type": "*:",
+    "named": false
+  },
+  {
     "type": "+",
     "named": false
   },
@@ -5941,6 +6365,10 @@
   },
   {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": ":*",
     "named": false
   },
   {
@@ -6104,6 +6532,10 @@
     "named": true
   },
   {
+    "type": "comment",
+    "named": false
+  },
+  {
     "type": "construction",
     "named": false
   },
@@ -6153,6 +6585,10 @@
   },
   {
     "type": "div",
+    "named": false
+  },
+  {
+    "type": "document",
     "named": false
   },
   {
@@ -6340,10 +6776,6 @@
     "named": false
   },
   {
-    "type": "operator",
-    "named": true
-  },
-  {
     "type": "option",
     "named": false
   },
@@ -6413,6 +6845,10 @@
   },
   {
     "type": "switch",
+    "named": false
+  },
+  {
+    "type": "text",
     "named": false
   },
   {
