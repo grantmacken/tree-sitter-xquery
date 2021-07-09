@@ -5,20 +5,28 @@
 
 
 ==================
-3.2 Postfix Expressions [ predicate ]
+3.2 Postfix Expressions - Filter Expressions
 ==================
 
 $products[price gt 100]
 
 ---
 
-  (module 
-   (var_ref (EQName (identifier))) 
-   (path_expr 
-    (relative_path_expr 
-     (step_expr 
-      (predicate (comparison_expr (EQName (identifier)) (integer_literal)))))))
+(module 
+(var_ref (EQName (identifier))) 
+ (predicate (comparison_expr (EQName (identifier)) (integer_literal)))) 
 
+==================
+3.2 Postfix Expressions - Dynamic Function Calls
+==================
+
+$f(2, 3)
+
+---
+
+(module 
+  (var_ref (EQName (identifier))) 
+  (argument_list (argument (integer_literal)) (argument (integer_literal))))
 
 ==================
 3.4 Sequence Expressions
