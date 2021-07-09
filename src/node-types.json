@@ -6075,17 +6075,16 @@
   {
     "type": "var_ref",
     "named": true,
-    "fields": {
-      "var_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "EQName",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "EQName",
+          "named": true
+        }
+      ]
     }
   },
   {

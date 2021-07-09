@@ -100,13 +100,12 @@ module.exports = grammar({
     // 2. unary    -- operator with rhs expr
     // 3. binary   --  (rhs expr) operator (lhs expr)
     _expr: $ =>
-       prec.left(seq( choice(
-        //a $._postfix_expr, // 121
+       prec.left( choice(
         seq( $._primary, optional( $._postfix_expr)), // 121
         $._statement, // precident 2 statement_like expr
         $._binary_expr, // lhs expr op rhs expr
         $.unary_expr, // prefix  // 97 prec: 21 rl
-        //$.path_expr, //108 prec: 19 lr
+        $.path_expr, //108 prec: 19 lr
         $.bang_expr, //107 prec: 18 l
         $.arrow_expr, // 96 prec: 16 lr
         $.cast_as_expr, // 95 prec: 15 lr
@@ -114,9 +113,9 @@ module.exports = grammar({
         $.treat_expr, // 93 prec: 13 lr
         $.instance_of_expr, // 92 prec: 12 lr
         $.string_concat_expr, // 86 prec: 6 lr
-      ),
-       optional($.path_expr), //108 prec: 19 lr
-       )),
+      )),
+      // optional($.path_expr), //108 prec: 19 lr
+      // )),
     _statement: $ => prec.left(PREC.statement,choice(
       $.flwor_expr, // prec 2
       $.quantified_expr, // prec 2
@@ -167,8 +166,8 @@ module.exports = grammar({
     _numeric_literal: $ =>
       choice($.integer_literal, $.decimal_literal, $.double_literal),
     //3.1.2 Variable References
-    var_ref: $ => seq('$', field('var_name', alias($.var_name, $.EQName))),
-    //ref: $ => choice( /[_A-Za-z]{1}[\-\w]*(:[_A-Za-z]{1}[\-\w]*)*/, $.uri_qualified_name),
+    var_ref: $ => seq('$',  $.EQName ),
+    // note: a dynamic function call can consist of _postfix_expr [ var_ref + argument_list ]
     // 3.1.3 Parenthesized Expressions
     parenthesized_expr: $ => prec(PREC.comma, seq('(', commaSep($._expr), ')')), // 133
     //3.1.4 Context Item Expression

@@ -6,5 +6,8 @@ $products[price gt 100],
 (21 to 29)[5],
 $orders[fn:position() = (5 to 9)],
 $book/(chapter | appendix)[fn:last()],
-'TODO 3.2.2 Dynamic Function Calls'
+'3.2.2 Dynamic Function Calls',
+$f(2, 3),
+$f[2]("Hi there"),
+$f()[2]
 )
