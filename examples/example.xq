@@ -1,6 +1,8 @@
 (
-'3.2.2 Dynamic Function Calls',
-$f(2, 3),
-$f[2]("Hi there"),
-$f()[2]
+'3.1.5 Static Function Calls',
+my:three-argument-function(1, 2, 3),
+my:two-argument-function((1, 2), 3),
+my:one-argument-function((1, 2, 3)),
+my:one-argument-function(( )),
+my:zero-argument-function( ),
 )

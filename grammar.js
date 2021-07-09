@@ -126,12 +126,13 @@ module.exports = grammar({
     )),
     // 3.1 Primary Expressions
     _primary: $ => prec.left(PREC.primary,choice(
-      $.EQName,
+      // $.EQName,
+      $.EQName,  // prec 2
+      $.function_call,
       $._literal, // 57
       $.var_ref, // 59
       $.parenthesized_expr, // 133
       $.context_item_expr, // 134
-      $.function_call, // 137
       $.named_function_ref, // function item
       $.inline_function_expr, // function item
       $.ordered_expr,
@@ -174,10 +175,10 @@ module.exports = grammar({
     context_item_expr: $ => '.',
     //3.1.5 Static Function Calls
     function_call: $ =>
-      seq(
-        field('function_name', $.EQName),
-        field('arguments', $.argument_list)
-      ), // 137
+      prec.left(25 ,seq(
+        $.EQName,
+        $.argument_list
+      )), // 137
     // 3.1.6 Named Function References
     named_function_ref: $ =>
       seq(

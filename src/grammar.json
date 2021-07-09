@@ -307,6 +307,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "function_call"
+          },
+          {
+            "type": "SYMBOL",
             "name": "_literal"
           },
           {
@@ -320,10 +324,6 @@
           {
             "type": "SYMBOL",
             "name": "context_item_expr"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "function_call"
           },
           {
             "type": "SYMBOL",
@@ -701,25 +701,21 @@
       "value": "."
     },
     "function_call": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "function_name",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": 25,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
             "name": "EQName"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "arguments",
-          "content": {
+          },
+          {
             "type": "SYMBOL",
             "name": "argument_list"
           }
-        }
-      ]
+        ]
+      }
     },
     "named_function_ref": {
       "type": "SEQ",

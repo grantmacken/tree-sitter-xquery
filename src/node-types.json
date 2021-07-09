@@ -2286,27 +2286,20 @@
   {
     "type": "function_call",
     "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "argument_list",
-            "named": true
-          }
-        ]
-      },
-      "function_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "EQName",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "EQName",
+          "named": true
+        },
+        {
+          "type": "argument_list",
+          "named": true
+        }
+      ]
     }
   },
   {
