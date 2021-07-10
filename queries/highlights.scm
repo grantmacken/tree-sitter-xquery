@@ -4,18 +4,23 @@
 (decimal_literal)
 (double_literal)
 ] @number
-(identifier) @variable
-(context_item_expr) @method
-(function_call
-  (EQName (identifier) @function))
+;(identifier) @variable
+;(context_item_expr) @method
+; (_ 
+;   [
+;    ns_builtin: (identifier)
+;    unprefixed: (identifier)
+;    prefix: (identifier)
+;    local_part: (identifier)
+; ] @property)
 
-(_ 
-  [
-   ns_builtin: (identifier)
-   unprefixed: (identifier)
-   prefix: (identifier)
-   local_part: (identifier)
-] @property)
+(function_call
+  (EQName 
+    [
+    ns_builtin: (identifier)
+    prefix: (identifier)
+    local_part: (identifier)
+    ] @function))
 
 ; binary exressions
 (range_expr [ "to" ] @keyword.operator)

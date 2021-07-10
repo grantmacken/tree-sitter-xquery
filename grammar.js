@@ -54,7 +54,7 @@ module.exports = grammar({
   extras: $ => [$.comment, /\s/],
   word: $ => $.keyword,
   conflicts: $ => [ 
-  // [$.function_call, $._name_test]
+  // [$.function_call, $.name_test]
   ],
   supertypes: $ => [$._primary, $._statement, $._binary_expr],
   rules: {
@@ -101,11 +101,11 @@ module.exports = grammar({
     // 3. binary   --  (rhs expr) operator (lhs expr)
     _expr: $ =>
        prec.left( choice(
-        seq( $._primary, optional( $._postfix_expr)), // 121
+        seq( $._primary, optional( choice( $.path_expr , $._postfix_expr) )), // 121
         $._statement, // precident 2 statement_like expr
-        $._binary_expr, // lhs expr op rhs expr
+        $._binary_expr, // lhs expr op rhs expr - same both sides
         $.unary_expr, // prefix  // 97 prec: 21 rl
-        $.path_expr, //108 prec: 19 lr
+        //$.path_expr, //108 prec: 19 lr
         $.bang_expr, //107 prec: 18 l
         $.arrow_expr, // 96 prec: 16 lr
         $.cast_as_expr, // 95 prec: 15 lr
@@ -221,58 +221,26 @@ module.exports = grammar({
         $.relative_path_expr
       )
     )),
-    relative_path_expr: $ => prec.left(seq($.step_expr, optional( seq( choice('/', '//'), $.step_expr) ))), //109 
+    relative_path_expr: $ => prec.left(seq($.step_expr, optional( repeat1 (seq( choice('/', '//'), $.step_expr))))), //109 
     step_expr: $ =>  prec.left(PREC.path,choice( $._axis_step , $._postfix_expr)),
-    _axis_step: $ => prec.left(seq(choice($._reverse_step, $._forward_step),optional(repeat($.predicate)))), // 111 124
-    _forward_step: $ => choice(seq($.forward_axis, $._node_test), $.abbrev_forward_step), // 112
+    _axis_step: $ => prec.left(seq(choice($._reverse_step, $.forward_step),optional(repeat($.predicate)))), // 111 124
+    forward_step: $ => choice(seq($._forward_axis, $._node_test), $.abbrev_forward_step), // 112
     abbrev_forward_step: $ => seq(optional($.abbrev_attr), $._node_test), // 117
     abbrev_attr: $ => '@',
     // 3.3.2.1 Axes
-    forward_axis: $ =>
-      seq(
-        field(
-          'axis',
-          alias(
-            choice(
-              'child',
-              'descendant',
-              'attribute',
-              'self',
-              'descendant-or-self',
-              'following-sibling',
-              'following'
-            ),
-            $.keyword
-          )
-        ),
-        '::'
-      ), //113
+  _forward_axis: $ =>
+  seq( choice( 'child','descendant', 'attribute', 'self', 'descendant-or-self', 'following-sibling', 'following'),
+    '::'
+  ), //113
     _reverse_step: $ =>
-      choice(seq($._reverse_axis, $._node_test), $.abbrev_reverse_step), // 115
-    _reverse_axis: $ =>
-      seq(
-        field(
-          'axis',
-          alias(
-            choice(
-              'parent',
-              'ancestor',
-              'preceding-sibling',
-              'preceding',
-              'ancestor-or-self'
-            ),
-            $.keyword
-          )
-        ),
+      choice(seq($.reverse_axis, $._node_test), $.abbrev_reverse_step), // 115
+    reverse_axis: $ => seq(
+      choice( 'parent', 'ancestor', 'preceding-sibling', 'preceding', 'ancestor-or-self' ),
         '::'
       ), //116
     abbrev_reverse_step: $ => token('..'), // 117
     //3.3.2.2 Node Tests
-    _node_test: $ =>
-      choice(
-        $._kind_test,
-        field('node_name_test', $._name_test)
-      ), // 118'
+    _node_test: $ => choice( $._kind_test, $.name_test), // 118'
     _binary_expr: $ => choice(
       $.range_expr, // 87 prec: 7 na 
       $.union_expr, // 90 prec:  10 lr
@@ -535,7 +503,7 @@ module.exports = grammar({
       prec(PREC.statement, seq($.try_clause, $.catch_clause)), // 78
     try_clause: $ => seq('try', $.enclosed_expr), // 78
     catch_clause: $ => seq('catch', $.catch_error_list, $.enclosed_expr), // 79
-    catch_error_list: $ => barSep1($._name_test),
+    catch_error_list: $ => barSep1($.name_test),
     // 3.18 Expressions on SequenceTypes
     // 3.18.1 Instance Of
     instance_of_expr: $ =>
@@ -849,17 +817,12 @@ module.exports = grammar({
       $.namespace_node_test,
       $.text_test
     ),
-    any_kind_test: $ => seq(field('type_identifier', alias('node', $.keyword)),'(',')'), // 189
-    text_test: $ => seq(field('type_identifier', alias('text', $.keyword)),'(',')'), // 191
-    comment_test: $ => seq(field('type_identifier', alias('comment', $.keyword)),'(',')'), // 192
-    namespace_node_test: $ => seq(field('type_identifier', alias('namespace-node', $.keyword)),'(',')'), // 193
+    any_kind_test: $ => seq('node','(',')'), // 189
+    text_test: $ => seq('text', '(',')'), // 191
+    comment_test: $ => seq('comment','(',')'), // 192
+    namespace_node_test: $ => seq('namespace-node','(',')'), // 193
     document_test: $ =>
-      seq(
-        field('type_identifier', alias('document-node', $.keyword)),
-        '(',
-        optional(choice($.element_test, $.schema_element_test)),
-        ')'
-      ), // 190
+      seq('document-node', '(', optional(choice($.element_test, $.schema_element_test)),')' ), // 190
     // wildcard - element() same as element(*)
     element_test: $ =>
     seq(
@@ -921,7 +884,7 @@ module.exports = grammar({
           ')'
         )
       ), // 194
-    _name_test: $ => choice($.EQName, $.wildcard), // TODO 199
+    name_test: $ => choice($.EQName, $.wildcard), // TODO 199
     wildcard: $ =>
       choice( '*',
         seq($.NCName, ':*' ),
