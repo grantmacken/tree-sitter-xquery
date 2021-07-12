@@ -38,8 +38,7 @@
 
 ; path_expr
  [ "/" "//" "::" ] @operator
- (forward_step) @method
- (reverse_step) @method
+ (path_expr) @function
 
 ; kind tests - after path
  [ 
