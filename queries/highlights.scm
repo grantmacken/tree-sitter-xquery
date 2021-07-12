@@ -14,13 +14,46 @@
 ;    local_part: (identifier)
 ; ] @property)
 
+
+
+  (EQName 
+    [
+    ns_builtin: (identifier) 
+    prefix: (identifier)
+    ] @namespace)
+
+  (EQName 
+    [
+     local_part: (identifier)
+    unprefixed: (identifier)
+    ] @tag)
+
+
 (function_call
   (EQName 
     [
-    ns_builtin: (identifier)
-    prefix: (identifier)
     local_part: (identifier)
+    unprefixed: (identifier)
     ] @function))
+
+; path_expr
+ [ "/" "//" "::" ] @operator
+ (forward_step) @method
+ (reverse_step) @method
+
+; kind tests - after path
+ [ 
+  (any_kind_test)
+  (comment_test)
+  (namespace_node_test)
+  (text_test)
+  (document_test)
+  (element_test)
+  (attribute_test)
+  (schema_element_test)
+  (schema_attribute_test)
+  (pi_test)
+] @type
 
 ; binary exressions
 (range_expr [ "to" ] @keyword.operator)
@@ -58,5 +91,4 @@
 "]" @punctuation.bracket
 
 (comment) @comment
-
 (ERROR) @error
