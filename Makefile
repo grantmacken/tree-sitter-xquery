@@ -87,7 +87,7 @@ getTreeSitter:
 	then 
 	npm update
 	else
-	npm init
+	#npm init --yes
 	npm install --save nan
 	npm install --save-dev tree-sitter-cli
 	fi
