@@ -22,6 +22,11 @@ jobs:
         run: |
             bin/tree-sitter generate
             printf %60s | tr ' ' '-' && echo
+      - name: parse
+        run: |
+            echo "TERM=xterm" >> $GITHUB_ENV
+            bin/tree-sitter generate
+            printf %60s | tr ' ' '-' && echo
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
 #         printf %60s | tr ' ' '-' && echo
