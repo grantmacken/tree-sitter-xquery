@@ -18,9 +18,10 @@ jobs:
       - name: get tree-sitter cli
         run: | 
             make getTreeSitter 
-#   - name: generate and test
-#     run: |
-#         bin/tree-sitter generate
+      - name: generate
+        run: |
+            bin/tree-sitter generate
+            printf %60s | tr ' ' '-' && echo
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
 #         printf %60s | tr ' ' '-' && echo
