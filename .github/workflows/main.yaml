@@ -20,6 +20,7 @@ jobs:
             make getTreeSitter 
       - name: generate
         run: |
+            echo "TERM=xterm" >> $GITHUB_ENV
             bin/tree-sitter generate
             printf %60s | tr ' ' '-' && echo
       - name: parse

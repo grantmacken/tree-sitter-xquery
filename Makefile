@@ -61,8 +61,6 @@ parse:  ## parse specific example nominated in .env
 	@$(TS) parse examples/$(EXAMPLE).xq
 
 
-
-
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 	@mkdir -p $(dir $@)
 	@cp -v $< $@
