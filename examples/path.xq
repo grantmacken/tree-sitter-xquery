@@ -1,4 +1,4 @@
-(
+( 
  'path begins a node root',
  'stand alone lone slash',
  /, (/) * 5,

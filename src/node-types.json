@@ -146,6 +146,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -243,6 +247,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -314,7 +326,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -323,6 +335,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -423,6 +439,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -488,7 +512,7 @@
         ]
       },
       "rhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -497,6 +521,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -597,6 +625,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -742,7 +778,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -751,6 +787,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -858,6 +898,14 @@
           "named": true
         },
         {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
+          "named": true
+        },
+        {
           "type": "quantified_expr",
           "named": true
         },
@@ -945,7 +993,7 @@
     "named": true,
     "fields": {
       "rhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -954,6 +1002,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -1054,6 +1106,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1213,7 +1273,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1222,6 +1282,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -1322,6 +1386,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1399,6 +1471,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -1496,6 +1572,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1593,7 +1677,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1602,6 +1686,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -1702,6 +1790,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -1783,7 +1879,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1792,6 +1888,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -1892,6 +1992,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2022,7 +2130,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -2031,6 +2139,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -2131,6 +2243,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2196,7 +2316,7 @@
         ]
       },
       "rhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -2205,6 +2325,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -2305,6 +2429,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2420,6 +2552,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -2524,6 +2660,14 @@
             "named": true
           },
           {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
             "type": "quantified_expr",
             "named": true
           },
@@ -2605,7 +2749,7 @@
     "named": true,
     "fields": {
       "var_default_value": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -2614,6 +2758,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -2714,6 +2862,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -2779,7 +2935,7 @@
         ]
       },
       "var_value": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -2788,6 +2944,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -2888,6 +3048,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -3272,7 +3440,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -3281,6 +3449,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -3381,6 +3553,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -3533,6 +3713,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -3630,6 +3814,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -3827,6 +4019,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -3927,6 +4123,14 @@
           "named": true
         },
         {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
+          "named": true
+        },
+        {
           "type": "quantified_expr",
           "named": true
         },
@@ -4011,15 +4215,32 @@
   {
     "type": "function_call",
     "named": true,
-    "fields": {},
+    "fields": {
+      "dynamic": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "var_ref",
+            "named": true
+          }
+        ]
+      },
+      "static": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "EQName",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "EQName",
-          "named": true
-        },
         {
           "type": "argument_list",
           "named": true
@@ -4129,6 +4350,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -4226,6 +4451,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -4305,7 +4538,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -4314,6 +4547,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -4414,6 +4651,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -4547,7 +4792,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -4556,6 +4801,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -4659,6 +4908,14 @@
             "named": true
           },
           {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
             "type": "quantified_expr",
             "named": true
           },
@@ -4746,6 +5003,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -4849,6 +5110,14 @@
           "named": true
         },
         {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
+          "named": true
+        },
+        {
           "type": "quantified_expr",
           "named": true
         },
@@ -4916,7 +5185,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -4925,6 +5194,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -5025,6 +5298,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5090,7 +5371,7 @@
         ]
       },
       "rhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -5099,6 +5380,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -5199,6 +5484,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5293,6 +5586,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -5390,6 +5687,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -5517,7 +5822,7 @@
     "named": true,
     "fields": {
       "key": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -5526,6 +5831,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -5626,6 +5935,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5691,7 +6008,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -5700,6 +6017,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -5800,6 +6121,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -5880,6 +6209,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -6043,6 +6376,14 @@
           "named": true
         },
         {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
+          "named": true
+        },
+        {
           "type": "quantified_expr",
           "named": true
         },
@@ -6052,6 +6393,10 @@
         },
         {
           "type": "schema_import",
+          "named": true
+        },
+        {
+          "type": "sequence_expr",
           "named": true
         },
         {
@@ -6178,7 +6523,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -6187,6 +6532,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -6287,6 +6636,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -6352,7 +6709,7 @@
         ]
       },
       "rhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -6361,6 +6718,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -6461,6 +6822,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -6649,7 +7018,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -6658,6 +7027,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -6758,6 +7131,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -6823,7 +7204,7 @@
         ]
       },
       "rhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -6832,6 +7213,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -6932,6 +7317,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -7015,6 +7408,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -7112,6 +7509,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -7278,6 +7683,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -7375,6 +7784,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -7707,7 +8124,7 @@
     "named": true,
     "fields": {
       "filter": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -7716,6 +8133,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -7816,6 +8237,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -7899,6 +8328,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -7996,6 +8429,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -8070,7 +8511,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -8079,6 +8520,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -8179,6 +8624,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -8244,7 +8697,7 @@
         ]
       },
       "rhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -8253,6 +8706,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -8353,6 +8810,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -8424,7 +8889,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -8433,6 +8898,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -8533,6 +9002,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -8673,6 +9150,388 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "sequence_expr",
+    "named": true,
+    "fields": {
+      "lhs": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "additive_expr",
+            "named": true
+          },
+          {
+            "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
+            "named": true
+          },
+          {
+            "type": "arrow_expr",
+            "named": true
+          },
+          {
+            "type": "bang_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "castable_expr",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
+            "named": true
+          },
+          {
+            "type": "computed_constructor",
+            "named": true
+          },
+          {
+            "type": "context_item_expr",
+            "named": true
+          },
+          {
+            "type": "curly_array_constructor",
+            "named": true
+          },
+          {
+            "type": "decimal_literal",
+            "named": true
+          },
+          {
+            "type": "direct_element",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "flwor_expr",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "if_expr",
+            "named": true
+          },
+          {
+            "type": "inline_function_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of_expr",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "intersect_except_expr",
+            "named": true
+          },
+          {
+            "type": "map_constructor",
+            "named": true
+          },
+          {
+            "type": "multiplicative_expr",
+            "named": true
+          },
+          {
+            "type": "named_function_ref",
+            "named": true
+          },
+          {
+            "type": "or_expr",
+            "named": true
+          },
+          {
+            "type": "ordered_expr",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expr",
+            "named": true
+          },
+          {
+            "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "quantified_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "square_array_constructor",
+            "named": true
+          },
+          {
+            "type": "string_concat_expr",
+            "named": true
+          },
+          {
+            "type": "string_constructor",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "switch_expr",
+            "named": true
+          },
+          {
+            "type": "treat_expr",
+            "named": true
+          },
+          {
+            "type": "try_catch_expr",
+            "named": true
+          },
+          {
+            "type": "typeswitch_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "unary_lookup",
+            "named": true
+          },
+          {
+            "type": "union_expr",
+            "named": true
+          },
+          {
+            "type": "unordered_expr",
+            "named": true
+          },
+          {
+            "type": "var_ref",
+            "named": true
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "additive_expr",
+            "named": true
+          },
+          {
+            "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
+            "named": true
+          },
+          {
+            "type": "arrow_expr",
+            "named": true
+          },
+          {
+            "type": "bang_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "castable_expr",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
+            "named": true
+          },
+          {
+            "type": "computed_constructor",
+            "named": true
+          },
+          {
+            "type": "context_item_expr",
+            "named": true
+          },
+          {
+            "type": "curly_array_constructor",
+            "named": true
+          },
+          {
+            "type": "decimal_literal",
+            "named": true
+          },
+          {
+            "type": "direct_element",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "flwor_expr",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "if_expr",
+            "named": true
+          },
+          {
+            "type": "inline_function_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of_expr",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "intersect_except_expr",
+            "named": true
+          },
+          {
+            "type": "map_constructor",
+            "named": true
+          },
+          {
+            "type": "multiplicative_expr",
+            "named": true
+          },
+          {
+            "type": "named_function_ref",
+            "named": true
+          },
+          {
+            "type": "or_expr",
+            "named": true
+          },
+          {
+            "type": "ordered_expr",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expr",
+            "named": true
+          },
+          {
+            "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "quantified_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "sequence_expr",
+            "named": true
+          },
+          {
+            "type": "square_array_constructor",
+            "named": true
+          },
+          {
+            "type": "string_concat_expr",
+            "named": true
+          },
+          {
+            "type": "string_constructor",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "switch_expr",
+            "named": true
+          },
+          {
+            "type": "treat_expr",
+            "named": true
+          },
+          {
+            "type": "try_catch_expr",
+            "named": true
+          },
+          {
+            "type": "typeswitch_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "unary_lookup",
+            "named": true
+          },
+          {
+            "type": "union_expr",
+            "named": true
+          },
+          {
+            "type": "unordered_expr",
+            "named": true
+          },
+          {
+            "type": "var_ref",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -8828,6 +9687,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -8925,6 +9788,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -9055,7 +9926,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -9064,6 +9935,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -9164,6 +10039,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -9241,6 +10124,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -9338,6 +10225,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -9433,7 +10328,7 @@
     "named": true,
     "fields": {
       "operand": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -9442,6 +10337,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -9542,6 +10441,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -9607,7 +10514,7 @@
         ]
       },
       "return": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -9616,6 +10523,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -9716,6 +10627,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -9787,7 +10706,7 @@
     "named": true,
     "fields": {
       "return": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -9796,6 +10715,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -9896,6 +10819,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -10002,6 +10933,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -10099,6 +11034,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -10174,7 +11117,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -10183,6 +11126,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -10286,6 +11233,14 @@
           "named": true
         },
         {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
+          "named": true
+        },
+        {
           "type": "quantified_expr",
           "named": true
         },
@@ -10353,7 +11308,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -10362,6 +11317,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -10462,6 +11421,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -10656,7 +11623,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -10665,6 +11632,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -10765,6 +11736,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -10885,6 +11864,10 @@
           "named": true
         },
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "arrow_expr",
           "named": true
         },
@@ -10982,6 +11965,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {
@@ -11091,6 +12082,10 @@
             "named": true
           },
           {
+            "type": "argument_list",
+            "named": true
+          },
+          {
             "type": "arrow_expr",
             "named": true
           },
@@ -11191,6 +12186,14 @@
             "named": true
           },
           {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
             "type": "quantified_expr",
             "named": true
           },
@@ -11259,7 +12262,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -11268,6 +12271,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -11371,6 +12378,14 @@
           "named": true
         },
         {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
+          "named": true
+        },
+        {
           "type": "quantified_expr",
           "named": true
         },
@@ -11465,7 +12480,7 @@
     "named": true,
     "fields": {
       "lhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -11474,6 +12489,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -11574,6 +12593,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -11639,7 +12666,7 @@
         ]
       },
       "rhs": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -11648,6 +12675,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -11748,6 +12779,14 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
             "named": true
           },
           {
@@ -11873,7 +12912,7 @@
         ]
       },
       "var_value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -11882,6 +12921,10 @@
           },
           {
             "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
             "named": true
           },
           {
@@ -11985,6 +13028,14 @@
             "named": true
           },
           {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
             "type": "quantified_expr",
             "named": true
           },
@@ -12078,7 +13129,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -12087,6 +13138,10 @@
         },
         {
           "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "argument_list",
           "named": true
         },
         {
@@ -12187,6 +13242,14 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "predicate",
           "named": true
         },
         {

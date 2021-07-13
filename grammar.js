@@ -1,4 +1,29 @@
-const  DIGIT = /[0-9]/,
+const PREC = {
+    primary: 23,
+    unarylookup: 22,
+    predicate: 21,
+    lookup: 20,
+    path: 19,
+    bang: 18,
+    unary: 17,
+    arrow: 16,
+    cast: 15,
+    castable: 14,
+    treat: 13,
+    instance: 12,
+    intersect: 11,
+    union: 10,
+    multiplicative: 9,
+    additive: 8,
+    range: 7,
+    concat: 6,
+    comparison: 5,
+    and: 4,
+    or: 3,
+    statement: 2,
+    comma: 1
+  },
+  DIGIT = /[0-9]/,
   WHITESPACE = /[\u000d\u000a\u0020\u0009]/,
   INTEGER = repeat1(DIGIT),
   DOUBLE = seq(
@@ -29,7 +54,7 @@ module.exports = grammar({
   extras: $ => [$.comment, /\s/],
   word: $ => $.keyword,
   conflicts: $ => [ 
-   [$.function_call, $.name_test]
+   [$._expr, $._step_expr]
   ],
   supertypes: $ => [],
   rules: {
@@ -69,38 +94,45 @@ module.exports = grammar({
           )
         )
       ), // 6 TODO:
-    _query_body: $ => seq($._expr, optional( repeat(seq( prec(1,','), $._expr)))),
+    _query_body: $ => choice( $._expr, $.sequence_expr ),
+     sequence_expr: $ => seq(
+        field('lhs', $._expr),
+        ',',
+        field('rhs', choice($.sequence_expr, $._expr))
+      ),
+    // seq($._expr, optional( repeat(seq( prec(1,','), $._expr)))),
     _expr: $ => choice( // statement like expressions all prec 2
+      $._primary_expr,
       $.flwor_expr,
-      $.quantified_expr,
-      $.switch_expr,
-      $.if_expr,
-      $.typeswitch_expr,
-      $.try_catch_expr,
-      $.or_expr, // 83             prec: 3
-      $.and_expr, // 84            prec: 4
-      $.comparison_expr, // 85     prec: 5
-      $.string_concat_expr, // 86  prec: 6
-      $.range_expr, // 87          prec: 7
-      $.additive_expr, // 88       prec: 8
-      $.multiplicative_expr, // 89 prec: 9
-      $.union_expr, // 90          prec: 10 
-      $.intersect_except_expr,//91 prec: 11
-      $.instance_of_expr, // 92    prec: 12
-      $.treat_expr, // 93          prec: 13
-      $.castable_expr, // 94       prec: 14
-      $.cast_expr, // 95           prec: 15
-      $.arrow_expr, // 96          prec: 16
-      $.unary_expr, //  97         prec: 17 '-' '+' arithmetic prefix right to left
-      $.bang_expr, //107           prec: 18
-      $.path_expr, //108           prec: 19   '/' '//'  not relative path?
+     $.quantified_expr,
+     $.switch_expr,
+     $.if_expr,
+     $.typeswitch_expr,
+     $.try_catch_expr,
+    $.or_expr, // 83             prec: 3
+    $.and_expr, // 84            prec: 4
+    $.comparison_expr, // 85     prec: 5
+    $.string_concat_expr, // 86  prec: 6
+    $.range_expr, // 87          prec: 7
+    $.additive_expr, // 88       prec: 8
+    $.multiplicative_expr, // 89 prec: 9
+    $.union_expr, // 90          prec: 10 
+    $.intersect_except_expr,//91 prec: 11
+    $.instance_of_expr, // 92    prec: 12
+    $.treat_expr, // 93          prec: 13
+    $.castable_expr, // 94       prec: 14
+    $.cast_expr, // 95           prec: 15
+    $.arrow_expr, // 96          prec: 16
+    $.unary_expr, //  97         prec: 17 '-' '+' arithmetic prefix right to left
+    $.bang_expr, //107           prec: 18
+    $.path_expr, //108           prec: 19   '/' '//'  not relative path?
       //  $.predicate //124        prec: 20 @primary postfix predicate '[' ']'
       //  $.postfix_lookup //125   prec: 20 @primary postfix lookup   '?'
       //  $.unary_lookup,// 181    prec: 21 @primary unary lookup
-      $._primary_expr
+      //seq($._primary_expr, optional( $._postfix_expr )) 
     ),
     // 3.1 Primary Expressions
-    _primary_expr: $ => choice(
+    _primary_expr: $ => prec.left(PREC.primary,seq(choice(
       $._literal, // 57
       $.var_ref, // 59
       $.parenthesized_expr, // 133
@@ -117,7 +149,7 @@ module.exports = grammar({
       $.curly_array_constructor, // 176  array_constructor 174
       $.string_constructor, // 177
       $.unary_lookup // 181
-     ),
+     ), optional($._postfix_expr))),
     // 3.1.1 Literals
     _literal: $ => choice($.string_literal, $._numeric_literal),
     string_literal: $ =>
@@ -148,7 +180,9 @@ module.exports = grammar({
     //3.1.4 Context Item Expression TODO not like spec
     context_item_expr: $ => prec.left(seq('.', optional( $.path_expr))),
     //3.1.5 Static Function Calls
-    function_call: $ => prec.left(seq( $.EQName, $.argument_list)), // 137
+    function_call: $ => prec.left(25,seq( 
+      choice( field( 'dynamic', $.var_ref),field('static', $.EQName)),
+      $.argument_list)), // 137 spec deviation added $var_ref
     //function_call: $ => prec.left(25 ,seq( $.EQName, $.argument_list)), // 137
     // 3.1.6 Named Function References
     named_function_ref: $ =>
@@ -194,7 +228,7 @@ module.exports = grammar({
       )
     ),
     _relative_path_expr: $ => prec.left(seq($._step_expr, optional( repeat1 (seq( choice('/', '//'), $._step_expr))))), //109 
-    _step_expr: $ => prec.left(choice( seq( $._primary_expr,  $._postfix_expr ) , $._axis_step )),
+    _step_expr: $ => prec.left(choice( seq( $._primary_expr, optional( $._postfix_expr )) , $._axis_step )),
     _axis_step: $ => prec.left(seq(choice($._reverse_step, $._forward_step),optional(repeat($.predicate)))), // 111 124
     _forward_step: $ => field('step',choice(seq($._forward_axis, $._node_test), $.abbrev_forward_step)), // 112
     abbrev_forward_step: $ => seq(optional($.abbrev_attr), $._node_test), // 117
@@ -768,7 +802,7 @@ module.exports = grammar({
     pi_test: $ => 
       seq( 'processing-instruction', 
         seq( '(', optional(field('param', choice($.NCName, $.string_literal))),')' )), // 194
-    name_test: $ => choice($.EQName, $.wildcard), // TODO 199
+    name_test: $ => prec.left(choice($.EQName, $.wildcard)), // TODO 199
     wildcard: $ =>
       choice( '*',
         seq($.NCName, ':*' ),
