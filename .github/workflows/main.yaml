@@ -11,14 +11,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v2
-      with:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
           fetch-depth: 1
-#   - name: get tree-sitter cli
-#     run: | 
-#         echo '::set-env name=TERM::xterm' 
-#         make bin/tree-sitter
+      - name: get tree-sitter cli
+        run: | 
+            echo '::set-env name=TERM::xterm' 
+            make getTreeSitter 
 #   - name: generate and test
 #     run: |
 #         bin/tree-sitter generate
