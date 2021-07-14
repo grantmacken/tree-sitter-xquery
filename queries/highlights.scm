@@ -1,9 +1,14 @@
+
+
+; primary
 (string_literal) @string
 [
 (integer_literal)
 (decimal_literal)
 (double_literal)
 ] @number
+
+
 ;(identifier) @variable
 ;(context_item_expr) @method
 ; (_ 
@@ -13,7 +18,7 @@
 ;    prefix: (identifier)
 ;    local_part: (identifier)
 ; ] @property)
-
+ 
 
 
   (EQName 
@@ -26,7 +31,11 @@
     [
      local_part: (identifier)
     unprefixed: (identifier)
-    ] @tag)
+    ] @constant)
+
+(var_ref ["$"]  @constant)
+
+
 
 
 (function_call
@@ -37,9 +46,11 @@
     ] @function))
 
 ; path_expr
- [ "/" "//" "::" ] @operator
- (path_expr) @function
-
+ (path_expr [ "/" "//" "::" ] @operator)
+ (abbrev_attr) @operator
+ ;(path_expr) @function
+ (path_expr ["child" "descendant" "attribute" "self" "descendant-or-self" "following-sibling" "following"] @keyword.operator)
+ (path_expr ["parent"  "ancestor"  "preceding-sibling"  "preceding"  "ancestor-or-self" ] @keyword.operator )
 ; kind tests - after path
  [ 
   (any_kind_test)
@@ -52,6 +63,7 @@
   (schema_element_test)
   (schema_attribute_test)
   (pi_test)
+  (name_test)
 ] @type
 
 ; binary exressions
@@ -64,6 +76,13 @@
 (unary_expr [ "-" "+"] @operator)
 (and_expr [ "and" ] @keyword.operator)
 (or_expr [ "or" ] @keyword.operator)
+(or_expr [ "or" ] @keyword.operator)
+
+(bang_expr [ "!" ] @operator)
+(arrow_expr [ "=>" ] @operator)
+(context_item_expr [ "." ] @operator)
+
+;(abbrev_attr ["@"] @operator)
 
 (map_constructor ["map"] @keyword.function)
 

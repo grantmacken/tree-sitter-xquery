@@ -25,9 +25,14 @@ jobs:
             printf %60s | tr ' ' '-' && echo
       - name: parse
         run: |
-            echo "TERM=xterm" >> $GITHUB_ENV
+            #echo "TERM=xterm" >> $GITHUB_ENV
+            bin/tree-sitter parse examples/path.xq
+            printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/postfix.xq
+            printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/primary.xq
+            printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/bang.xq
             printf %60s | tr ' ' '-' && echo
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
