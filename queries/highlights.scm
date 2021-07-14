@@ -45,6 +45,14 @@
     unprefixed: (identifier)
     ] @function))
 
+(arrow_function
+  (EQName 
+    [
+    local_part: (identifier)
+    unprefixed: (identifier)
+    ] @function))
+
+
 ; path_expr
  (path_expr [ "/" "//" "::" ] @operator)
  (abbrev_attr) @operator
@@ -85,17 +93,18 @@
 ;(abbrev_attr ["@"] @operator)
 
 (map_constructor ["map"] @keyword.function)
+(let_clause ["let"] @keyword.operator)
+(for_clause ["for" "in"] @keyword.operator)
+(let_binding [":="] @operator)
 
 ; sequences types
  [ "as" ] @keyword.operator
 
-[
- "let"
-] @keyword
 
 "function" @keyword.function
 "return" @keyword.return
 
+"$" @constant 
 ;"." @punctuation.delimiter
 "," @punctuation.delimiter
 ":" @punctuation.delimiter
