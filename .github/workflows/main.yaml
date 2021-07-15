@@ -36,6 +36,8 @@ jobs:
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/arrow.xq
             printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/expressions_on_sequence_types.xq
+
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
 #         printf %60s | tr ' ' '-' && echo
