@@ -39,6 +39,8 @@ jobs:
             bin/tree-sitter parse examples/expressions_on_sequence_types.xq
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/try-catch.xq
+            printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/quantified.xq
 
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet

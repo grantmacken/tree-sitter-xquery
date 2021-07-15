@@ -84,17 +84,17 @@
 (unary_expr [ "-" "+"] @operator)
 (and_expr [ "and" ] @keyword.operator)
 (or_expr [ "or" ] @keyword.operator)
-(or_expr [ "or" ] @keyword.operator)
-
-; Expressions on SequenceTypes
+; 3.16 Quantified Expressions
+(quantified_expr ["some" "every" "in" "satisfies" ] @conditional)
+; 3.17 Try/Catch Expressions 
+[ "try" "catch" ] @conditional
+; 3.18 Expressions on SequenceTypes
 (instance_of_expr ["instance" "of"] @keyword.operator) 
 (cast_expr [ "cast"] @keyword.operator) 
 (castable_expr [ "castable"] @keyword.operator) 
 (treat_expr [ "treat"] @keyword.operator) 
 
 [ "typeswitch" "case" "default" ] @conditional
-[ "try" "catch" ] @conditional
-
 
 (occurrence_indicator) @repeat
 
