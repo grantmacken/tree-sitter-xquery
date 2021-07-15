@@ -86,6 +86,19 @@
 (or_expr [ "or" ] @keyword.operator)
 (or_expr [ "or" ] @keyword.operator)
 
+; Expressions on SequenceTypes
+(instance_of_expr ["instance" "of"] @keyword.operator) 
+(cast_expr [ "cast"] @keyword.operator) 
+(castable_expr [ "castable"] @keyword.operator) 
+(treat_expr [ "treat"] @keyword.operator) 
+
+[ "typeswitch" "case" "default" ] @conditional
+
+
+(occurrence_indicator) @repeat
+
+[ (start_tag) (end_tag) (empty_tag) ] @tag
+
 (bang_expr [ "!" ] @operator)
 (arrow_expr [ "=>" ] @operator)
 (context_item_expr [ "." ] @operator)
@@ -97,12 +110,16 @@
 (for_clause ["for" "in"] @keyword.operator)
 (let_binding [":="] @operator)
 
+; statements
+[ "if" "then" "else" ] @conditional
+
 ; sequences types
  [ "as" ] @keyword.operator
 
 
 "function" @keyword.function
 "return" @keyword.return
+
 
 "$" @constant 
 ;"." @punctuation.delimiter
