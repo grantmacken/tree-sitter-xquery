@@ -84,6 +84,10 @@
 (unary_expr [ "-" "+"] @operator)
 (and_expr [ "and" ] @keyword.operator)
 (or_expr [ "or" ] @keyword.operator)
+; 3.15 Switch Expression
+(switch_expr ["switch" ] @conditional)
+(switch_clause ["case" "return"] @conditional)
+(switch_default ["default" "return"] @conditional)
 ; 3.16 Quantified Expressions
 (quantified_expr ["some" "every" "in" "satisfies" ] @conditional)
 ; 3.17 Try/Catch Expressions 

@@ -1,8 +1,10 @@
 (
-every $part in /parts/part satisfies $part/@discounted,
-some $emp in /emps/employee satisfies
-     ($emp/bonus > 0.25 * $emp/salary),
-some $x in (1, 2, "cat") satisfies $x * 2 = 4
+'3.15 Switch Expression', 
+switch ($animal)
+   case "Cow" return "Moo"
+   case "Cat" return "Meow"
+   case "Duck" return "Quack"
+   default return "What's that odd noise?"
 )
 
 

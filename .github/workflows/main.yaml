@@ -41,6 +41,8 @@ jobs:
             bin/tree-sitter parse examples/try-catch.xq
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/quantified.xq
+            printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/switch.xq
 
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
