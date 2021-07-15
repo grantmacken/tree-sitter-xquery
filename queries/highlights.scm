@@ -84,6 +84,19 @@
 (unary_expr [ "-" "+"] @operator)
 (and_expr [ "and" ] @keyword.operator)
 (or_expr [ "or" ] @keyword.operator)
+; 3.12 FLWOR Expressions
+ ["let" "for"  "as" "return" "count" "as" "allowing" "empty" ] @keyword
+ ["at" "in" "where" ] @conditional
+; ;ordering
+ ["stable" "order" "by" "ascending"  "descending" "empty" "greatest" "least" "collation" ] @keyword
+; ; grouping 
+ ["group" "by" ] @keyword
+ ":=" @operator
+;3.13 Ordered and Unordered Expressions
+(unordered_expr  ["unordered" ] @conditional)
+(ordered_expr  ["ordered" ] @conditional)
+;3.14 Conditional Expressions
+[ "if" "then" "else" ] @conditional
 ; 3.15 Switch Expression
 (switch_expr ["switch" ] @conditional)
 (switch_clause ["case" "return"] @conditional)
@@ -111,15 +124,10 @@
 ;(abbrev_attr ["@"] @operator)
 
 (map_constructor ["map"] @keyword.function)
-(let_clause ["let"] @keyword.operator)
-(for_clause ["for" "in"] @keyword.operator)
-(let_binding [":="] @operator)
 
-; statements
-[ "if" "then" "else" ] @conditional
 
-; sequences types
- [ "as" ] @keyword.operator
+
+
 
 
 "function" @keyword.function

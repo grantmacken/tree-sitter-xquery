@@ -43,6 +43,10 @@ jobs:
             bin/tree-sitter parse examples/quantified.xq
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/switch.xq
+            printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/conditional.xq
+            printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/ordered_unordered.xq
 
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
