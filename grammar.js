@@ -502,7 +502,7 @@ module.exports = grammar({
     try_catch_expr: $ => prec(2, seq($.try_clause, $.catch_clause)), // 78
     try_clause: $ => seq('try', $.enclosed_expr), // 78
     catch_clause: $ => seq('catch', $.catch_error_list, $.enclosed_expr), // 79
-    catch_error_list: $ => barSep1($.name_test),
+    catch_error_list: $ => seq($.name_test, repeat(seq('|', $.name_test))) ,
     typeswitch_expr: $ => prec(2,seq( 
       'typeswitch',
       $.typeswitch_operand,
@@ -869,10 +869,4 @@ function commaSep1(rule) {
 
 function commaSep(rule) {
   return optional(commaSep1(rule));
-}
-function barSep1(rule) {
-  return seq(rule, repeat(seq('|', rule)));
-}
-function barSep(rule) {
-  return optional(barSep1(rule));
 }

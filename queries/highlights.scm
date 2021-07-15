@@ -93,6 +93,7 @@
 (treat_expr [ "treat"] @keyword.operator) 
 
 [ "typeswitch" "case" "default" ] @conditional
+[ "try" "catch" ] @conditional
 
 
 (occurrence_indicator) @repeat
@@ -126,6 +127,7 @@
 "," @punctuation.delimiter
 ":" @punctuation.delimiter
 ";" @punctuation.delimiter
+"|" @punctuation.delimiter
 
 "(" @punctuation.bracket
 ")" @punctuation.bracket
