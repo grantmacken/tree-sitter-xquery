@@ -1,7 +1,7 @@
 
 
 ; primary
-(string_literal) @string
+[(string_literal) (char_data)] @string
 [
 (integer_literal)
 (decimal_literal)
@@ -34,9 +34,6 @@
     ] @constant)
 
 (var_ref ["$"]  @constant)
-
-
-
 
 (function_call
   (EQName 
@@ -124,11 +121,6 @@
 ;(abbrev_attr ["@"] @operator)
 
 (map_constructor ["map"] @keyword.function)
-
-
-
-
-
 
 "function" @keyword.function
 "return" @keyword.return

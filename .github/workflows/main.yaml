@@ -47,6 +47,8 @@ jobs:
             bin/tree-sitter parse examples/conditional.xq
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/ordered_unordered.xq
+            printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/FLWOR.xq
 
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
