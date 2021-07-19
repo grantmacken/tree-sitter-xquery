@@ -6,6 +6,7 @@
 (integer_literal)
 (decimal_literal)
 (double_literal)
+(lookup_digit)
 ] @number
 
 
@@ -120,7 +121,11 @@
 
 ;(abbrev_attr ["@"] @operator)
 
-(map_constructor ["map"] @keyword.function)
+[ (map_constructor) (curly_array_constructor) ] @constructor
+[ (unary_lookup) (postfix_lookup) ] @symbol
+[ (lookup_wildcard) (NCName) ] @constant
+
+;(curly_array_constructor ["array"] @constructor)
 
 "function" @keyword.function
 "return" @keyword.return

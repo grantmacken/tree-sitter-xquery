@@ -3172,16 +3172,6 @@
     "type": "curly_array_constructor",
     "named": true,
     "fields": {
-      "constructor": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "keyword",
-            "named": true
-          }
-        ]
-      },
       "content": {
         "multiple": false,
         "required": true,
@@ -5792,29 +5782,16 @@
   {
     "type": "map_constructor",
     "named": true,
-    "fields": {
-      "body": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "map_entry",
-            "named": true
-          },
-          {
-            "type": "{",
-            "named": false
-          },
-          {
-            "type": "}",
-            "named": false
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "map_entry",
+          "named": true
+        }
+      ]
     }
   },
   {

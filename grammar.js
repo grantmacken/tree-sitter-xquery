@@ -376,14 +376,14 @@ module.exports = grammar({
     char_group: $ => prec.left(repeat1(/(\w|\s)+/)),
     interpolation: $ => seq('`{', commaSep($._expr), '}`'), // 180',
     //3.11 Maps and Arrays
-    map_constructor: $ => seq('map',field('body',seq('{',commaSep($.map_entry),'}'))),//170
+    map_constructor: $ => seq('map',seq('{',commaSep($.map_entry),'}')),//170
     map_entry: $ => seq(field('key', $._expr), ':', field('value', $._expr)),
     // 3.11.2 Arrays
     _array_constructor: $ =>
       choice($.curly_array_constructor, $.square_array_constructor), // 174 TODO ,
     curly_array_constructor: $ =>
       seq(
-        field('constructor', alias('array', $.keyword)),
+        'array',
         field('content', $.enclosed_expr)
       ),
     square_array_constructor: $ => seq('[', commaSep($._expr), ']'),
