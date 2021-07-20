@@ -23,7 +23,9 @@ const PREC = {
     statement: 2,
     comma: 1
   },
+  LETTER = /\p{L}/,
   DIGIT = /[0-9]/,
+  CHAR = /./,
   WHITESPACE = /[\u000d\u000a\u0020\u0009]/,
   INTEGER = repeat1(DIGIT),
   DOUBLE = seq(
@@ -94,12 +96,12 @@ module.exports = grammar({
           )
         )
       ), // 6 TODO:
-    _query_body: $ => choice( $._expr, $.sequence_expr ),
-     sequence_expr: $ => seq(
+    _query_body: $ => seq($._expr, optional( repeat(seq( prec(1,','), $._expr)))),
+     /* sequence_expr: $ => seq(
         field('lhs', $._expr),
         ',',
         field('rhs', choice($.sequence_expr, $._expr))
-      ),
+      ), */
     // seq($._expr, optional( repeat(seq( prec(1,','), $._expr)))),
     _expr: $ => choice( // statement like expressions all prec 2
       $._primary_expr,
@@ -370,11 +372,21 @@ module.exports = grammar({
         field('content', $.enclosed_expr)
       ), // 160
     //3.10 String Constructors TODO
-    string_constructor: $ => seq('``[', repeat($._string_content), ']``'), // 177
+    //        token(
+          /* seq(
+            '"',
+            repeat(choice(PredefinedEntityRef, CharRef, EscapeQuote, /[^"&]/)),
+            '"'
+          )
+        ) */
+    string_constructor: $ => seq('``[', repeat( choice($.char_group, $.interpolation)), ']``'), // 177
     // TODO this is not correct  string content is external in other tree sitters
-    _string_content: $ => prec.right(choice($.char_group, $.interpolation)),
-    char_group: $ => prec.left(repeat1(/(\w|\s)+/)),
-    interpolation: $ => seq('`{', commaSep($._expr), '}`'), // 180',
+    // _string_content: $ => repeat(choice(, $.interpolation)),
+    // Lletter | N number | P punctuation  
+    char_group: $ => token(prec.left(repeat1(/[^`\]]/))), // TODO
+    //:;`"'@#.,|^&<=>+\-*/\\%?!~()\[\]{}
+    // var xmlName = /^\p{L}[\p{N}\-.]*(:[\p{L}0-9\-.]+)?$/u;
+    interpolation: $ => seq('`{', commaSep($._expr), '}`'), // 1p80',
     //3.11 Maps and Arrays
     map_constructor: $ => seq('map',seq('{',commaSep($.map_entry),'}')),//170
     map_entry: $ => seq(field('key', $._expr), ':', field('value', $._expr)),

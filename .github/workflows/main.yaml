@@ -51,6 +51,8 @@ jobs:
             bin/tree-sitter parse examples/FLWOR.xq
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/arrays-maps.xq
+            printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/string_constructors.xq
 
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet

@@ -125,6 +125,10 @@
 [ (unary_lookup) (postfix_lookup) ] @symbol
 [ (lookup_wildcard) (NCName) ] @constant
 
+(string_constructor ["``[" "]``"] ) @constructor
+(interpolation ["`{" "}`"] ) @punctuation.delimiter
+(char_group) @string
+
 ;(curly_array_constructor ["array"] @constructor)
 
 "function" @keyword.function

@@ -26,6 +26,6 @@ You have just won `{$a?value}` dollars!
   "taxed_value" : `{ $a?taxed_value }`]``  
   else ""
   }`
-}]``,
+}]``
 'end'
 )

@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/grantmacken/tree-sitter-xquery#readme",
   "dependencies": {
-    "nan": "^2.14.2"
+    "nan": "^2.14.2",
+    "regenerate": "^1.4.2"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.19.5"
