@@ -1,7 +1,8 @@
 
 
 ; primary
-[(string_literal) (char_data) (char_ref) ] @string
+[(string_literal) (char_data) (char_ref) (char_group) ] @string
+
 [
 (integer_literal)
 (decimal_literal)
@@ -121,33 +122,30 @@
 
 ;(abbrev_attr ["@"] @operator)
 
-[ (map_constructor) (curly_array_constructor) ] @constructor
 [ (unary_lookup) (postfix_lookup) ] @symbol
 [ (lookup_wildcard) (NCName) ] @constant
 
-(string_constructor ["``[" "]``"] ) @constructor
-(interpolation ["`{" "}`"] ) @punctuation.delimiter
-(char_group) @string
 
-;(curly_array_constructor ["array"] @constructor)
+[
+ (square_array_constructor ["[" "]"] )
+ (curly_array_constructor ["array" "{" "}"] )
+ (map_constructor ["map" "{" "}"] )
+ (string_constructor ["``[" "]``"] )
+ (interpolation ["`{" "}`"] )
+ (comp_elem_constructor ["element"] )
+ (comp_attr_constructor ["attribute"] )
+ (comp_doc_constructor ["document"] )
+ (comp_text_constructor ["text"] )
+ (comp_comment_constructor ["comment"] )
+ (comp_pi_constructor ["processing-instruction"] )
+ (comp_namespace_constructor ["namespace"] )
+ ] @constructor 
 
 "function" @keyword.function
 "return" @keyword.return
 
 
 "$" @constant 
-;"." @punctuation.delimiter
-"," @punctuation.delimiter
-":" @punctuation.delimiter
-";" @punctuation.delimiter
-"|" @punctuation.delimiter
-
-"(" @punctuation.bracket
-")" @punctuation.bracket
-"{" @punctuation.bracket
-"}" @punctuation.bracket
-"[" @punctuation.bracket
-"]" @punctuation.bracket
 
 (comment) @comment
 (ERROR) @error

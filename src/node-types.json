@@ -166,11 +166,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -358,11 +382,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -544,11 +592,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -814,11 +886,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -1025,11 +1121,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -1305,11 +1425,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -1491,11 +1635,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -1723,11 +1891,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -1925,11 +2117,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -2135,6 +2351,810 @@
     "fields": {}
   },
   {
+    "type": "comp_attr_constructor",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "EQName",
+            "named": true
+          },
+          {
+            "type": "additive_expr",
+            "named": true
+          },
+          {
+            "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
+            "named": true
+          },
+          {
+            "type": "arrow_expr",
+            "named": true
+          },
+          {
+            "type": "bang_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "castable_expr",
+            "named": true
+          },
+          {
+            "type": "comp_attr_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
+            "named": true
+          },
+          {
+            "type": "context_item_expr",
+            "named": true
+          },
+          {
+            "type": "curly_array_constructor",
+            "named": true
+          },
+          {
+            "type": "decimal_literal",
+            "named": true
+          },
+          {
+            "type": "direct_element",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "flwor_expr",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "if_expr",
+            "named": true
+          },
+          {
+            "type": "inline_function_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of_expr",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "intersect_except_expr",
+            "named": true
+          },
+          {
+            "type": "map_constructor",
+            "named": true
+          },
+          {
+            "type": "multiplicative_expr",
+            "named": true
+          },
+          {
+            "type": "named_function_ref",
+            "named": true
+          },
+          {
+            "type": "or_expr",
+            "named": true
+          },
+          {
+            "type": "ordered_expr",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expr",
+            "named": true
+          },
+          {
+            "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "quantified_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "square_array_constructor",
+            "named": true
+          },
+          {
+            "type": "string_concat_expr",
+            "named": true
+          },
+          {
+            "type": "string_constructor",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "switch_expr",
+            "named": true
+          },
+          {
+            "type": "treat_expr",
+            "named": true
+          },
+          {
+            "type": "try_catch_expr",
+            "named": true
+          },
+          {
+            "type": "typeswitch_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "unary_lookup",
+            "named": true
+          },
+          {
+            "type": "union_expr",
+            "named": true
+          },
+          {
+            "type": "unordered_expr",
+            "named": true
+          },
+          {
+            "type": "var_ref",
+            "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "comp_comment_constructor",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "comp_doc_constructor",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "comp_elem_constructor",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "EQName",
+            "named": true
+          },
+          {
+            "type": "additive_expr",
+            "named": true
+          },
+          {
+            "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
+            "named": true
+          },
+          {
+            "type": "arrow_expr",
+            "named": true
+          },
+          {
+            "type": "bang_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "castable_expr",
+            "named": true
+          },
+          {
+            "type": "comp_attr_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
+            "named": true
+          },
+          {
+            "type": "context_item_expr",
+            "named": true
+          },
+          {
+            "type": "curly_array_constructor",
+            "named": true
+          },
+          {
+            "type": "decimal_literal",
+            "named": true
+          },
+          {
+            "type": "direct_element",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "flwor_expr",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "if_expr",
+            "named": true
+          },
+          {
+            "type": "inline_function_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of_expr",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "intersect_except_expr",
+            "named": true
+          },
+          {
+            "type": "map_constructor",
+            "named": true
+          },
+          {
+            "type": "multiplicative_expr",
+            "named": true
+          },
+          {
+            "type": "named_function_ref",
+            "named": true
+          },
+          {
+            "type": "or_expr",
+            "named": true
+          },
+          {
+            "type": "ordered_expr",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expr",
+            "named": true
+          },
+          {
+            "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "quantified_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "square_array_constructor",
+            "named": true
+          },
+          {
+            "type": "string_concat_expr",
+            "named": true
+          },
+          {
+            "type": "string_constructor",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "switch_expr",
+            "named": true
+          },
+          {
+            "type": "treat_expr",
+            "named": true
+          },
+          {
+            "type": "try_catch_expr",
+            "named": true
+          },
+          {
+            "type": "typeswitch_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "unary_lookup",
+            "named": true
+          },
+          {
+            "type": "union_expr",
+            "named": true
+          },
+          {
+            "type": "unordered_expr",
+            "named": true
+          },
+          {
+            "type": "var_ref",
+            "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "comp_namespace_constructor",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "NCName",
+            "named": true
+          },
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "comp_pi_constructor",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "NCName",
+            "named": true
+          },
+          {
+            "type": "additive_expr",
+            "named": true
+          },
+          {
+            "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
+            "named": true
+          },
+          {
+            "type": "arrow_expr",
+            "named": true
+          },
+          {
+            "type": "bang_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "castable_expr",
+            "named": true
+          },
+          {
+            "type": "comp_attr_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
+            "named": true
+          },
+          {
+            "type": "context_item_expr",
+            "named": true
+          },
+          {
+            "type": "curly_array_constructor",
+            "named": true
+          },
+          {
+            "type": "decimal_literal",
+            "named": true
+          },
+          {
+            "type": "direct_element",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "flwor_expr",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "if_expr",
+            "named": true
+          },
+          {
+            "type": "inline_function_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of_expr",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "intersect_except_expr",
+            "named": true
+          },
+          {
+            "type": "map_constructor",
+            "named": true
+          },
+          {
+            "type": "multiplicative_expr",
+            "named": true
+          },
+          {
+            "type": "named_function_ref",
+            "named": true
+          },
+          {
+            "type": "or_expr",
+            "named": true
+          },
+          {
+            "type": "ordered_expr",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expr",
+            "named": true
+          },
+          {
+            "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "quantified_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "square_array_constructor",
+            "named": true
+          },
+          {
+            "type": "string_concat_expr",
+            "named": true
+          },
+          {
+            "type": "string_constructor",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "switch_expr",
+            "named": true
+          },
+          {
+            "type": "treat_expr",
+            "named": true
+          },
+          {
+            "type": "try_catch_expr",
+            "named": true
+          },
+          {
+            "type": "typeswitch_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "unary_lookup",
+            "named": true
+          },
+          {
+            "type": "union_expr",
+            "named": true
+          },
+          {
+            "type": "unordered_expr",
+            "named": true
+          },
+          {
+            "type": "var_ref",
+            "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "comp_text_constructor",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "comparison_expr",
     "named": true,
     "fields": {
@@ -2171,11 +3191,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -2357,11 +3401,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -2507,242 +3575,6 @@
           {
             "type": "var_ref",
             "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "computed_constructor",
-    "named": true,
-    "fields": {
-      "constructor": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "keyword",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "enclosed_expr",
-            "named": true
-          }
-        ]
-      },
-      "name_expr": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "EQName",
-            "named": true
-          },
-          {
-            "type": "NCName",
-            "named": true
-          },
-          {
-            "type": "additive_expr",
-            "named": true
-          },
-          {
-            "type": "and_expr",
-            "named": true
-          },
-          {
-            "type": "argument_list",
-            "named": true
-          },
-          {
-            "type": "arrow_expr",
-            "named": true
-          },
-          {
-            "type": "bang_expr",
-            "named": true
-          },
-          {
-            "type": "cast_expr",
-            "named": true
-          },
-          {
-            "type": "castable_expr",
-            "named": true
-          },
-          {
-            "type": "comparison_expr",
-            "named": true
-          },
-          {
-            "type": "computed_constructor",
-            "named": true
-          },
-          {
-            "type": "context_item_expr",
-            "named": true
-          },
-          {
-            "type": "curly_array_constructor",
-            "named": true
-          },
-          {
-            "type": "decimal_literal",
-            "named": true
-          },
-          {
-            "type": "direct_element",
-            "named": true
-          },
-          {
-            "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "enclosed_expr",
-            "named": true
-          },
-          {
-            "type": "flwor_expr",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "if_expr",
-            "named": true
-          },
-          {
-            "type": "inline_function_expr",
-            "named": true
-          },
-          {
-            "type": "instance_of_expr",
-            "named": true
-          },
-          {
-            "type": "integer_literal",
-            "named": true
-          },
-          {
-            "type": "intersect_except_expr",
-            "named": true
-          },
-          {
-            "type": "map_constructor",
-            "named": true
-          },
-          {
-            "type": "multiplicative_expr",
-            "named": true
-          },
-          {
-            "type": "named_function_ref",
-            "named": true
-          },
-          {
-            "type": "or_expr",
-            "named": true
-          },
-          {
-            "type": "ordered_expr",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expr",
-            "named": true
-          },
-          {
-            "type": "path_expr",
-            "named": true
-          },
-          {
-            "type": "postfix_lookup",
-            "named": true
-          },
-          {
-            "type": "predicate",
-            "named": true
-          },
-          {
-            "type": "quantified_expr",
-            "named": true
-          },
-          {
-            "type": "range_expr",
-            "named": true
-          },
-          {
-            "type": "square_array_constructor",
-            "named": true
-          },
-          {
-            "type": "string_concat_expr",
-            "named": true
-          },
-          {
-            "type": "string_constructor",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "switch_expr",
-            "named": true
-          },
-          {
-            "type": "treat_expr",
-            "named": true
-          },
-          {
-            "type": "try_catch_expr",
-            "named": true
-          },
-          {
-            "type": "typeswitch_expr",
-            "named": true
-          },
-          {
-            "type": "unary_expr",
-            "named": true
-          },
-          {
-            "type": "unary_lookup",
-            "named": true
-          },
-          {
-            "type": "union_expr",
-            "named": true
-          },
-          {
-            "type": "unordered_expr",
-            "named": true
-          },
-          {
-            "type": "var_ref",
-            "named": true
-          },
-          {
-            "type": "{",
-            "named": false
-          },
-          {
-            "type": "}",
-            "named": false
           }
         ]
       }
@@ -2790,11 +3622,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -2976,11 +3832,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -3507,11 +4387,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -3754,11 +4658,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -4046,11 +4974,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -4377,11 +5329,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -4577,11 +5553,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -4831,11 +5831,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -5033,11 +6057,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -5224,11 +6272,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -5410,11 +6482,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -5613,11 +6709,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -5848,11 +6968,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -6034,11 +7178,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -6234,11 +7402,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -6545,11 +7737,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -6731,11 +7947,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -7040,11 +8280,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -7226,11 +8490,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -7418,11 +8706,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -7693,11 +9005,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -7971,7 +9307,31 @@
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_attr_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
           "named": true
         },
         {
@@ -8146,11 +9506,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -8338,11 +9722,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -8533,11 +9941,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -8719,11 +10151,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -8911,11 +10367,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -9315,11 +10795,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -9552,11 +11056,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -9738,11 +11266,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -9976,11 +11528,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -10162,11 +11738,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -10354,11 +11954,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -10569,11 +12193,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -10765,11 +12413,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -10956,11 +12628,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -11271,11 +12967,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -11500,11 +13220,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -11718,11 +13462,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -11910,11 +13678,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -12128,11 +13920,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -12314,11 +14130,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -12560,11 +14400,35 @@
             "named": true
           },
           {
-            "type": "comparison_expr",
+            "type": "comp_attr_constructor",
             "named": true
           },
           {
-            "type": "computed_constructor",
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
             "named": true
           },
           {
@@ -12777,11 +14641,35 @@
           "named": true
         },
         {
-          "type": "comparison_expr",
+          "type": "comp_attr_constructor",
           "named": true
         },
         {
-          "type": "computed_constructor",
+          "type": "comp_comment_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_doc_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_elem_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_namespace_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_pi_constructor",
+          "named": true
+        },
+        {
+          "type": "comp_text_constructor",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
           "named": true
         },
         {
@@ -13429,10 +15317,6 @@
   {
     "type": "item",
     "named": false
-  },
-  {
-    "type": "keyword",
-    "named": true
   },
   {
     "type": "le",

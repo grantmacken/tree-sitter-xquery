@@ -332,7 +332,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "computed_constructor"
+                "name": "_computed_constructor"
               },
               {
                 "type": "SYMBOL",
@@ -1955,19 +1955,6 @@
         }
       ]
     },
-    "node_constructor": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "computed_constructor"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_direct_constructor"
-        }
-      ]
-    },
     "_direct_constructor": {
       "type": "CHOICE",
       "members": [
@@ -2310,85 +2297,71 @@
       "type": "STRING",
       "value": "\"\""
     },
-    "computed_constructor": {
+    "_computed_constructor": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_document_text_comment_constructor"
+          "name": "comp_elem_constructor"
         },
         {
           "type": "SYMBOL",
-          "name": "_element_attr_constructor"
+          "name": "comp_attr_constructor"
         },
         {
           "type": "SYMBOL",
-          "name": "_namespace_constructor"
+          "name": "comp_doc_constructor"
         },
         {
           "type": "SYMBOL",
-          "name": "_pi_constructor"
+          "name": "comp_text_constructor"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comp_comment_constructor"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comp_namespace_constructor"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comp_pi_constructor"
         }
       ]
     },
-    "_document_text_comment_constructor": {
+    "comp_elem_constructor": {
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "document"
-            },
-            {
-              "type": "STRING",
-              "value": "text"
-            },
-            {
-              "type": "STRING",
-              "value": "comment"
-            }
-          ]
+          "type": "STRING",
+          "value": "element"
         },
         {
-          "type": "FIELD",
-          "name": "content",
-          "content": {
-            "type": "SYMBOL",
-            "name": "enclosed_expr"
-          }
+          "type": "SYMBOL",
+          "name": "_name_content"
         }
       ]
     },
-    "_element_attr_constructor": {
+    "comp_attr_constructor": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_name_content"
+        }
+      ]
+    },
+    "_name_content": {
       "type": "SEQ",
       "members": [
         {
           "type": "FIELD",
-          "name": "constructor",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "element"
-                },
-                {
-                  "type": "STRING",
-                  "value": "attribute"
-                }
-              ]
-            },
-            "named": true,
-            "value": "keyword"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "name_expr",
+          "name": "name",
           "content": {
             "type": "CHOICE",
             "members": [
@@ -2455,25 +2428,67 @@
         }
       ]
     },
-    "_pi_constructor": {
+    "comp_doc_constructor": {
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "constructor",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "processing-instruction"
-            },
-            "named": true,
-            "value": "keyword"
-          }
+          "type": "STRING",
+          "value": "document"
         },
         {
           "type": "FIELD",
-          "name": "name_expr",
+          "name": "content",
+          "content": {
+            "type": "SYMBOL",
+            "name": "enclosed_expr"
+          }
+        }
+      ]
+    },
+    "comp_text_constructor": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "text"
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "SYMBOL",
+            "name": "enclosed_expr"
+          }
+        }
+      ]
+    },
+    "comp_comment_constructor": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "comment"
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "SYMBOL",
+            "name": "enclosed_expr"
+          }
+        }
+      ]
+    },
+    "comp_pi_constructor": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "processing-instruction"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
           "content": {
             "type": "CHOICE",
             "members": [
@@ -2540,25 +2555,16 @@
         }
       ]
     },
-    "_namespace_constructor": {
+    "comp_namespace_constructor": {
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "constructor",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "namespace"
-            },
-            "named": true,
-            "value": "keyword"
-          }
+          "type": "STRING",
+          "value": "namespace"
         },
         {
           "type": "FIELD",
-          "name": "name_expr",
+          "name": "name",
           "content": {
             "type": "CHOICE",
             "members": [

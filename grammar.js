@@ -133,7 +133,7 @@ module.exports = grammar({
       $.unordered_expr, // 136
       $.function_call, // 137
       $._direct_constructor,  // 141 node constructors 140 
-      $.computed_constructor, // 155 // node constructors 140
+      $._computed_constructor, // 155 // node constructors 140
       $.named_function_ref,   // 168  function item 167
       $.inline_function_expr, // 169 function item 167
       $.map_constructor, // 170
@@ -262,12 +262,10 @@ module.exports = grammar({
     arrow_function: $ => seq(choice($.EQName, $.var_ref, $.parenthesized_expr), $.argument_list), // 127
 // 3.6 String Concatenation Expressions
       //3.9 Node Constructors
-    node_constructor: $ => choice($.computed_constructor, $._direct_constructor),
+    //node_constructor: $ => choice($._computed_constructor, $._direct_constructor),
     // 3.9.1 Direct Element Constructors
-    _direct_constructor: $ =>
-      choice(
+    _direct_constructor: $ => choice(
         $.direct_element
-        // $.direct_element
         // TODO dir_comment_constructor,
         // TODO dir_pi_constructor
       ), //141  TODO
@@ -282,12 +280,7 @@ module.exports = grammar({
     direct_attribute_value: $ => choice( 
       seq( '"', repeat(choice($._common_content, $.escape_quote, /[^"&]/)),'"'), 
       seq( "'", repeat(choice($._common_content, $.escape_apos, /[^'&]/)),"'")),
-    _common_content: $ =>  choice(
-            $.predefined_entity_ref,
-            $.char_ref,
-            $.escape_curly,
-            $.enclosed_expr),
-
+    _common_content: $ =>  choice( $.predefined_entity_ref, $.char_ref, $.escape_curly, $.enclosed_expr),
     char_data: $ => /[^{}<&]+/,
     char_ref: $ => choice( seq('&#', repeat1(/[0-9]/), ';'),seq('&#x', repeat1(/[0-9a-fA-F]/), ';') ),
     escape_curly: $ => choice('{{', '}}'),
@@ -295,34 +288,32 @@ module.exports = grammar({
     escape_apos: $ =>  "''",
     escape_quote: $ => '""',
     // 3.9.3 Computed Constructors TODO make Computed Constructors a supertype
-    computed_constructor: $ =>
+    _computed_constructor: $ =>
       choice(
-        $._document_text_comment_constructor,
-        $._element_attr_constructor,
-        $._namespace_constructor,
-        $._pi_constructor
+        $.comp_elem_constructor,
+        $.comp_attr_constructor,
+        $.comp_doc_constructor,
+        $.comp_text_constructor,
+        $.comp_comment_constructor,
+        $.comp_namespace_constructor,
+        $.comp_pi_constructor
       ), // 155
-    _document_text_comment_constructor: $ =>
-      seq( choice('document', 'text', 'comment'),
-                  field('content', $.enclosed_expr)), // 156 164 165
-    _element_attr_constructor: $ =>
-      seq(
-        field('constructor', alias(choice('element', 'attribute'), $.keyword)),
-        field('name_expr', choice($.EQName, seq('{', commaSep($._expr), '}'))),
-        field('content', $.enclosed_expr)
-      ), // 157 159
-    _pi_constructor: $ =>
-      seq(
-        field('constructor', alias('processing-instruction', $.keyword)),
-        field('name_expr', choice($.NCName, seq('{', commaSep($._expr), '}'))),
-        field('content', $.enclosed_expr)
-      ), // 166
-    _namespace_constructor: $ =>
-      seq(
-        field('constructor', alias('namespace', $.keyword)),
-        field('name_expr', choice($.NCName, $.enclosed_expr)),
-        field('content', $.enclosed_expr)
-      ), // 160
+    comp_elem_constructor: $ => seq( 'element', $._name_content),
+    comp_attr_constructor: $ => seq( 'attribute', $._name_content),
+    _name_content: $ => seq(
+     field('name', choice($.EQName, seq('{', commaSep($._expr), '}'))),
+     field('content', $.enclosed_expr)),
+    comp_doc_constructor: $ => seq( 'document', field('content', $.enclosed_expr)),
+    comp_text_constructor: $ => seq( 'text', field('content', $.enclosed_expr)),
+    comp_comment_constructor: $ => seq( 'comment', field('content', $.enclosed_expr)),
+    comp_pi_constructor: $ => seq( 
+       'processing-instruction',
+        field('name', choice($.NCName, seq('{', commaSep($._expr), '}'))), 
+        field('content', $.enclosed_expr)), // 166
+    comp_namespace_constructor: $ => seq(
+        'namespace', 
+        field('name', choice($.NCName, $.enclosed_expr)),//@see 3.9.3.7
+        field('content', $.enclosed_expr)), // 160
     //3.10 String Constructors TODO
     string_constructor: $ => seq('``[', repeat( choice($.char_group, $.interpolation)), ']``'), // 177
     // TODO this is not correct  string content is external in other tree sitters
