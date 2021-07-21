@@ -303,24 +303,25 @@ module.exports = grammar({
         seq($.start_tag, repeat($._direct_element_content), $.end_tag),
         $.empty_tag
       ),
-    start_tag: $ =>
-      seq(
-        '<',
-        field('name', $._QName),
-        repeat(field('attribute', $.direct_attribute)),
-        '>'
-      ),
-    end_tag: $ => seq('</', field('name', $._QName), '>'),
-    empty_tag: $ =>
-      seq(
-        '<',
-        field('name', $._QName),
-        repeat(field('attribute', $.direct_attribute)),
-        '/>'
-      ),
-
-    direct_attribute: $ =>
-      seq(field('name', $._QName), '=', field('value', $.string_literal)),
+    start_tag: $ => seq( '<', $._QName, repeat($.direct_attribute),'>'),
+    end_tag: $ => seq('</',  $._QName, '>'),
+    empty_tag: $ => seq( '<', $._QName,repeat($.direct_attribute),'/>' ),
+    direct_attribute: $ => seq( $._QName, '=',  $.direct_attribute_value),
+    direct_attribute_value: $ => choice( seq(
+      '"',
+      repeat(choice($._common_content, $.escape_quote, /[^"&]/)),
+      '"'
+    ), seq(
+      "'",
+      repeat(choice($._common_content, $.escape_apos, /[^'&]/)),
+      "'"
+    )
+    ),
+    _common_content: $ =>  choice(
+            $.predefined_entity_ref,
+            $.char_ref,
+            $.escape_curly,
+            $.enclosed_expr),
     _element_text: $ =>
       prec.left(
         repeat1(
@@ -334,14 +335,11 @@ module.exports = grammar({
         )
       ),
     char_data: $ => /[^{}<&]+/,
-    char_ref: $ =>
-      choice(
-        seq('&#', repeat1(/[0-9]/), ';'),
-        seq('&#x', repeat1(/[0-9a-fA-F]/), ';')
-      ),
+    char_ref: $ => choice( seq('&#', repeat1(/[0-9]/), ';'),seq('&#x', repeat1(/[0-9a-fA-F]/), ';') ),
     escape_curly: $ => choice('{{', '}}'),
-    predefined_entity_ref: $ =>
-      seq('&', choice('lt', 'gt', 'amp', 'quot', 'apos'), ';'),
+    predefined_entity_ref: $ => seq('&', choice('lt', 'gt', 'amp', 'quot', 'apos'), ';'),
+    escape_apos: $ =>  "''",
+    escape_quote: $ => '""',
     // 3.9.3 Computed Constructors TODO make Computed Constructors a supertype
     computed_constructor: $ =>
       choice(

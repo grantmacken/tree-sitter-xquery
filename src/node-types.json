@@ -3260,20 +3260,6 @@
           }
         ]
       },
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "prefix": {
         "multiple": false,
         "required": false,
@@ -3293,17 +3279,52 @@
             "named": true
           }
         ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "direct_attribute_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "direct_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "char_ref",
+          "named": true
+        },
+        {
+          "type": "enclosed_expr",
+          "named": true
+        },
+        {
+          "type": "escape_apos",
+          "named": true
+        },
+        {
+          "type": "escape_curly",
+          "named": true
+        },
+        {
+          "type": "escape_quote",
+          "named": true
+        },
+        {
+          "type": "predefined_entity_ref",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3625,34 +3646,10 @@
     "type": "empty_tag",
     "named": true,
     "fields": {
-      "attribute": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "direct_attribute",
-            "named": true
-          }
-        ]
-      },
       "local_part": {
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
           {
             "type": "identifier",
             "named": true
@@ -3679,6 +3676,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "direct_attribute",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3880,20 +3887,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
           {
             "type": "identifier",
             "named": true
@@ -9451,34 +9444,10 @@
     "type": "start_tag",
     "named": true,
     "fields": {
-      "attribute": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "direct_attribute",
-            "named": true
-          }
-        ]
-      },
       "local_part": {
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
           {
             "type": "identifier",
             "named": true
@@ -9505,6 +9474,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "direct_attribute",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -12929,6 +12908,10 @@
     "named": false
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
     "type": "#",
     "named": false
   },
@@ -12950,6 +12933,10 @@
   },
   {
     "type": "&#x",
+    "named": false
+  },
+  {
+    "type": "'",
     "named": false
   },
   {
@@ -13283,6 +13270,14 @@
   {
     "type": "err",
     "named": false
+  },
+  {
+    "type": "escape_apos",
+    "named": true
+  },
+  {
+    "type": "escape_quote",
+    "named": true
   },
   {
     "type": "every",

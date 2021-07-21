@@ -1,7 +1,7 @@
 
 
 ; primary
-[(string_literal) (char_data)] @string
+[(string_literal) (char_data) (char_ref) ] @string
 [
 (integer_literal)
 (decimal_literal)
