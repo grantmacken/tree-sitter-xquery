@@ -10,7 +10,11 @@
 (lookup_digit)
 ] @number
 
-
+[
+ (parenthesized_expr ["(" ")"] )
+ (predicate ["[" "]"] ) 
+ ] @constructor
+ (argument_list ["(" ")"] ) @punctuation.bracket
 ;(identifier) @variable
 ;(context_item_expr) @method
 ; (_ 
@@ -116,15 +120,17 @@
 
 [ (start_tag) (end_tag) (empty_tag) ] @tag
 
-(bang_expr [ "!" ] @operator)
-(arrow_expr [ "=>" ] @operator)
-(context_item_expr [ "." ] @operator)
+[
+(string_concat_expr ["||"] )
+(bang_expr [ "!" ] )
+(arrow_expr [ "=>" ] )
+(context_item_expr [ "." ] )
+] @operator
 
 ;(abbrev_attr ["@"] @operator)
 
 [ (unary_lookup) (postfix_lookup) ] @symbol
 [ (lookup_wildcard) (NCName) ] @constant
-
 
 [
  (square_array_constructor ["[" "]"] )

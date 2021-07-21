@@ -260,10 +260,6 @@ module.exports = grammar({
       ), // 107
     single_type: $ => prec.left(seq($.EQName, optional('?'))), // 182
     arrow_function: $ => seq(choice($.EQName, $.var_ref, $.parenthesized_expr), $.argument_list), // 127
-// 3.6 String Concatenation Expressions
-      //3.9 Node Constructors
-    //node_constructor: $ => choice($._computed_constructor, $._direct_constructor),
-    // 3.9.1 Direct Element Constructors
     _direct_constructor: $ => choice(
         $.direct_element
         // TODO dir_comment_constructor,
@@ -314,8 +310,7 @@ module.exports = grammar({
         'namespace', 
         field('name', choice($.NCName, $.enclosed_expr)),//@see 3.9.3.7
         field('content', $.enclosed_expr)), // 160
-    //3.10 String Constructors TODO
-    string_constructor: $ => seq('``[', repeat( choice($.char_group, $.interpolation)), ']``'), // 177
+      string_constructor: $ => seq('``[', repeat( choice($.char_group, $.interpolation)), ']``'), // 177
     // TODO this is not correct  string content is external in other tree sitters
     char_group: $ => token(prec.left(repeat1(/[^`\]]/))), // TODO
     interpolation: $ => seq('`{', commaSep($._expr), '}`'), // 1p80',
