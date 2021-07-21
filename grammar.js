@@ -35,22 +35,12 @@ const PREC = {
     optional(/[+-]/),
     repeat1(DIGIT)
   ), // TODO check
-  DECIMAL = seq(repeat(DIGIT), '.', repeat(DIGIT)),
+  DECIMAL = seq(repeat(DIGIT), '.', repeat(DIGIT))
   //https://github.com/bwrrp/slimdom.js/blob/main/src/util/namespaceHelpers.ts#L132
 //var xmlName = /^\p{L}[\p{L}0-9\-.]*(:[\p{L}0-9\-.]+)?$/u;
-  NAME_START_CHAR = /[^.\-,;:!?'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/,
-  NAME_CHAR = /[^,;:!?.'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/,
-  EscapeApos = "''",
-    EscapeQuote = '""',
-    PredefinedEntityRef = seq(
-      '&',
-      choice('lt', 'gt', 'amp', 'quot', 'apos'),
-      ';'
-    ),
-    CharRef = choice(
-      seq('&#', repeat1(/[0-9]/), ';'),
-      seq('&#x', repeat1(/[0-9a-fA-F]/), ';')
-    )
+  //NAME_START_CHAR = /[^.\-,;:!?'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/,
+  //NAME_CHAR = /[^,;:!?.'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/
+
 module.exports = grammar({
   name: 'xquery',
   extras: $ => [$.comment, /\s/],
@@ -154,24 +144,9 @@ module.exports = grammar({
      ), optional($._postfix_expr))),
     // 3.1.1 Literals
     _literal: $ => choice($.string_literal, $._numeric_literal),
-    string_literal: $ =>
-      choice(
-        // TODO? might turn predefined etc into tokens
-        token(
-          seq(
-            '"',
-            repeat(choice(PredefinedEntityRef, CharRef, EscapeQuote, /[^"&]/)),
-            '"'
-          )
-        ),
-        token(
-          seq(
-            "'",
-            repeat(choice(PredefinedEntityRef, CharRef, EscapeApos, /[^'&]/)),
-            "'"
-          )
-        )
-      ),
+    string_literal: $ => choice(
+        seq( '"', repeat(choice($.predefined_entity_ref, $.char_ref, $.escape_quote, /[^"&]/)),'"'),
+        seq( "'", repeat(choice($.predefined_entity_ref, $.char_ref, $.escape_apos, /[^'&]/)),"'")),
     _numeric_literal: $ =>
       choice($.integer_literal, $.decimal_literal, $.double_literal),
     //3.1.2 Variable References
@@ -287,8 +262,7 @@ module.exports = grammar({
     arrow_function: $ => seq(choice($.EQName, $.var_ref, $.parenthesized_expr), $.argument_list), // 127
 // 3.6 String Concatenation Expressions
       //3.9 Node Constructors
-    node_constructor: $ =>
-      choice($.computed_constructor, $._direct_constructor),
+    node_constructor: $ => choice($.computed_constructor, $._direct_constructor),
     // 3.9.1 Direct Element Constructors
     _direct_constructor: $ =>
       choice(
@@ -297,43 +271,23 @@ module.exports = grammar({
         // TODO dir_comment_constructor,
         // TODO dir_pi_constructor
       ), //141  TODO
-    _direct_element_content: $ => choice($.direct_element, $._element_text),
-    direct_element: $ =>
-      choice(
-        seq($.start_tag, repeat($._direct_element_content), $.end_tag),
-        $.empty_tag
-      ),
+    direct_element: $ => choice( 
+      seq($.start_tag, repeat(choice($.direct_element, $.element_text)), $.end_tag),
+      $.empty_tag ),
     start_tag: $ => seq( '<', $._QName, repeat($.direct_attribute),'>'),
     end_tag: $ => seq('</',  $._QName, '>'),
     empty_tag: $ => seq( '<', $._QName,repeat($.direct_attribute),'/>' ),
+    element_text: $ => choice( $. _common_content, $.char_data ),
     direct_attribute: $ => seq( $._QName, '=',  $.direct_attribute_value),
-    direct_attribute_value: $ => choice( seq(
-      '"',
-      repeat(choice($._common_content, $.escape_quote, /[^"&]/)),
-      '"'
-    ), seq(
-      "'",
-      repeat(choice($._common_content, $.escape_apos, /[^'&]/)),
-      "'"
-    )
-    ),
+    direct_attribute_value: $ => choice( 
+      seq( '"', repeat(choice($._common_content, $.escape_quote, /[^"&]/)),'"'), 
+      seq( "'", repeat(choice($._common_content, $.escape_apos, /[^'&]/)),"'")),
     _common_content: $ =>  choice(
             $.predefined_entity_ref,
             $.char_ref,
             $.escape_curly,
             $.enclosed_expr),
-    _element_text: $ =>
-      prec.left(
-        repeat1(
-          choice(
-            $.predefined_entity_ref,
-            $.char_ref,
-            $.escape_curly,
-            $.enclosed_expr,
-            $.char_data
-          )
-        )
-      ),
+
     char_data: $ => /[^{}<&]+/,
     char_ref: $ => choice( seq('&#', repeat1(/[0-9]/), ';'),seq('&#x', repeat1(/[0-9a-fA-F]/), ';') ),
     escape_curly: $ => choice('{{', '}}'),
@@ -370,20 +324,9 @@ module.exports = grammar({
         field('content', $.enclosed_expr)
       ), // 160
     //3.10 String Constructors TODO
-    //        token(
-          /* seq(
-            '"',
-            repeat(choice(PredefinedEntityRef, CharRef, EscapeQuote, /[^"&]/)),
-            '"'
-          )
-        ) */
     string_constructor: $ => seq('``[', repeat( choice($.char_group, $.interpolation)), ']``'), // 177
     // TODO this is not correct  string content is external in other tree sitters
-    // _string_content: $ => repeat(choice(, $.interpolation)),
-    // Lletter | N number | P punctuation  
     char_group: $ => token(prec.left(repeat1(/[^`\]]/))), // TODO
-    //:;`"'@#.,|^&<=>+\-*/\\%?!~()\[\]{}
-    // var xmlName = /^\p{L}[\p{N}\-.]*(:[\p{L}0-9\-.]+)?$/u;
     interpolation: $ => seq('`{', commaSep($._expr), '}`'), // 1p80',
     //3.11 Maps and Arrays
     map_constructor: $ => seq('map',seq('{',commaSep($.map_entry),'}')),//170
@@ -865,7 +808,7 @@ module.exports = grammar({
     NCName: $ => $.identifier, // 123
     uri_qualified_name: $ => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
     braced_uri_literal: $ =>
-      seq('Q{', repeat1(choice(PredefinedEntityRef, CharRef, /[^&{}]/)), '}'), // 224
+      seq('Q{', repeat1(choice($.predefined_entity_ref, $.char_ref, /[^&{}]/)), '}'), // 224
     //[A-Za-z_\\xC0-\\xD6][-a-zA-Zα-ωΑ-Ωµ0-9_']*/
     identifier: $ => /[_A-Za-z]{1}[\-\w]*/,
     keyword: $ => /[a-z]+([-][a-z]+)*/,
