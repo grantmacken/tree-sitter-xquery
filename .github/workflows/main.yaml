@@ -61,6 +61,10 @@ jobs:
             bin/tree-sitter parse examples/comparison_expressions.xq
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/string_concat_expressions.xq
+            printf %60s | tr ' ' '-' && ech-o
+            bin/tree-sitter parse examples/arithmetic_expressions.xq
+            printf %60s | tr ' ' '-' && echo
+            bin/tree-sitter parse examples/sequence_expressions.xq
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
 #         printf %60s | tr ' ' '-' && echo

@@ -109,10 +109,14 @@
 ; 3.17 Try/Catch Expressions 
 [ "try" "catch" ] @conditional
 ; 3.18 Expressions on SequenceTypes
-(instance_of_expr ["instance" "of"] @keyword.operator) 
-(cast_expr [ "cast"] @keyword.operator) 
-(castable_expr [ "castable"] @keyword.operator) 
-(treat_expr [ "treat"] @keyword.operator) 
+[
+(instance_of_expr ["instance" "of"]) 
+(cast_expr [ "cast"]) 
+(castable_expr [ "castable"]) 
+(treat_expr [ "treat"]) 
+(intersect_except_expr [ "intersect" "except"] )
+(union_expr [ "union" ] )
+] @keyword.operator
 
 [ "typeswitch" "case" "default" ] @conditional
 
@@ -123,6 +127,7 @@
 [
 (string_concat_expr ["||"] )
 (bang_expr [ "!" ] )
+
 (arrow_expr [ "=>" ] )
 (context_item_expr [ "." ] )
 ] @operator
