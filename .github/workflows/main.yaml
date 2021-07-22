@@ -27,6 +27,12 @@ jobs:
             printf %60s | tr ' ' '-' && echo
       - name: 3.1 Primary Expressions
         run: bin/tree-sitter parse examples/primary_expressions.xq --quiet
+      - name: 3.10 String Constructors
+        run: bin/tree-sitter parse examples/string_constructors.xq --quiet
+      - name: 3.2 Postfix Expressions
+        run: bin/tree-sitter parse examples/postfix_expressions.xq --quiet
+      - name: 3.3 Path Expressions
+        run: bin/tree-sitter parse examples/path_expressions.xq --quiet
             # printf %60s | tr ' ' '-' && echo
             # echo '3.10 String Constructors'
             # bin/tree-sitter parse examples/string_constructors.xq --quiet

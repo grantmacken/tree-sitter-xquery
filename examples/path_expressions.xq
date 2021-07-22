@@ -9,7 +9,6 @@
  child::div1,
  '3.3.1 Relative Path Expressions',
  child::div1/child::para,
- 'TODO /*',
  /child::div1/*,
  parent::div1/*,
  '3.3.2.2 Node Tests',
@@ -97,7 +96,7 @@ para[5][@type="warning"],
 chapter[title="Introduction"],
 chapter[title],
 employee[@secretary and @assistant],
-'TODO! ERROR book(chapter|appendix)/section',
+book(chapter|appendix)/section,
 'END'
 )
 
