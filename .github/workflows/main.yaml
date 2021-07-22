@@ -23,53 +23,52 @@ jobs:
             echo "TERM=xterm" >> $GITHUB_ENV
             bin/tree-sitter generate
             printf %60s | tr ' ' '-' && echo
-      - name: parse
-        run: |
             echo 'checks: with "quiet" flag, parse error will fail run'   
-            echo '3.1 Primary Expressions'
-            bin/tree-sitter parse examples/_primary_expressions.xq --quiet
             printf %60s | tr ' ' '-' && echo
-            echo '3.10 String Constructors'
-            bin/tree-sitter parse examples/string_constructors.xq --quiet
-            printf %60s | tr ' ' '-' && echo
-            echo '3.2 Postfix Expressions'
-            bin/tree-sitter parse examples/postfix_expressions.xq --quiet
-            echo '3.11 Maps and Arrays'
-            bin/tree-sitter parse examples/maps_and_arrays.xq --quiet
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/path.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/postfix.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/bang.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/arrow.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/expressions_on_sequence_types.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/try-catch.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/quantified.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/switch.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/conditional.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/ordered_unordered.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/FLWOR.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/node_constructors.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/logical_expressions.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/comparison_expressions.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/string_concat_expressions.xq
-            printf %60s | tr ' ' '-' && ech-o
-            bin/tree-sitter parse examples/arithmetic_expressions.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/sequence_expressions.xq
+      - name: 3.1 Primary Expressions
+        run: bin/tree-sitter parse examples/primary_expressions.xq --quiet
+            # printf %60s | tr ' ' '-' && echo
+            # echo '3.10 String Constructors'
+            # bin/tree-sitter parse examples/string_constructors.xq --quiet
+            # printf %60s | tr ' ' '-' && echo
+            # echo '3.2 Postfix Expressions'
+            # bin/tree-sitter parse examples/postfix_expressions.xq --quiet
+            # echo '3.11 Maps and Arrays'
+            # # bin/tree-sitter parse examples/maps_and_arrays.xq --quiet
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/path.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/postfix.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/bang.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/arrow.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/expressions_on_sequence_types.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/try-catch.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/quantified.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/switch.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/conditional.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/ordered_unordered.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/FLWOR.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/node_constructors.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/logical_expressions.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/comparison_expressions.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/string_concat_expressions.xq
+            # printf %60s | tr ' ' '-' && ech-o
+            # bin/tree-sitter parse examples/arithmetic_expressions.xq
+            # printf %60s | tr ' ' '-' && echo
+            # bin/tree-sitter parse examples/sequence_expressions.xq
 #         bin/tree-sitter test
 #         bin/tree-sitter parse examples/*.xq --quiet
 #         printf %60s | tr ' ' '-' && echo
