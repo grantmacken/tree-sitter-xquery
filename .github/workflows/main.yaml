@@ -25,8 +25,15 @@ jobs:
             printf %60s | tr ' ' '-' && echo
       - name: parse
         run: |
+            echo 'checks: with "quiet" flag, parse error will fail run'   
             echo '3.1 Primary Expressions'
-            bin/tree-sitter parse examples/_primary_expressions.xq
+            bin/tree-sitter parse examples/_primary_expressions.xq --quiet
+            printf %60s | tr ' ' '-' && echo
+            echo '3.10 String Constructors'
+            bin/tree-sitter parse examples/string_constructors.xq --quiet
+            printf %60s | tr ' ' '-' && echo
+            echo '3.11 Maps and Arrays'
+            bin/tree-sitter parse examples/arrays-maps.xq --quiet
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/path.xq
             printf %60s | tr ' ' '-' && echo
@@ -49,10 +56,6 @@ jobs:
             bin/tree-sitter parse examples/ordered_unordered.xq
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/FLWOR.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/arrays-maps.xq
-            printf %60s | tr ' ' '-' && echo
-            bin/tree-sitter parse examples/string_constructors.xq
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/node_constructors.xq
             printf %60s | tr ' ' '-' && echo
