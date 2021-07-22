@@ -459,16 +459,16 @@ module.exports = grammar({
     typeswitch_case_return: $ => seq('return', $._expr),
     typeswitch_default: $ =>
       seq('default', optional($.var_ref), 'return', $._expr),
-    //3.18.5 Constructor Functions TODO
-    // 3.19 Simple map _operator (!)
     // 3.21 Validate Expressions TODO
     // 3.22 Extension Expressions TODO
     //4.1 Version Declaration
-    version_declaration: $ =>
-      seq('xquery', choice($._encoding, $._version, $._version_encoding), ';'),
-    _encoding: $ => seq('encoding', $.string_literal),
-    _version: $ => seq('version', $.string_literal),
-    _version_encoding: $ => seq($._version, $._encoding),
+    version_declaration: $ => seq(
+      'xquery', 
+       choice( 
+         seq('encoding', $.string_literal),
+         seq('version', $.string_literal, optional( seq('encoding', $.string_literal)))),
+      ';'
+    ), 
     //4.2 Module Declaration
     module_declaration: $ =>
       seq(

@@ -1,4 +1,5 @@
 
+(version_declaration ["xquery" "encoding" "version" ] ) @keyword
 
 ; primary
 [(string_literal) (char_data) (char_ref) (char_group) ] @string

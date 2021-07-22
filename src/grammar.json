@@ -3911,61 +3911,57 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_encoding"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "encoding"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "string_literal"
+                }
+              ]
             },
             {
-              "type": "SYMBOL",
-              "name": "_version"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_version_encoding"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "version"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "string_literal"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "encoding"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "string_literal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
         {
           "type": "STRING",
           "value": ";"
-        }
-      ]
-    },
-    "_encoding": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "encoding"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string_literal"
-        }
-      ]
-    },
-    "_version": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "version"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string_literal"
-        }
-      ]
-    },
-    "_version_encoding": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_version"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_encoding"
         }
       ]
     },

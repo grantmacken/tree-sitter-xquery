@@ -69,3 +69,5 @@ jobs:
         run: bin/tree-sitter parse examples/bang.xq --quiet
       - name: 3.20 Arrow operator (=>)
         run: bin/tree-sitter parse examples/arrow.xq --quiet
+      - name: 4.1 Version Declaration
+        run: bin/tree-sitter parse examples/version_declaration.xq --quiet
