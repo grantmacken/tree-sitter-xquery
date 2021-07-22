@@ -96,9 +96,9 @@ module.exports = grammar({
     _expr: $ => choice( // statement like expressions all prec 2
       $._primary_expr,
       $.flwor_expr,
-     $.quantified_expr,
-     $.switch_expr,
-     $.if_expr,
+      $.quantified_expr,
+      $.switch_expr,
+      $.if_expr,
      $.typeswitch_expr,
      $.try_catch_expr,
     $.or_expr, // 83             prec: 3
@@ -118,6 +118,7 @@ module.exports = grammar({
     $.unary_expr, //  97         prec: 17 '-' '+' arithmetic prefix right to left
     $.bang_expr, //107           prec: 18
     $.path_expr, //108           prec: 19   '/' '//'  not relative path?
+
       //  $.predicate //124        prec: 20 @primary postfix predicate '[' ']'
       //  $.postfix_lookup //125   prec: 20 @primary postfix lookup   '?'
       //  $.unary_lookup,// 181    prec: 21 @primary unary lookup
@@ -125,6 +126,7 @@ module.exports = grammar({
     ),
     // 3.1 Primary Expressions
     _primary_expr: $ => prec.left(PREC.primary,seq(choice(
+      $.enclosed_expr, // 36,
       $._literal, // 57
       $.var_ref, // 59
       $.parenthesized_expr, // 133
@@ -140,7 +142,7 @@ module.exports = grammar({
       $.square_array_constructor, // 175 array_constructor 174
       $.curly_array_constructor, // 176  array_constructor 174
       $.string_constructor, // 177
-      $.unary_lookup // 181
+      $.unary_lookup,// 181
      ), optional($._postfix_expr))),
     // 3.1.1 Literals
     _literal: $ => choice($.string_literal, $._numeric_literal),
@@ -153,7 +155,7 @@ module.exports = grammar({
     var_ref: $ => seq('$',  $.EQName ),
     // note: a dynamic function call can consist of _postfix_expr [ var_ref + argument_list ]
     // 3.1.3 Parenthesized Expressions
-    parenthesized_expr: $ =>  seq('(', commaSep($._expr), ')'), // 133
+    parenthesized_expr: $ =>  seq('(', optional($._query_body), ')'), // 133
     //3.1.4 Context Item Expression TODO not like spec
     context_item_expr: $ => prec.left(seq('.', optional( $.path_expr))),
     //3.1.5 Static Function Calls
@@ -184,17 +186,17 @@ module.exports = grammar({
         field('param_name', seq('$', $.EQName)),
         optional(field('param_type', seq('as', $.sequence_type)))
       ),
-    // 3.1.8 Enclosed Expressions
-    enclosed_expr: $ => prec(1, seq('{', commaSep($._expr), '}')), // 5
+    // 3.1.8 Enclosed Expressions: when content empty then empty parenthesized_expr {()} is assumed
+    enclosed_expr: $ =>  seq('{', optional( $._query_body ) , '}'), // 5
     // 3.2 Postfix Expressions TODO
     //_postfix_expr: $ =>  seq($._primary_expr, optional(repeat1(choice($.predicate, $.argument_list, $.postfix_lookup)))), // 49
     _postfix_expr: $ =>  repeat1(choice($.predicate, $.postfix_lookup, $.argument_list )), // 49
     // 3.2.1 Filter Expressions TODO tests
-    predicate: $ => prec(20, seq( '[', field('filter', $._expr ), ']')), //124
+    predicate: $ => prec(20, seq( '[', field('filter', $._query_body ), ']')), //124
     // 3.2.2 Dynamic Function Calls
     argument_list: $ => prec(1,seq('(', commaSep($.argument), ')')), // 122
     argument: $ => choice($._expr, $.argument_placeholder), // 138
-    argument_placeholder: $ => token('?'), //  139
+    argument_placeholder: $ => '?', //  139
     // 3.3 Path Expressions
     // https://docs.oracle.com/cd/E13190_01/liquiddata/docs81/xquery/query.html
     path_expr: $ => prec.left(19, 

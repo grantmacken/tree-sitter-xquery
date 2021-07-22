@@ -25,21 +25,26 @@
 ;    local_part: (identifier)
 ; ] @property)
  
-
-
   (EQName 
     [
     ns_builtin: (identifier) 
     prefix: (identifier)
     ] @namespace)
 
-  (EQName 
-    [
-     local_part: (identifier)
-    unprefixed: (identifier)
-    ] @constant)
+  ; (EQName 
+  ;   [
+  ;    local_part: (identifier)
+  ;   unprefixed: (identifier)
+  ;   ] @constant)
 
-(var_ref ["$"]  @constant)
+(var_ref 
+  ["$"]  @variable
+ (EQName 
+    [
+    local_part: (identifier)
+    unprefixed: (identifier)
+    ] @variable)
+  )
 
 (function_call
   (EQName 
@@ -156,7 +161,6 @@
 "return" @keyword.return
 
 
-"$" @constant 
 
 (comment) @comment
 (ERROR) @error

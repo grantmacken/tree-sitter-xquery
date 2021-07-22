@@ -16,27 +16,10 @@ $var,
 'TODO fn:doc("bib.xml")/books/book[fn:count(./author)>1])',
 'evaluate to a atomic value or expression',
 'TODO (1 to 100)[. mod 5 eq 0])'
-'3.1.5 Static Function Calls',
-my:three-argument-function(1, 2, 3),
-my:two-argument-function((1, 2), 3),
-my:one-argument-function((1, 2, 3)),
-my:one-argument-function(( )),
-my:zero-argument-function( ),
 '3.1.5.1 Evaluating Static and Dynamic Function Calls',
-'Example: Partial Application of an Anonymous Function ',
-let $f := function ($seq, $delim) { 
-    fn:fold-left($seq, "", fn:concat(?, $delim, ?)) },
-    $paf := $f(?, ".")
-return $paf(1 to 5),
 'Example: Partial Application of a Built-In Function',
 let $sum-of-squares := fn:fold-right(?, 0, function($a, $b) { $a div $a + $b })
 return $sum-of-squares(1 to 3),
-'Example: Partial Application of a Map',
-let $a := map {"A": 1, "B": 2}(?) return $a("A"),
-'Example: Derived Types and Nonlocal Variable Bindings',
-let $incr := 1,
-    $f := function ($i as xs:decimal) as xs:decimal { $i + $incr }
-return $f(5),
 'Example: Using the Context Item in an Anonymous Function',
 'TODO let $vat := function($art) { $art@vat + $art/@price } return shop/article/$vat(.)',
 'Example: A Built-in Function',

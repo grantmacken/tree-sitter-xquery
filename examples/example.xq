@@ -1,4 +1,2 @@
-('3.6 String Concatenation Expressions',
-"con" || "cat" || "enate",
-'end'
-)
+(1 to 100)
+
