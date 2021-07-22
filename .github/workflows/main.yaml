@@ -32,8 +32,10 @@ jobs:
             echo '3.10 String Constructors'
             bin/tree-sitter parse examples/string_constructors.xq --quiet
             printf %60s | tr ' ' '-' && echo
+            echo '3.2 Postfix Expressions'
+            bin/tree-sitter parse examples/postfix_expressions.xq --quiet
             echo '3.11 Maps and Arrays'
-            bin/tree-sitter parse examples/arrays-maps.xq --quiet
+            bin/tree-sitter parse examples/maps_and_arrays.xq --quiet
             printf %60s | tr ' ' '-' && echo
             bin/tree-sitter parse examples/path.xq
             printf %60s | tr ' ' '-' && echo
