@@ -47,84 +47,25 @@ jobs:
         run: bin/tree-sitter parse examples/node_constructors.xq --quiet
       - name: 3.10 String Constructors
         run: bin/tree-sitter parse examples/string_constructors.xq --quiet
-            # printf %60s | tr ' ' '-' && echo
-            # echo '3.10 String Constructors'
-            # bin/tree-sitter parse examples/string_constructors.xq --quiet
-            # printf %60s | tr ' ' '-' && echo
-            # echo '3.2 Postfix Expressions'
-            # bin/tree-sitter parse examples/postfix_expressions.xq --quiet
-            # echo '3.11 Maps and Arrays'
-            # # bin/tree-sitter parse examples/maps_and_arrays.xq --quiet
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/path.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/postfix.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/bang.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/arrow.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/expressions_on_sequence_types.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/try-catch.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/quantified.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/switch.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/conditional.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/ordered_unordered.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/FLWOR.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/node_constructors.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/logical_expressions.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/comparison_expressions.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/string_concat_expressions.xq
-            # printf %60s | tr ' ' '-' && ech-o
-            # bin/tree-sitter parse examples/arithmetic_expressions.xq
-            # printf %60s | tr ' ' '-' && echo
-            # bin/tree-sitter parse examples/sequence_expressions.xq
-#         bin/tree-sitter test
-#         bin/tree-sitter parse examples/*.xq --quiet
-#         printf %60s | tr ' ' '-' && echo
-#         echo 'PARSE EXAMPLES'
-#         echo '=============='
-#         echo '1: primay and misc expressions'
-#         echo '=============================='
-#         bin/tree-sitter parse examples/lib.xq
-#         printf %60s | tr ' ' '-' && echo
-#         echo '2: constructors expressions'
-#         echo '==========================='
-#         bin/tree-sitter parse examples/constructors.xq
-#         printf %60s | tr ' ' '-' && echo
-#         echo '3: path expressions'
-#         echo '==========================='
-#         bin/tree-sitter parse examples/xPath.xq
-#         printf %60s | tr ' ' '-' && echo
-#         echo '4: main module and prolog expressions'
-#         echo '====================================='
-#         bin/tree-sitter parse examples/main.xq
-#         printf %60s | tr ' ' '-' && echo
-#         echo 'QUERY EXAMPLES'
-#         echo '====================================='
-#         echo '1: a library module'
-#         echo '==================='
-#         bin/tree-sitter query --captures queries/highlights.scm examples/lib.xq
-#         printf %60s | tr ' ' '-' && echo
-#         echo '2: a main module'
-#         echo '================'
-#         bin/tree-sitter query --captures queries/highlights.scm examples/main.xq
-#         printf %60s | tr ' ' '-' && echo
-#         echo '3: misc xpath expressions'
-#         echo '========================='
-#         bin/tree-sitter query --captures queries/highlights.scm examples/xPath.xq
-#         printf %60s | tr ' ' '-' && echo
-#         echo '4: misc constructor expressions'
-#         echo '==============================='
-#         bin/tree-sitter query --captures queries/highlights.scm examples/constructors.xq
-#         printf %60s | tr ' ' '-' && echo
+      - name: 3.11 Maps and Arrays 
+        run: bin/tree-sitter parse examples/maps_and_arrays.xq --quiet
+      - name: 3.12 FLWOR Expressions 
+        run: bin/tree-sitter parse examples/FLWOR_expressions.xq --quiet
+      - name: 3.13 Ordered and Unordered Expressions
+        run: bin/tree-sitter parse examples/ordered_and_unordered_expressions.xq --quiet
+      - name: 3.14 Conditional Expressions
+        run: bin/tree-sitter parse examples/conditional_expressions.xq --quiet
+      - name: 3.15 Switch Expression
+        run: bin/tree-sitter parse examples/switch_expression.xq --quiet
+      - name: 3.16 Quantified Expressions
+        run: bin/tree-sitter parse examples/quantified_expressions.xq --quiet
+      - name: 3.17 Try Catch Expressions
+        run: bin/tree-sitter parse examples/try_catch_expressions.xq --quiet
+      - name: TODO 3.18 Expressions on SequenceTypes 
+        run: bin/tree-sitter parse examples/expressions_on_sequence_types.xq --quiet
+      - name: 3.19 Simple map operator 
+        run: bin/tree-sitter parse examples/bang.xq --quiet
+      - name: 3.19 Simple map operator 
+        run: bin/tree-sitter parse examples/bang.xq --quiet
+      - name: 3.20 Arrow operator (=>)
+        run: bin/tree-sitter parse examples/arrow.xq --quiet
