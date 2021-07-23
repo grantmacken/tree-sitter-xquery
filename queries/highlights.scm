@@ -3,12 +3,13 @@
 [ 
   "xquery" "encoding" "version" 
   "declare" "module" "namespace" "option" "import" "schema"
-  "construction"  "preserve"  "strip" ; construction_declaration
-  "ordering"  "ordered"  "unordered" ; ordering_mode_declaration TODO also order_expr
+  "base-uri" ; base_uri_declaration
+  "construction"  "preserve"  "strip"   ; construction_declaration
+  "ordering"  "ordered"  "unordered"    ; ordering_mode_declaration TODO also order_expr
   "order"  "empty"  "greatest"  "least" ;empty_order_declaration TODO also in FLWOR
-  "copy-namespaces" "preserve"  "no-preserve" "inherit"  "no-inherit"
-  "decimal-format" "decimal-separator" "grouping-separator" "infinity" "minus-sign" "NaN"
-  "percent" "per-mille"  "zero-digit" "digit" "pattern-separator" "exponent-separator"
+  "copy-namespaces" "preserve"  "no-preserve" "inherit"  "no-inherit" ; copy_namespaces_declaration
+  "decimal-format" "decimal-separator" "grouping-separator" "infinity" "minus-sign" "NaN" ; decimal_format_declaration
+  "percent" "per-mille"  "zero-digit" "digit" "pattern-separator" "exponent-separator"    ; decimal_format_declaration
   "variable" "context" "item" "external"
   ] @keyword
 
