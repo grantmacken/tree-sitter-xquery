@@ -5130,20 +5130,6 @@
             "named": true
           }
         ]
-      },
-      "result": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "as",
-            "named": false
-          },
-          {
-            "type": "sequence_type",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -5152,6 +5138,10 @@
       "types": [
         {
           "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
           "named": true
         }
       ]

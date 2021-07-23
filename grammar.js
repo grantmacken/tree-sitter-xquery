@@ -535,11 +535,11 @@ module.exports = grammar({
     function_declaration: $ =>
       seq(
         'declare',
-        optional(repeat1($.annotation)),
+        repeat($.annotation),
         'function',
         field('name', $.EQName),
         field('params', $.param_list),
-        field('result', optional(seq('as', $.sequence_type))),
+        optional($.type_declaration),
         field('body', choice($.enclosed_expr, 'external'))
       ),
     //4.19 Option Declaration
