@@ -3,6 +3,7 @@
 [ 
   "xquery" "encoding" "version" 
   "declare" "module" "namespace" "option" "import" "schema"
+  "construction"  "preserve"  "strip" ; construction_declaration
   "ordering"  "ordered"  "unordered" ; ordering_mode_declaration TODO also order_expr
   "order"  "empty"  "greatest"  "least" ;empty_order_declaration TODO also in FLWOR
   "copy-namespaces" "preserve"  "no-preserve" "inherit"  "no-inherit"

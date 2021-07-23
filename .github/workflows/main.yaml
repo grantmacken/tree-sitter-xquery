@@ -71,6 +71,8 @@ jobs:
         run: bin/tree-sitter parse examples/arrow.xq --quiet
       - name: 4.1 Version Declaration
         run: bin/tree-sitter parse examples/version_declaration.xq --quiet
+      - name: 4.6 Construction Declaration
+        run: bin/tree-sitter parse examples/construction_declaration.xq --quiet
       - name: 4.7 Ordering Mode Declaration
         run: bin/tree-sitter parse examples/ordering_mode_declaration.xq --quiet
       - name: 4.8 Empty Order Declaration 
