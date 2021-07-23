@@ -3950,28 +3950,17 @@
   {
     "type": "decimal_format_declaration",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "df_property_name",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "EQName",
+          "named": true
+        },
+        {
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -4008,11 +3997,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "df_property_name",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "direct_attribute",
@@ -15036,11 +15020,11 @@
   },
   {
     "type": "comment",
-    "named": false
+    "named": true
   },
   {
     "type": "comment",
-    "named": true
+    "named": false
   },
   {
     "type": "construction",

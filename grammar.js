@@ -475,22 +475,13 @@ module.exports = grammar({
         choice('inherit', 'no-inherit')
       ),
     // 4.10 Decimal Format Declaration
-    decimal_format_declaration: $ =>
-      seq(
-        'declare',
+    decimal_format_declaration: $ => seq( 'declare',
         choice(
           seq('decimal-format', $.EQName),
           seq('default', 'decimal-format')
         ),
-        optional(
-          seq(
-            field('name', $.df_property_name),
-            '=',
-            field('name', $.string_literal)
-          )
-        )
-      ),
-    df_property_name: $ => choice( 
+        repeat( seq( $._df_property_name, '=', $.string_literal ))),
+    _df_property_name: $ => choice( 
       'decimal-separator','grouping-separator','infinity','minus-sign','NaN','percent','per-mille',
       'zero-digit','digit','pattern-separator','exponent-separator'),
     schema_import: $ => seq( 'import', 'schema', 

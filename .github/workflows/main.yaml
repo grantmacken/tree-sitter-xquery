@@ -71,6 +71,8 @@ jobs:
         run: bin/tree-sitter parse examples/arrow.xq --quiet
       - name: 4.1 Version Declaration
         run: bin/tree-sitter parse examples/version_declaration.xq --quiet
+      - name: 4.10 Decimal Format Declaration 
+        run: bin/tree-sitter parse examples/decimal_format_declaration.xq --quiet
       - name: 4.11 Schema Import
         run: bin/tree-sitter parse examples/schema_import.xq --quiet
       - name: 4.12 Module Import

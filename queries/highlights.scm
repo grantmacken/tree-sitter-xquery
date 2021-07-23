@@ -3,13 +3,20 @@
 [ 
   "xquery" "encoding" "version" 
   "declare" "module" "namespace" "option" "import" "schema"
+  "decimal-format" "decimal-separator" "grouping-separator" "infinity" "minus-sign" "NaN"
+  "percent" "per-mille"  "zero-digit" "digit" "pattern-separator" "exponent-separator"
   "variable" "context" "item" "external"
   ] @keyword
+
+
 
 ; declaration keyword that also appears elsewhere
 (default_namespace_declaration ["element" "function" ] @keyword )
 (schema_import  ["element" ] @keyword )
 (function_declaration ["function" ] @keyword )
+
+ ; declaration and let assignment operators
+ [":=" "="] @operator
 
 ; primary
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
@@ -108,7 +115,6 @@
  ["stable" "order" "by" "ascending"  "descending" "empty" "greatest" "least" "collation" ] @keyword
 ; ; grouping 
  ["group" "by" ] @keyword
- ":=" @operator
 ;3.13 Ordered and Unordered Expressions
 (unordered_expr  ["unordered" ] @conditional)
 (ordered_expr  ["ordered" ] @conditional)
