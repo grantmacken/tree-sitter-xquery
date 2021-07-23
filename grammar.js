@@ -496,10 +496,7 @@ module.exports = grammar({
     schema_import: $ => seq( 'import', 'schema', optional($.schema_prefix), field('uri', $.string_literal), optional(seq('at', commaSep1($.string_literal)))), // 21
     schema_prefix: $ => choice( seq('namespace', $.NCName, '='), seq('default', 'element', 'namespace')), //22',
     // 4.12 Module Import // TODO
-    module_import: $ =>
-      seq(
-        'import',
-        'module',
+    module_import: $ => seq( 'import', 'module',
         optional(seq('namespace', $.NCName, '=')),
         field('uri', $.string_literal),
         optional(seq('at', commaSep1($.string_literal)))
