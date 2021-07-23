@@ -466,14 +466,12 @@ module.exports = grammar({
     ordering_mode_declaration: $ => seq('declare', 'ordering', choice('ordered', 'unordered')),
     empty_order_declaration: $ => seq( 'declare', 'default', 'order', 'empty', choice('greatest', 'least')),
     // 4.9 Copy-Namespaces Declaration
-    copy_namespaces_declaration: $ =>
-      seq(
-        'declare',
-        'copy-namespaces',
-        choice('preserve', 'no-preserve'),
-        ',',
-        choice('inherit', 'no-inherit')
-      ),
+    copy_namespaces_declaration: $ => seq( 
+      'declare', 'copy-namespaces',
+      choice('preserve', 'no-preserve'),
+      ',',
+      choice('inherit', 'no-inherit')
+    ),
     // 4.10 Decimal Format Declaration
     decimal_format_declaration: $ => seq( 'declare',
         choice(
