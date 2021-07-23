@@ -71,6 +71,8 @@ jobs:
         run: bin/tree-sitter parse examples/arrow.xq --quiet
       - name: 4.1 Version Declaration
         run: bin/tree-sitter parse examples/version_declaration.xq --quiet
+      - name: 4.4 Default Collation Declaration
+        run: bin/tree-sitter parse examples/default_collation_declaration.xq --quiet
       - name: 4.5 Base URI Declaration 
         run: bin/tree-sitter parse examples/base_URI_declaration.xq --quiet
       - name: 4.6 Construction Declaration

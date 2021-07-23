@@ -3,6 +3,7 @@
 [ 
   "xquery" "encoding" "version" 
   "declare" "module" "namespace" "option" "import" "schema"
+  "default"  "collation" ; default_collation_declaration TO also in _query_body
   "base-uri" ; base_uri_declaration
   "construction"  "preserve"  "strip"   ; construction_declaration
   "ordering"  "ordered"  "unordered"    ; ordering_mode_declaration TODO also order_expr
