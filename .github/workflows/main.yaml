@@ -73,3 +73,5 @@ jobs:
         run: bin/tree-sitter parse examples/version_declaration.xq --quiet
       - name: 4.16 Variable Declaration
         run: bin/tree-sitter parse examples/variable_declaration.xq --quiet
+      - name: 4.17 Context Item Declaration
+        run: bin/tree-sitter parse examples/context_item_declaration.xq --quiet

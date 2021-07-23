@@ -2,7 +2,7 @@
 [ 
   "xquery" "encoding" "version" 
   "declare" "module" "namespace"
-  "variable" "external"
+  "variable" "context" "item" "external"
   ] @keyword
 
 
