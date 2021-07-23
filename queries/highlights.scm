@@ -1,8 +1,9 @@
 
-; declarations
+; declarations TODO rm dups
 [ 
   "xquery" "encoding" "version" 
-  "declare" "module" "namespace" "option" "import" "schema"
+  "declare" "module" "namespace" "option" "import" "schema" 
+  "boundary-space"  "preserve"  "strip" ; boundary_space_declaration
   "default"  "collation" ; default_collation_declaration TO also in _query_body
   "base-uri" ; base_uri_declaration
   "construction"  "preserve"  "strip"   ; construction_declaration
