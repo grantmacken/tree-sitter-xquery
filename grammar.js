@@ -504,9 +504,9 @@ module.exports = grammar({
         field('uri', $.string_literal),
         optional(seq('at', commaSep1($.string_literal)))
       ),
-    namespace_declaration: $ => seq( 'declare', 'namespace', field('name', $.NCName), '=', field('uri', $.string_literal)), // 24
-    default_namespace_declaration: $ => seq(
-      'declare', 'default', 
+    namespace_declaration: $ => seq( 'declare', 'namespace', 
+      field('name', $.NCName), '=', field('uri', $.string_literal)), // 4.13
+    default_namespace_declaration: $ => seq( 'declare', 'default', 
       choice('element', 'function'), 'namespace', field('uri', $.string_literal)), // 4.14
     //4.15 Annotations
     annotation: $ =>
