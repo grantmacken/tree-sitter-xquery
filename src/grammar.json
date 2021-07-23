@@ -4331,8 +4331,47 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "schema_prefix"
+              "type": "FIELD",
+              "name": "prefix",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "namespace"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "NCName"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "="
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "default"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "element"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": "namespace"
+                      }
+                    ]
+                  }
+                ]
+              }
             },
             {
               "type": "BLANK"
@@ -4386,45 +4425,6 @@
             },
             {
               "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
-    "schema_prefix": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "namespace"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "NCName"
-            },
-            {
-              "type": "STRING",
-              "value": "="
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "default"
-            },
-            {
-              "type": "STRING",
-              "value": "element"
-            },
-            {
-              "type": "STRING",
-              "value": "namespace"
             }
           ]
         }

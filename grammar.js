@@ -493,8 +493,10 @@ module.exports = grammar({
     df_property_name: $ => choice( 
       'decimal-separator','grouping-separator','infinity','minus-sign','NaN','percent','per-mille',
       'zero-digit','digit','pattern-separator','exponent-separator'),
-    schema_import: $ => seq( 'import', 'schema', optional($.schema_prefix), field('uri', $.string_literal), optional(seq('at', commaSep1($.string_literal)))), // 21
-    schema_prefix: $ => choice( seq('namespace', $.NCName, '='), seq('default', 'element', 'namespace')), //22',
+    schema_import: $ => seq( 'import', 'schema', 
+      optional( field( 'prefix',
+        choice( seq('namespace', $.NCName, '='), seq('default', 'element', 'namespace')))), 
+      field('uri', $.string_literal), optional(seq('at', commaSep1($.string_literal)))), // 21
     // 4.12 Module Import // TODO
     module_import: $ => seq( 'import', 'module',
         optional(seq('namespace', $.NCName, '=')),

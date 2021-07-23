@@ -10549,6 +10549,32 @@
     "type": "schema_import",
     "named": true,
     "fields": {
+      "prefix": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "NCName",
+            "named": true
+          },
+          {
+            "type": "default",
+            "named": false
+          },
+          {
+            "type": "element",
+            "named": false
+          },
+          {
+            "type": "namespace",
+            "named": false
+          }
+        ]
+      },
       "uri": {
         "multiple": false,
         "required": true,
@@ -10565,26 +10591,7 @@
       "required": false,
       "types": [
         {
-          "type": "schema_prefix",
-          "named": true
-        },
-        {
           "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "schema_prefix",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "NCName",
           "named": true
         }
       ]
@@ -15029,11 +15036,11 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": false
   },
   {
     "type": "comment",
-    "named": false
+    "named": true
   },
   {
     "type": "construction",

@@ -2,12 +2,13 @@
 ; declarations
 [ 
   "xquery" "encoding" "version" 
-  "declare" "module" "namespace" "option"
+  "declare" "module" "namespace" "option" "import" "schema"
   "variable" "context" "item" "external"
   ] @keyword
 
 ; declaration keyword that also appears elsewhere
 (default_namespace_declaration ["element" "function" ] @keyword )
+(schema_import  ["element" ] @keyword )
 (function_declaration ["function" ] @keyword )
 
 ; primary
