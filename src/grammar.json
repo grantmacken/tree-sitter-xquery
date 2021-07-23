@@ -22,17 +22,17 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_library_module"
+              "name": "library_module"
             },
             {
               "type": "SYMBOL",
-              "name": "_main_module"
+              "name": "main_module"
             }
           ]
         }
       ]
     },
-    "_library_module": {
+    "library_module": {
       "type": "SEQ",
       "members": [
         {
@@ -43,12 +43,12 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_prolog"
+            "name": "prolog"
           }
         }
       ]
     },
-    "_main_module": {
+    "main_module": {
       "type": "SEQ",
       "members": [
         {
@@ -58,7 +58,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_prolog"
+                "name": "prolog"
               },
               {
                 "type": "STRING",
@@ -73,7 +73,7 @@
         }
       ]
     },
-    "_prolog": {
+    "prolog": {
       "type": "CHOICE",
       "members": [
         {

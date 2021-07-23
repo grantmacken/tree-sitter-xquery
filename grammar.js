@@ -50,11 +50,11 @@ module.exports = grammar({
     module: $ =>
       seq(
         optional($.version_declaration),
-        choice($._library_module, $._main_module)
+        choice($.library_module, $.main_module)
       ),
-    _library_module: $ => seq($.module_declaration, repeat($._prolog)),
-    _main_module: $ => seq(repeat(seq($._prolog,';')), $._query_body),
-    _prolog: $ => choice(
+    library_module: $ => seq($.module_declaration, repeat($.prolog)),
+    main_module: $ => seq(repeat(seq($.prolog,';')), $._query_body),
+    prolog: $ => choice(
       $.default_namespace_declaration,
       // setter
       $.boundary_space_declaration,
