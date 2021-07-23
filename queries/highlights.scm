@@ -1,5 +1,10 @@
 
-(version_declaration ["xquery" "encoding" "version" ] ) @keyword
+[ 
+  "xquery" "encoding" "version" 
+  "declare" "module" "namespace"
+  "variable" "external"
+  ] @keyword
+
 
 ; primary
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
@@ -15,7 +20,12 @@
  (parenthesized_expr ["(" ")"] )
  (predicate ["[" "]"] ) 
  ] @constructor
- (argument_list ["(" ")"] ) @punctuation.bracket
+
+(enclosed_expr ["{" "}" ] @punctuation.bracket )
+(argument_list ["(" ")"]  @punctuation.bracket )
+(param_list ["(" ")"]  @punctuation.bracket )
+ [ ";" ","] @punctuation.delimiter
+
 ;(identifier) @variable
 ;(context_item_expr) @method
 ; (_ 
@@ -32,20 +42,13 @@
     prefix: (identifier)
     ] @namespace)
 
-  ; (EQName 
-  ;   [
-  ;    local_part: (identifier)
-  ;   unprefixed: (identifier)
-  ;   ] @constant)
-
-(var_ref 
-  ["$"]  @variable
- (EQName 
+  (EQName 
     [
-    local_part: (identifier)
+     local_part: (identifier)
     unprefixed: (identifier)
-    ] @variable)
-  )
+    ] @constant)
+
+["$"] @constant
 
 (function_call
   (EQName 
