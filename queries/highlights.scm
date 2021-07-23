@@ -1,8 +1,8 @@
 
 ; declarations TODO rm dups
-[ 
-  "xquery" "encoding" "version" 
-  "declare" "module" "namespace" "option" "import" "schema" 
+[
+  "xquery" "encoding" "version"  ; version_declaration
+  "declare"  "module" "namespace"; module_declaration
   "boundary-space"  "preserve"  "strip" ; boundary_space_declaration
   "default"  "collation" ; default_collation_declaration TO also in _query_body
   "base-uri" ; base_uri_declaration
@@ -12,6 +12,7 @@
   "copy-namespaces" "preserve"  "no-preserve" "inherit"  "no-inherit" ; copy_namespaces_declaration
   "decimal-format" "decimal-separator" "grouping-separator" "infinity" "minus-sign" "NaN" ; decimal_format_declaration
   "percent" "per-mille"  "zero-digit" "digit" "pattern-separator" "exponent-separator"    ; decimal_format_declaration
+   "option" "import" "schema" 
   "variable" "context" "item" "external"
   ] @keyword
 

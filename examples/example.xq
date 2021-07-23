@@ -1,2 +1,1 @@
-declare boundary-space preserve;
-()
+module namespace gis = "http://example.org/gis-functions";
