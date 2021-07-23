@@ -71,6 +71,10 @@ jobs:
         run: bin/tree-sitter parse examples/arrow.xq --quiet
       - name: 4.1 Version Declaration
         run: bin/tree-sitter parse examples/version_declaration.xq --quiet
+      - name: 4.14 Default Namespace Declaration
+        run: bin/tree-sitter parse examples/default_namespace_declaration.xq --quiet
+      - name: 4.15 Annotations 
+        run: bin/tree-sitter parse examples/annotations.xq --quiet
       - name: 4.16 Variable Declaration
         run: bin/tree-sitter parse examples/variable_declaration.xq --quiet
       # - name: 4.17 Context Item Declaration
@@ -79,5 +83,3 @@ jobs:
         run: bin/tree-sitter parse examples/function_declaration.xq --quiet
       - name: 4.19 Option Declaration
         run: bin/tree-sitter parse examples/option_declaration.xq --quiet
-      - name: 4.15 Annotations 
-        run: bin/tree-sitter parse examples/annotations.xq --quiet

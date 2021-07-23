@@ -1,4 +1,5 @@
-declare 
-   %java:method("java.lang.StrictMath.copySign") 
-   function smath:copySign($magnitude, $sign) 
-   external;
+declare option exq:strip-comments "true";
+
+declare namespace smath = "http://example.org/MathLibrary"; 
+declare option exq:java-class "smath = java.lang.StrictMath";
+()

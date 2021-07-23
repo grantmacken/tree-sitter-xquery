@@ -1,10 +1,14 @@
 
+; declarations
 [ 
   "xquery" "encoding" "version" 
-  "declare" "module" "namespace"
+  "declare" "module" "namespace" "option"
   "variable" "context" "item" "external"
   ] @keyword
 
+; declaration keyword that also appears elsewhere
+(default_namespace_declaration ["element" "function" ] @keyword )
+(function_declaration ["function" ] @keyword )
 
 ; primary
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
@@ -24,7 +28,7 @@
 (enclosed_expr ["{" "}" ] @punctuation.bracket )
 (argument_list ["(" ")"]  @punctuation.bracket )
 (param_list ["(" ")"]  @punctuation.bracket )
- [ ";" ","] @punctuation.delimiter
+ [ "%" ";" ":" ","] @punctuation.delimiter
 
 ;(identifier) @variable
 ;(context_item_expr) @method
@@ -161,7 +165,6 @@
  (comp_namespace_constructor ["namespace"] )
  ] @constructor 
 
-"function" @keyword.function
 "return" @keyword.return
 
 
