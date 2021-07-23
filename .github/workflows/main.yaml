@@ -71,6 +71,8 @@ jobs:
         run: bin/tree-sitter parse examples/arrow.xq --quiet
       - name: 4.1 Version Declaration
         run: bin/tree-sitter parse examples/version_declaration.xq --quiet
+      - name: 4.8 Empty Order Declaration 
+        run: bin/tree-sitter parse examples/empty_order_declaration.xq --quiet
       - name: 4.9 Copy-Namespaces Declaration
         run: bin/tree-sitter parse examples/copy_namespaces_declaration.xq --quiet
       - name: 4.10 Decimal Format Declaration 

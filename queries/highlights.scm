@@ -3,6 +3,7 @@
 [ 
   "xquery" "encoding" "version" 
   "declare" "module" "namespace" "option" "import" "schema"
+  "order"  "empty"  "greatest"  "least" ;empty_order_declaration TODO also in FLWOR
   "copy-namespaces" "preserve"  "no-preserve" "inherit"  "no-inherit"
   "decimal-format" "decimal-separator" "grouping-separator" "infinity" "minus-sign" "NaN"
   "percent" "per-mille"  "zero-digit" "digit" "pattern-separator" "exponent-separator"
