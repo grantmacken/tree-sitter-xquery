@@ -61,28 +61,24 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "prolog",
+          "type": "REPEAT",
           "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
                 "type": "SYMBOL",
                 "name": "_prolog"
               },
               {
-                "type": "BLANK"
+                "type": "STRING",
+                "value": ";"
               }
             ]
           }
         },
         {
-          "type": "FIELD",
-          "name": "body",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_query_body"
-          }
+          "type": "SYMBOL",
+          "name": "_query_body"
         }
       ]
     },
@@ -638,29 +634,20 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "result_type",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "as"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "sequence_type"
-                  }
-                ]
-              },
-              {
-                "type": "BLANK"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "result_type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "type_declaration"
               }
-            ]
-          }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -745,17 +732,8 @@
               "type": "FIELD",
               "name": "param_type",
               "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "as"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "sequence_type"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "type_declaration"
               }
             },
             {
@@ -4752,19 +4730,6 @@
         }
       ]
     },
-    "type_declaration": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "as"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "sequence_type"
-        }
-      ]
-    },
     "context_item_declaration": {
       "type": "SEQ",
       "members": [
@@ -4937,6 +4902,19 @@
             "type": "SYMBOL",
             "name": "string_literal"
           }
+        }
+      ]
+    },
+    "type_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "as"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "sequence_type"
         }
       ]
     },
@@ -5693,17 +5671,8 @@
       ]
     },
     "signature_return": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "as"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "sequence_type"
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "type_declaration"
     },
     "any_map_test": {
       "type": "SEQ",

@@ -29,8 +29,8 @@ module.exports = grammar({
       ),
     library_module: $ => seq($.module_declaration, repeat(seq($._prolog,';'))),
     main_module: $ => seq(
-      field('prolog',optional($._prolog)), 
-      field('body',$._query_body)),
+      repeat(seq($._prolog,';')), 
+      $._query_body),
     _prolog: $ => choice(
       $.default_namespace_declaration,
       // setter
@@ -134,14 +134,14 @@ module.exports = grammar({
         // optional( $.annotation ),
         'function',
         field('parameters', $.param_list),
-        field('result_type', optional(seq('as', $.sequence_type))),
+        optional( field('result_type', $.type_declaration)),
         field('body', $.enclosed_expr)
       ), // 169
     param_list: $ => seq('(', commaSep($.param), ')'),
     param: $ =>
       seq(
         field('param_name', seq('$', $.EQName)),
-        optional(field('param_type', seq('as', $.sequence_type)))
+        optional(field('param_type', $.type_declaration))
       ),
     // 3.1.8 Enclosed Expressions: when content empty then empty parenthesized_expr {()} is assumed
     enclosed_expr: $ =>  seq('{', optional( $._query_body ) , '}'), // 5
@@ -483,7 +483,6 @@ module.exports = grammar({
       choice( 
         seq( ':=', $._expr ),
         seq('external', optional( seq(':=', $._expr ))))), // 26
-    type_declaration: $ => seq( 'as',  $.sequence_type),
     // 4.17 Context Item Declaration
     context_item_declaration: $ => seq(
         'declare', 'context', 'item',
@@ -610,7 +609,7 @@ module.exports = grammar({
         optional(field('anno', $.annotation)),
          'function', '(', $.signature_params, ')', $.signature_return ),
     signature_params: $ => commaSep1($.sequence_type),
-    signature_return: $ => seq('as', $.sequence_type),
+    signature_return: $ => $.type_declaration,
     any_map_test: $ => seq( 'map','(', '*', ')' ), // 210
     typed_map_test: $ => seq( 'map','(', $.atomic_or_union_type,',', $.sequence_type,')'), // 212
     any_array_test: $ => seq( 'array', '(', '*', ')' ),
