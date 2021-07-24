@@ -1,5 +1,7 @@
-declare namespace env="http://www.w3.org/2003/05/soap-envelope";
-declare context item as element(env:Envelope) external;
-declare context item as element(sys:log) external := doc("/var/xlogs/sysevent.xml")/sys:log; 
-()
+
+module namespace strings = "http://datypic.com/strings";
+declare variable $strings:maxStringLength := 32;
+declare function strings:trim($arg as xs:string?) as xs:string? {
+  replace(replace($arg,'^\s+',''),'\s+$','')
+};
 

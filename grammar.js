@@ -1,29 +1,4 @@
-const PREC = {
-    primary: 23,
-    unarylookup: 22,
-    predicate: 21,
-    lookup: 20,
-    path: 19,
-    bang: 18,
-    unary: 17,
-    arrow: 16,
-    cast: 15,
-    castable: 14,
-    treat: 13,
-    instance: 12,
-    intersect: 11,
-    union: 10,
-    multiplicative: 9,
-    additive: 8,
-    range: 7,
-    concat: 6,
-    comparison: 5,
-    and: 4,
-    or: 3,
-    statement: 2,
-    comma: 1
-  },
-  DIGIT = /[0-9]/,
+const  DIGIT = /[0-9]/,
   INTEGER = repeat1(DIGIT),
   DOUBLE = seq(
     repeat(DIGIT),
@@ -45,16 +20,18 @@ module.exports = grammar({
   conflicts: $ => [ 
    [$._expr, $._step_expr]
   ],
-  supertypes: $ => [],
+  supertypes: $ => [ $._prolog ],
   rules: {
     module: $ =>
       seq(
         optional($.version_declaration),
         choice($.library_module, $.main_module)
       ),
-    library_module: $ => seq($.module_declaration, repeat($.prolog)),
-    main_module: $ => seq(repeat(seq($.prolog,';')), $._query_body),
-    prolog: $ => choice(
+    library_module: $ => seq($.module_declaration, repeat(seq($._prolog,';'))),
+    main_module: $ => seq(
+      field('prolog',optional($._prolog)), 
+      field('body',$._query_body)),
+    _prolog: $ => choice(
       $.default_namespace_declaration,
       // setter
       $.boundary_space_declaration,
@@ -72,47 +49,40 @@ module.exports = grammar({
       $.context_item_declaration,
       $.variable_declaration,
       $.function_declaration,
-      $.option_declaration ),
+      $.option_declaration),
     _query_body: $ => seq($._expr, optional( repeat(seq( prec(1,','), $._expr)))),
-     /* sequence_expr: $ => seq(
-        field('lhs', $._expr),
-        ',',
-        field('rhs', choice($.sequence_expr, $._expr))
-      ), */
-    // seq($._expr, optional( repeat(seq( prec(1,','), $._expr)))),
     _expr: $ => choice( // statement like expressions all prec 2
       $._primary_expr,
       $.flwor_expr,
       $.quantified_expr,
       $.switch_expr,
       $.if_expr,
-     $.typeswitch_expr,
-     $.try_catch_expr,
-    $.or_expr, // 83             prec: 3
-    $.and_expr, // 84            prec: 4
-    $.comparison_expr, // 85     prec: 5
-    $.string_concat_expr, // 86  prec: 6
-    $.range_expr, // 87          prec: 7
-    $.additive_expr, // 88       prec: 8
-    $.multiplicative_expr, // 89 prec: 9
-    $.union_expr, // 90          prec: 10 
-    $.intersect_except_expr,//91 prec: 11
-    $.instance_of_expr, // 92    prec: 12
-    $.treat_expr, // 93          prec: 13
-    $.castable_expr, // 94       prec: 14
-    $.cast_expr, // 95           prec: 15
-    $.arrow_expr, // 96          prec: 16
-    $.unary_expr, //  97         prec: 17 '-' '+' arithmetic prefix right to left
-    $.bang_expr, //107           prec: 18
-    $.path_expr, //108           prec: 19   '/' '//'  not relative path?
-
+      $.typeswitch_expr,
+      $.try_catch_expr,
+      $.or_expr, // 83             prec: 3
+      $.and_expr, // 84            prec: 4
+      $.comparison_expr, // 85     prec: 5
+      $.string_concat_expr, // 86  prec: 6
+      $.range_expr, // 87          prec: 7
+      $.additive_expr, // 88       prec: 8
+      $.multiplicative_expr, // 89 prec: 9
+      $.union_expr, // 90          prec: 10 
+      $.intersect_except_expr,//91 prec: 11
+      $.instance_of_expr, // 92    prec: 12
+      $.treat_expr, // 93          prec: 13
+      $.castable_expr, // 94       prec: 14
+      $.cast_expr, // 95           prec: 15
+      $.arrow_expr, // 96          prec: 16
+      $.unary_expr, //  97         prec: 17 '-' '+' arithmetic prefix right to left
+      $.bang_expr, //107           prec: 18
+      $.path_expr, //108           prec: 19   '/' '//'  not relative path?
       //  $.predicate //124        prec: 20 @primary postfix predicate '[' ']'
       //  $.postfix_lookup //125   prec: 20 @primary postfix lookup   '?'
       //  $.unary_lookup,// 181    prec: 21 @primary unary lookup
       //seq($._primary_expr, optional( $._postfix_expr )) 
     ),
-    // 3.1 Primary Expressions
-    _primary_expr: $ => prec.left(PREC.primary,seq(choice(
+    // 3.1 Primary Expressions set as highest prec
+    _primary_expr: $ => prec.left(23,seq(choice(
       $.enclosed_expr, // 36,
       $._literal, // 57
       $.var_ref, // 59

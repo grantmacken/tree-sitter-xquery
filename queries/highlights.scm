@@ -162,7 +162,7 @@
 ;(abbrev_attr ["@"] @operator)
 
 [ (unary_lookup) (postfix_lookup) ] @symbol
-[ (lookup_wildcard) (NCName) ] @constant
+; [ (lookup_wildcard) (NCName) ] @constant
 
 [
  (square_array_constructor ["[" "]"] )
@@ -181,7 +181,7 @@
 
 "return" @keyword.return
 
-
+(module_declaration) @namespace
 
 (comment) @comment
 (ERROR) @error

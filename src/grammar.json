@@ -42,8 +42,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "prolog"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_prolog"
+              },
+              {
+                "type": "STRING",
+                "value": ";"
+              }
+            ]
           }
         }
       ]
@@ -52,28 +61,32 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "prolog",
           "content": {
-            "type": "SEQ",
+            "type": "CHOICE",
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "prolog"
+                "name": "_prolog"
               },
               {
-                "type": "STRING",
-                "value": ";"
+                "type": "BLANK"
               }
             ]
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "_query_body"
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_query_body"
+          }
         }
       ]
     },
-    "prolog": {
+    "_prolog": {
       "type": "CHOICE",
       "members": [
         {
@@ -6112,6 +6125,8 @@
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": []
+  "supertypes": [
+    "_prolog"
+  ]
 }
 

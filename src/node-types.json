@@ -1,5 +1,75 @@
 [
   {
+    "type": "_prolog",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "base_uri_declaration",
+        "named": true
+      },
+      {
+        "type": "boundary_space_declaration",
+        "named": true
+      },
+      {
+        "type": "construction_declaration",
+        "named": true
+      },
+      {
+        "type": "context_item_declaration",
+        "named": true
+      },
+      {
+        "type": "copy_namespaces_declaration",
+        "named": true
+      },
+      {
+        "type": "decimal_format_declaration",
+        "named": true
+      },
+      {
+        "type": "default_collation_declaration",
+        "named": true
+      },
+      {
+        "type": "default_namespace_declaration",
+        "named": true
+      },
+      {
+        "type": "empty_order_declaration",
+        "named": true
+      },
+      {
+        "type": "function_declaration",
+        "named": true
+      },
+      {
+        "type": "module_import",
+        "named": true
+      },
+      {
+        "type": "namespace_declaration",
+        "named": true
+      },
+      {
+        "type": "option_declaration",
+        "named": true
+      },
+      {
+        "type": "ordering_mode_declaration",
+        "named": true
+      },
+      {
+        "type": "schema_import",
+        "named": true
+      },
+      {
+        "type": "variable_declaration",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "EQName",
     "named": true,
     "fields": {
@@ -6987,11 +7057,11 @@
       "required": true,
       "types": [
         {
-          "type": "module_declaration",
+          "type": "_prolog",
           "named": true
         },
         {
-          "type": "prolog",
+          "type": "module_declaration",
           "named": true
         }
       ]
@@ -7010,224 +7080,235 @@
   {
     "type": "main_module",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "additive_expr",
-          "named": true
-        },
-        {
-          "type": "and_expr",
-          "named": true
-        },
-        {
-          "type": "argument_list",
-          "named": true
-        },
-        {
-          "type": "arrow_expr",
-          "named": true
-        },
-        {
-          "type": "bang_expr",
-          "named": true
-        },
-        {
-          "type": "cast_expr",
-          "named": true
-        },
-        {
-          "type": "castable_expr",
-          "named": true
-        },
-        {
-          "type": "comp_attr_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_comment_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_doc_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_elem_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_namespace_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_pi_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_text_constructor",
-          "named": true
-        },
-        {
-          "type": "comparison_expr",
-          "named": true
-        },
-        {
-          "type": "context_item_expr",
-          "named": true
-        },
-        {
-          "type": "curly_array_constructor",
-          "named": true
-        },
-        {
-          "type": "decimal_literal",
-          "named": true
-        },
-        {
-          "type": "direct_element",
-          "named": true
-        },
-        {
-          "type": "double_literal",
-          "named": true
-        },
-        {
-          "type": "enclosed_expr",
-          "named": true
-        },
-        {
-          "type": "flwor_expr",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "if_expr",
-          "named": true
-        },
-        {
-          "type": "inline_function_expr",
-          "named": true
-        },
-        {
-          "type": "instance_of_expr",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "intersect_except_expr",
-          "named": true
-        },
-        {
-          "type": "map_constructor",
-          "named": true
-        },
-        {
-          "type": "multiplicative_expr",
-          "named": true
-        },
-        {
-          "type": "named_function_ref",
-          "named": true
-        },
-        {
-          "type": "or_expr",
-          "named": true
-        },
-        {
-          "type": "ordered_expr",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expr",
-          "named": true
-        },
-        {
-          "type": "path_expr",
-          "named": true
-        },
-        {
-          "type": "postfix_lookup",
-          "named": true
-        },
-        {
-          "type": "predicate",
-          "named": true
-        },
-        {
-          "type": "prolog",
-          "named": true
-        },
-        {
-          "type": "quantified_expr",
-          "named": true
-        },
-        {
-          "type": "range_expr",
-          "named": true
-        },
-        {
-          "type": "square_array_constructor",
-          "named": true
-        },
-        {
-          "type": "string_concat_expr",
-          "named": true
-        },
-        {
-          "type": "string_constructor",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "switch_expr",
-          "named": true
-        },
-        {
-          "type": "treat_expr",
-          "named": true
-        },
-        {
-          "type": "try_catch_expr",
-          "named": true
-        },
-        {
-          "type": "typeswitch_expr",
-          "named": true
-        },
-        {
-          "type": "unary_expr",
-          "named": true
-        },
-        {
-          "type": "unary_lookup",
-          "named": true
-        },
-        {
-          "type": "union_expr",
-          "named": true
-        },
-        {
-          "type": "unordered_expr",
-          "named": true
-        },
-        {
-          "type": "var_ref",
-          "named": true
-        }
-      ]
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "additive_expr",
+            "named": true
+          },
+          {
+            "type": "and_expr",
+            "named": true
+          },
+          {
+            "type": "argument_list",
+            "named": true
+          },
+          {
+            "type": "arrow_expr",
+            "named": true
+          },
+          {
+            "type": "bang_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "castable_expr",
+            "named": true
+          },
+          {
+            "type": "comp_attr_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "comparison_expr",
+            "named": true
+          },
+          {
+            "type": "context_item_expr",
+            "named": true
+          },
+          {
+            "type": "curly_array_constructor",
+            "named": true
+          },
+          {
+            "type": "decimal_literal",
+            "named": true
+          },
+          {
+            "type": "direct_element",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "enclosed_expr",
+            "named": true
+          },
+          {
+            "type": "flwor_expr",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "if_expr",
+            "named": true
+          },
+          {
+            "type": "inline_function_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of_expr",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "intersect_except_expr",
+            "named": true
+          },
+          {
+            "type": "map_constructor",
+            "named": true
+          },
+          {
+            "type": "multiplicative_expr",
+            "named": true
+          },
+          {
+            "type": "named_function_ref",
+            "named": true
+          },
+          {
+            "type": "or_expr",
+            "named": true
+          },
+          {
+            "type": "ordered_expr",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expr",
+            "named": true
+          },
+          {
+            "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "quantified_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "square_array_constructor",
+            "named": true
+          },
+          {
+            "type": "string_concat_expr",
+            "named": true
+          },
+          {
+            "type": "string_constructor",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "switch_expr",
+            "named": true
+          },
+          {
+            "type": "treat_expr",
+            "named": true
+          },
+          {
+            "type": "try_catch_expr",
+            "named": true
+          },
+          {
+            "type": "typeswitch_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "unary_lookup",
+            "named": true
+          },
+          {
+            "type": "union_expr",
+            "named": true
+          },
+          {
+            "type": "unordered_expr",
+            "named": true
+          },
+          {
+            "type": "var_ref",
+            "named": true
+          }
+        ]
+      },
+      "prolog": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "_prolog",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -9777,81 +9858,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "prolog",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "base_uri_declaration",
-          "named": true
-        },
-        {
-          "type": "boundary_space_declaration",
-          "named": true
-        },
-        {
-          "type": "construction_declaration",
-          "named": true
-        },
-        {
-          "type": "context_item_declaration",
-          "named": true
-        },
-        {
-          "type": "copy_namespaces_declaration",
-          "named": true
-        },
-        {
-          "type": "decimal_format_declaration",
-          "named": true
-        },
-        {
-          "type": "default_collation_declaration",
-          "named": true
-        },
-        {
-          "type": "default_namespace_declaration",
-          "named": true
-        },
-        {
-          "type": "empty_order_declaration",
-          "named": true
-        },
-        {
-          "type": "function_declaration",
-          "named": true
-        },
-        {
-          "type": "module_import",
-          "named": true
-        },
-        {
-          "type": "namespace_declaration",
-          "named": true
-        },
-        {
-          "type": "option_declaration",
-          "named": true
-        },
-        {
-          "type": "ordering_mode_declaration",
-          "named": true
-        },
-        {
-          "type": "schema_import",
-          "named": true
-        },
-        {
-          "type": "variable_declaration",
-          "named": true
-        }
-      ]
     }
   },
   {
