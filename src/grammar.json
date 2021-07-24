@@ -4701,7 +4701,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_primary_expr"
+                  "name": "_expr"
                 }
               ]
             },
@@ -4724,7 +4724,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "_primary_expr"
+                          "name": "_expr"
                         }
                       ]
                     },
@@ -4794,7 +4794,7 @@
                   "name": "var_value",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_primary_expr"
+                    "name": "_expr"
                   }
                 }
               ]
@@ -4818,7 +4818,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "_primary_expr"
+                          "name": "_expr"
                         }
                       ]
                     },

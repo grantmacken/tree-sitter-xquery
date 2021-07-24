@@ -101,8 +101,8 @@ jobs:
         run: bin/tree-sitter parse examples/annotations.xq --quiet
       - name: 4.16 Variable Declaration
         run: bin/tree-sitter parse examples/variable_declaration.xq --quiet
-      # - name: 4.17 Context Item Declaration
-      #   run: bin/tree-sitter parse examples/context_item_declaration.xq --quiet
+      - name: 4.17 Context Item Declaration
+        run: bin/tree-sitter parse examples/context_item_declaration.xq --quiet
       - name: 4.18 Function Declaration
         run: bin/tree-sitter parse examples/function_declaration.xq --quiet
       - name: 4.19 Option Declaration

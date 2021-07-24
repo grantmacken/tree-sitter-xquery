@@ -511,16 +511,16 @@ module.exports = grammar({
       "$", $.EQName, 
       optional($.type_declaration),
       choice( 
-        seq( ':=', $._primary_expr ),
-        seq('external', optional( seq(':=', $._primary_expr ))))), // 26
+        seq( ':=', $._expr ),
+        seq('external', optional( seq(':=', $._expr ))))), // 26
     type_declaration: $ => seq( 'as',  $.sequence_type),
     // 4.17 Context Item Declaration
     context_item_declaration: $ => seq(
         'declare', 'context', 'item',
         optional($.type_declaration),
         choice(
-            seq(':=', field('var_value', $._primary_expr)),
-            seq('external', optional(seq(':=', $._primary_expr))))),
+            seq(':=', field('var_value', $._expr)),
+            seq('external', optional(seq(':=', $._expr))))),
     // 4.18 Function Declaration
     function_declaration: $ =>
       seq(
