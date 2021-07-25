@@ -643,7 +643,10 @@ module.exports = grammar({
     //[A-Za-z_\\xC0-\\xD6][-a-zA-Zα-ωΑ-Ωµ0-9_']*/
     identifier: $ => /[_A-Za-z]{1}[\-\w]*/,
     keyword: $ => /[a-z]+([-][a-z]+)*/,
-    comment: $ => token(/[(]:[^:]*:*([^(:][^:]*:+)*[)]/)
+    comment: $ => token( seq(
+      '(:', 
+       /[^:]*:+([^):][^:]*:+)*/, 
+        ')'))
   }
 });
 
