@@ -85,7 +85,7 @@ module.exports = grammar({
     _primary_expr: $ => prec.left(23,seq(choice(
       $.enclosed_expr, // 36,
       $._literal, // 57
-      $.var_ref, // 59
+      $.var, // 59
       $.parenthesized_expr, // 133
       $.context_item_expr, // 134
       $.ordered_expr, // 135
@@ -109,16 +109,16 @@ module.exports = grammar({
     _numeric_literal: $ =>
       choice($.integer_literal, $.decimal_literal, $.double_literal),
     //3.1.2 Variable References
-    var_ref: $ => seq('$',  $.EQName ),
-    // note: a dynamic function call can consist of _postfix_expr [ var_ref + argument_list ]
+    var: $ => seq('$',  $.EQName ),
+    // note: a dynamic function call can consist of _postfix_expr [ var + argument_list ]
     // 3.1.3 Parenthesized Expressions
     parenthesized_expr: $ =>  seq('(', optional($._query_body), ')'), // 133
     //3.1.4 Context Item Expression TODO not like spec
     context_item_expr: $ => prec.left(seq('.', optional( $.path_expr))),
     //3.1.5 Static Function Calls
     function_call: $ => prec.left(25,seq( 
-      choice( field( 'dynamic', $.var_ref),field('static', $.EQName)),
-      $.argument_list)), // 137 spec deviation added $var_ref
+      choice( field( 'dynamic', $.var),field('static', $.EQName)),
+      $.argument_list)), // 137 spec deviation added $var
     //function_call: $ => prec.left(25 ,seq( $.EQName, $.argument_list)), // 137
     // 3.1.6 Named Function References
     named_function_ref: $ =>
@@ -218,7 +218,7 @@ module.exports = grammar({
         )))
       ), // 107
     single_type: $ => prec.left(seq($.EQName, optional('?'))), // 182
-    arrow_function: $ => seq(choice($.EQName, $.var_ref, $.parenthesized_expr), $.argument_list), // 127
+    arrow_function: $ => seq(choice($.EQName, $.var, $.parenthesized_expr), $.argument_list), // 127
     _direct_constructor: $ => choice(
         $.direct_element
         // TODO dir_comment_constructor,
@@ -392,8 +392,10 @@ module.exports = grammar({
     // 3.16 Quantified Expressions TODO
     quantified_expr: $ => prec(2, seq(
           choice('some', 'every'),
-          $.var_ref, optional($.type_declaration),
-          'in', $._expr, 'satisfies', $._expr
+          field( 'quantifier',$.var) , optional($.type_declaration),
+          'in', field( 'in_binding', 
+            seq( $._expr, repeat(seq(',', $.var, optional($.type_declaration), 'in', $._expr)))),
+          'satisfies', field( 'satisfy_conditional',  $._expr )
         )
       ),
     // 3.17 Try/Catch Expressions
@@ -405,10 +407,10 @@ module.exports = grammar({
       'typeswitch', 
       field('operand',seq('(',commaSep1($._expr),')')),
       repeat1( field( 'case', $._typeswitch_clause)),
-      field( 'default', seq('default', optional($.var_ref), 'return', $._expr)))), // 74
+      field( 'default', seq('default', optional($.var), 'return', $._expr)))), // 74
     _typeswitch_clause: $ => seq(
       'case', 
-      optional(seq($.var_ref, 'as')),
+      optional(seq($.var, 'as')),
       $.sequence_type, repeat(seq('|', $.sequence_type)),
       "return", 
       $._expr ),
