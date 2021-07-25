@@ -1,6 +1,6 @@
 {
   "name": "xquery",
-  "word": "keyword",
+  "word": "identifier",
   "rules": {
     "module": {
       "type": "SEQ",
@@ -3961,7 +3961,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "NCName"
+            "name": "identifier"
           }
         },
         {
@@ -3970,7 +3970,7 @@
         },
         {
           "type": "FIELD",
-          "name": "value",
+          "name": "uri",
           "content": {
             "type": "SYMBOL",
             "name": "string_literal"
@@ -4320,8 +4320,12 @@
                         "value": "namespace"
                       },
                       {
-                        "type": "SYMBOL",
-                        "name": "NCName"
+                        "type": "FIELD",
+                        "name": "name",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "identifier"
+                        }
                       },
                       {
                         "type": "STRING",
@@ -4428,8 +4432,12 @@
                   "value": "namespace"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "NCName"
+                  "type": "FIELD",
+                  "name": "name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  }
                 },
                 {
                   "type": "STRING",
@@ -4510,7 +4518,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "NCName"
+            "name": "identifier"
           }
         },
         {
@@ -6028,11 +6036,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[_A-Za-z]{1}[\\-\\w]*"
-    },
-    "keyword": {
-      "type": "PATTERN",
-      "value": "[a-z]+([-][a-z]+)*"
+      "value": "[_\\p{L}]{1}[\\-_\\p{L}\\p{N}]*"
     },
     "comment": {
       "type": "TOKEN",

@@ -23,6 +23,14 @@
 (function_declaration ["function" ] @keyword )
 (context_item_declaration ["context" "item" ] @keyword )
 
+; declared namespace indentifiers
+[
+ (schema_import)
+ (module_declaration)
+ (namespace_declaration)
+ (module_import)
+ ] @namespace
+
  ; declaration and let assignment operators
  [":=" "="] @operator
 
@@ -189,7 +197,7 @@
 
 "return" @keyword.return
 
-(module_declaration) @namespace
+
 
 (comment) @comment
 (ERROR) @error

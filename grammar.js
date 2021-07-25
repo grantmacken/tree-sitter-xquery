@@ -7,16 +7,16 @@ const  DIGIT = /[0-9]/,
     optional(/[+-]/),
     repeat1(DIGIT)
   ), // TODO check
-  DECIMAL = seq(repeat(DIGIT), '.', repeat(DIGIT))
+  DECIMAL = seq(repeat(DIGIT), '.', repeat(DIGIT)),
   //https://github.com/bwrrp/slimdom.js/blob/main/src/util/namespaceHelpers.ts#L132
 //var xmlName = /^\p{L}[\p{L}0-9\-.]*(:[\p{L}0-9\-.]+)?$/u;
-  //NAME_START_CHAR = /[^.\-,;:!?'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/,
-  //NAME_CHAR = /[^,;:!?.'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/
+  NAME_START_CHAR = /[^.\-,;:!?'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/,
+  NAME_CHAR = /[^,;:!?.'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/
 
 module.exports = grammar({
   name: 'xquery',
   extras: $ => [$.comment, /\s/],
-  word: $ => $.keyword,
+  word: $ => $.identifier,
   conflicts: $ => [ 
    [$._expr, $._step_expr]
   ],
@@ -423,8 +423,8 @@ module.exports = grammar({
     ), 
     //4.2 Module Declaration
     module_declaration: $ => seq( 'module', 'namespace', 
-      field('name', $.NCName), '=', 
-      field('value', $.string_literal),';' ),
+      field('name', $.identifier), '=', 
+      field('uri', $.string_literal),';' ),
     boundary_space_declaration: $ => seq('declare', 'boundary-space', choice('preserve', 'strip')),
     default_collation_declaration: $ => seq( 'declare', 'default', 'collation', field('uri', $.string_literal)),
     base_uri_declaration: $ => seq('declare', 'base-uri', field('uri', $.string_literal)),
@@ -450,16 +450,18 @@ module.exports = grammar({
       'zero-digit','digit','pattern-separator','exponent-separator'),
     schema_import: $ => seq( 'import', 'schema', 
       optional( field( 'prefix',
-        choice( seq('namespace', $.NCName, '='), seq('default', 'element', 'namespace')))), 
+        choice(
+          seq('namespace', field('name', $.identifier),  '='), 
+          seq('default', 'element', 'namespace')))), 
       field('uri', $.string_literal), optional(seq('at', commaSep1($.string_literal)))), // 21
     // 4.12 Module Import // TODO
     module_import: $ => seq( 'import', 'module',
-        optional(seq('namespace', $.NCName, '=')),
+        optional(seq('namespace', field('name', $.identifier), '=')),
         field('uri', $.string_literal),
         optional(seq('at', commaSep1($.string_literal)))
       ),
     namespace_declaration: $ => seq( 'declare', 'namespace', 
-      field('name', $.NCName), '=', field('uri', $.string_literal)), // 4.13
+      field('name', $.identifier), '=', field('uri', $.string_literal)), // 4.13
     default_namespace_declaration: $ => seq( 'declare', 'default', 
       choice('element', 'function'), 'namespace', field('uri', $.string_literal)), // 4.14
     //4.15 Annotations
@@ -640,13 +642,8 @@ module.exports = grammar({
     uri_qualified_name: $ => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
     braced_uri_literal: $ =>
       seq('Q{', repeat1(choice($.predefined_entity_ref, $.char_ref, /[^&{}]/)), '}'), // 224
-    //[A-Za-z_\\xC0-\\xD6][-a-zA-Zα-ωΑ-Ωµ0-9_']*/
-    identifier: $ => /[_A-Za-z]{1}[\-\w]*/,
-    keyword: $ => /[a-z]+([-][a-z]+)*/,
-    comment: $ => token( seq(
-      '(:', 
-       /[^:]*:+([^):][^:]*:+)*/, 
-        ')'))
+    identifier: $ => /[_\p{L}]{1}[\-_\p{L}\p{N}]*/,
+    comment: $ => token( seq( '(:', /[^:]*:+([^):][^:]*:+)*/, ')'))
   }
 });
 

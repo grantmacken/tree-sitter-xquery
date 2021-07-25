@@ -7776,12 +7776,12 @@
         "required": true,
         "types": [
           {
-            "type": "NCName",
+            "type": "identifier",
             "named": true
           }
         ]
       },
-      "value": {
+      "uri": {
         "multiple": false,
         "required": true,
         "types": [
@@ -7797,6 +7797,16 @@
     "type": "module_import",
     "named": true,
     "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "uri": {
         "multiple": false,
         "required": true,
@@ -7812,10 +7822,6 @@
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "NCName",
-          "named": true
-        },
         {
           "type": "string_literal",
           "named": true
@@ -8321,7 +8327,7 @@
         "required": true,
         "types": [
           {
-            "type": "NCName",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -10752,6 +10758,16 @@
     "type": "schema_import",
     "named": true,
     "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "prefix": {
         "multiple": true,
         "required": false,
@@ -10759,10 +10775,6 @@
           {
             "type": "=",
             "named": false
-          },
-          {
-            "type": "NCName",
-            "named": true
           },
           {
             "type": "default",
