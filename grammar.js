@@ -402,20 +402,16 @@ module.exports = grammar({
     catch_clause: $ => seq('catch', $.catch_error_list, $.enclosed_expr), // 79
     catch_error_list: $ => seq($.name_test, repeat(seq('|', $.name_test))) ,
     typeswitch_expr: $ => prec(2,seq( 
-      'typeswitch',
-      $.typeswitch_operand,
-      repeat1($.typeswitch_clause),
-      $.typeswitch_default)), // 74
-    // commaSep1( $._expr ),
-    typeswitch_operand: $ =>
-      seq('(', field('operand', commaSep1($._expr)), ')'), // 72
-    typeswitch_clause: $ =>
-      seq($.typeswitch_case_type, $.typeswitch_case_return), // 72
-    typeswitch_case_type: $ =>
-      seq('case', optional(seq($.var_ref, 'as')), $.sequence_type),
-    typeswitch_case_return: $ => seq('return', $._expr),
-    typeswitch_default: $ =>
-      seq('default', optional($.var_ref), 'return', $._expr),
+      'typeswitch', 
+      field('operand',seq('(',commaSep1($._expr),')')),
+      repeat1( field( 'case', $._typeswitch_clause)),
+      field( 'default', seq('default', optional($.var_ref), 'return', $._expr)))), // 74
+    _typeswitch_clause: $ => seq(
+      'case', 
+      optional(seq($.var_ref, 'as')),
+      $.sequence_type, repeat(seq('|', $.sequence_type)),
+      "return", 
+      $._expr ),
     // 3.21 Validate Expressions TODO
     // 3.22 Extension Expressions TODO
     //4.1 Version Declaration
@@ -602,14 +598,9 @@ module.exports = grammar({
         seq('*:', $.NCName),
         seq($.braced_uri_literal, '*')
       ), // 120
-    any_function_test: $ => seq(
-        optional(field('anno', $.annotation)),
-        'function', seq('(', '*', ')')), //  // 207
-    typed_function_test: $ => seq(
-        optional(field('anno', $.annotation)),
-         'function', '(', $.signature_params, ')', $.signature_return ),
-    signature_params: $ => commaSep1($.sequence_type),
-    signature_return: $ => $.type_declaration,
+    any_function_test: $ => seq( repeat( $.annotation ), 'function', seq('(', '*', ')')), //  // 207
+    typed_function_test: $ => seq(repeat( $.annotation ), 'function', 
+      '(', $.sequence_type, repeat(seq(',',$.sequence_type)), ')',$.type_declaration ),
     any_map_test: $ => seq( 'map','(', '*', ')' ), // 210
     typed_map_test: $ => seq( 'map','(', $.atomic_or_union_type,',', $.sequence_type,')'), // 212
     any_array_test: $ => seq( 'array', '(', '*', ')' ),

@@ -11,6 +11,17 @@ typeswitch($customer/billing-address)
    case $a as element(*, CanadaAddress) return $a/province
    case $a as element(*, JapanAddress) return $a/prefecture
    default return "unknown",
+typeswitch($customer/billing-address)
+   case $a as element(*, USAddress)
+            | element(*, AustraliaAddress)
+            | element(*, MexicoAddress)
+     return $a/state
+   case $a as element(*, CanadaAddress)
+     return $a/province
+   case $a as element(*, JapanAddress)
+     return $a/prefecture
+   default
+     return "unknown",
 '3.18.(3,4) Cast Castable', 
 if ($x castable as hatsize)
    then $x cast as hatsize

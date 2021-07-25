@@ -13,7 +13,7 @@
   "decimal-format" "decimal-separator" "grouping-separator" "infinity" "minus-sign" "NaN" ; decimal_format_declaration
   "percent" "per-mille"  "zero-digit" "digit" "pattern-separator" "exponent-separator"    ; decimal_format_declaration
    "option" "import" "schema" 
-  "variable" "context" "item" "external"
+  "variable"  "external"
   ] @keyword
 
 
@@ -21,6 +21,7 @@
 (default_namespace_declaration ["element" "function" ] @keyword )
 (schema_import  ["element" ] @keyword )
 (function_declaration ["function" ] @keyword )
+(context_item_declaration ["context" "item" ] @keyword )
 
  ; declaration and let assignment operators
  [":=" "="] @operator
@@ -43,7 +44,7 @@
 (enclosed_expr ["{" "}" ] @punctuation.bracket )
 (argument_list ["(" ")"]  @punctuation.bracket )
 (param_list ["(" ")"]  @punctuation.bracket )
- [ "%" ";" ":" ","] @punctuation.delimiter
+ [ "%" ";" ":" "," "|"] @punctuation.delimiter
 
 ;(identifier) @variable
 ;(context_item_expr) @method
@@ -92,6 +93,13 @@
  (path_expr ["parent"  "ancestor"  "preceding-sibling"  "preceding"  "ancestor-or-self" ] @keyword.operator )
 ; kind tests - after path
  [ 
+  (any_item)
+  (any_function_test)
+  (typed_function_test)
+  (any_map_test)
+  (typed_map_test)
+  (any_array_test)
+  (typed_array_test)
   (any_kind_test)
   (comment_test)
   (namespace_node_test)
