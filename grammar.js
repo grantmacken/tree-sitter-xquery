@@ -375,21 +375,15 @@ module.exports = grammar({
     then_consequence: $ => seq('then', $._expr),
     else_alternative: $ => seq('else', $._expr),
     // 3.15 Switch Expression
-    switch_expr: $ => prec(2,seq(
-          'switch',
-          $.switch_value,
+    switch_expr: $ => prec(2,seq( 'switch',
+          field( 'switch_operand', seq('(', commaSep1($._expr), ')')),
           repeat1($.switch_clause),
-          $.switch_default)), // 71
-    switch_value: $ => seq('(', commaSep1($._expr), ')'), // 72
-    switch_clause: $ =>
-      seq(
-        'case',
-        field('operand', $._expr),
-        'return',
-        field('return', $._expr)
-      ), // 72
-    switch_default: $ => seq('default', 'return', field('return', $._expr)),
-    // 3.16 Quantified Expressions TODO
+          field('switch_default',
+            seq('default', 'return', field('return', $._expr))))), // 71
+    switch_clause: $ => seq( 
+      'case',field('case_operand', $._expr),
+      'return',field('case_return', $._expr)), // 72
+    // 3.16 Quantified Expressions
     quantified_expr: $ => prec(2, seq(
           choice('some', 'every'),
           field( 'quantifier',$.var) , optional($.type_declaration),
