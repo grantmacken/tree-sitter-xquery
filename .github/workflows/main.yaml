@@ -25,6 +25,8 @@ jobs:
             printf %60s | tr ' ' '-' && echo
             echo 'checks: with "quiet" flag, parse error will fail run'   
             printf %60s | tr ' ' '-' && echo
+      - name: 2.5 Types
+        run: bin/tree-sitter parse examples/primary_expressions.xq --quiet
       - name: 3.1 Primary Expressions
         run: bin/tree-sitter parse examples/primary_expressions.xq --quiet
       - name: 3.2 Postfix Expressions
