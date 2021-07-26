@@ -32,16 +32,12 @@
  [":=" "="] @operator
 ; literals
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
-
 [ (integer_literal) (decimal_literal) (double_literal) (lookup_digit) ] @number
-[
- (parenthesized_expr ["(" ")"] )
- (predicate ["[" "]"] ) 
- ] @constructor
+ 
+; enclose brackets
+["{" "}" "(" ")"] @punctuation.bracket
+; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
 
-(enclosed_expr ["{" "}" ] @punctuation.bracket )
-(argument_list ["(" ")"]  @punctuation.bracket )
-(param_list ["(" ")"]  @punctuation.bracket )
  [ "%" ";" ":" "," "|"] @punctuation.delimiter
 
 [
@@ -61,6 +57,11 @@
     unprefixed: (identifier)
     ] @constant)
 
+(NCName) @constant
+
+
+; FUNCTIONS
+(inline_function_expr "function" @function ) 
 
 (function_call
   (EQName 
@@ -104,7 +105,27 @@
   (name_test)
 ] @type
 
-; binary exressions
+
+; 3.12 FLWOR Expressions
+ ["let" "for"  "as" "return" "count" "as" "allowing" "empty" ] @keyword
+ ["at" "in" "where" ] @conditional
+; ;ordering
+ ["stable" "order" "by" "ascending"  "descending" "empty" "greatest" "least" "collation" ] @keyword
+; ; grouping 
+ ["group" "by" ] @keyword
+;3.13 Ordered and Unordered Expressions
+(unordered_expr  ["unordered" ] @keyword)
+(ordered_expr  ["ordered" ] @keyword)
+;Conditionals
+(if_expr [ "if" "then" "else" ] @conditional)
+(switch_expr "switch" @conditional)
+(switch_clause "case" @conditional)
+(quantified_expr ["some" "every" "in" "satisfies" ] @conditional)
+(typeswitch_expr [ "typeswitch" "case" "default" ]  @conditional)
+(try_clause "try" @conditional)
+(catch_clause "catch" @conditional)
+
+; lhs rhs binary exressions
 (range_expr [ "to" ] @keyword.operator)
 (additive_expr [ "-" "+"] @operator)
 (multiplicative_expr [ "*" ] @operator)
@@ -114,42 +135,16 @@
 (unary_expr [ "-" "+"] @operator)
 (and_expr [ "and" ] @keyword.operator)
 (or_expr [ "or" ] @keyword.operator)
-; 3.12 FLWOR Expressions
- ["let" "for"  "as" "return" "count" "as" "allowing" "empty" ] @keyword
- ["at" "in" "where" ] @conditional
-; ;ordering
- ["stable" "order" "by" "ascending"  "descending" "empty" "greatest" "least" "collation" ] @keyword
-; ; grouping 
- ["group" "by" ] @keyword
-;3.13 Ordered and Unordered Expressions
-(unordered_expr  ["unordered" ] @conditional)
-(ordered_expr  ["ordered" ] @conditional)
-;3.14 Conditional Expressions
-[ "if" "then" "else" ] @conditional
-; 3.15 Switch Expression
-(switch_expr "switch" @conditional)
-(switch_clause 
-  "case" @conditional
-  )
-;3.16 Quantified Expressions
-(quantified_expr ["some" "every" "in" "satisfies" ] @conditional)
-; 3.17 Try/Catch Expressions 
-[ "try" "catch" ] @conditional
-; 3.18 Expressions on SequenceTypes
-[
-(instance_of_expr ["instance" "of"]) 
-(cast_expr [ "cast"]) 
-(castable_expr [ "castable"]) 
-(treat_expr [ "treat"]) 
-(intersect_except_expr [ "intersect" "except"] )
-(union_expr [ "union" ] )
-] @keyword.operator
-(typeswitch_expr 
-  [ "typeswitch" "case" "default" ]  @conditional
-  )
+; other lhs rhs expr operators that are words  
+(instance_of_expr ["instance" "of"] @keyword.operator ) 
+(cast_expr [ "cast"] @keyword.operator ) 
+(castable_expr [ "castable"] @keyword.operator ) 
+(treat_expr [ "treat"] @keyword.operator ) 
+(intersect_except_expr [ "intersect" "except"] @keyword.operator )
+(union_expr [ "union" ] @keyword.operator )
 
 ["return"] @keyword.return
-; [ "typeswitch" "case" "default" ] 
+
 (occurrence_indicator) @repeat
 
 ; misc ops
@@ -160,9 +155,12 @@
 (context_item_expr [ "." ] )
 ] @operator
 
-;(abbrev_attr ["@"] @operator)
 
-[ (unary_lookup) (postfix_lookup) ] @symbol
+
+;(abbrev_attr ["@"] @operator)
+(postfix_lookup "?" @operator ) 
+(unary_lookup "?" @operator )
+(wildcard) @conditional
 
 ; direct XML constructors
 [(start_tag) (end_tag) (empty_tag)  ] @tag
@@ -171,22 +169,22 @@
   attr_value: (direct_attribute_value) @string
   )
 
-; other constructors
-[
- (square_array_constructor ["[" "]"] )
- (curly_array_constructor ["array" "{" "}"] )
- (map_constructor ["map" "{" "}"] )
- (string_constructor ["``[" "]``"] )
- (interpolation ["`{" "}`"] )
- (comp_elem_constructor ["element"] )
- (comp_attr_constructor ["attribute"] )
- (comp_doc_constructor ["document"] )
- (comp_text_constructor ["text"] )
- (comp_comment_constructor ["comment"] )
- (comp_pi_constructor ["processing-instruction"] )
- (comp_namespace_constructor ["namespace"] )
- ] @constructor 
-
+; constructors 
+ (square_array_constructor ["[" "]"] @constructor )
+ (curly_array_constructor ["array" ] @constructor )
+ (map_constructor ["map" ] @constructor )
+ (string_constructor ["``[" "]``"] @constructor )
+ (interpolation ["`{" "}`"] @constructor )
+ (comp_elem_constructor ["element"] @constructor )
+ (comp_attr_constructor ["attribute"] @constructor )
+ (comp_doc_constructor ["document"] @yconstructor )
+ (comp_text_constructor ["text" ] @constructor )
+ (comp_comment_constructor ["comment" ] @constructor )
+ (comp_pi_constructor ["processing-instruction" ] @constructor )
+ (comp_namespace_constructor ["namespace" ] @constructor )
+; also say a these are constuctors
+(parenthesized_expr ["(" ")"] @constructor)
+(predicate ["[" "]"] @constructor) 
 
 [ 
  (direct_comment)

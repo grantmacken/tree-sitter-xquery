@@ -151,9 +151,8 @@ module.exports = grammar({
     // 3.2.1 Filter Expressions TODO tests
     predicate: $ => prec(20, seq( '[', field('filter', $._query_body ), ']')), //124
     // 3.2.2 Dynamic Function Calls
-    argument_list: $ => prec(1,seq('(', commaSep($.argument), ')')), // 122
-    argument: $ => choice($._expr, $.argument_placeholder), // 138
-    argument_placeholder: $ => '?', //  139
+    argument_list: $ => prec(1,seq('(', commaSep($._argument), ')')), // 122
+    _argument: $ => field( 'argument', choice($._expr, "?" )), // 138
     // 3.3 Path Expressions
     // https://docs.oracle.com/cd/E13190_01/liquiddata/docs81/xquery/query.html
     path_expr: $ => prec.left(19, 
@@ -290,9 +289,8 @@ module.exports = grammar({
     square_array_constructor: $ => seq('[', commaSep($._expr), ']'),
     postfix_lookup: $ => prec.left( 20 , seq( '?', $._key_specifier)), // 125
     unary_lookup: $ => prec.left( 21 , seq( '?', $._key_specifier)),
-    _key_specifier: $ => choice($.NCName, $.lookup_digit, $.parenthesized_expr, $.lookup_wildcard), // 54
+    _key_specifier: $ => choice($.NCName, $.lookup_digit, $.parenthesized_expr, alias( "*" , $.wildcard)), // 54
     lookup_digit: $ => repeat1(/\d/),
-    lookup_wildcard: $ => '*',
     //##########################
     // 3.12 FLWOR Expressions
     flwor_expr: $ => prec(2,seq($._initial_clause, optional($._intermediate_clause), $.return_clause)), // 41
@@ -302,16 +300,16 @@ module.exports = grammar({
         $.let_clause // 48
       ),
     //3.12.2 For Clause
-    for_clause: $ => seq('for', commaSep($.for_binding)), // 44',
-    for_binding: $ =>
+    for_clause: $ => 
+      seq('for',  
+      commaSep($._for_binding)), // 44',
+    _for_binding: $ =>
       seq(
-        '$',
-        field('var_name', $.EQName),
+        $.var,
         optional($.type_declaration),
         optional(seq('allowing', 'empty')),
-        optional(seq('at', '$', field('at_var_name', $.EQName))),
-        'in',
-        $._expr
+        optional(seq('at', field('positional_variable', $.var))),
+        'in', field( 'binding_sequence', $._expr )
       ), // 45
     // 3.12.3 Let Clause
     let_clause: $ => seq('let', commaSep1($.let_binding)),
@@ -373,13 +371,13 @@ module.exports = grammar({
     ordered_expr: $ => seq('ordered', $.enclosed_expr), // 135
     unordered_expr: $ => seq('unordered', $.enclosed_expr), // 136
     // 3.14 Conditional Expressions
-    if_expr: $ => prec(2, seq($.if_condition, $.then_consequence, $.else_alternative)),
-    if_condition: $ => seq('if', '(', $._expr, ')'),
-    then_consequence: $ => seq('then', $._expr),
-    else_alternative: $ => seq('else', $._expr),
+    if_expr: $ => prec(2, seq(
+    'if',  field( 'if_test', seq( '(', $._query_body, ')' )),
+    'then', field( 'if_consequence',  $._expr),
+    'else', field( 'if_alternative',  $._expr))),
     // 3.15 Switch Expression
     switch_expr: $ => prec(2,seq( 'switch',
-          field( 'switch_operand', seq('(', commaSep1($._expr), ')')),
+          field( 'switch_operand', seq('(', $._query_body, ')')),
           repeat1($.switch_clause),
           field('switch_default',
             seq('default', 'return', field('default_return', $._expr))))), // 71
@@ -397,7 +395,7 @@ module.exports = grammar({
       ),
     // 3.17 Try/Catch Expressions
     try_catch_expr: $ => prec(2, seq($.try_clause, $.catch_clause)), // 78
-    try_clause: $ => seq('try', $.enclosed_expr), // 78
+    try_clause: $ => seq('try', $.enclosed_expr) , // 78
     catch_clause: $ => seq('catch', $.catch_error_list, $.enclosed_expr), // 79
     catch_error_list: $ => seq($.name_test, repeat(seq('|', $.name_test))) ,
     typeswitch_expr: $ => prec(2,seq( 
