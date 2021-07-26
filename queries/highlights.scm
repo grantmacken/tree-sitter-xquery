@@ -15,8 +15,6 @@
    "option" "import" "schema" 
   "variable"  "external"
   ] @keyword
-
-
 ; declaration keyword that also appears elsewhere
 (default_namespace_declaration ["element" "function" ] @keyword )
 (schema_import  ["element" ] @keyword )
@@ -30,20 +28,12 @@
  (namespace_declaration)
  (module_import)
  ] @namespace
-
- ; declaration and let assignment operators
+ ; declarations, direct_attribute and 'let' assignment operators
  [":=" "="] @operator
-
-; primary
+; literals
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
 
-[
-(integer_literal)
-(decimal_literal)
-(double_literal)
-(lookup_digit)
-] @number
-
+[ (integer_literal) (decimal_literal) (double_literal) (lookup_digit) ] @number
 [
  (parenthesized_expr ["(" ")"] )
  (predicate ["[" "]"] ) 
@@ -54,17 +44,9 @@
 (param_list ["(" ")"]  @punctuation.bracket )
  [ "%" ";" ":" "," "|"] @punctuation.delimiter
 
-;(identifier) @variable
-;(context_item_expr) @method
-; (_ 
-;   [
-;    ns_builtin: (identifier)
-;    unprefixed: (identifier)
-;    prefix: (identifier)
-;    local_part: (identifier)
-; ] @property)
- 
-  (EQName 
+(var) @constant
+
+ (EQName 
     [
     ns_builtin: (identifier) 
     prefix: (identifier)
@@ -76,7 +58,6 @@
     unprefixed: (identifier)
     ] @constant)
 
-["$"] @constant
 
 (function_call
   (EQName 
@@ -91,7 +72,6 @@
     local_part: (identifier)
     unprefixed: (identifier)
     ] @function))
-
 
 ; path_expr
  (path_expr [ "/" "//" "::" ] @operator)
@@ -143,11 +123,14 @@
 (ordered_expr  ["ordered" ] @conditional)
 ;3.14 Conditional Expressions
 [ "if" "then" "else" ] @conditional
+
 ; 3.15 Switch Expression
-(switch_expr ["switch" ] @conditional)
-(switch_clause ["case" "return"] @conditional)
-(switch_default ["default" "return"] @conditional)
-; 3.16 Quantified Expressions
+(switch_expr "switch" @conditional)
+(switch_clause 
+  "case" @conditional
+  "return" @keyword.return
+  )
+;3.16 Quantified Expressions
 (quantified_expr ["some" "every" "in" "satisfies" ] @conditional)
 ; 3.17 Try/Catch Expressions 
 [ "try" "catch" ] @conditional
@@ -160,17 +143,13 @@
 (intersect_except_expr [ "intersect" "except"] )
 (union_expr [ "union" ] )
 ] @keyword.operator
-
-[ "typeswitch" "case" "default" ] @conditional
-
+; [ "typeswitch" "case" "default" ] @conditional
 (occurrence_indicator) @repeat
 
-[ (start_tag) (end_tag) (empty_tag) ] @tag
-
+; misc ops
 [
 (string_concat_expr ["||"] )
 (bang_expr [ "!" ] )
-
 (arrow_expr [ "=>" ] )
 (context_item_expr [ "." ] )
 ] @operator
@@ -178,8 +157,15 @@
 ;(abbrev_attr ["@"] @operator)
 
 [ (unary_lookup) (postfix_lookup) ] @symbol
-; [ (lookup_wildcard) (NCName) ] @constant
 
+; direct XML constructors
+[(start_tag) (end_tag) (empty_tag)  ] @tag
+(direct_attribute 
+  attr_name: (identifier) @attribute
+  attr_value: (direct_attribute_value) @string
+  )
+
+; other constructors
 [
  (square_array_constructor ["[" "]"] )
  (curly_array_constructor ["array" "{" "}"] )
@@ -195,9 +181,9 @@
  (comp_namespace_constructor ["namespace"] )
  ] @constructor 
 
-"return" @keyword.return
 
-
-
-(comment) @comment
+[ 
+ (direct_comment)
+ (comment)
+ ] @comment
 (ERROR) @error

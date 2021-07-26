@@ -220,18 +220,21 @@ module.exports = grammar({
     single_type: $ => prec.left(seq($.EQName, optional('?'))), // 182
     arrow_function: $ => seq(choice($.EQName, $.var, $.parenthesized_expr), $.argument_list), // 127
     _direct_constructor: $ => choice(
-        $.direct_element
-        // TODO dir_comment_constructor,
-        // TODO dir_pi_constructor
-      ), //141  TODO
+        $.direct_element,
+        $.direct_comment,
+        $.direct_pi
+      ), //141
+    direct_comment: $ => token(seq('<!--', repeat(/[^-]/), '-->')), // TODO
+    direct_pi: $ => token(seq('<?', repeat(/[^?]/), '?>')), // TODO
     direct_element: $ => choice( 
-      seq($.start_tag, repeat(choice($.direct_element, $.element_text)), $.end_tag),
+      seq($.start_tag, repeat(choice($._direct_constructor, $.element_text)), $.end_tag),
       $.empty_tag ),
-    start_tag: $ => seq( '<', $._QName, repeat($.direct_attribute),'>'),
-    end_tag: $ => seq('</',  $._QName, '>'),
-    empty_tag: $ => seq( '<', $._QName,repeat($.direct_attribute),'/>' ),
+    start_tag: $ => seq( '<',field('tag_name',alias($._QName,$.identifier)), repeat($.direct_attribute),'>'),
+    end_tag: $ => seq('</',  field('tag_name',alias($._QName,$.identifier)), '>'),
+    empty_tag: $ => seq( '<', field('tag_name',alias($._QName,$.identifier)),repeat($.direct_attribute),'/>' ),
     element_text: $ => choice( $. _common_content, $.char_data ),
-    direct_attribute: $ => seq( $._QName, '=',  $.direct_attribute_value),
+    direct_attribute: $ => seq( 
+      field('attr_name',alias($._QName,$.identifier)), '=',  field( 'attr_value', $.direct_attribute_value)),
     direct_attribute_value: $ => choice( 
       seq( '"', repeat(choice($._common_content, $.escape_quote, /[^"&]/)),'"'), 
       seq( "'", repeat(choice($._common_content, $.escape_apos, /[^'&]/)),"'")),
@@ -379,7 +382,7 @@ module.exports = grammar({
           field( 'switch_operand', seq('(', commaSep1($._expr), ')')),
           repeat1($.switch_clause),
           field('switch_default',
-            seq('default', 'return', field('return', $._expr))))), // 71
+            seq('default', 'return', field('default_return', $._expr))))), // 71
     switch_clause: $ => seq( 
       'case',field('case_operand', $._expr),
       'return',field('case_return', $._expr)), // 72
