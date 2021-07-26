@@ -44,7 +44,10 @@
 (param_list ["(" ")"]  @punctuation.bracket )
  [ "%" ";" ":" "," "|"] @punctuation.delimiter
 
-(var) @constant
+[
+ (var)
+ "$"
+ ] @constant
 
  (EQName 
     [
@@ -123,12 +126,10 @@
 (ordered_expr  ["ordered" ] @conditional)
 ;3.14 Conditional Expressions
 [ "if" "then" "else" ] @conditional
-
 ; 3.15 Switch Expression
 (switch_expr "switch" @conditional)
 (switch_clause 
   "case" @conditional
-  "return" @keyword.return
   )
 ;3.16 Quantified Expressions
 (quantified_expr ["some" "every" "in" "satisfies" ] @conditional)
@@ -143,7 +144,12 @@
 (intersect_except_expr [ "intersect" "except"] )
 (union_expr [ "union" ] )
 ] @keyword.operator
-; [ "typeswitch" "case" "default" ] @conditional
+(typeswitch_expr 
+  [ "typeswitch" "case" "default" ]  @conditional
+  )
+
+["return"] @keyword.return
+; [ "typeswitch" "case" "default" ] 
 (occurrence_indicator) @repeat
 
 ; misc ops

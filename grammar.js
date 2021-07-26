@@ -475,10 +475,10 @@ module.exports = grammar({
       'declare', 
       repeat($.annotation), 
       'variable', 
-      "$", $.EQName, 
+        field('name', seq('$', $.EQName)),
       optional($.type_declaration),
       choice( 
-        seq( ':=', $._expr ),
+        seq( ':=', field( 'value', $._expr )),
         seq('external', optional( seq(':=', $._expr ))))), // 26
     // 4.17 Context Item Declaration
     context_item_declaration: $ => seq(
