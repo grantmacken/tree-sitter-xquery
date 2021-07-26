@@ -109,3 +109,5 @@ jobs:
         run: bin/tree-sitter parse examples/function_declaration.xq 
       - name: 4.19 Option Declaration
         run: bin/tree-sitter parse examples/option_declaration.xq 
+      - name: highlight queries
+        run: bin/tree-sitter query --captures queries/highlights.scm examples/app/use_case_JSON.xq
