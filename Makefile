@@ -66,11 +66,15 @@ $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 	@cp -v $< $@
 
 # playground: tree-sitter-xQuery.wasm
-
-# tree-sitter-xQuery.wasm: grammar.js
+# .PHONY: web
+# web:
+# 	@source /home/gmack/projects/emsdk/emsdk_env.sh &>/dev/null
+# 	@emcc --version
 # 	@rm -f tree-sitter-xquery.wasm
-# 	@$(TS) build-wasm
-# 	@$(TS) web-ui
+# 	@npx tree-sitter generate && \
+# 	npx node-gyp rebuild && \
+# 	npx tree-sitter build-wasm && \
+# 	npx tree-sitter web-ui
 
 .PHONY: stow
 stow:

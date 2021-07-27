@@ -634,7 +634,7 @@ module.exports = grammar({
         $.uri_qualified_name
       ), // 112
     ns_builtin: $ =>
-      choice('xs', 'fn', 'map', 'array', 'math', 'err', 'output'),
+      choice('xml', 'xs', 'xsi', 'fn', 'map', 'array', 'math', 'err', 'output', 'local'),
     NCName: $ => $.identifier, // 123
     uri_qualified_name: $ => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
     braced_uri_literal: $ =>

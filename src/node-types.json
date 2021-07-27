@@ -16127,11 +16127,11 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": false
   },
   {
     "type": "comment",
-    "named": false
+    "named": true
   },
   {
     "type": "construction",
@@ -16358,6 +16358,10 @@
     "named": false
   },
   {
+    "type": "local",
+    "named": false
+  },
+  {
     "type": "lt",
     "named": false
   },
@@ -16558,11 +16562,19 @@
     "named": false
   },
   {
+    "type": "xml",
+    "named": false
+  },
+  {
     "type": "xquery",
     "named": false
   },
   {
     "type": "xs",
+    "named": false
+  },
+  {
+    "type": "xsi",
     "named": false
   },
   {

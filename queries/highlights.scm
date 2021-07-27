@@ -12,7 +12,7 @@
   "copy-namespaces" "preserve"  "no-preserve" "inherit"  "no-inherit" ; copy_namespaces_declaration
   "decimal-format" "decimal-separator" "grouping-separator" "infinity" "minus-sign" "NaN" ; decimal_format_declaration
   "percent" "per-mille"  "zero-digit" "digit" "pattern-separator" "exponent-separator"    ; decimal_format_declaration
-   "option" "import" "schema" 
+   "option" "schema" 
   "variable"  "external"
   ] @keyword
 ; declaration keyword that also appears elsewhere
@@ -21,13 +21,20 @@
 (function_declaration ["function" ] @keyword )
 (context_item_declaration ["context" "item" ] @keyword )
 
+; TSinclude
+ (schema_import  "import" @include) 
+ (module_import  "import" @include)
+
 ; declared namespace indentifiers
+
+ (module_import name: (identifier) @namespace)
+ (schema_import name: (identifier) @namespace)
+
 [
- (schema_import)
- (module_declaration)
+ (module_declaration )
  (namespace_declaration)
- (module_import)
  ] @namespace
+ 
  ; declarations, direct_attribute and 'let' assignment operators
  [":=" "="] @operator
 ; literals
@@ -38,6 +45,8 @@
 ["{" "}" "(" ")"] @punctuation.bracket
 ; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
 
+
+; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
  [ "%" ";" ":" "," "|"] @punctuation.delimiter
 
 [
@@ -59,8 +68,8 @@
 
 (NCName) @constant
 
-
-; FUNCTIONS
+; TSFuncBuiltin TODO maybe see go highlight scm
+;TSFunction -  calls
 (inline_function_expr "function" @function ) 
 
 (function_call
@@ -77,13 +86,18 @@
     unprefixed: (identifier)
     ] @function))
 
-; path_expr
+
  (path_expr [ "/" "//" "::" ] @operator)
  (abbrev_attr) @operator
  ;(path_expr) @function
  (path_expr ["child" "descendant" "attribute" "self" "descendant-or-self" "following-sibling" "following"] @keyword.operator)
  (path_expr ["parent"  "ancestor"  "preceding-sibling"  "preceding"  "ancestor-or-self" ] @keyword.operator )
 ; kind tests - after path
+
+
+; TSType`
+; TSTypeBuiltin`
+
  [ 
   (any_item)
   (any_function_test)
@@ -116,7 +130,7 @@
 ;3.13 Ordered and Unordered Expressions
 (unordered_expr  ["unordered" ] @keyword)
 (ordered_expr  ["ordered" ] @keyword)
-;Conditionals
+;TSConditional keywords related to conditionnals.
 (if_expr [ "if" "then" "else" ] @conditional)
 (switch_expr "switch" @conditional)
 (switch_clause "case" @conditional)

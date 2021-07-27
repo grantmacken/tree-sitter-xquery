@@ -6087,7 +6087,15 @@
       "members": [
         {
           "type": "STRING",
+          "value": "xml"
+        },
+        {
+          "type": "STRING",
           "value": "xs"
+        },
+        {
+          "type": "STRING",
+          "value": "xsi"
         },
         {
           "type": "STRING",
@@ -6112,6 +6120,10 @@
         {
           "type": "STRING",
           "value": "output"
+        },
+        {
+          "type": "STRING",
+          "value": "local"
         }
       ]
     },
