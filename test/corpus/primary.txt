@@ -6,7 +6,9 @@
 
 ---
 
-(module (integer_literal))
+(module 
+ (main_module 
+  (integer_literal)))
 
 ==================
 3.1.1 Literal: numeric decimal
@@ -17,7 +19,8 @@
 ---
 
 (module 
- (decimal_literal))
+ (main_module 
+  (decimal_literal)))
 
 ==================
 3.1.1 Literal: numeric double
@@ -28,7 +31,8 @@
 ---
 
 (module 
- (double_literal))
+ (main_module 
+  (double_literal)))
 
 
 ==================
@@ -39,7 +43,9 @@
 
 ---
 
- (module (string_literal))
+(module 
+ (main_module 
+  (string_literal)))
 
 ==================
 3.1.1 Literal: string single quotes
@@ -49,7 +55,9 @@
 
 ---
 
-(module  (string_literal))
+(module 
+ (main_module 
+  (string_literal)))
 
 ==================
  3.1.1 Literal: string with escaped quotes
@@ -58,7 +66,11 @@
 "He said, ""I don't like it."""
 ---
 
-(module  (string_literal))
+(module 
+ (main_module 
+  (string_literal 
+   (escape_quote)
+   (escape_quote)))) 
 
 ==================
 3.1.1 Literal: string with escape apos
@@ -68,7 +80,12 @@
 
 ---
 
-(module  (string_literal))
+(module 
+ (main_module 
+  (string_literal 
+   (escape_apos) 
+   (escape_apos)
+   (escape_apos))))
 
 =================
 3.1.1 Literal: string with predefined entity ref
@@ -78,7 +95,12 @@
 
 ---
 
-(module  (string_literal))
+(module 
+ (main_module 
+  (string_literal 
+   (predefined_entity_ref) 
+   (predefined_entity_ref))))
+
 
 ==================
 3.1.1 Literal: string with character reference
@@ -88,7 +110,10 @@
 
 ---
 
-(module  (string_literal))
+(module 
+ (main_module 
+  (string_literal 
+   (char_ref))))
 
 ==================
 3.1.2 Variable References: unprefixed
@@ -99,6 +124,7 @@ $x
 ---
 
 (module
+ (main_module 
   (var_ref (EQName (identifier))))
 
 ==================

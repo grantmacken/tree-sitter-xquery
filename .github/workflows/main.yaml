@@ -113,5 +113,7 @@ jobs:
         run: bin/tree-sitter parse examples/comments.xq 
       - name: highlight queries
         run: bin/tree-sitter query --captures queries/highlights.scm examples/app/use_case_JSON.xq
-      - name: TESTS
-        run: make test
+      - name: tests - 4 Modules and Prologs
+        run: test TEST_SECTION="4."
+      - name: TEST Primary Expressions - 3.1.1 Literal
+        run: test TEST_SECTION="3.1.1 Literal"

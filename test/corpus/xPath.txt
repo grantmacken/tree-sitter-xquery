@@ -39,9 +39,11 @@ $node/*
 ---
 
 (module 
-  (path_expr 
-    (var_ref (EQName (identifier))) 
-    (abbrev_forward_step (wildcard))))
+  (main_module 
+    (path_expr 
+      (var (EQName (identifier))) 
+      (abbrev_forward_step 
+        (name_test (wildcard))))))
 
 ==================
 3.3.1.1 Path operator (/) kind test
@@ -52,10 +54,10 @@ $node/text()
 ---
 
 (module 
-  (path_expr 
-    (var_ref (EQName (identifier))) 
-    (abbrev_forward_step (text_test))
-))
+  (main_module 
+    (path_expr 
+      (var (EQName (identifier))) 
+      (abbrev_forward_step (text_test)))))
 
 ==================
 3.3 Path - Relative Path Expressions

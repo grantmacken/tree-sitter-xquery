@@ -69,7 +69,7 @@ declare base-uri "http://example.org";
   (parenthesized_expr)))
 
 ==================
-4.6  Construction Declaration 
+4.6 Construction Declaration 
 ==================
 
 declare construction strip;
@@ -111,7 +111,7 @@ declare default order empty least;
   (parenthesized_expr)))
 
 ==================
-4.9  Copy-Namespaces Declaration
+4.9 Copy-Namespaces Declaration
 ==================
 
 declare copy-namespaces preserve, no-inherit;
@@ -122,7 +122,7 @@ declare copy-namespaces preserve, no-inherit;
 (module (main_module (copy_namespaces_declaration) (parenthesized_expr)))
 
 ==================
-4.10 Decimal Format Declaration: TODO no prefix and local-part
+4.10 Decimal Format Declaration
 ==================
 
 declare decimal-format local:de 
