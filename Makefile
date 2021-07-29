@@ -10,7 +10,7 @@ TS := bin/tree-sitter
 NVIM_QUERIES := $(HOME)/.config/nvim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
 
-default: src/grammar.json $(Queries)
+default: src/grammar.json $(NVIM_QUERIES)/xquery/highlights.scm
 
 # default: generate tree-sitter grammar
 generate: src/grammar.json ## generate tree-sitter files
@@ -119,3 +119,8 @@ pr-merge:
 	gh pr merge --help
 	gh pr merge -s -d
 	git pull
+
+# .PHONY: headless
+# headless:
+# 	@nvim --headless +PackerSync +qall
+	@#nvim --headless +TSUpdateSync +qall

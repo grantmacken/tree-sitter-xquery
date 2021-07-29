@@ -4,14 +4,10 @@ const  DIGIT = /[0-9]/,
     repeat(DIGIT),
     optional(seq('.', repeat(DIGIT))),
     /[eE]/,
-    optional(/[+-]/),
+   optional(/[+-]/),
     repeat1(DIGIT)
   ), // TODO check
-  DECIMAL = seq(repeat(DIGIT), '.', repeat(DIGIT)),
-  //https://github.com/bwrrp/slimdom.js/blob/main/src/util/namespaceHelpers.ts#L132
-//var xmlName = /^\p{L}[\p{L}0-9\-.]*(:[\p{L}0-9\-.]+)?$/u;
-  NAME_START_CHAR = /[^.\-,;:!?'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/,
-  NAME_CHAR = /[^,;:!?.'"()\[\]\{\}@*/\\\&#%`\^+<>|\~\s\d]/
+  DECIMAL = seq(repeat(DIGIT), '.', repeat(DIGIT))
 
 module.exports = grammar({
   name: 'xquery',
@@ -640,7 +636,15 @@ module.exports = grammar({
     braced_uri_literal: $ =>
       seq('Q{', repeat1(choice($.predefined_entity_ref, $.char_ref, /[^&{}]/)), '}'), // 224
     identifier: $ => /[_\p{L}]{1}[\-_\p{L}\p{N}]*/,
-    comment: $ => token( seq( '(:', /[^:]*:+([^):][^:]*:+)*/, ')'))
+  comment: $ =>  seq( 
+  '(:', 
+    repeat(
+      alias( token(repeat1(/[^:()]|[:][^)]|[(][^:]|[^:][)]|[)][:]/)
+    )
+    , $.comment_content
+  )
+), 
+':)')
   }
 });
 

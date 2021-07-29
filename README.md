@@ -33,7 +33,6 @@ make help
  -  [Video: Neovim Treesitter](https://www.youtube.com/watch?v=xQGbhiUbSmM)
  - [Video: Tree sitter & LSP: Short Comparison](https://www.youtube.com/watch?v=c17j09vY5sw)
 
-
 Follow the instuctions at
 [Github: nvim-treesitter ](https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers)
 to use the xquery treesitter
@@ -46,33 +45,14 @@ parser_config.xquery = {
     files = {"src/parser.c"}
   }
 }
-```
 
+
+```
 ## queries
 
 $(HOME)/.config/nvim/queries/xquery
 
-###
-
-
-
-<!--
-
-## playground
-  
-```
-# get tree-sitter cli
-make getTreeSitter
-#  generate the tree-sitter grammar  
-make
-# convert to web assembly and play with 
-# the result in the web ui interface
-make playground
-```
-
-To see highlighting in action check the query checkbox and
-paste the highlight query found in queries folder.
--->
+At this stage only the highlights query is available
 
 To peek at tree-sitter in action, I also run some parse and query examples in 
 [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
@@ -81,9 +61,22 @@ which you might want to look at. The parse examples should show what can be pars
 nested list (tree-structured) data. The query examples should show the capture items that can be highlighted in a
 text editor.
 
-Please note: this is very much a work in progress. I am learning as I go, and may go down many dead end or wrong paths
+Please note: this is very much a work in progress. I am learning as I go.
 
-## contributing, issues, and tests 
+## Known limitations
+
+- [ ]  comments:  will parse embeded comments, but errors if ':' or ')' at end of comment delimiters
+```xquery
+
+(: OK! (: xquery allows embed comments :) :)
+(:~
+:  ok with doc style comments
+:
+:)
+ (: but this will error ::)
+```
+
+## Contributing, Issues, and Tests 
 
 [Contributions](CONTRIBUTING.md) and suggestions in form of 
 [issues](https://github.com/grantmacken/tree-sitter-xQuery/issues) are welcome.

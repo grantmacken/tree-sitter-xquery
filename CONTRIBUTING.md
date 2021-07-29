@@ -12,7 +12,7 @@ The project consists of
  - grammar.js  the tree-sitter grammar for xQuery.
  - test/corpus/   
  - queries/       highlight.scm  etc
- - examples/      xQuery example files:vs
+ - examples/      xQuery example filess
  - _config        this is the symlinked to the `~/.tree-sitter
  - Makefile: some tree-sitter shortcut commands, helped by a dot env file
    - make
@@ -35,14 +35,26 @@ Although there is a lot to digest the guides I have found useful are
 
 ## Known limitations/issues
 
-### Resolving rhs for xPath axis expressions
+### comments
 
-`$node/descendant::toy[attribute::color = "red"]`
-throws error as we require right hand side for axis expressions,
-`$node/descendant::toy[./attribute::color = "red"]`
-solution is to use context expression 
+errors if ':' or ')' at end of comment delimiter
 
-###  extra node in direct constructors
+```xquery
+
+(: OK! (: xquery allows embed comments :) :)
+(:~
+:  ok with doc style comments
+:
+:)
+ (: but this will error ::)
+```
+
+There are no lookahead regex expr allowed for tree-sitter grammars,
+so this might no be resolved, unless a c lexer is used. Thats what other
+TS grammars use.
+
+
+###  extra node can appear in direct constructors
 
 not sure how to resolve
 

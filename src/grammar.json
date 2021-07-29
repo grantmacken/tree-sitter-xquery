@@ -6173,24 +6173,35 @@
       "value": "[_\\p{L}]{1}[\\-_\\p{L}\\p{N}]*"
     },
     "comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "(:"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[^:]*:+([^):][^:]*:+)*"
-          },
-          {
-            "type": "STRING",
-            "value": ")"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "(:"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^:()]|[:][^)]|[(][^:]|[^:][)]|[)][:]"
+                }
+              }
+            },
+            "named": true,
+            "value": "comment_content"
           }
-        ]
-      }
+        },
+        {
+          "type": "STRING",
+          "value": ":)"
+        }
+      ]
     }
   },
   "extras": [

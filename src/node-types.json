@@ -2504,6 +2504,21 @@
     "fields": {}
   },
   {
+    "type": "comment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "comment_test",
     "named": true,
     "fields": {}
@@ -15902,6 +15917,10 @@
     "named": false
   },
   {
+    "type": "(:",
+    "named": false
+  },
+  {
     "type": ")",
     "named": false
   },
@@ -15943,6 +15962,10 @@
   },
   {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": ":)",
     "named": false
   },
   {
@@ -16130,7 +16153,7 @@
     "named": false
   },
   {
-    "type": "comment",
+    "type": "comment_content",
     "named": true
   },
   {
