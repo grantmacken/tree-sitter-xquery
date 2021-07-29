@@ -47,7 +47,7 @@
 
 
 ; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
- [ "%" ";" ":" "," "|"] @punctuation.delimiter
+ [ "%" ";" ":" "," "|" "(:" ":)"] @punctuation.delimiter
 
 [
  (var)
@@ -171,7 +171,6 @@
 
 
 
-;(abbrev_attr ["@"] @operator)
 (postfix_lookup "?" @operator ) 
 (unary_lookup "?" @operator )
 (wildcard) @conditional
@@ -179,7 +178,7 @@
 ; direct XML constructors
 [(start_tag) (end_tag) (empty_tag)  ] @tag
 (direct_attribute 
-  attr_name: (identifier) @attribute
+  attr_name: (identifier) @tag.attribute
   attr_value: (direct_attribute_value) @string
   )
 

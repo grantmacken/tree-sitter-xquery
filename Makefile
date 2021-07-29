@@ -10,12 +10,12 @@ TS := bin/tree-sitter
 NVIM_QUERIES := $(HOME)/.config/nvim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
 
-default: src/grammar.json $(NVIM_QUERIES)/xquery/highlights.scm
+default: src/grammar.json $(NVIM_QUERIES)/xquery/highlights.scm $(NVIM_QUERIES)/xquery/textobjects.scm
 
 # default: generate tree-sitter grammar
 generate: src/grammar.json ## generate tree-sitter files
 
-.PHONY: h
+.PHONY: hl
 hl: ## hightlight query specific example nominated in .env
 	@$(TS) query --captures queries/highlights.scm examples/$(EXAMPLE).xq
 

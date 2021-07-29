@@ -63,7 +63,7 @@ jobs:
         run: bin/tree-sitter parse examples/quantified_expressions.xq 
       - name: 3.17 Try Catch Expressions
         run: bin/tree-sitter parse examples/try_catch_expressions.xq 
-      - name: TODO 3.18 Expressions on SequenceTypes 
+      - name: 3.18 Expressions on SequenceTypes 
         run: bin/tree-sitter parse examples/expressions_on_sequence_types.xq 
       - name: 3.19 Simple map operator 
         run: bin/tree-sitter parse examples/bang.xq 
@@ -113,3 +113,5 @@ jobs:
         run: bin/tree-sitter parse examples/comments.xq 
       - name: highlight queries
         run: bin/tree-sitter query --captures queries/highlights.scm examples/app/use_case_JSON.xq
+      - name: TESTS
+        run: make test

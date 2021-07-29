@@ -65,21 +65,11 @@ Please note: this is very much a work in progress. I am learning as I go.
 
 ## Known limitations
 
-- [ ]  comments:  will parse embeded comments, but errors if ':' or ')' at end of comment delimiters
-```xquery
-
-(: OK! (: xquery allows embed comments :) :)
-(:~
-:  ok with doc style comments
-:
-:)
- (: but this will error ::)
-```
 
 ## Contributing, Issues, and Tests 
 
 [Contributions](CONTRIBUTING.md) and suggestions in form of 
-[issues](https://github.com/grantmacken/tree-sitter-xQuery/issues) are welcome.
+[issues](https://github.com/grantmacken/tree-sitter-xquery/issues) are welcome.
 
 Tests are run via [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
 and follow the main sections in the 

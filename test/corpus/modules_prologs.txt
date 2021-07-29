@@ -7,269 +7,252 @@ xquery version "3.0" encoding "utf-8";
 ()
 
 ---
+ 
+  (module 
+   (version_declaration (string_literal) (string_literal)) 
+   (main_module (parenthesized_expr)))
 
- (module (version_declaration (string_literal) (string_literal)) (parenthesized_expr))
 
 ==================
 4.2 Module Declaration
 ==================
 
-module namespace mod = "http://example.org/#mod";
-declare variable $mod:bar := 'main module dummy';
+module namespace gis = "http://example.org/gis-functions";
+
 
 ---
 
 (module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (library_module 
+  (module_declaration (identifier) (string_literal))))
 
 ==================
 4.3 Boundary-space Declaration 
 ==================
 
-module namespace mod = "http://example.org/#mod";
 declare boundary-space preserve;
-declare variable $mod:bar := 'main module dummy';
+()
 
 
 ---
 
 (module 
-(module_declaration (NCName (identifier)) (string_literal)) 
-(boundary_space_declaration) 
-(variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (main_module 
+  (boundary_space_declaration) (parenthesized_expr)))
 
 ==================
 4.4 Default Collation Declaration 
 ==================
 
-module namespace mod = "http://example.org/#mod";
 declare default collation "http://example.org/languages/Icelandic";
-declare variable $mod:bar := 'main module dummy';
+()
 
 ---
 
- (module 
- (module_declaration (NCName (identifier)) (string_literal)) 
- (default_collation_declaration (string_literal)) 
- (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+(module 
+ (main_module 
+  (default_collation_declaration (string_literal))
+  (parenthesized_expr)))
 
 ==================
 4.5 Base URI Declaration
 ==================
 
-module namespace mod = "http://example.org/#mod";
 declare base-uri "http://example.org";
-declare variable $mod:bar := 'main module dummy';
+()
 
 ---
 
 (module 
-(module_declaration (NCName (identifier)) (string_literal))
-(base_uri_declaration (string_literal))
-(variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (main_module 
+  (base_uri_declaration (string_literal))
+  (parenthesized_expr)))
 
 ==================
 4.6  Construction Declaration 
 ==================
 
-module namespace mod = "http://example.org/#mod";
 declare construction strip;
-declare variable $mod:bar := 'main module dummy';
+()
 
 ---
 
 (module 
-(module_declaration (NCName (identifier)) (string_literal))
-(construction_declaration)
-(variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (main_module 
+  (construction_declaration)
+  (parenthesized_expr)))
 
 ==================
 4.7 Ordering Mode Declaration
 ==================
 
-module namespace mod = "http://example.org/#mod";
 declare ordering unordered;
-declare variable $mod:bar := 'main module dummy';
+()
 
 ---
 
 (module 
-(module_declaration (NCName (identifier)) (string_literal))
-(ordering_mode_declaration)
-(variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (main_module 
+  (ordering_mode_declaration) 
+  (parenthesized_expr)))
 
 ==================
 4.8 Empty Order Declaration
 ==================
 
-module namespace mod = "http://example.org/#mod";
 declare default order empty least;
-declare variable $mod:bar := 'main module dummy';
+()
 
 ---
 
-  (module 
-   (module_declaration (NCName (identifier)) (string_literal)) 
-   (empty_order_declaration)
-   (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+(module 
+ (main_module 
+  (empty_order_declaration) 
+  (parenthesized_expr)))
 
 ==================
 4.9  Copy-Namespaces Declaration
 ==================
 
-module namespace mod = "http://example.org/#mod";
 declare copy-namespaces preserve, no-inherit;
-declare variable $mod:bar := 'main module dummy';
+()
+
+---
+
+(module (main_module (copy_namespaces_declaration) (parenthesized_expr)))
+
+==================
+4.10 Decimal Format Declaration: TODO no prefix and local-part
+==================
+
+declare decimal-format local:de 
+  decimal-separator = "," grouping-separator = ".";
+()
 
 ---
 
 (module 
- (module_declaration (NCName (identifier)) (string_literal)) 
- (copy_namespaces_declaration) 
- (variable_declaration (EQName (identifier) (identifier)) (string_literal))) 
-
-==================
-4.10 Decimal Format Declaration TODO! https://www.w3.org/TR/xquery-31/#id-module-declaration
-==================
-
-module namespace mod = "http://example.org/#mod";
-declare default decimal-format ;
-declare variable $mod:bar := 'main module dummy';
-
----
-
-(module 
- (module_declaration (NCName (identifier)) (string_literal)) 
- (decimal_format_declaration)
- (variable_declaration (EQName (identifier) (identifier)) (string_literal))) 
+ (main_module 
+  (decimal_format_declaration (EQName (identifier) (identifier))
+   (string_literal) (string_literal)) (parenthesized_expr))) 
 
 ==================
 4.11 Schema Import 
 ==================
 
-module namespace mod = "http://example.org/#mod";
-import schema namespace soap="http://www.w3.org/2003/05/soap-envelope";
-declare variable $mod:bar := 'main module dummy';
+import schema namespace soap="http://www.w3.org/2003/05/soap-envelope" 
+    at "http://www.w3.org/2003/05/soap-envelope/"; 
+import schema default element namespace "" at "http://example.org/xyz.xsd";
+()
 
 ---
 
 (module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (schema_import (schema_prefix (NCName (identifier))) (string_literal)) 
-  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (main_module 
+  (schema_import (identifier) (string_literal) (string_literal)) 
+  (schema_import (string_literal) (string_literal)) 
+  (parenthesized_expr)))
 
 ==================
 4.12 Module Import  
 ==================
 
-import schema namespace geometry = "http://example.org/geo-schema-declarations"; 
 import module namespace geo = "http://example.org/geo-functions"; 
-declare variable $t as geometry:triangle := geo:make-triangle(); 
-$t
+()
 
 ---
+
 (module 
-  (schema_import (schema_prefix (NCName (identifier))) (string_literal)) 
-  (module_import (NCName (identifier)) (string_literal)) 
-  (variable_declaration (EQName (identifier)) (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))) 
-  (function_call (EQName (identifier) (identifier)) (argument_list))) 
-  (var_ref (EQName (identifier))))
+ (main_module 
+  (module_import (identifier) (string_literal)) 
+  (parenthesized_expr)))
 
 ==================
 4.13 Namespace Declaration 
 ==================
 
-module namespace mod = "http://example.org/#mod";
-declare namespace foo = "http://example.org/#foo";
-declare variable $mod:bar := 'main module dummy';
+declare namespace foo = "http://example.org";
+<foo:bar> Lentils </foo:bar>
 
 ---
 
 (module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (namespace_declaration (NCName (identifier)) (string_literal)) 
-  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (main_module 
+ (namespace_declaration (identifier) (string_literal)) 
+  (direct_element 
+   (start_tag (identifier (identifier) (identifier))) 
+   (element_text (char_data))
+   (end_tag (identifier (identifier) (identifier))))))
 
 ==================
 4.14 Default Namespace Declaration 
 ==================
 
-module namespace mod = "http://example.org/#mod";
-declare namespace foo = "http://example.org/#foo";
 declare default element namespace "http://example.org/names";
-declare variable $mod:bar := "main module dummy";
-
----
-
-(module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (namespace_declaration (NCName (identifier)) (string_literal)) 
-  (default_namespace_declaration (string_literal)) 
-  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
-
-==================
-4.15 Annotations TODO! more
-==================
-
-declare 
- %private
- variable $arg := 'xxx';
+declare default function namespace "http://www.w3.org/2005/xpath-functions/math";
 ()
 
 ---
 
-(module
- (variable_declaration 
-  (annotation (EQName (identifier)))
-  (EQName (identifier)) (string_literal))
- (parenthesized_expr)
-)
+(module 
+ (main_module 
+  (default_namespace_declaration (string_literal)) 
+  (default_namespace_declaration (string_literal)) 
+  (parenthesized_expr)))
+
+==================
+4.15 Annotations
+==================
+
+declare 
+   %java:method("java.lang.StrictMath.copySign") 
+   function smath:copySign($magnitude, $sign) 
+   external;
+   ()
+
+---
+
+(module 
+ (main_module 
+  (function_declaration 
+   (annotation (EQName (identifier) (identifier)) (string_literal)) 
+   (EQName (identifier) (identifier)) 
+   (parameters (parameter (EQName (identifier))) (parameter (EQName (identifier))))) 
+  (parenthesized_expr)))
 
 ==================
 4.16 Variable Declaration 
 ==================
 
-module namespace foo = "http://example.org/#foo";
-declare variable $foo:num := 7.5;
+declare variable $x as xs:integer := 7;
+()
 
 ---
 
 (module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (variable_declaration (EQName (identifier) (identifier)) (decimal_literal)))
+ (main_module 
+  (variable_declaration 
+   (EQName (identifier)) 
+   (type_declaration (sequence_type (atomic_or_union_type (EQName (identifier) (identifier))))) 
+   (integer_literal)) 
+  (parenthesized_expr)))
 
-==================
-4.16 Variable Declaration with type declaration TODO!
-==================
-
-module namespace mod = "http://example.org/#mod";
-declare variable $mod:base as item() := array:size($arr);
-
-
----
-
-  (module 
-   (module_declaration (NCName (identifier)) (string_literal)) 
-   (variable_declaration 
-    (EQName (identifier) (identifier)) 
-    (sequence_type (keyword)) 
-    (function_call (EQName (identifier) (identifier)) (argument_list (argument (var_ref (EQName (identifier))))))))
   
 ==================
 4.17 Context Item Declaration 
 ==================
 
-module namespace mod = "http://example.org/#mod";
-declare context item as item() external;
-declare variable $mod:bar := "main module dummy";
+declare context item as element(foo) external;
+()
 
 ---
 
 (module 
-  (module_declaration (NCName (identifier)) (string_literal))
-  (context_item_declaration (type_declaration (sequence_type (keyword)))) 
-  (variable_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (main_module 
+  (context_item_declaration 
+   (type_declaration (sequence_type (element_test (element_test_params (EQName (identifier))))))) 
+  (parenthesized_expr)))
+
 
 ==================
 4.18 Function Declaration with params, as types and return type
@@ -282,16 +265,14 @@ function foo:summary($emps as element(employee)*) as element(dept)* {
 
 ---
 
-(module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (function_declaration 
-  (EQName (identifier) (identifier)) 
-  (param_list 
-    (param 
-    (EQName (identifier)) 
-    (sequence_type (element_test (keyword) (EQName (identifier))) (occurrence_indicator)))) 
-  (sequence_type (element_test (keyword) (EQName (identifier))) (occurrence_indicator)) 
-  (enclosed_expr)))
+  (module 
+   (library_module (module_declaration (identifier) (string_literal)) 
+    (function_declaration (EQName (identifier) (identifier)) 
+     (parameters 
+      (parameter (EQName (identifier)) 
+       (type_declaration (sequence_type (element_test (element_test_params (EQName (identifier)))) (occurrence_indicator))))) 
+     (type_declaration (sequence_type (element_test (element_test_params (EQName (identifier)))) (occurrence_indicator))) 
+     (enclosed_expr)))) 
 
   
 ==================
@@ -303,42 +284,39 @@ declare
 %rest:path("hello/{$who}") 
 %rest:GET 
 function page:hello($who) {
- <response>
-    <title>Hello { $who }!</title>
-  </response>
+ <response> { $who } </response>
 };
 
 ---
 
-  (module 
-   (module_declaration (NCName (identifier)) (string_literal)) 
-   (function_declaration 
-    (annotation (EQName (identifier) (identifier)) (string_literal)) 
-    (annotation (EQName (identifier) (identifier))) 
-    (EQName (identifier) (identifier)) 
-    (param_list (param (EQName (identifier)))) 
-    (enclosed_expr (direct_element (start_tag (identifier)) (char_data) 
-    (direct_element (start_tag (identifier)) (char_data) 
-    (enclosed_expr (var_ref (EQName (identifier)))) 
-    (char_data) (end_tag (identifier))) 
-    (char_data) (end_tag (identifier))))))
+(module 
+ (library_module 
+  (module_declaration (identifier) (string_literal)) 
+  (function_declaration 
+   (annotation (EQName (identifier) (identifier)) (string_literal)) 
+   (annotation (EQName (identifier) (identifier))) 
+   (EQName (identifier) (identifier)) (parameters (parameter (EQName (identifier)))) 
+   (enclosed_expr 
+    (direct_element (start_tag (identifier (identifier))) (element_text (char_data)) (element_text (enclosed_expr (var (EQName (identifier))))) (element_text (char_data)) (end_tag (identifier (identifier))))))
+ )) 
 
 
 ==================
 4.18 Function Declaration external
 ==================
 
-
-module namespace foo = "http://example.org/#foo";
-declare  
-function smath:copySign( $magnitude, $sign ) 
-external;
+declare  function smath:copySign( $magnitude, $sign ) external;
+()
 
 ---
 
 (module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (function_declaration (EQName (identifier) (identifier)) (param_list (param (EQName (identifier))) (param (EQName (identifier)))))) 
+ (main_module 
+  (function_declaration (EQName (identifier) (identifier)) 
+   (parameters 
+    (parameter (EQName (identifier))) 
+    (parameter (EQName (identifier))))) 
+  (parenthesized_expr)))
 
 ==================
 4.19 Option Declaration 
@@ -352,6 +330,6 @@ declare option output:method 'text';
 ---
 
 (module 
-  (module_declaration (NCName (identifier)) (string_literal)) 
-  (namespace_declaration (NCName (identifier)) (string_literal)) 
-  (option_declaration (EQName (identifier) (identifier)) (string_literal)))
+ (library_module (module_declaration (identifier) (string_literal)) 
+  (namespace_declaration (identifier) (string_literal)) 
+  (option_declaration (EQName (identifier) (identifier)) (string_literal))))

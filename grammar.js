@@ -11,6 +11,8 @@ const  DIGIT = /[0-9]/,
 
 module.exports = grammar({
   name: 'xquery',
+  //
+  // Whitespace and Comments function as symbol separators
   extras: $ => [$.comment, /\s/],
   word: $ => $.identifier,
   conflicts: $ => [ 
@@ -106,7 +108,7 @@ module.exports = grammar({
       choice($.integer_literal, $.decimal_literal, $.double_literal),
     //3.1.2 Variable References
     var: $ => seq('$',  $.EQName ),
-    // note: a dynamic function call can consist of _postfix_expr [ var + argument_list ]
+    // note: a dynamic function call can consist of _postfix_expr [ var + arguments ]
     // 3.1.3 Parenthesized Expressions
     parenthesized_expr: $ =>  seq('(', optional($._query_body), ')'), // 133
     //3.1.4 Context Item Expression TODO not like spec
@@ -114,13 +116,12 @@ module.exports = grammar({
     //3.1.5 Static Function Calls
     function_call: $ => prec.left(25,seq( 
       choice( field( 'dynamic', $.var),field('static', $.EQName)),
-      $.argument_list)), // 137 spec deviation added $var
-    //function_call: $ => prec.left(25 ,seq( $.EQName, $.argument_list)), // 137
+      $.arguments)), // 137 spec deviation added $var
     // 3.1.6 Named Function References
     named_function_ref: $ =>
       seq(
         field('function_name', $.EQName),
-        field('delimiter', '#'),
+        '#',
         field('signature', $.integer_literal)
       ),
     // 3.1.7 Inline Function Expr
@@ -129,12 +130,12 @@ module.exports = grammar({
       seq(
         // optional( $.annotation ),
         'function',
-        field('parameters', $.param_list),
+        $.parameters,
         optional( field('result_type', $.type_declaration)),
         field('body', $.enclosed_expr)
       ), // 169
-    param_list: $ => seq('(', commaSep($.param), ')'),
-    param: $ =>
+    parameters: $ => seq('(', commaSep($.parameter), ')'),
+    parameter: $ =>
       seq(
         field('param_name', seq('$', $.EQName)),
         optional(field('param_type', $.type_declaration))
@@ -142,12 +143,12 @@ module.exports = grammar({
     // 3.1.8 Enclosed Expressions: when content empty then empty parenthesized_expr {()} is assumed
     enclosed_expr: $ =>  seq('{', optional( $._query_body ) , '}'), // 5
     // 3.2 Postfix Expressions TODO
-    //_postfix_expr: $ =>  seq($._primary_expr, optional(repeat1(choice($.predicate, $.argument_list, $.postfix_lookup)))), // 49
-    _postfix_expr: $ =>  repeat1(choice($.predicate, $.postfix_lookup, $.argument_list )), // 49
+    //_postfix_expr: $ =>  seq($._primary_expr, optional(repeat1(choice($.predicate, $.arguments, $.postfix_lookup)))), // 49
+    _postfix_expr: $ =>  repeat1(choice($.predicate, $.postfix_lookup, $.arguments )), // 49
     // 3.2.1 Filter Expressions TODO tests
     predicate: $ => prec(20, seq( '[', field('filter', $._query_body ), ']')), //124
     // 3.2.2 Dynamic Function Calls
-    argument_list: $ => prec(1,seq('(', commaSep($._argument), ')')), // 122
+    arguments: $ => prec(1,seq('(', commaSep($._argument), ')')), // 122
     _argument: $ => field( 'argument', choice($._expr, "?" )), // 138
     // 3.3 Path Expressions
     // https://docs.oracle.com/cd/E13190_01/liquiddata/docs81/xquery/query.html
@@ -213,7 +214,7 @@ module.exports = grammar({
         )))
       ), // 107
     single_type: $ => prec.left(seq($.EQName, optional('?'))), // 182
-    arrow_function: $ => seq(choice($.EQName, $.var, $.parenthesized_expr), $.argument_list), // 127
+    arrow_function: $ => seq(choice($.EQName, $.var, $.parenthesized_expr), $.arguments), // 127
     _direct_constructor: $ => choice(
         $.direct_element,
         $.direct_comment,
@@ -327,7 +328,7 @@ module.exports = grammar({
           $.count_clause
         )
       ), // 43',
-    // 3.12.4 Window Clause
+    // 3.12.4 Window Clause:
     //3.12.5 Where Clause
     where_clause: $ => seq('where', $._expr), // 60
     // 3.12.6 Count Clause
@@ -434,7 +435,8 @@ module.exports = grammar({
     // 4.10 Decimal Format Declaration
     decimal_format_declaration: $ => seq( 'declare',
         choice(
-          seq('decimal-format', $.EQName),
+          seq('decimal-format',
+          field('name', $.EQName)),
           seq('default', 'decimal-format')
         ),
         repeat( seq( $._df_property_name, '=', $.string_literal ))),
@@ -488,7 +490,7 @@ module.exports = grammar({
         repeat($.annotation),
         'function',
         field('name', $.EQName),
-        field('params', $.param_list),
+        $.parameters,
         optional($.type_declaration),
         field('body', choice($.enclosed_expr, 'external'))
       ),

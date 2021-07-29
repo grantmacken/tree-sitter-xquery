@@ -584,7 +584,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "argument_list"
+            "name": "arguments"
           }
         ]
       }
@@ -601,12 +601,8 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "delimiter",
-          "content": {
-            "type": "STRING",
-            "value": "#"
-          }
+          "type": "STRING",
+          "value": "#"
         },
         {
           "type": "FIELD",
@@ -626,12 +622,8 @@
           "value": "function"
         },
         {
-          "type": "FIELD",
-          "name": "parameters",
-          "content": {
-            "type": "SYMBOL",
-            "name": "param_list"
-          }
+          "type": "SYMBOL",
+          "name": "parameters"
         },
         {
           "type": "CHOICE",
@@ -659,7 +651,7 @@
         }
       ]
     },
-    "param_list": {
+    "parameters": {
       "type": "SEQ",
       "members": [
         {
@@ -674,7 +666,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "param"
+                  "name": "parameter"
                 },
                 {
                   "type": "REPEAT",
@@ -687,7 +679,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "param"
+                        "name": "parameter"
                       }
                     ]
                   }
@@ -705,7 +697,7 @@
         }
       ]
     },
-    "param": {
+    "parameter": {
       "type": "SEQ",
       "members": [
         {
@@ -783,7 +775,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "argument_list"
+            "name": "arguments"
           }
         ]
       }
@@ -813,7 +805,7 @@
         ]
       }
     },
-    "argument_list": {
+    "arguments": {
       "type": "PREC",
       "value": 1,
       "content": {
@@ -1888,7 +1880,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "argument_list"
+          "name": "arguments"
         }
       ]
     },
@@ -4310,8 +4302,12 @@
                   "value": "decimal-format"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "EQName"
+                  "type": "FIELD",
+                  "name": "name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "EQName"
+                  }
                 }
               ]
             },
@@ -4966,12 +4962,8 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "params",
-          "content": {
-            "type": "SYMBOL",
-            "name": "param_list"
-          }
+          "type": "SYMBOL",
+          "name": "parameters"
         },
         {
           "type": "CHOICE",
