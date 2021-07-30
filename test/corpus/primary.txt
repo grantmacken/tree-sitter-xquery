@@ -125,7 +125,7 @@ $x
 
 (module
  (main_module 
-  (var_ref (EQName (identifier))))
+  (var (EQName (identifier)))))
 
 ==================
 3.1.2 Variable References: namespace prefix and local part
@@ -136,7 +136,8 @@ $example:fruit
 ---
 
 (module 
-  (var_ref (EQName (identifier) (identifier))))
+ (main_module 
+  (var (EQName (identifier) (identifier)))))
 
 ==================
 3.1.2 Variable References: URIQualifiedName 	
@@ -147,7 +148,8 @@ $Q{http://example.com/ns}invoice
 -------------------
 
 (module 
-  (var_ref (EQName (uri_qualified_name))))
+  (main_module 
+  (var (EQName (uri_qualified_name)))))
 
 ==================
 3.1.3 Parenthesized with constructed empty sequence
@@ -158,8 +160,8 @@ $Q{http://example.com/ns}invoice
 -------------------
 
 (module 
- (parenthesized_expr)
- )
+ (main_module 
+  (parenthesized_expr)))
 
 ==================
 3.1.3 Parenthesized with constructed sequence one item 
@@ -170,8 +172,9 @@ $Q{http://example.com/ns}invoice
 ---
 
 (module 
-  (parenthesized_expr (integer_literal))
-)
+ (main_module 
+  (parenthesized_expr 
+   (integer_literal))))
 
 ==================
 3.1.3 Parenthesized with constructed sequence comma separated items
@@ -182,11 +185,10 @@ $Q{http://example.com/ns}invoice
 ---
 
 (module 
+ (main_module 
  (parenthesized_expr 
    (integer_literal)
-   (integer_literal)
-  )
- )
+   (integer_literal))))
 
 ==================
 3.1.3 Parenthesized with embeded sequences 5 items
@@ -197,12 +199,12 @@ $Q{http://example.com/ns}invoice
 ---
 
 (module 
+ (main_module 
  (parenthesized_expr 
    (integer_literal) 
    (parenthesized_expr (integer_literal) (integer_literal)) 
    (parenthesized_expr) 
-   (parenthesized_expr (integer_literal) (integer_literal))
-))
+   (parenthesized_expr (integer_literal) (integer_literal)))))
 
 ==================
 3.1.4 Context Item Expression
@@ -213,8 +215,8 @@ $Q{http://example.com/ns}invoice
 ---
 
 (module 
-   (context_item_expr) 
-)
+ (main_module 
+  (context_item_expr)))
 
 ==================
 3.1.5 Static Function Call with identifier without arg
@@ -225,9 +227,10 @@ array:size()
 ---
 
 (module 
+ (main_module 
  (function_call 
   (EQName (identifier) (identifier)) 
-  (argument_list)))
+  (arguments))))
 
 ==================
 3.1.5 Static Function Call with identifier with arg
@@ -237,8 +240,9 @@ empty( $foo )
   ---
 
   (module 
+ (main_module 
    (function_call (EQName (identifier)) 
-    (argument_list (argument (var_ref (EQName (identifier)))))))
+    (arguments (argument (var (EQName (identifier))))))))
 
 ==================
 3.1.5 Static Function Call with identifier with hyphen
@@ -247,10 +251,11 @@ empty( $foo )
 my:hyphen-function( $foo )
 ---
 
-(module 
-  (function_call (EQName (identifier) (identifier))
-  (argument_list (argument (var_ref (EQName (identifier)))))
-))
+(module
+ (main_module 
+  (function_call 
+   (EQName (identifier) (identifier)) 
+   (arguments (var (EQName (identifier)))))))
 
 ==================
 3.1.6 Named Function References: TODO
@@ -261,10 +266,11 @@ fn:abs#1
 ---
 
 (module
+ (main_module 
  (named_function_ref 
   (EQName (identifier) (identifier))
   (integer_literal)
- )) 
+ ))) 
 
 ==================
 3.1.7 Inline Function Expressions: simple
@@ -274,11 +280,10 @@ function()  { 'hello world' }
 
 ---
 
-(module
- (inline_function_expr 
-   (param_list)
-   (enclosed_expr (string_literal))
-)) 
+(module 
+ (main_module 
+  (inline_function_expr (parameters) 
+   (enclosed_expr (string_literal))))) 
 
 ==================
 3.1.7 Inline Function: with args
@@ -288,13 +293,11 @@ function ( $param1, $param2 )  {()}
 
 ---
 
-(module
- (inline_function_expr
-  (param_list 
-   (param (EQName (identifier))) 
-   (param (EQName (identifier)))) 
- (enclosed_expr (parenthesized_expr)
- )))
+(module 
+ (main_module 
+  (inline_function_expr 
+   (parameters (parameter (EQName (identifier))) (parameter (EQName (identifier)))) 
+   (enclosed_expr (parenthesized_expr)))))
 
 ==================
 3.1.7 Inline Function: with arg type declaration
@@ -305,9 +308,12 @@ function( $a as empty-sequence() )  { () }
 ---
 
 (module 
-(inline_function_expr 
-(param_list (param (EQName (identifier)) (sequence_type (empty_sequence))))
-(enclosed_expr (parenthesized_expr))))
+ (main_module 
+  (inline_function_expr 
+   (parameters 
+    (parameter (EQName (identifier)) 
+     (type_declaration (sequence_type (empty_sequence))))) 
+   (enclosed_expr (parenthesized_expr)))))
 
 ==================
 3.1.7 Inline Function:  with return type declaration
@@ -318,10 +324,13 @@ function( $a as item() ) as item()  { () }
 ---
 
 (module 
- (inline_function_expr 
-  (param_list (param (EQName (identifier)) (sequence_type (any_item)))) 
-  (sequence_type (any_item))
-  (enclosed_expr (parenthesized_expr))))
+ (main_module 
+  (inline_function_expr 
+   (parameters 
+    (parameter (EQName (identifier)) 
+     (type_declaration (sequence_type (any_item))))) 
+   (type_declaration (sequence_type (any_item))) 
+   (enclosed_expr (parenthesized_expr)))))
 
 ==================
 3.1.7 Inline Function: sequence type occurrance indicator
@@ -332,7 +341,14 @@ function( $a as item()* ) as item()+  { () }
 ---
 
 (module 
- (inline_function_expr 
-  (param_list (param (EQName (identifier)) (sequence_type (any_item) (occurrence_indicator)))) 
-  (sequence_type (any_item) (occurrence_indicator))
-  (enclosed_expr (parenthesized_expr))))
+ (main_module 
+  (inline_function_expr 
+   (parameters 
+    (parameter (EQName (identifier)) 
+     (type_declaration 
+      (sequence_type (any_item) 
+       (occurrence_indicator))))) 
+   (type_declaration 
+    (sequence_type (any_item) 
+     (occurrence_indicator))) 
+   (enclosed_expr (parenthesized_expr)))))
