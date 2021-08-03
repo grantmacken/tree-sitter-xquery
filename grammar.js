@@ -50,7 +50,6 @@ module.exports = grammar({
       $.option_declaration),
     _query_body: $ => seq($._expr, optional( repeat(seq( prec(1,','), $._expr)))),
     _expr: $ => choice( // statement like expressions all prec 2
-      $._primary_expr,
       $.flwor_expr,
       $.quantified_expr,
       $.switch_expr,
@@ -78,6 +77,8 @@ module.exports = grammar({
       //  $.postfix_lookup //125   prec: 20 @primary postfix lookup   '?'
       //  $.unary_lookup,// 181    prec: 21 @primary unary lookup
       //seq($._primary_expr, optional( $._postfix_expr )) 
+      //
+      $._primary_expr,
     ),
     // 3.1 Primary Expressions set as highest prec
     _primary_expr: $ => prec.left(23,seq(choice(
@@ -151,33 +152,31 @@ module.exports = grammar({
     arguments: $ => prec(1,seq('(', commaSep($._argument), ')')), // 122
     _argument: $ => field( 'argument', choice($._expr, "?" )), // 138
     // 3.3 Path Expressions
-    // https://docs.oracle.com/cd/E13190_01/liquiddata/docs81/xquery/query.html
     path_expr: $ => prec.left(19, 
       choice(
         seq('/', optional($._relative_path_expr)), //parse-note-leading-lone-slash
-        seq( '//', $._relative_path_expr ),  // must have relative_path_expr 
-        $._relative_path_expr  // can stand alone
+        seq( optional('//'), $._relative_path_expr )
       )
     ),
-    _relative_path_expr: $ => prec.left(seq($._step_expr, optional( repeat1 (seq( choice('/', '//'), $._step_expr))))), //109 
-    _step_expr: $ => prec.left(choice( seq( $._primary_expr, optional( $._postfix_expr )) , $._axis_step )),
-    _axis_step: $ => prec.left(seq(choice($._reverse_step, $._forward_step),optional(repeat($.predicate)))), // 111 124
-    _forward_step: $ => field('step',choice(seq($._forward_axis, $._node_test), $.abbrev_forward_step)), // 112
-    abbrev_forward_step: $ => seq(optional($.abbrev_attr), $._node_test), // 117
-    abbrev_attr: $ => '@',
+    _relative_path_expr: $ => prec.left(seq($._step_expr,  repeat (seq( choice('/', '//'), $._step_expr)))), //109 
+    _step_expr: $ => prec.left(
+      choice( seq( $._primary_expr, optional( $._postfix_expr )) , field( 'step', $.axis_step ))),
+     // A step is a part of a path expression that generates 
+    // a sequence of items and then filters the sequence by zero or more predicates.
+    axis_step: $ => prec.left(seq(choice($._reverse_step, $._forward_step),repeat($.predicate))), // 111 124a
+    _forward_step: $ => choice( 
+      seq( field('axis_movement', $.forward_axis), 
+           field( 'node_test', $._node_test)),
+      seq( optional( field('axis_movement', $.abbrev_foward )),field( 'node_test', $._node_test))),
+    abbrev_foward: $ => '@', // 117
     // 3.3.2.1 Axes
-  _forward_axis: $ =>
-    seq( choice( 'child','descendant', 'attribute', 'self', 'descendant-or-self', 'following-sibling', 'following'),
-      '::'
-  ), ///113
-  _reverse_step: $ => field('step',choice(seq($._reverse_axis, $._node_test), $.abbrev_reverse_step)), // 115
-    _reverse_axis: $ => seq(
-      choice( 'parent', 'ancestor', 'preceding-sibling', 'preceding', 'ancestor-or-self' ),
-        '::'
-      ), //116
+   forward_axis: $ => seq( 
+      choice( 'child','descendant', 'attribute', 'self', 'descendant-or-self', 'following-sibling', 'following'), '::'), //113
+  _reverse_step: $ => field('axis_direction',choice(seq($._reverse_axis, $._node_test), $.abbrev_reverse_step )), // 115
     abbrev_reverse_step: $ => '..', // 117
-    _node_test: $ => choice( $._kind_test, $.name_test), // 118'
-
+  _reverse_axis: $ => seq( 
+    choice( 'parent', 'ancestor', 'preceding-sibling', 'preceding', 'ancestor-or-self' ),'::'), //116
+    _node_test: $ => prec.left(choice($.name_test,$.kind_test)), // 118'
     or_expr: $ => prec.left(3,seq( field('lhs', $._expr), 'or', field('rhs', $._expr))),
     and_expr: $ => prec.left(4,seq( field('lhs', $._expr), 'and', field('rhs', $._expr))),
     comparison_expr: $ => prec.left(5,seq(field('lhs',$._expr),choice('eq','ne','lt','le','gt','ge','=','!=','<','<=','>','>=','is','<<','>>'),field('rhs',$._expr))),
@@ -283,7 +282,7 @@ module.exports = grammar({
         'array',
         field('content', $.enclosed_expr)
       ),
-    square_array_constructor: $ => seq('[', commaSep($._expr), ']'),
+    square_array_constructor: $ =>  seq('[', commaSep($._expr), ']'),
     postfix_lookup: $ => prec.left( 20 , seq( '?', $._key_specifier)), // 125
     unary_lookup: $ => prec.left( 21 , seq( '?', $._key_specifier)),
     _key_specifier: $ => choice($.NCName, $.lookup_digit, $.parenthesized_expr, alias( "*" , $.wildcard)), // 54
@@ -510,7 +509,7 @@ module.exports = grammar({
     _item: $ => prec.right(seq($._item_type, optional($.occurrence_indicator))),
     _item_type: $ =>
       choice(
-        $._kind_test,
+        $.kind_test,
         $.any_item,
         $.any_function_test,
         $.typed_function_test,
@@ -524,7 +523,7 @@ module.exports = grammar({
     occurrence_indicator: $ => choice('?', '*', '+'), // 185
     atomic_or_union_type: $ => $.EQName, // 187
     any_item: $ => seq('item', '(', ')'),
-    _kind_test: $ =>
+    kind_test: $ =>
     choice(
       $.document_test,
       $.element_test,
@@ -538,10 +537,10 @@ module.exports = grammar({
       $.namespace_node_test,
       $.text_test
     ),
-    any_kind_test: $ => seq('node','(',')'), // 189
-    text_test: $ => seq('text', '(',')'), // 191
-    comment_test: $ => seq('comment','(',')'), // 192
-    namespace_node_test: $ => seq('namespace-node','(',')'), // 193
+    any_kind_test: $ => token(seq('node','(',')')), // 189
+    text_test: $ => token(seq('text', '(',')')), // 191
+    comment_test: $ => token(seq('comment','(',')')), // 192
+    namespace_node_test: $ => token(seq('namespace-node','(',')')), // 193
     document_test: $ =>
       seq('document-node', '(', optional(choice($.element_test, $.schema_element_test)),')' ), // 190
     // wildcard - element() same as element(*)

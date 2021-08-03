@@ -141,65 +141,6 @@
     }
   },
   {
-    "type": "abbrev_forward_step",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "abbrev_attr",
-          "named": true
-        },
-        {
-          "type": "any_kind_test",
-          "named": true
-        },
-        {
-          "type": "attribute_test",
-          "named": true
-        },
-        {
-          "type": "comment_test",
-          "named": true
-        },
-        {
-          "type": "document_test",
-          "named": true
-        },
-        {
-          "type": "element_test",
-          "named": true
-        },
-        {
-          "type": "name_test",
-          "named": true
-        },
-        {
-          "type": "namespace_node_test",
-          "named": true
-        },
-        {
-          "type": "pi_test",
-          "named": true
-        },
-        {
-          "type": "schema_attribute_test",
-          "named": true
-        },
-        {
-          "type": "schema_element_test",
-          "named": true
-        },
-        {
-          "type": "text_test",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "additive_expr",
     "named": true,
     "fields": {
@@ -941,11 +882,6 @@
     "fields": {}
   },
   {
-    "type": "any_kind_test",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "any_map_test",
     "named": true,
     "fields": {}
@@ -1493,6 +1429,92 @@
       "types": [
         {
           "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "axis_step",
+    "named": true,
+    "fields": {
+      "axis_direction": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "::",
+            "named": false
+          },
+          {
+            "type": "abbrev_reverse_step",
+            "named": true
+          },
+          {
+            "type": "ancestor",
+            "named": false
+          },
+          {
+            "type": "ancestor-or-self",
+            "named": false
+          },
+          {
+            "type": "kind_test",
+            "named": true
+          },
+          {
+            "type": "name_test",
+            "named": true
+          },
+          {
+            "type": "parent",
+            "named": false
+          },
+          {
+            "type": "preceding",
+            "named": false
+          },
+          {
+            "type": "preceding-sibling",
+            "named": false
+          }
+        ]
+      },
+      "axis_movement": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_foward",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          }
+        ]
+      },
+      "node_test": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "kind_test",
+            "named": true
+          },
+          {
+            "type": "name_test",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "predicate",
           "named": true
         }
       ]
@@ -2517,11 +2539,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "comment_test",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "comp_attr_constructor",
@@ -5156,6 +5173,11 @@
     }
   },
   {
+    "type": "forward_axis",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "function_call",
     "named": true,
     "fields": {
@@ -7163,6 +7185,57 @@
     }
   },
   {
+    "type": "kind_test",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "any_kind_test",
+          "named": true
+        },
+        {
+          "type": "attribute_test",
+          "named": true
+        },
+        {
+          "type": "comment_test",
+          "named": true
+        },
+        {
+          "type": "document_test",
+          "named": true
+        },
+        {
+          "type": "element_test",
+          "named": true
+        },
+        {
+          "type": "namespace_node_test",
+          "named": true
+        },
+        {
+          "type": "pi_test",
+          "named": true
+        },
+        {
+          "type": "schema_attribute_test",
+          "named": true
+        },
+        {
+          "type": "schema_element_test",
+          "named": true
+        },
+        {
+          "type": "text_test",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "let_binding",
     "named": true,
     "fields": {
@@ -8746,11 +8819,6 @@
     }
   },
   {
-    "type": "namespace_node_test",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "occurrence_indicator",
     "named": true,
     "fields": {}
@@ -9774,107 +9842,7 @@
         "required": false,
         "types": [
           {
-            "type": "::",
-            "named": false
-          },
-          {
-            "type": "abbrev_forward_step",
-            "named": true
-          },
-          {
-            "type": "abbrev_reverse_step",
-            "named": true
-          },
-          {
-            "type": "ancestor",
-            "named": false
-          },
-          {
-            "type": "ancestor-or-self",
-            "named": false
-          },
-          {
-            "type": "any_kind_test",
-            "named": true
-          },
-          {
-            "type": "attribute",
-            "named": false
-          },
-          {
-            "type": "attribute_test",
-            "named": true
-          },
-          {
-            "type": "child",
-            "named": false
-          },
-          {
-            "type": "comment_test",
-            "named": true
-          },
-          {
-            "type": "descendant",
-            "named": false
-          },
-          {
-            "type": "descendant-or-self",
-            "named": false
-          },
-          {
-            "type": "document_test",
-            "named": true
-          },
-          {
-            "type": "element_test",
-            "named": true
-          },
-          {
-            "type": "following",
-            "named": false
-          },
-          {
-            "type": "following-sibling",
-            "named": false
-          },
-          {
-            "type": "name_test",
-            "named": true
-          },
-          {
-            "type": "namespace_node_test",
-            "named": true
-          },
-          {
-            "type": "parent",
-            "named": false
-          },
-          {
-            "type": "pi_test",
-            "named": true
-          },
-          {
-            "type": "preceding",
-            "named": false
-          },
-          {
-            "type": "preceding-sibling",
-            "named": false
-          },
-          {
-            "type": "schema_attribute_test",
-            "named": true
-          },
-          {
-            "type": "schema_element_test",
-            "named": true
-          },
-          {
-            "type": "self",
-            "named": false
-          },
-          {
-            "type": "text_test",
+            "type": "axis_step",
             "named": true
           }
         ]
@@ -11565,10 +11533,6 @@
           "named": true
         },
         {
-          "type": "any_kind_test",
-          "named": true
-        },
-        {
           "type": "any_map_test",
           "named": true
         },
@@ -11577,47 +11541,15 @@
           "named": true
         },
         {
-          "type": "attribute_test",
-          "named": true
-        },
-        {
-          "type": "comment_test",
-          "named": true
-        },
-        {
-          "type": "document_test",
-          "named": true
-        },
-        {
-          "type": "element_test",
-          "named": true
-        },
-        {
           "type": "empty_sequence",
           "named": true
         },
         {
-          "type": "namespace_node_test",
+          "type": "kind_test",
           "named": true
         },
         {
           "type": "occurrence_indicator",
-          "named": true
-        },
-        {
-          "type": "pi_test",
-          "named": true
-        },
-        {
-          "type": "schema_attribute_test",
-          "named": true
-        },
-        {
-          "type": "schema_element_test",
-          "named": true
-        },
-        {
-          "type": "text_test",
           "named": true
         },
         {
@@ -13334,11 +13266,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "text_test",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "treat_expr",
@@ -16044,7 +15971,7 @@
     "named": false
   },
   {
-    "type": "abbrev_attr",
+    "type": "abbrev_foward",
     "named": true
   },
   {
@@ -16070,6 +15997,10 @@
   {
     "type": "and",
     "named": false
+  },
+  {
+    "type": "any_kind_test",
+    "named": true
   },
   {
     "type": "apos",
@@ -16145,6 +16076,10 @@
   },
   {
     "type": "comment_content",
+    "named": true
+  },
+  {
+    "type": "comment_test",
     "named": true
   },
   {
@@ -16404,8 +16339,8 @@
     "named": false
   },
   {
-    "type": "namespace-node",
-    "named": false
+    "type": "namespace_node_test",
+    "named": true
   },
   {
     "type": "ne",
@@ -16417,10 +16352,6 @@
   },
   {
     "type": "no-preserve",
-    "named": false
-  },
-  {
-    "type": "node",
     "named": false
   },
   {
@@ -16530,6 +16461,10 @@
   {
     "type": "text",
     "named": false
+  },
+  {
+    "type": "text_test",
+    "named": true
   },
   {
     "type": "then",

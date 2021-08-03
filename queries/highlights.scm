@@ -87,11 +87,13 @@
     ] @function))
 
 
- (path_expr [ "/" "//" "::" ] @operator)
- (abbrev_attr) @operator
- ;(path_expr) @function
- (path_expr ["child" "descendant" "attribute" "self" "descendant-or-self" "following-sibling" "following"] @keyword.operator)
- (path_expr ["parent"  "ancestor"  "preceding-sibling"  "preceding"  "ancestor-or-self" ] @keyword.operator )
+ (path_expr [ "/" "//" ] @operator)
+[axis_movement: (_)]  @keyword.operator
+;[axis_movement: (reverse_axis)]  @keyword.operator
+ ; (abbrev_attr) @operator
+ ; ;(path_expr) @function
+ ;["child" "descendant" "attribute" "self" "descendant-or-self" "following-sibling" "following"] @keyword.operator
+ ;["parent"  "ancestor"  "preceding-sibling"  "preceding"  "ancestor-or-self" ] @keyword.operator 
 ; kind tests - after path
 
 
