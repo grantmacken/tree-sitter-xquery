@@ -5,36 +5,33 @@
 ==================
 
 let $x := 47
-return $x
-
----
-
-(module
- (flwor_expr
-  (let_clause 
-   (let_binding (EQName (identifier)) (integer_literal))) 
-  (return_clause (var_ref (EQName (identifier))))
- ))
-
-==================
-3.12.1 Variable Bindings multiple
-==================
-
-let $x := 47, $y := f($x)
-return ( $x, $y)
+return ()
 
 ---
 
 (module 
- (flwor_expr 
-  (let_clause 
-   (let_binding 
-    (EQName (identifier)) 
-    (integer_literal)) 
-   (let_binding 
-    (EQName (identifier))
-    (function_call (EQName (identifier)) (argument_list (argument (var_ref (EQName (identifier)))))))) 
-  (return_clause (parenthesized_expr (var_ref (EQName (identifier))) (var_ref (EQName (identifier))))))) 
+ (main_module 
+  (flwor_expr 
+   (let_clause (let_binding (EQName (identifier)) (integer_literal))) 
+   (return_clause (parenthesized_expr)))))
+
+
+==================
+3.12.1 Variable  multiple binds
+==================
+
+let $x := 47, $y := f($x)
+return ()
+
+---
+
+(module 
+ (main_module 
+  (flwor_expr 
+   (let_clause 
+    (let_binding (EQName (identifier)) (integer_literal)) 
+    (let_binding (EQName (identifier)) (function_call (EQName (identifier)) (arguments (var (EQName (identifier))))))) 
+   (return_clause (parenthesized_expr)))))
  
 ==================
 3.12.1 Variable Bindings accompanied by a type declaration
@@ -46,12 +43,13 @@ return  $salary
 ---
 
 (module 
- (flwor_expr 
-  (let_clause 
-   (let_binding (EQName (identifier))
-    (type_declaration (sequence_type (EQName (identifier) (identifier)))) 
-    (string_literal))) 
-  (return_clause (var_ref (EQName (identifier))))))
+ (main_module 
+  (flwor_expr 
+   (let_clause 
+    (let_binding (EQName (identifier)) 
+     (type_declaration (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))))
+     (string_literal)))
+   (return_clause (var (EQName (identifier)))))))
 
 ==================
 3.12.2 For Clause 
@@ -63,12 +61,12 @@ return  $x
 ---
 
 (module 
- (flwor_expr 
-  (for_clause 
-   (for_binding 
-    (EQName (identifier))
-    (var_ref (EQName (identifier)))))
-    (return_clause (var_ref (EQName (identifier))))))
+ (main_module 
+  (flwor_expr 
+   (for_clause 
+    (var (EQName (identifier))) 
+    (var (EQName (identifier)))) 
+   (return_clause (var (EQName (identifier)))))))
 
 ==================
 3.12.5 Where Clause
@@ -81,19 +79,12 @@ return $x
 ---
 
 (module 
- (flwor_expr 
-  (for_clause 
-   (for_binding (EQName (identifier)) (EQName (identifier)) (var_ref (EQName (identifier))))) 
-  (where_clause 
-   (comparison_expr 
-    (multiplicative_expr 
-     (var_ref (EQName (identifier))) 
-     (multiplicative_op) 
-     (integer_literal)) 
-    (comparison_op) 
-    (integer_literal))) 
-  (return_clause (var_ref (EQName (identifier))))
- ))
+ (main_module 
+  (flwor_expr 
+   (for_clause (var (EQName (identifier))) 
+    (var (EQName (identifier))) (var (EQName (identifier)))) 
+   (where_clause (comparison_expr (multiplicative_expr (var (EQName (identifier))) (integer_literal)) (integer_literal))) 
+   (return_clause (var (EQName (identifier)))))))
 
 ==================
 3.12.6 Count Clause 
@@ -104,32 +95,19 @@ order by $p/sales descending
 count $rank
 where $rank <= 3
 return
-   <product rank="{$rank}">
-      {$p/name, $p/sales}
-   </product>
+()
 
 ---
 
 (module 
- (flwor_expr 
-  (for_clause (for_binding (EQName (identifier)) (var_ref (EQName (identifier))))) 
-  (order_by_clause 
-   (path_expr (var_ref (EQName (identifier)))
-    (abbrev_forward_step (EQName (identifier))))) 
-  (count_clause (EQName (identifier))) 
-  (where_clause 
-  (comparison_expr (var_ref (EQName (identifier))) (comparison_op) (integer_literal))) 
-  (return_clause 
-   (direct_element 
-    (start_tag (identifier) (direct_attribute (identifier) (string_literal))) 
-    (char_data) 
-    (enclosed_expr 
-     (path_expr (var_ref (EQName (identifier))) 
-      (abbrev_forward_step (EQName (identifier)))) 
-     (path_expr (var_ref (EQName (identifier))) 
-      (abbrev_forward_step (EQName (identifier))))) 
-    (char_data) 
-    (end_tag (identifier))))))
+ (main_module 
+  (flwor_expr 
+   (for_clause (var (EQName (identifier))) (var (EQName (identifier)))) 
+   (order_by_clause (path_expr (var (EQName (identifier))) (abbrev_forward_step (name_test (EQName (identifier)))))) 
+   (count_clause (EQName (identifier))) 
+   (where_clause (comparison_expr (var (EQName (identifier))) (integer_literal))) 
+   (return_clause (parenthesized_expr)))))
+
 
 ==================
 3.12.7 Group By Clause TODO more examples
@@ -142,11 +120,12 @@ return $g1
 ---
 
 (module 
+ (main_module 
  (flwor_expr 
-  (let_clause (let_binding (EQName (identifier)) (var_ref (EQName (identifier))))) 
-  (let_clause (let_binding (EQName (identifier)) (var_ref (EQName (identifier))))) 
+  (let_clause (let_binding (EQName (identifier)) (var (EQName (identifier))))) 
+  (let_clause (let_binding (EQName (identifier)) (var (EQName (identifier))))) 
   (group_by_clause (EQName (identifier)) (EQName (identifier)) (EQName (identifier)) (string_literal)) 
-  (return_clause (var_ref (EQName (identifier)))))) 
+  (return_clause (var (EQName (identifier)))))))
 
 ==================
 3.12.8 Order By Clause 
@@ -159,12 +138,10 @@ return $e/name
 ---
 
 (module 
- (flwor_expr 
-  (for_clause (for_binding (EQName (identifier)) (var_ref (EQName (identifier))))) 
-  (order_by_clause 
-   (path_expr (var_ref (EQName (identifier))) (abbrev_forward_step (EQName (identifier))))) 
-  (return_clause 
-   (path_expr (var_ref (EQName (identifier))) (abbrev_forward_step (EQName (identifier)))))))
+ (main_module 
+  (flwor_expr (for_clause (var (EQName (identifier))) (var (EQName (identifier)))) 
+   (order_by_clause (path_expr (var (EQName (identifier))) (abbrev_forward_step (name_test (EQName (identifier)))))) 
+   (return_clause (path_expr (var (EQName (identifier))) (abbrev_forward_step (name_test (EQName (identifier)))))))))
 
 
 

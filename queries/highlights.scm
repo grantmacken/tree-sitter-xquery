@@ -15,13 +15,8 @@
    "option" "schema" 
   "variable"  "external"
   ] @keyword
-; declaration keyword that also appears elsewhere
-(default_namespace_declaration ["element" "function" ] @keyword )
-(schema_import  ["element" ] @keyword )
-(function_declaration ["function" ] @keyword )
-(context_item_declaration ["context" "item" ] @keyword )
 
-; TSinclude
+; TSinclude:
  (schema_import  "import" @include) 
  (module_import  "import" @include)
 
@@ -34,7 +29,7 @@
  (module_declaration )
  (namespace_declaration)
  ] @namespace
- 
+
  ; declarations, direct_attribute and 'let' assignment operators
  [":=" "="] @operator
 ; literals
@@ -49,55 +44,40 @@
 ; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
  [ "%" ";" ":" "," "|" "(:" ":)"] @punctuation.delimiter
 
-[
- (var)
- "$"
- ] @constant
+ (var_ref) @constant
+  [
+  ns_builtin: (identifier) 
+  prefix: (identifier)
+  ] @namespace
 
- (EQName 
-    [
-    ns_builtin: (identifier) 
-    prefix: (identifier)
-    ] @namespace)
+  [
+   local_part: (identifier)
+  unprefixed_name: (identifier)
+  ] @constant
 
-  (EQName 
-    [
-     local_part: (identifier)
-    unprefixed: (identifier)
-    ] @constant)
-
-(NCName) @constant
-
-; TSFuncBuiltin TODO maybe see go highlight scm
-;TSFunction -  calls
 (inline_function_expr "function" @function ) 
-
 (function_call
-  (EQName 
+  (_ 
     [
     local_part: (identifier)
-    unprefixed: (identifier)
+    unprefixed_name: (identifier)
     ] @function))
 
 (arrow_function
-  (EQName 
+  (_ 
     [
     local_part: (identifier)
-    unprefixed: (identifier)
+    unprefixed_name: (identifier)
     ] @function))
 
-
- (path_expr [ "/" "//" "::" ] @operator)
- (abbrev_attr) @operator
- ;(path_expr) @function
- (path_expr ["child" "descendant" "attribute" "self" "descendant-or-self" "following-sibling" "following"] @keyword.operator)
- (path_expr ["parent"  "ancestor"  "preceding-sibling"  "preceding"  "ancestor-or-self" ] @keyword.operator )
-; kind tests - after path
-
+; PATH 
+  (abbrev_reverse) @operator
+  (abbrev_foward) @operator
+[ "/" "//" ] @punctuation.delimiter
+[axis_movement: (_)]  @keyword.operator
 
 ; TSType`
 ; TSTypeBuiltin`
-
  [ 
   (any_item)
   (any_function_test)
@@ -119,7 +99,6 @@
   (name_test)
 ] @type
 
-
 ; 3.12 FLWOR Expressions
  ["let" "for"  "as" "return" "count" "as" "allowing" "empty" ] @keyword
  ["at" "in" "where" ] @conditional
@@ -139,7 +118,7 @@
 (try_clause "try" @conditional)
 (catch_clause "catch" @conditional)
 
-; lhs rhs binary exressions
+; lhs rhs binary statments
 (range_expr [ "to" ] @keyword.operator)
 (additive_expr [ "-" "+"] @operator)
 (multiplicative_expr [ "*" ] @operator)
@@ -169,8 +148,6 @@
 (context_item_expr [ "." ] )
 ] @operator
 
-
-
 (postfix_lookup "?" @operator ) 
 (unary_lookup "?" @operator )
 (wildcard) @conditional
@@ -181,7 +158,6 @@
   attr_name: (identifier) @tag.attribute
   attr_value: (direct_attribute_value) @string
   )
-
 ; constructors 
  (square_array_constructor ["[" "]"] @constructor )
  (curly_array_constructor ["array" ] @constructor )
@@ -195,7 +171,7 @@
  (comp_comment_constructor ["comment" ] @constructor )
  (comp_pi_constructor ["processing-instruction" ] @constructor )
  (comp_namespace_constructor ["namespace" ] @constructor )
-; also say a these are constuctors
+; also say these are constuctors
 (parenthesized_expr ["(" ")"] @constructor)
 (predicate ["[" "]"] @constructor) 
 

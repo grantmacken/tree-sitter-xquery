@@ -6,11 +6,11 @@
 ; (named_function_ref)
 
 (function_call
-  (arguments) @call.inner)
+  (arg_list) @call.inner)
 (function_call) @call.outer
 
-(arguments
+(arg_list
  (_) @parameter.inner)
 
-(parameters
+(param_list
  (_) @parameter.inner)

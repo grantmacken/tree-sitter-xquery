@@ -5,8 +5,9 @@ A tree-sitter grammar is built for an as-you-type experience in a text editor.
 It should provide identification of syntax tree parts that enable
 text highlighting, folding, scope info and more for a text editor.
 The incremental tree-sitter parse should be a step above text highlighting with regular
-expressions, but should not be confused with a validating parser. Unlike a 
+expressions, however tree-sitter should not be confused with a validating parser. Unlike a 
 validating parser, tree-sitter will not stop on-error, but continue to parse. 
+
 
 - [tree-sitter presentation](https://www.youtube.com/watch?v=Jes3bD6P0To) - a new parsing system for programming tools
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
@@ -27,6 +28,34 @@ To see other make targets type
 ```
 make help
 ```
+
+## parse tests
+
+The parser might be lax at what it accepts, so any parsed text might not be able to compile. 
+However the parser SHOULD NOT throw a parse error with any **valid** xQuery module text.
+
+```
+make parse-spec
+make parse-qt3
+```
+
+The parsing examples that are derived from the [W3C xQuery recommendation](https://www.w3.org/TR/xquery-31)
+are found in the 'examples/spec' folder.
+
+Other parse examples are from the [qt3tests suite](https://github.com/w3c/qt3tests) and are in the examples/qt3tests folder
+
+## test corpus
+
+The `test/corpus/` dir contains some tree-sitter tests.
+They are mainly organised around the sections outlined in the 
+[W3C xQuery recommendation](https://www.w3.org/TR/xquery-31).
+
+```
+make test TEST_SECTION=Path
+```
+
+will test some xPath expressions 
+
 
 # using tree-sitter with neovim
 

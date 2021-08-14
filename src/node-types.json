@@ -70,62 +70,6 @@
     ]
   },
   {
-    "type": "EQName",
-    "named": true,
-    "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "uri_qualified_name",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "NCName",
     "named": true,
     "fields": {},
@@ -135,65 +79,6 @@
       "types": [
         {
           "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "abbrev_forward_step",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "abbrev_attr",
-          "named": true
-        },
-        {
-          "type": "any_kind_test",
-          "named": true
-        },
-        {
-          "type": "attribute_test",
-          "named": true
-        },
-        {
-          "type": "comment_test",
-          "named": true
-        },
-        {
-          "type": "document_test",
-          "named": true
-        },
-        {
-          "type": "element_test",
-          "named": true
-        },
-        {
-          "type": "name_test",
-          "named": true
-        },
-        {
-          "type": "namespace_node_test",
-          "named": true
-        },
-        {
-          "type": "pi_test",
-          "named": true
-        },
-        {
-          "type": "schema_attribute_test",
-          "named": true
-        },
-        {
-          "type": "schema_element_test",
-          "named": true
-        },
-        {
-          "type": "text_test",
           "named": true
         }
       ]
@@ -216,7 +101,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -420,7 +305,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -444,7 +329,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -648,7 +533,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -666,7 +551,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -870,7 +755,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -903,12 +788,84 @@
           }
         ]
       },
-      "name": {
+      "local_part": {
         "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -951,7 +908,7 @@
     "fields": {}
   },
   {
-    "type": "arguments",
+    "type": "arg_list",
     "named": true,
     "fields": {
       "argument": {
@@ -971,7 +928,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -1175,7 +1132,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -1199,7 +1156,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -1403,7 +1360,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -1423,17 +1380,78 @@
   {
     "type": "arrow_function",
     "named": true,
-    "fields": {},
+    "fields": {
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "EQName",
-          "named": true
-        },
-        {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -1441,7 +1459,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -1450,16 +1468,71 @@
   {
     "type": "atomic_or_union_type",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "EQName",
-          "named": true
-        }
-      ]
+    "fields": {
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1467,21 +1540,101 @@
     "named": true,
     "fields": {
       "attribute_name": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "local_part": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
             "named": true
           }
         ]
       },
       "type_name": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -1515,7 +1668,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -1719,7 +1872,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -1737,7 +1890,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -1941,7 +2094,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -2005,7 +2158,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -2209,7 +2362,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -2243,7 +2396,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -2447,7 +2600,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -2537,6 +2690,16 @@
           }
         ]
       },
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": true,
         "required": true,
@@ -2546,8 +2709,8 @@
             "named": false
           },
           {
-            "type": "EQName",
-            "named": true
+            "type": ":",
+            "named": false
           },
           {
             "type": "additive_expr",
@@ -2558,7 +2721,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -2647,6 +2810,10 @@
           },
           {
             "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
             "named": true
           },
           {
@@ -2762,7 +2929,11 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "uri_qualified_name",
+            "named": true
+          },
+          {
+            "type": "var_ref",
             "named": true
           },
           {
@@ -2772,6 +2943,60 @@
           {
             "type": "}",
             "named": false
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
           }
         ]
       }
@@ -2823,6 +3048,16 @@
           }
         ]
       },
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": true,
         "required": true,
@@ -2832,8 +3067,8 @@
             "named": false
           },
           {
-            "type": "EQName",
-            "named": true
+            "type": ":",
+            "named": false
           },
           {
             "type": "additive_expr",
@@ -2844,7 +3079,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -2933,6 +3168,10 @@
           },
           {
             "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
             "named": true
           },
           {
@@ -3048,7 +3287,11 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "uri_qualified_name",
+            "named": true
+          },
+          {
+            "type": "var_ref",
             "named": true
           },
           {
@@ -3058,6 +3301,60 @@
           {
             "type": "}",
             "named": false
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
           }
         ]
       }
@@ -3128,7 +3425,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -3332,7 +3629,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           },
           {
@@ -3380,7 +3677,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -3584,7 +3881,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -3602,7 +3899,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -3806,7 +4103,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -3835,7 +4132,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -4039,7 +4336,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -4058,7 +4355,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -4266,7 +4563,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -4296,12 +4593,84 @@
     "type": "count_clause",
     "named": true,
     "fields": {
-      "var_name": {
+      "local_part": {
         "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "var_name": {
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -4328,12 +4697,84 @@
     "type": "decimal_format_declaration",
     "named": true,
     "fields": {
-      "name": {
+      "local_part": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "EQName",
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -4529,12 +4970,36 @@
     "type": "element_test_params",
     "named": true,
     "fields": {
+      "local_part": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "param": {
         "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
             "named": true
           },
           {
@@ -4542,7 +5007,55 @@
             "named": true
           },
           {
+            "type": "uri_qualified_name",
+            "named": true
+          },
+          {
             "type": "wildcard",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -4633,7 +5146,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -4837,7 +5350,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -4920,7 +5433,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -5124,7 +5637,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -5134,7 +5647,7 @@
         "required": false,
         "types": [
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -5149,11 +5662,16 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "forward_axis",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "function_call",
@@ -5164,17 +5682,89 @@
         "required": false,
         "types": [
           {
-            "type": "var",
+            "type": "var_ref",
+            "named": true
+          }
+        ]
+      },
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
             "named": true
           }
         ]
       },
       "static": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "EQName",
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -5185,7 +5775,7 @@
       "required": true,
       "types": [
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         }
       ]
@@ -5209,12 +5799,84 @@
           }
         ]
       },
-      "name": {
+      "local_part": {
         "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -5229,7 +5891,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "param_list",
           "named": true
         },
         {
@@ -5243,12 +5905,70 @@
     "type": "group_by_clause",
     "named": true,
     "fields": {
+      "local_part": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "uri": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -5258,7 +5978,15 @@
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -5277,7 +6005,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -5485,7 +6213,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -5515,7 +6243,21 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
         "multiple": false,
         "required": false,
         "types": [
@@ -5544,7 +6286,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -5748,7 +6490,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -5766,7 +6508,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -5970,7 +6712,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -6000,7 +6742,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -6204,7 +6946,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -6237,11 +6979,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "parameters",
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "param_list",
           "named": true
         }
       ]
@@ -6264,7 +7010,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -6468,7 +7214,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -6502,7 +7248,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -6706,7 +7452,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -6729,7 +7475,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -6933,7 +7679,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -6951,7 +7697,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -7155,7 +7901,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -7166,12 +7912,84 @@
     "type": "let_binding",
     "named": true,
     "fields": {
-      "var_name": {
+      "local_part": {
         "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "var_name": {
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -7190,7 +8008,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -7398,7 +8216,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -7464,7 +8282,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -7668,7 +8486,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -7706,7 +8524,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -7910,7 +8728,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -7928,7 +8746,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -8132,7 +8950,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -8241,7 +9059,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -8445,7 +9263,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -8463,7 +9281,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -8667,7 +9485,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -8677,15 +9495,76 @@
   {
     "type": "name_test",
     "named": true,
-    "fields": {},
+    "fields": {
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "EQName",
-          "named": true
-        },
         {
           "type": "wildcard",
           "named": true
@@ -8698,11 +9577,63 @@
     "named": true,
     "fields": {
       "function_name": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -8713,6 +9644,26 @@
         "types": [
           {
             "type": "integer_literal",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -8759,12 +9710,84 @@
     "type": "option_declaration",
     "named": true,
     "fields": {
-      "name": {
+      "local_part": {
         "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -8798,7 +9821,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -9002,7 +10025,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -9020,7 +10043,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -9224,7 +10247,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -9248,7 +10271,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -9452,7 +10475,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -9494,9 +10517,44 @@
     "fields": {}
   },
   {
+    "type": "param_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "param_name": {
         "multiple": true,
         "required": true,
@@ -9506,7 +10564,15 @@
             "named": false
           },
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -9520,22 +10586,51 @@
             "named": true
           }
         ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
       }
-    }
-  },
-  {
-    "type": "parameters",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "parameter",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -9555,7 +10650,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -9759,7 +10854,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -9769,57 +10864,39 @@
     "type": "path_expr",
     "named": true,
     "fields": {
-      "step": {
+      "axis_movement": {
         "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "::",
-            "named": false
-          },
-          {
-            "type": "abbrev_forward_step",
+            "type": "abbrev_foward",
             "named": true
           },
           {
-            "type": "abbrev_reverse_step",
+            "type": "forward_axis",
             "named": true
           },
           {
-            "type": "ancestor",
-            "named": false
-          },
-          {
-            "type": "ancestor-or-self",
-            "named": false
-          },
+            "type": "reverse_axis",
+            "named": true
+          }
+        ]
+      },
+      "node_test": {
+        "multiple": true,
+        "required": false,
+        "types": [
           {
             "type": "any_kind_test",
             "named": true
-          },
-          {
-            "type": "attribute",
-            "named": false
           },
           {
             "type": "attribute_test",
             "named": true
           },
           {
-            "type": "child",
-            "named": false
-          },
-          {
             "type": "comment_test",
             "named": true
-          },
-          {
-            "type": "descendant",
-            "named": false
-          },
-          {
-            "type": "descendant-or-self",
-            "named": false
           },
           {
             "type": "document_test",
@@ -9830,14 +10907,6 @@
             "named": true
           },
           {
-            "type": "following",
-            "named": false
-          },
-          {
-            "type": "following-sibling",
-            "named": false
-          },
-          {
             "type": "name_test",
             "named": true
           },
@@ -9846,20 +10915,8 @@
             "named": true
           },
           {
-            "type": "parent",
-            "named": false
-          },
-          {
             "type": "pi_test",
             "named": true
-          },
-          {
-            "type": "preceding",
-            "named": false
-          },
-          {
-            "type": "preceding-sibling",
-            "named": false
           },
           {
             "type": "schema_attribute_test",
@@ -9870,145 +10927,209 @@
             "named": true
           },
           {
-            "type": "self",
-            "named": false
-          },
-          {
             "type": "text_test",
             "named": true
           }
         ]
+      },
+      "step": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
+            "type": "abbrev_foward",
+            "named": true
+          },
+          {
+            "type": "abbrev_reverse",
+            "named": true
+          },
+          {
+            "type": "any_kind_test",
+            "named": true
+          },
+          {
+            "type": "arg_list",
+            "named": true
+          },
+          {
+            "type": "attribute_test",
+            "named": true
+          },
+          {
+            "type": "comment_test",
+            "named": true
+          },
+          {
+            "type": "comp_attr_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_comment_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_doc_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_elem_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_namespace_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_pi_constructor",
+            "named": true
+          },
+          {
+            "type": "comp_text_constructor",
+            "named": true
+          },
+          {
+            "type": "context_item_expr",
+            "named": true
+          },
+          {
+            "type": "curly_array_constructor",
+            "named": true
+          },
+          {
+            "type": "decimal_literal",
+            "named": true
+          },
+          {
+            "type": "direct_comment",
+            "named": true
+          },
+          {
+            "type": "direct_element",
+            "named": true
+          },
+          {
+            "type": "direct_pi",
+            "named": true
+          },
+          {
+            "type": "document_test",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "element_test",
+            "named": true
+          },
+          {
+            "type": "enclosed_expr",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "inline_function_expr",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "map_constructor",
+            "named": true
+          },
+          {
+            "type": "name_test",
+            "named": true
+          },
+          {
+            "type": "named_function_ref",
+            "named": true
+          },
+          {
+            "type": "namespace_node_test",
+            "named": true
+          },
+          {
+            "type": "ordered_expr",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expr",
+            "named": true
+          },
+          {
+            "type": "pi_test",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
+            "named": true
+          },
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "reverse_axis",
+            "named": true
+          },
+          {
+            "type": "schema_attribute_test",
+            "named": true
+          },
+          {
+            "type": "schema_element_test",
+            "named": true
+          },
+          {
+            "type": "square_array_constructor",
+            "named": true
+          },
+          {
+            "type": "string_constructor",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "text_test",
+            "named": true
+          },
+          {
+            "type": "unary_lookup",
+            "named": true
+          },
+          {
+            "type": "unordered_expr",
+            "named": true
+          },
+          {
+            "type": "var_ref",
+            "named": true
+          }
+        ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "arguments",
-          "named": true
-        },
-        {
-          "type": "comp_attr_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_comment_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_doc_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_elem_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_namespace_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_pi_constructor",
-          "named": true
-        },
-        {
-          "type": "comp_text_constructor",
-          "named": true
-        },
-        {
-          "type": "context_item_expr",
-          "named": true
-        },
-        {
-          "type": "curly_array_constructor",
-          "named": true
-        },
-        {
-          "type": "decimal_literal",
-          "named": true
-        },
-        {
-          "type": "direct_comment",
-          "named": true
-        },
-        {
-          "type": "direct_element",
-          "named": true
-        },
-        {
-          "type": "direct_pi",
-          "named": true
-        },
-        {
-          "type": "double_literal",
-          "named": true
-        },
-        {
-          "type": "enclosed_expr",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "inline_function_expr",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "map_constructor",
-          "named": true
-        },
-        {
-          "type": "named_function_ref",
-          "named": true
-        },
-        {
-          "type": "ordered_expr",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expr",
-          "named": true
-        },
-        {
-          "type": "postfix_lookup",
-          "named": true
-        },
-        {
-          "type": "predicate",
-          "named": true
-        },
-        {
-          "type": "square_array_constructor",
-          "named": true
-        },
-        {
-          "type": "string_constructor",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "unary_lookup",
-          "named": true
-        },
-        {
-          "type": "unordered_expr",
-          "named": true
-        },
-        {
-          "type": "var",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -10084,7 +11205,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -10288,7 +11409,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -10316,7 +11437,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -10528,7 +11649,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -10538,7 +11659,7 @@
         "required": true,
         "types": [
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -10556,7 +11677,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -10760,7 +11881,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -10794,7 +11915,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -10998,7 +12119,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -11016,7 +12137,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -11220,7 +12341,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -11244,7 +12365,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -11448,22 +12569,99 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
     }
   },
   {
+    "type": "reverse_axis",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "schema_attribute_test",
     "named": true,
     "fields": {
       "attribute_name": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -11475,11 +12673,83 @@
     "named": true,
     "fields": {
       "element_name": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -11638,16 +12908,71 @@
   {
     "type": "single_type",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "EQName",
-          "named": true
-        }
-      ]
+    "fields": {
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -11667,7 +12992,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -11871,7 +13196,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -11920,7 +13245,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -12124,7 +13449,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -12142,7 +13467,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -12346,7 +13671,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -12416,7 +13741,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -12620,7 +13945,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -12638,7 +13963,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -12842,7 +14167,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -12866,7 +14191,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -13070,7 +14395,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -13114,7 +14439,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -13318,7 +14643,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -13357,7 +14682,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -13561,7 +14886,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -13701,7 +15026,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -13921,7 +15246,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           },
           {
@@ -13943,7 +15268,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -14155,7 +15480,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -14185,7 +15510,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -14389,7 +15714,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -14413,7 +15738,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -14617,7 +15942,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -14667,7 +15992,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -14871,7 +16196,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -14889,7 +16214,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -15093,7 +16418,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -15116,24 +16441,89 @@
     }
   },
   {
-    "type": "var",
+    "type": "var_ref",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "EQName",
-          "named": true
-        }
-      ]
+    "fields": {
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "variable_declaration",
     "named": true,
     "fields": {
+      "local_part": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": true,
         "required": true,
@@ -15143,7 +16533,69 @@
             "named": false
           },
           {
-            "type": "EQName",
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "ns_builtin": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "uri": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -15161,7 +16613,7 @@
             "named": true
           },
           {
-            "type": "arguments",
+            "type": "arg_list",
             "named": true
           },
           {
@@ -15365,7 +16817,7 @@
             "named": true
           },
           {
-            "type": "var",
+            "type": "var_ref",
             "named": true
           }
         ]
@@ -15388,7 +16840,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -15596,7 +17048,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -15634,7 +17086,7 @@
           "named": true
         },
         {
-          "type": "arguments",
+          "type": "arg_list",
           "named": true
         },
         {
@@ -15838,7 +17290,7 @@
           "named": true
         },
         {
-          "type": "var",
+          "type": "var_ref",
           "named": true
         }
       ]
@@ -16044,11 +17496,11 @@
     "named": false
   },
   {
-    "type": "abbrev_attr",
+    "type": "abbrev_foward",
     "named": true
   },
   {
-    "type": "abbrev_reverse_step",
+    "type": "abbrev_reverse",
     "named": true
   },
   {

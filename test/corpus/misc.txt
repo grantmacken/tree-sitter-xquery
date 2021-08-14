@@ -1,9 +1,4 @@
 
-
-
-
-
-
 ==================
 3.2 Postfix Expressions - Filter Expressions
 ==================
@@ -13,8 +8,13 @@ $products[price gt 100]
 ---
 
 (module 
-(var_ref (EQName (identifier))) 
- (predicate (comparison_expr (EQName (identifier)) (integer_literal)))) 
+ (main_module 
+  (path_expr 
+   (var (EQName (identifier))) 
+   (predicate 
+    (comparison_expr 
+     (path_expr (abbrev_forward_step (name_test (EQName (identifier))))) 
+     (integer_literal))))))
 
 ==================
 3.2 Postfix Expressions - Dynamic Function Calls
@@ -25,8 +25,9 @@ $f(2, 3)
 ---
 
 (module 
-  (var_ref (EQName (identifier))) 
-  (argument_list (argument (integer_literal)) (argument (integer_literal))))
+ (main_module 
+  (function_call (var (EQName (identifier))) 
+   (arguments (integer_literal) (integer_literal))))) 
 
 ==================
 3.4 Sequence Expressions
@@ -37,8 +38,9 @@ $f(2, 3)
 ---
 
 (module 
+ (main_module 
   (parenthesized_expr (integer_literal) 
-  (range_expr (integer_literal) (integer_literal))))
+  (range_expr (integer_literal) (integer_literal)))))
 
 ==================
 3.5 Arithmetic Expressions
@@ -48,7 +50,11 @@ $f(2, 3)
 
 ---
 
-(module (multiplicative_expr (integer_literal) (integer_literal)))
+(module 
+ (main_module 
+  (multiplicative_expr 
+   (integer_literal) 
+   (integer_literal))))
 
 
 ==================
@@ -59,7 +65,10 @@ $f(2, 3)
 
 ---
 
-(module (string_concat_expr (string_literal) (string_concat_expr (string_literal) (string_literal))))
+(module 
+ (main_module 
+  (string_concat_expr (string_literal) 
+   (string_concat_expr (string_literal) (string_literal)))))
 
 
 ==================
@@ -70,7 +79,9 @@ $f(2, 3)
 
 ---
 
-(module (comparison_expr (integer_literal) (integer_literal)))
+(module
+ (main_module 
+  (comparison_expr (integer_literal) (integer_literal))))
 
 ==================
 3.8 Logical Expressions
@@ -81,9 +92,10 @@ $f(2, 3)
 ---
 
 (module 
+ (main_module 
   (and_expr 
   (comparison_expr (integer_literal) (integer_literal))
-  (comparison_expr (integer_literal) (integer_literal))))
+  (comparison_expr (integer_literal) (integer_literal)))))
 
 ==================
 3.13 Unordered Expression 
@@ -94,8 +106,8 @@ unordered { }
 ---
 
 (module 
- (unordered_expr (enclosed_expr))
-)
+ (main_module 
+  (unordered_expr (enclosed_expr))))
 
 ==================
 3.13 Ordered Expression 
@@ -106,8 +118,8 @@ ordered { }
 ---
 
 (module 
- (ordered_expr (enclosed_expr))
-)
+ (main_module 
+ (ordered_expr (enclosed_expr))))
 
 
 ==================
@@ -121,11 +133,8 @@ if ( 'text' )
 ---
 
 (module 
- (if_expr 
-  (if_condition (string_literal)) 
-  (then_consequence (string_literal)) 
-  (else_alternative (string_literal))
- ))
+ (main_module 
+  (if_expr (string_literal) (string_literal) (string_literal))))
 
 ==================
 3.14 Conditional:  main module with multiple if else
@@ -138,16 +147,9 @@ else 'pigs fly'
 ---
 
 (module 
- (if_expr 
-  (if_condition (string_literal)) 
-  (then_consequence (string_literal)) 
-  (else_alternative 
-   (if_expr 
-    (if_condition (string_literal)) 
-    (then_consequence (string_literal)) 
-    (else_alternative (string_literal))
-   )
-  )))
+ (main_module 
+  (if_expr (string_literal) (string_literal) 
+   (if_expr (string_literal) (string_literal) (string_literal)))))
 
 ==================
 3.15 Switch: main module with switch expr
@@ -162,17 +164,15 @@ switch ( $animal )
 ---
 
 (module 
-    (switch_expr 
-	(switch_value (var_ref (EQName (identifier)))) 
-	(switch_clause (string_literal) (string_literal)) 
-	(switch_clause (string_literal) (string_literal)) 
-	(switch_clause (string_literal) (string_literal)) 
-	(switch_default (string_literal))
-    )
-)
+ (main_module 
+  (switch_expr (var (EQName (identifier))) 
+   (switch_clause (string_literal) (string_literal)) 
+   (switch_clause (string_literal) (string_literal)) 
+   (switch_clause (string_literal) (string_literal)) 
+   (string_literal))))
 
 ==================
-3.16 Quantified Expressions: some
+3.16 Quantified Expressions
 ==================
 
 some $foo in $baa satisfies $boo
@@ -180,24 +180,10 @@ some $foo in $baa satisfies $boo
 ---
 
 (module 
- (quantified_expr 
-  (quantified_in (var_ref (EQName (identifier))) (var_ref (EQName (identifier))))
-  (quantified_satisfies (var_ref (EQName (identifier))))
- ))
-
-==================
-3.16 Quantified Expressions: every
-==================
-
-every $foo in $baa satisfies $boo
-
----
-
-(module 
- (quantified_expr 
-  (quantified_in (var_ref (EQName (identifier))) (var_ref (EQName (identifier))))
-  (quantified_satisfies (var_ref (EQName (identifier))))
- ))
+ (main_module 
+  (quantified_expr (var (EQName (identifier))) 
+   (var (EQName (identifier))) 
+   (var (EQName (identifier))))))
 
 ==================
 3.17 Try/Catch Expressions
@@ -211,12 +197,10 @@ catch * {
 ---
 
 (module 
- (try_catch_expr 
-  (try_clause (enclosed_expr)) 
-  (catch_clause
-   (catch_error_list (wildcard)) 
-   (enclosed_expr)
-  )))
+(main_module 
+(try_catch_expr 
+(try_clause (enclosed_expr)) 
+(catch_clause (catch_error_list (name_test (wildcard))) (enclosed_expr)))))
 
 ==================
 3.18.1 Instance Of: 
@@ -227,10 +211,14 @@ catch * {
 ---
 
 (module 
-  (instance_of_expr (integer_literal) (sequence_type (EQName (identifier) (identifier)))))
+ (main_module 
+  (instance_of_expr 
+   (integer_literal) 
+   (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))))))
+
 
 ==================
-3.18.2 Typeswitch: main module with typeswitch expr
+3.18.2 Typeswitch:  TODO should have have case clause
 ==================
 
 typeswitch ( $node )
@@ -241,16 +229,12 @@ typeswitch ( $node )
 ---
 
 (module 
- (typeswitch_expr 
-  (typeswitch_operand (var_ref (EQName (identifier)))) 
-  (typeswitch_clause 
-   (typeswitch_case_type (sequence_type (text_test))) 
-   (typeswitch_case_return (var_ref (EQName (identifier))))) 
-  (typeswitch_clause 
-   (typeswitch_case_type (sequence_type (element_test))) 
-   (typeswitch_case_return (var_ref (EQName (identifier))))) 
-  (typeswitch_default (string_literal))
-  ))
+ (main_module 
+  (typeswitch_expr (var (EQName (identifier))) 
+   (sequence_type (text_test)) (var (EQName (identifier))) 
+   (sequence_type (element_test)) (var (EQName (identifier))) 
+   (string_literal))))
+ 
 
 ==================
 3.18.3 Cast 
@@ -261,10 +245,10 @@ $x cast as xs:integer
 ---
 
 (module 
- (cast_as_expr 
-  (var_ref (EQName (identifier))) 
-  (single_type (EQName (identifier) (identifier)))
- ))
+ (main_module 
+  (cast_expr 
+   (var (EQName (identifier))) 
+   (single_type (EQName (identifier) (identifier))))))
 
 
 ==================
@@ -276,9 +260,10 @@ $x castable as xs:integer
 ---
 
 (module 
- (castable_as_expr 
-  (var_ref (EQName (identifier)))
-  (single_type (EQName (identifier) (identifier)))))
+ (main_module 
+  (castable_expr 
+   (var (EQName (identifier))) 
+   (single_type (EQName (identifier) (identifier))))))
 
 ==================
 3.18.5 Constructor Functions
@@ -289,12 +274,13 @@ xs:date("2000")
 ---
 
 (module 
+ (main_module 
  (function_call 
   (EQName (identifier) (identifier))
-  (argument_list (argument (string_literal)))))
+  (arguments (string_literal)))))
 
 ==================
-3.18.6 Treat TODO 
+3.18.6 Treat 
 ==================
 
 $myaddress treat as element(*)
@@ -302,8 +288,10 @@ $myaddress treat as element(*)
 ---
 
 (module 
- (treat_as_expr 
-  (var_ref (EQName (identifier))) (sequence_type (element_test (param_wildcard)))))
+ (main_module 
+  (treat_expr 
+   (var (EQName (identifier))) 
+   (sequence_type (element_test (element_test_params (wildcard)))))))
 
 
 ==================
@@ -314,11 +302,12 @@ $emp ! ( $bang )
 
 ---
 
-(module 
+(module
+(main_module
  (bang_expr 
-  (var_ref (EQName (identifier))) 
-  (parenthesized_expr (var_ref (EQName (identifier))))
- ))
+  (var (EQName (identifier))) 
+  (parenthesized_expr (var (EQName (identifier))))
+ )))
 
 ==================
 3.20 Arrow operator 
@@ -328,8 +317,9 @@ $string => upper-case()
 -------------------
 
 (module 
-  (arrow_expr (var_ref (EQName (identifier))) 
-  (arrow_function_specifier (EQName (identifier)) (argument_list))
-))
+ (main_module 
+  (arrow_expr 
+   (var (EQName (identifier))) 
+   (arrow_function (EQName (identifier)) (arguments))))) 
 
 

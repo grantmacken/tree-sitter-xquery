@@ -11,11 +11,12 @@
 -------------------
 
 (module 
- (direct_element 
-  (start_tag (identifier)) 
-  (char_data)
-  (end_tag (identifier))
- ))
+ (main_module 
+  (direct_element 
+   (start_tag (identifier (identifier))) 
+   (element_text (char_data)) 
+   (end_tag (identifier (identifier))))))
+ 
 
 ==================
 3.9.1 Direct Element with char reference
@@ -26,12 +27,12 @@
 -------------------
 
 (module 
- (direct_element
-  (start_tag (identifier)) 
-  (char_ref)
-  (char_data)
-  (end_tag (identifier))
- ))
+ (main_module 
+  (direct_element 
+   (start_tag (identifier (identifier))) 
+   (element_text (char_ref)) 
+   (element_text (char_data)) 
+   (end_tag (identifier (identifier))))))
 
 ==================
 3.9.1 Direct Element with entities
@@ -42,15 +43,15 @@
 -------------------
 
 (module 
- (direct_element 
-  (start_tag (identifier)) 
-  (char_data) 
-  (predefined_entity_ref) 
-  (char_data) 
-  (predefined_entity_ref) 
-  (char_data) 
-  (end_tag (identifier)
-)))
+ (main_module 
+  (direct_element 
+   (start_tag (identifier (identifier))) 
+   (element_text (char_data)) 
+   (element_text (predefined_entity_ref)) 
+   (element_text (char_data))
+   (element_text (predefined_entity_ref)) 
+   (element_text (char_data)) 
+   (end_tag (identifier (identifier))))))
 
 ==================
 3.9.1 Direct Element with enclosed expression
@@ -61,12 +62,12 @@
 -------------------
 
 (module 
- (direct_element 
-  (start_tag (identifier)) 
-  (char_data) 
-  (enclosed_expr (var_ref (EQName (identifier))))
-  (end_tag (identifier))
- ))
+(main_module 
+(direct_element 
+(start_tag (identifier (identifier))) 
+(element_text (char_data)) 
+(element_text (enclosed_expr (var (EQName (identifier))))) 
+(end_tag (identifier (identifier))))))
 
 ==================
 3.9.1 Direct Element with embeded element
@@ -79,16 +80,16 @@
 -------------------
 
 (module 
- (direct_element 
-  (start_tag (identifier))
-  (char_data) 
+ (main_module 
   (direct_element 
-   (start_tag (identifier))
-   (char_data) 
-   (end_tag (identifier)))
-  (char_data) 
-  (end_tag (identifier))
- )) 
+   (start_tag (identifier (identifier))) 
+   (element_text (char_data)) 
+   (direct_element 
+    (start_tag (identifier (identifier))) 
+    (element_text (char_data)) 
+    (end_tag (identifier (identifier)))) 
+   (element_text (char_data)) 
+   (end_tag (identifier (identifier))))))
  
 ==================
 3.9.3.1 Computed Element Constructors 
@@ -101,10 +102,12 @@ element book {
 ---
 
 (module 
- (element_constructor 
-  (EQName (identifier)) 
-  (element_constructor (string_literal) (string_literal))
- ))
+ (main_module 
+  (comp_elem_constructor (EQName (identifier)) 
+   (enclosed_expr 
+    (comp_elem_constructor (string_literal) 
+     (enclosed_expr (string_literal)))))))
+
 
 ==================
 3.9.3.2 Computed Attribute Constructors 
@@ -115,11 +118,9 @@ attribute size {4 + 3}
 ---
 
 (module 
- (attribute_constructor 
-  (EQName (identifier)) 
-  (additive_expr (integer_literal) (additive_op) (integer_literal))
-))
-
+ (main_module 
+  (comp_attr_constructor (EQName (identifier)) 
+   (enclosed_expr (additive_expr (integer_literal) (integer_literal))))))
 
 ==================
 3.9.3.3 Document Node Constructors
@@ -130,9 +131,9 @@ document {  }
 ---
 
 (module 
-   (document_constructor 
-    (enclosed_expr)
-))
+ (main_module 
+  (comp_doc_constructor 
+   (enclosed_expr))))
 
 
 ==================
@@ -143,9 +144,10 @@ text { 'hello' }
 
 ---
 
-(module
-  (text_constructor (enclosed_expr (string_literal)))
-)
+(module 
+ (main_module 
+  (comp_text_constructor 
+   (enclosed_expr (string_literal)))))
 
 ==================
 3.9.3.6 Computed Comment Constructors
@@ -156,8 +158,9 @@ comment { }
 ---
 
 (module 
-  (comment_constructor (enclosed_expr))
-)
+ (main_module 
+  (comp_comment_constructor 
+   (enclosed_expr))))
 
 ==================
 3.10 String Constructors 
@@ -167,11 +170,12 @@ comment { }
 
 ---
 
-(module 
+(module
+ (main_module
  (string_constructor 
-  (interpolation (var_ref (EQName (identifier)))) 
+  (interpolation (var (EQName (identifier)))) 
   (char_group)
- ))
+ )))
 
 
 
@@ -187,10 +191,11 @@ map {
 ---
 
 (module 
+ (main_module
  (map_constructor
   (map_entry (string_literal) (string_literal)) 
   (map_entry (string_literal) (string_literal)) 
- ))
+ )))
 
 ==================
 3.11.2.1 Curly Array Constructor
@@ -200,12 +205,12 @@ array { 'one', 'two' }
 
 ---
 
-(module 
- (curly_array_constructor
-  (enclosed_expr  
-   (string_literal)
-   (string_literal)
-  )))
+(module
+ (main_module
+  (curly_array_constructor
+   (enclosed_expr  
+    (string_literal)
+    (string_literal)))))
 
 ==================
 3.11.2.1 Square Array Constructor
@@ -216,13 +221,14 @@ array { 'one', 'two' }
 ---
 
 (module 
+ (main_module
  (square_array_constructor
   (string_literal)
   (string_literal)
- ))
+ )))
 
 ==================
-3.11.2.2 Array Lookup using Function Call Syntax 
+3.11.2.2 TODO! should resolve to Function call - Array Lookup using Function Call Syntax 
 ==================
 
 [ 'one', 'two' ](2) 
@@ -230,26 +236,20 @@ array { 'one', 'two' }
 ---
 
 (module 
- (postfix_expr 
-  (square_array_constructor (string_literal) (string_literal)) 
-  (argument_list (argument (integer_literal))))
- )
+ (main_module 
+  (path_expr 
+   (square_array_constructor (string_literal) (string_literal)) 
+   (arguments (integer_literal))))) 
 
 ==================
-3.11.3.1 Unary Lookup with predicate
+3.11.3.1 TODO! Unary Lookup with predicate
 ==================
 
 $mp[?name='Mike'] 
 
 ---
 
-  (module 
-   (postfix_expr (var_ref (EQName (identifier))) 
-    (predicate 
-     (comparison_expr 
-      (unary_lookup (NCName (identifier))) 
-      (comparison_op) 
-      (string_literal)))))
+  (module (main_module (path_expr (var (EQName (identifier))) (predicate (comparison_expr (unary_lookup (NCName (identifier))) (string_literal)))))) 
 
 ==================
 3.11.3.1 Unary Lookup with bang
@@ -260,14 +260,14 @@ $mp[?name='Mike']
 ---
 
 (module 
- (comparison_expr 
-  (bang_expr (var_ref (EQName (identifier))) (unary_lookup (NCName (identifier)))) 
-  (comparison_op) 
-  (string_literal)
- ))
+ (main_module 
+  (bang_expr (var (EQName (identifier))) 
+   (comparison_expr 
+    (unary_lookup (NCName (identifier))) 
+    (string_literal)))))
 
 ==================
-3.11.3.2 Postfix Lookup with array unary lookup
+3.11.3.2 Postfix Lookup with array unary lookup: TODO? should be postfix_expr
 ==================
 
 [ 'one', 'two' ]?2
@@ -275,6 +275,7 @@ $mp[?name='Mike']
 ---
 
 (module 
- (postfix_expr 
-  (square_array_constructor (string_literal) (string_literal)) 
-  (unary_lookup (lookup_digit))))
+ (main_module 
+  (path_expr 
+   (square_array_constructor (string_literal) (string_literal)) 
+   (postfix_lookup (lookup_digit)))))
