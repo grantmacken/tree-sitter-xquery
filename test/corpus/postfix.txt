@@ -1,6 +1,6 @@
 
 ==================
-3.2 Postfix Expressions - Filter Expressions
+3.2.1 Postfix Expressions - Filter Expressions
 ==================
 
 $products[price gt 100]
@@ -18,7 +18,7 @@ $products[price gt 100]
 
 
 ==================
-3.2 Postfix Expressions - Dynamic Function Calls
+3.2.2 Postfix Expressions - Dynamic Function Calls
 ==================
 
 $f(2, 3)

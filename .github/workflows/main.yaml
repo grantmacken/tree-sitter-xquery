@@ -112,9 +112,11 @@ jobs:
       - name: Comments
         run: bin/tree-sitter parse examples/spec/comments.xq 
       - name: TEST - 3.2 Postfix Expressions 
-        run: bin/tree-sitter test -f 3.2 Post
+        run: bin/tree-sitter test -f 3.2.
       - name: TEST - 3.3 Path Expressions
         run: bin/tree-sitter test -f Path
+      - name: TEST -3.12 FLWOR Expressions  
+        run: bin/tree-sitter test -f 3.12.
       - name: TEST - 3.18 Expressions on SequenceTypes
         run: bin/tree-sitter test -f 3.18
       # - name: highlight queries

@@ -12,7 +12,7 @@ return ()
 (module 
  (main_module 
   (flwor_expr 
-   (let_clause (let_binding (EQName (identifier)) (integer_literal))) 
+   (let_clause (let_binding (identifier) (integer_literal))) 
    (return_clause (parenthesized_expr)))))
 
 
@@ -29,8 +29,8 @@ return ()
  (main_module 
   (flwor_expr 
    (let_clause 
-    (let_binding (EQName (identifier)) (integer_literal)) 
-    (let_binding (EQName (identifier)) (function_call (EQName (identifier)) (arguments (var (EQName (identifier))))))) 
+    (let_binding (identifier) (integer_literal)) 
+    (let_binding (identifier) (function_call (identifier) (arg_list (var_ref (identifier)))))) 
    (return_clause (parenthesized_expr)))))
  
 ==================
@@ -46,10 +46,10 @@ return  $salary
  (main_module 
   (flwor_expr 
    (let_clause 
-    (let_binding (EQName (identifier)) 
-     (type_declaration (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))))
+    (let_binding (identifier) 
+     (type_declaration (sequence_type (atomic_or_union_type (identifier) (identifier))))
      (string_literal)))
-   (return_clause (var (EQName (identifier)))))))
+   (return_clause (var_ref (identifier))))))
 
 ==================
 3.12.2 For Clause 
@@ -64,9 +64,9 @@ return  $x
  (main_module 
   (flwor_expr 
    (for_clause 
-    (var (EQName (identifier))) 
-    (var (EQName (identifier)))) 
-   (return_clause (var (EQName (identifier)))))))
+    (var_ref (identifier)) 
+    (var_ref (identifier))) 
+   (return_clause (var_ref (identifier))))))
 
 ==================
 3.12.5 Where Clause
@@ -81,10 +81,10 @@ return $x
 (module 
  (main_module 
   (flwor_expr 
-   (for_clause (var (EQName (identifier))) 
-    (var (EQName (identifier))) (var (EQName (identifier)))) 
-   (where_clause (comparison_expr (multiplicative_expr (var (EQName (identifier))) (integer_literal)) (integer_literal))) 
-   (return_clause (var (EQName (identifier)))))))
+   (for_clause (var_ref (identifier)) 
+    (var_ref (identifier)) (var_ref (identifier))) 
+   (where_clause (comparison_expr (multiplicative_expr (var_ref (identifier)) (integer_literal)) (integer_literal))) 
+   (return_clause (var_ref (identifier))))))
 
 ==================
 3.12.6 Count Clause 
@@ -102,10 +102,10 @@ return
 (module 
  (main_module 
   (flwor_expr 
-   (for_clause (var (EQName (identifier))) (var (EQName (identifier)))) 
-   (order_by_clause (path_expr (var (EQName (identifier))) (abbrev_forward_step (name_test (EQName (identifier)))))) 
-   (count_clause (EQName (identifier))) 
-   (where_clause (comparison_expr (var (EQName (identifier))) (integer_literal))) 
+   (for_clause (var_ref (identifier)) (var_ref (identifier))) 
+   (order_by_clause (path_expr (var_ref (identifier)) (name_test (identifier)))) 
+   (count_clause (identifier)) 
+   (where_clause (comparison_expr (var_ref (identifier)) (integer_literal))) 
    (return_clause (parenthesized_expr)))))
 
 
@@ -122,10 +122,10 @@ return $g1
 (module 
  (main_module 
  (flwor_expr 
-  (let_clause (let_binding (EQName (identifier)) (var (EQName (identifier))))) 
-  (let_clause (let_binding (EQName (identifier)) (var (EQName (identifier))))) 
-  (group_by_clause (EQName (identifier)) (EQName (identifier)) (EQName (identifier)) (string_literal)) 
-  (return_clause (var (EQName (identifier)))))))
+  (let_clause (let_binding (identifier) (var_ref (identifier)))) 
+  (let_clause (let_binding (identifier) (var_ref (identifier)))) 
+  (group_by_clause (identifier) (identifier) (identifier) (string_literal)) 
+  (return_clause (var_ref (identifier))))))
 
 ==================
 3.12.8 Order By Clause 
@@ -139,9 +139,11 @@ return $e/name
 
 (module 
  (main_module 
-  (flwor_expr (for_clause (var (EQName (identifier))) (var (EQName (identifier)))) 
-   (order_by_clause (path_expr (var (EQName (identifier))) (abbrev_forward_step (name_test (EQName (identifier)))))) 
-   (return_clause (path_expr (var (EQName (identifier))) (abbrev_forward_step (name_test (EQName (identifier)))))))))
+  (flwor_expr 
+   (for_clause (var_ref (identifier)) (var_ref (identifier))) 
+   (order_by_clause (path_expr (var_ref (identifier)) (name_test (identifier)))) 
+   (return_clause (path_expr (var_ref (identifier)) (name_test (identifier)))))))
+
 
 
 
