@@ -57,9 +57,18 @@ test-all: ## test specific section nominated in .env
 	@$(TS) test
 
 .PHONY: parse
-parse:  ## parse specific example nominated in .env
-	@$(TS) parse examples/$(EXAMPLE).xq
+parse:  ## parse a specific example nominated in .env
+	@$(TS) parse examples/spec/$(EXAMPLE).xq
+	
+.PHONY: parse-spec
+parse-spec:  ## parse all spec examples
+	@$(TS) parse -q examples/spec/*
 
+.PHONY: parse-qt3
+parse-app:  ## parse all app examples 
+	@$(TS) parse -q examples/app/Demos/*
+	@$(TS) parse -q examples/app/walmsley/*
+	@$(TS) parse -q examples/app/XMark/*
 
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 	@mkdir -p $(dir $@)

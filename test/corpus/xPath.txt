@@ -1,7 +1,7 @@
 3.3 Path Expressions
 
 ==================
-3.3 Path Expr - leading lone slash
+3.3.0 Path Expr - leading lone slash
 ==================
 
 /
@@ -11,7 +11,7 @@
 (module (main_module (path_expr)))
 
 ==================
-3.3 Path Expr - lone slash or double with rel path,
+3.3.0 Path Expr - lone slash or double with rel path,
 ==================
 
  //child::div1
@@ -21,12 +21,11 @@
 (module 
   (main_module 
     (path_expr 
-      (axis_step 
         (forward_axis) 
-        (name_test (EQName (identifier)))))))
+        (name_test (identifier)))))
 
 ==================
-3.3 Path Expr just a relative path
+3.3.0 Path Expr just a relative path
 ==================
 
 child::div1
@@ -36,9 +35,8 @@ child::div1
 (module 
   (main_module 
     (path_expr 
-      (axis_step 
         (forward_axis) 
-        (name_test (EQName (identifier)))))))
+        (name_test (identifier)))))
 
 ==================
 3.3.1 Path operator (/) wildcard
@@ -49,9 +47,10 @@ $node/*
 ---
 
 (module 
-(main_module 
-(path_expr (var (EQName (identifier))) 
-(axis_step (name_test (wildcard))))))
+  (main_module 
+    (path_expr 
+      (var_ref (identifier)) 
+      (name_test (wildcard)))))
 
 ==================
 3.3.1 Path operator (/) kind test
@@ -61,40 +60,57 @@ $node/text()
 
 ---
 
-(module (main_module (path_expr (var (EQName (identifier))) (axis_step (kind_test (text_test))))))
+(module 
+  (main_module 
+    (path_expr 
+      (var_ref (identifier)) 
+      (text_test))))
  
 
 ==================
-3.3.1 Path - Relative Path Expressions
+3.3.1 Path Relative Path
 ==================
 
 child::div1/child::para
 
 ---
 
-(module (main_module (path_expr (axis_step (forward_axis) (name_test (EQName (identifier)))) (axis_step (forward_axis) (name_test (EQName (identifier)))))))
+(module 
+  (main_module 
+    (path_expr 
+      (forward_axis) 
+      (name_test (identifier)) 
+      (forward_axis) 
+      (name_test (identifier)))))
 
 ==================
-3.3.2 Path  Node Tests with wildcard
+3.3.2 Path Node Tests with wildcard
 ==================
 
 child::element(*, po:address)
 
 ---
 
-(module (main_module 
-          (path_expr 
-            (axis_step (forward_axis) (kind_test (element_test (element_test_params (wildcard) (EQName (identifier) (identifier)))))))))
+ (module 
+   (main_module 
+     (path_expr 
+       (forward_axis) 
+       (element_test (element_test_params (wildcard) (identifier) (identifier))))))
 
 ==================
-3.3.3 Path  Predicates within Steps
+3.3.3 Path Predicates within Steps
 ==================
 
  child::chapter[2]
 
 ---
 
- (module (main_module (path_expr (axis_step (forward_axis) (name_test (EQName (identifier))) (predicate (integer_literal))))))
+(module 
+  (main_module 
+    (path_expr 
+      (forward_axis) 
+      (name_test (identifier)) 
+      (predicate (integer_literal)))))
 
 ==================
 3.3.4 Path Unabbreviated Syntax
@@ -104,7 +120,11 @@ child::para
 
 ---
 
- (module (main_module (path_expr (axis_step (forward_axis) (name_test (EQName (identifier)))))))
+(module 
+  (main_module 
+    (path_expr 
+      (forward_axis) 
+      (name_test (identifier)))))
 
 
 ==================
@@ -118,15 +138,15 @@ child::para[fn:position() = 1]
 (module 
   (main_module 
     (path_expr 
-      (axis_step 
-        (forward_axis) 
-        (name_test (EQName (identifier))) 
-        (predicate 
-          (comparison_expr 
-            (function_call (EQName (identifier) (identifier)) (arguments)) (integer_literal)))))))
+      (forward_axis) 
+      (name_test (identifier)) 
+      (predicate 
+        (comparison_expr 
+          (function_call (identifier) (identifier) (arg_list))
+          (integer_literal)))))) 
 
 ==================
-3.3.5 Path: Abbreviated Syntax  with EQName (identifier)
+3.3.5 Path Abbreviated Syntax with EQName (identifier)
 ==================
 
 section/para
@@ -136,12 +156,8 @@ section/para
 (module 
   (main_module 
     (path_expr 
-      (axis_step 
-        (name_test 
-          (EQName (identifier)))) 
-      (axis_step 
-        (name_test 
-          (EQName (identifier)))))))
+      (name_test (identifier)) 
+      (name_test (identifier))))) 
 
 ==================
 3.3.5 Path: Abbreviated Syntax with attribute
@@ -154,11 +170,9 @@ section/@id
 (module 
   (main_module 
     (path_expr 
-      (axis_step 
-        (name_test (EQName (identifier)))) 
-      (axis_step 
+        (name_test (identifier)) 
         (abbrev_foward)
-        (name_test (EQName (identifier)))))))
+        (name_test (identifier)))))
 
 
 
@@ -173,9 +187,8 @@ section/@id
 (module 
   (main_module 
     (path_expr 
-      (axis_step 
         (abbrev_foward) 
-        (name_test (wildcard)))))) 
+        (name_test (wildcard))))) 
 
 
 ==================
@@ -189,7 +202,6 @@ section/@id
 (module 
   (main_module 
     (path_expr 
-      (axis_step 
-        (abbrev_reverse)))))
+      (abbrev_reverse))))
 
 
