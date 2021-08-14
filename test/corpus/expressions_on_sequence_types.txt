@@ -1,0 +1,92 @@
+==================
+3.18.1 Instance Of: 
+==================
+
+5 instance of xs:integer
+
+---
+
+(module 
+ (main_module 
+  (instance_of_expr 
+   (integer_literal) 
+   (sequence_type (atomic_or_union_type (identifier) (identifier))))))
+
+
+==================
+3.18.2 Typeswitch:  TODO should have have case clause
+==================
+
+typeswitch ( $node )
+ case text() return $node
+ case element() return $node
+ default return "unknown"
+
+---
+
+(module 
+ (main_module 
+  (typeswitch_expr (var_ref (identifier)) 
+   (sequence_type (text_test)) (var_ref (identifier)) 
+   (sequence_type (element_test)) (var_ref (identifier)) 
+   (string_literal))))
+ 
+
+==================
+3.18.3 Cast 
+==================
+
+$x cast as xs:integer
+
+---
+
+(module 
+ (main_module 
+  (cast_expr 
+   (var_ref (identifier)) 
+   (single_type (identifier) (identifier)))))
+
+
+==================
+3.18.4 Castable 
+==================
+
+$x castable as xs:integer
+
+---
+
+(module 
+ (main_module 
+  (castable_expr 
+   (var_ref (identifier)) 
+   (single_type (identifier) (identifier)))))
+
+==================
+3.18.5 Constructor Functions
+==================
+
+xs:date("2000")
+
+---
+
+(module 
+ (main_module 
+ (function_call 
+  (identifier) (identifier)
+  (arg_list (string_literal)))))
+
+==================
+3.18.6 Treat 
+==================
+
+$myaddress treat as element(*)
+
+---
+
+(module 
+ (main_module 
+  (treat_expr 
+   (var_ref (identifier)) 
+   (sequence_type (element_test (element_test_params (wildcard)))))))
+
+

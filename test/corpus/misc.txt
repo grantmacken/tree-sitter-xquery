@@ -1,34 +1,3 @@
-
-==================
-3.2 Postfix Expressions - Filter Expressions
-==================
-
-$products[price gt 100]
-
----
-
-(module 
- (main_module 
-  (path_expr 
-   (var (EQName (identifier))) 
-   (predicate 
-    (comparison_expr 
-     (path_expr (abbrev_forward_step (name_test (EQName (identifier))))) 
-     (integer_literal))))))
-
-==================
-3.2 Postfix Expressions - Dynamic Function Calls
-==================
-
-$f(2, 3)
-
----
-
-(module 
- (main_module 
-  (function_call (var (EQName (identifier))) 
-   (arguments (integer_literal) (integer_literal))))) 
-
 ==================
 3.4 Sequence Expressions
 ==================
@@ -165,7 +134,7 @@ switch ( $animal )
 
 (module 
  (main_module 
-  (switch_expr (var (EQName (identifier))) 
+  (switch_expr (var_ref (identifier)) 
    (switch_clause (string_literal) (string_literal)) 
    (switch_clause (string_literal) (string_literal)) 
    (switch_clause (string_literal) (string_literal)) 
@@ -181,9 +150,9 @@ some $foo in $baa satisfies $boo
 
 (module 
  (main_module 
-  (quantified_expr (var (EQName (identifier))) 
-   (var (EQName (identifier))) 
-   (var (EQName (identifier))))))
+  (quantified_expr (var_ref (identifier)) 
+   (var_ref (identifier)) 
+   (var_ref (identifier)))))
 
 ==================
 3.17 Try/Catch Expressions
@@ -203,98 +172,6 @@ catch * {
 (catch_clause (catch_error_list (name_test (wildcard))) (enclosed_expr)))))
 
 ==================
-3.18.1 Instance Of: 
-==================
-
-5 instance of xs:integer
-
----
-
-(module 
- (main_module 
-  (instance_of_expr 
-   (integer_literal) 
-   (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))))))
-
-
-==================
-3.18.2 Typeswitch:  TODO should have have case clause
-==================
-
-typeswitch ( $node )
- case text() return $node
- case element() return $node
- default return "unknown"
-
----
-
-(module 
- (main_module 
-  (typeswitch_expr (var (EQName (identifier))) 
-   (sequence_type (text_test)) (var (EQName (identifier))) 
-   (sequence_type (element_test)) (var (EQName (identifier))) 
-   (string_literal))))
- 
-
-==================
-3.18.3 Cast 
-==================
-
-$x cast as xs:integer
-
----
-
-(module 
- (main_module 
-  (cast_expr 
-   (var (EQName (identifier))) 
-   (single_type (EQName (identifier) (identifier))))))
-
-
-==================
-3.18.4 Castable 
-==================
-
-$x castable as xs:integer
-
----
-
-(module 
- (main_module 
-  (castable_expr 
-   (var (EQName (identifier))) 
-   (single_type (EQName (identifier) (identifier))))))
-
-==================
-3.18.5 Constructor Functions
-==================
-
-xs:date("2000")
-
----
-
-(module 
- (main_module 
- (function_call 
-  (EQName (identifier) (identifier))
-  (arguments (string_literal)))))
-
-==================
-3.18.6 Treat 
-==================
-
-$myaddress treat as element(*)
-
----
-
-(module 
- (main_module 
-  (treat_expr 
-   (var (EQName (identifier))) 
-   (sequence_type (element_test (element_test_params (wildcard)))))))
-
-
-==================
 3.19 Simple map operator
 ==================
 
@@ -305,8 +182,8 @@ $emp ! ( $bang )
 (module
 (main_module
  (bang_expr 
-  (var (EQName (identifier))) 
-  (parenthesized_expr (var (EQName (identifier))))
+  (var_ref (identifier)) 
+  (parenthesized_expr (var_ref (identifier)))
  )))
 
 ==================
@@ -319,7 +196,7 @@ $string => upper-case()
 (module 
  (main_module 
   (arrow_expr 
-   (var (EQName (identifier))) 
-   (arrow_function (EQName (identifier)) (arguments))))) 
+   (var_ref (identifier)) 
+   (arrow_function (identifier) (arg_list))))) 
 
 

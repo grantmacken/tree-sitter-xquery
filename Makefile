@@ -66,9 +66,9 @@ parse-spec:  ## parse all spec examples
 
 .PHONY: parse-qt3
 parse-app:  ## parse all app examples 
-	@$(TS) parse -q examples/app/Demos/*
-	@$(TS) parse -q examples/app/walmsley/*
-	@$(TS) parse -q examples/app/XMark/*
+	@$(TS) parse -q examples/qt3/app/Demos/*
+	@$(TS) parse -q examples/qt3/app/walmsley/*
+	@$(TS) parse -q examples/qt3/app/XMark/*
 
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 	@mkdir -p $(dir $@)

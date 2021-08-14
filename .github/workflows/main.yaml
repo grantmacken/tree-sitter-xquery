@@ -111,11 +111,15 @@ jobs:
         run: bin/tree-sitter parse examples/spec/option_declaration.xq 
       - name: Comments
         run: bin/tree-sitter parse examples/spec/comments.xq 
+      - name: TEST - 3.2 Postfix Expressions 
+        run: bin/tree-sitter test -f 3.2 Post
       - name: TEST - 3.3 Path Expressions
-        run: bin/tree-sitter test -f 3.3.
+        run: bin/tree-sitter test -f Path
+      - name: TEST - 3.18 Expressions on SequenceTypes
+        run: bin/tree-sitter test -f 3.18
       # - name: highlight queries
       #   run: bin/tree-sitter query --captures queries/highlights.scm examples/spec/app/use_case_JSON.xq
-      # - name: TEST - 4 Modules and Prologs
-      #   run: bin/tree-sitter test -f 4.
+      - name: TEST - 4 Modules and Prologs
+        run: bin/tree-sitter test -f 4.
       # - name: TEST - 3 Primary Expressions
       #   run: bin/tree-sitter test -f 3.1.

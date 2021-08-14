@@ -133,8 +133,8 @@ declare decimal-format local:de
 
 (module 
  (main_module 
-  (decimal_format_declaration (EQName (identifier) (identifier))
-   (string_literal) (string_literal)) (parenthesized_expr))) 
+  (decimal_format_declaration (identifier) (identifier) (string_literal) (string_literal)) 
+  (parenthesized_expr))) 
 
 ==================
 4.11 Schema Import 
@@ -215,10 +215,10 @@ declare
 (module 
  (main_module 
   (function_declaration 
-   (annotation (EQName (identifier) (identifier)) (string_literal)) 
-   (EQName (identifier) (identifier)) 
-   (parameters (parameter (EQName (identifier))) (parameter (EQName (identifier))))) 
+   (annotation (identifier) (identifier) (string_literal)) (identifier) (identifier) 
+   (param_list (parameter (identifier)) (parameter (identifier)))) 
   (parenthesized_expr)))
+ 
 
 ==================
 4.16 Variable Declaration 
@@ -232,8 +232,8 @@ declare variable $x as xs:integer := 7;
 (module 
  (main_module 
   (variable_declaration 
-   (EQName (identifier)) 
-   (type_declaration (sequence_type (atomic_or_union_type (EQName (identifier) (identifier))))) 
+   (identifier) 
+   (type_declaration (sequence_type (atomic_or_union_type (identifier) (identifier)))) 
    (integer_literal)) 
   (parenthesized_expr)))
 
@@ -250,7 +250,7 @@ declare context item as element(foo) external;
 (module 
  (main_module 
   (context_item_declaration 
-   (type_declaration (sequence_type (element_test (element_test_params (EQName (identifier))))))) 
+   (type_declaration (sequence_type (element_test (element_test_params (identifier)))))) 
   (parenthesized_expr)))
 
 
@@ -265,14 +265,15 @@ function foo:summary($emps as element(employee)*) as element(dept)* {
 
 ---
 
-  (module 
-   (library_module (module_declaration (identifier) (string_literal)) 
-    (function_declaration (EQName (identifier) (identifier)) 
-     (parameters 
-      (parameter (EQName (identifier)) 
-       (type_declaration (sequence_type (element_test (element_test_params (EQName (identifier)))) (occurrence_indicator))))) 
-     (type_declaration (sequence_type (element_test (element_test_params (EQName (identifier)))) (occurrence_indicator))) 
-     (enclosed_expr)))) 
+(module 
+ (library_module 
+  (module_declaration (identifier) (string_literal)) 
+  (function_declaration (identifier) (identifier) 
+   (param_list 
+    (parameter (identifier) (type_declaration (sequence_type (element_test (element_test_params (identifier))) (occurrence_indicator))))) 
+   (type_declaration (sequence_type (element_test (element_test_params (identifier))) (occurrence_indicator))) 
+   (enclosed_expr))))
+   
 
   
 ==================
@@ -292,13 +293,17 @@ function page:hello($who) {
 (module 
  (library_module 
   (module_declaration (identifier) (string_literal)) 
-  (function_declaration 
-   (annotation (EQName (identifier) (identifier)) (string_literal)) 
-   (annotation (EQName (identifier) (identifier))) 
-   (EQName (identifier) (identifier)) (parameters (parameter (EQName (identifier)))) 
+  (function_declaration (annotation (identifier) (identifier) (string_literal)) 
+   (annotation (identifier) (identifier)) (identifier) (identifier) 
+   (param_list (parameter (identifier))) 
    (enclosed_expr 
-    (direct_element (start_tag (identifier (identifier))) (element_text (char_data)) (element_text (enclosed_expr (var (EQName (identifier))))) (element_text (char_data)) (end_tag (identifier (identifier))))))
- )) 
+    (direct_element 
+     (start_tag (identifier (identifier))) 
+     (element_text (char_data)) 
+     (element_text (enclosed_expr (var_ref (identifier)))) 
+     (element_text (char_data)) 
+     (end_tag (identifier (identifier))))))))
+
 
 
 ==================
@@ -312,16 +317,14 @@ declare  function smath:copySign( $magnitude, $sign ) external;
 
 (module 
  (main_module 
-  (function_declaration (EQName (identifier) (identifier)) 
-   (parameters 
-    (parameter (EQName (identifier))) 
-    (parameter (EQName (identifier))))) 
+  (function_declaration (identifier) (identifier) 
+   (param_list (parameter (identifier)) (parameter (identifier)))) 
   (parenthesized_expr)))
+ 
 
 ==================
 4.19 Option Declaration 
 ==================
-
 
 module namespace foo = "http://example.org/#foo";
 declare namespace output = 'http://www.w3.org/2010/xslt-xquery-serialization';
@@ -332,4 +335,4 @@ declare option output:method 'text';
 (module 
  (library_module (module_declaration (identifier) (string_literal)) 
   (namespace_declaration (identifier) (string_literal)) 
-  (option_declaration (EQName (identifier) (identifier)) (string_literal))))
+  (option_declaration (identifier) (identifier) (string_literal))))
