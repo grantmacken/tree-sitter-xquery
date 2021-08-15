@@ -15,11 +15,11 @@ $N instance of item()*
 (module
  (main_module
   (parenthesized_expr 
-   (instance_of_expr (var (EQName (identifier))) 
+   (instance_of_expr (var_ref (identifier)) 
     (sequence_type (empty_sequence)))
-   (instance_of_expr (var (EQName (identifier))) 
+   (instance_of_expr (var_ref (identifier)) 
     (sequence_type (any_item)))
-   (instance_of_expr (var (EQName (identifier))) 
+   (instance_of_expr (var_ref (identifier)) 
     (sequence_type (any_item) (occurrence_indicator)))
   )))
 
@@ -39,10 +39,10 @@ $N instance of text()
 (module 
  (main_module
   (parenthesized_expr 
-   (instance_of_expr (var (EQName (identifier))) (sequence_type (any_kind_test)))
-   (instance_of_expr (var (EQName (identifier))) (sequence_type (comment_test)))
-   (instance_of_expr (var (EQName (identifier))) (sequence_type (namespace_node_test)))
-   (instance_of_expr (var (EQName (identifier))) (sequence_type (text_test)))
+   (instance_of_expr (var_ref (identifier)) (sequence_type (any_kind_test)))
+   (instance_of_expr (var_ref (identifier)) (sequence_type (comment_test)))
+   (instance_of_expr (var_ref (identifier)) (sequence_type (namespace_node_test)))
+   (instance_of_expr (var_ref (identifier)) (sequence_type (text_test)))
   )))
 
 ==================
@@ -56,12 +56,12 @@ $N instance of element(person, xx ?)
 (module 
  (main_module
   (instance_of_expr 
-   (var (EQName (identifier))) 
+   (var_ref (identifier)) 
    (sequence_type 
     (element_test  
      (element_test_params
-      (EQName (identifier)) 
-      (EQName (identifier)) 
+      (identifier) 
+      (identifier) 
       (occurrence_indicator)))
    ))))
 
@@ -76,10 +76,10 @@ $N instance of  schema-element(customer)
 (module 
  (main_module
   (instance_of_expr 
-   (var (EQName (identifier))) 
+   (var_ref (identifier)) 
    (sequence_type 
     (schema_element_test 
-    (EQName (identifier)))))))
+    (identifier))))))
 
 ==================
 2.5.5.5 Attribute Test 
@@ -92,11 +92,11 @@ $N instance of attribute(price, currency)
 (module 
  (main_module
  (instance_of_expr 
-  (var (EQName (identifier))) 
+  (var_ref (identifier)) 
   (sequence_type 
    (attribute_test
-    (EQName (identifier)) 
-    (EQName (identifier))))))) 
+    (identifier) 
+    (identifier)))))) 
 
 ==================
 2.5.5.6 Schema Attribute Test
@@ -109,10 +109,10 @@ $N instance of schema-attribute(colors)
 (module 
  (main_module
   (instance_of_expr 
-   (var (EQName (identifier))) 
+   (var_ref (identifier)) 
    (sequence_type 
     (schema_attribute_test 
-     (EQName (identifier)))))))
+     (identifier))))))
 
 ==================
 2.5.5.7 Any Function Test
@@ -125,7 +125,7 @@ $N instance of function(*)
 (module 
  (main_module
   (instance_of_expr 
-   (var (EQName (identifier))) 
+   (var_ref (identifier)) 
    (sequence_type 
     (any_function_test 
      )))))
@@ -141,10 +141,10 @@ $N instance of %assertion function(*)
 (module 
  (main_module
  (instance_of_expr 
-  (var (EQName (identifier))) 
+  (var_ref (identifier)) 
   (sequence_type 
    (any_function_test 
-    (annotation (EQName (identifier)))
+    (annotation (identifier))
     )))))
 
 ==================
@@ -158,12 +158,12 @@ $F instance of function(int, int) as int
 (module 
  (main_module 
   (instance_of_expr 
-   (var (EQName (identifier))) 
+   (var_ref (identifier)) 
    (sequence_type 
     (typed_function_test 
-     (sequence_type (atomic_or_union_type (EQName (identifier)))) 
-     (sequence_type (atomic_or_union_type (EQName (identifier))))
-     (type_declaration (sequence_type (atomic_or_union_type (EQName (identifier))))))))))
+     (sequence_type (atomic_or_union_type (identifier))) 
+     (sequence_type (atomic_or_union_type (identifier)))
+     (type_declaration (sequence_type (atomic_or_union_type (identifier)))))))))
 
 ==================
 2.5.5.7 Typed Function Test with annotation assertion
@@ -176,14 +176,14 @@ $F instance of %assertion function(int, int) as int
 (module 
  (main_module 
   (instance_of_expr 
-   (var (EQName (identifier))) 
+   (var_ref (identifier)) 
    (sequence_type 
     (typed_function_test 
-     (annotation (EQName (identifier))) 
-     (sequence_type (atomic_or_union_type (EQName (identifier)))) 
-     (sequence_type (atomic_or_union_type (EQName (identifier)))) 
+     (annotation (identifier)) 
+     (sequence_type (atomic_or_union_type (identifier))) 
+     (sequence_type (atomic_or_union_type (identifier))) 
      (type_declaration 
-      (sequence_type (atomic_or_union_type (EQName (identifier))))))
+      (sequence_type (atomic_or_union_type (identifier)))))
    )))) 
 
 ==================
@@ -197,9 +197,9 @@ $F instance of function(xs:anyAtomicType) as item()*
 (module 
  (main_module 
   (instance_of_expr 
-   (var (EQName (identifier))) 
+   (var_ref (identifier)) 
    (sequence_type 
-    (typed_function_test (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))) 
+    (typed_function_test (sequence_type (atomic_or_union_type (identifier) (identifier))) 
      (type_declaration (sequence_type (any_item) (occurrence_indicator))))))))
 
 ==================
@@ -212,9 +212,9 @@ $F instance of function(xs:integer) as item()*
 (module 
  (main_module 
   (instance_of_expr 
-   (var (EQName (identifier))) 
+   (var_ref (identifier)) 
    (sequence_type 
-    (typed_function_test (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))) 
+    (typed_function_test (sequence_type (atomic_or_union_type (identifier) (identifier))) 
      (type_declaration (sequence_type (any_item) (occurrence_indicator))))))))
 
 ==================
@@ -242,10 +242,10 @@ $M instance of map(xs:integer, xs:string)
 (module
 (main_module 
  (instance_of_expr 
-  (var (EQName (identifier))) 
+  (var_ref (identifier)) 
   (sequence_type 
-   (typed_map_test (atomic_or_union_type (EQName (identifier) (identifier))) 
-    (sequence_type (atomic_or_union_type (EQName (identifier) (identifier)))))))))
+   (typed_map_test (atomic_or_union_type (identifier) (identifier)) 
+    (sequence_type (atomic_or_union_type (identifier) (identifier))))))))
 
 ==================
 2.5.5.9 Any Array Test
@@ -256,11 +256,10 @@ $M instance of map(xs:integer, xs:string)
 ---
 
 (module 
- (instance_of_expr 
-  (square_array_constructor) 
-  (sequence_type 
-   (any_array_test 
-    (wildcard)))))
+ (main_module 
+  (instance_of_expr 
+   (square_array_constructor) 
+   (sequence_type (any_array_test)))))
 
 ==================
 2.5.5.9 Typed Array Test square
@@ -271,13 +270,12 @@ $M instance of map(xs:integer, xs:string)
 ---
 
 (module 
- (instance_of_expr 
-  (square_array_constructor (string_literal)) 
-  (sequence_type 
-   (typed_array_test 
-    (sequence_type 
-     (atomic_or_union_type 
-      (EQName (identifier) (identifier))))))))
+ (main_module 
+  (instance_of_expr 
+   (square_array_constructor (string_literal)) 
+   (sequence_type 
+    (typed_array_test 
+     (sequence_type (atomic_or_union_type (identifier) (identifier))))))))
 
 ==================
 2.5.5.9 Typed Array Test curly
@@ -287,12 +285,13 @@ array {"foo"} instance of array(xs:string)
 
 ---
 
-(module 
+(module
+ (main_module 
  (instance_of_expr
   (curly_array_constructor  (enclosed_expr (string_literal)))
   (sequence_type 
    (typed_array_test 
     (sequence_type 
      (atomic_or_union_type 
-      (EQName (identifier) (identifier))))))))
+      (identifier) (identifier))))))))
 

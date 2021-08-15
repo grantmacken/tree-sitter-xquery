@@ -15,8 +15,6 @@ $products[price gt 100]
    (predicate 
     (comparison_expr (path_expr (name_test (identifier))) (integer_literal))))))
 
-
-
 ==================
 3.2.2 Postfix Expressions - Dynamic Function Calls
 ==================

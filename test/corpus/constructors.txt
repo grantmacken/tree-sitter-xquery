@@ -66,7 +66,7 @@
 (direct_element 
 (start_tag (identifier (identifier))) 
 (element_text (char_data)) 
-(element_text (enclosed_expr (var (EQName (identifier))))) 
+(element_text (enclosed_expr (var_ref (identifier)))) 
 (end_tag (identifier (identifier))))))
 
 ==================
@@ -103,7 +103,7 @@ element book {
 
 (module 
  (main_module 
-  (comp_elem_constructor (EQName (identifier)) 
+  (comp_elem_constructor (identifier) 
    (enclosed_expr 
     (comp_elem_constructor (string_literal) 
      (enclosed_expr (string_literal)))))))
@@ -119,7 +119,7 @@ attribute size {4 + 3}
 
 (module 
  (main_module 
-  (comp_attr_constructor (EQName (identifier)) 
+  (comp_attr_constructor (identifier) 
    (enclosed_expr (additive_expr (integer_literal) (integer_literal))))))
 
 ==================
@@ -173,7 +173,7 @@ comment { }
 (module
  (main_module
  (string_constructor 
-  (interpolation (var (EQName (identifier)))) 
+  (interpolation (var_ref (identifier))) 
   (char_group)
  )))
 
@@ -235,11 +235,11 @@ array { 'one', 'two' }
 
 ---
 
-(module 
+(module
  (main_module 
   (path_expr 
    (square_array_constructor (string_literal) (string_literal)) 
-   (arguments (integer_literal))))) 
+   (arg_list (integer_literal)))))
 
 ==================
 3.11.3.1 TODO! Unary Lookup with predicate
@@ -249,7 +249,14 @@ $mp[?name='Mike']
 
 ---
 
-  (module (main_module (path_expr (var (EQName (identifier))) (predicate (comparison_expr (unary_lookup (NCName (identifier))) (string_literal)))))) 
+(module 
+ (main_module 
+  (path_expr 
+   (var_ref (identifier)) 
+   (predicate 
+    (comparison_expr 
+     (unary_lookup (NCName (identifier))) 
+     (string_literal)))))) 
 
 ==================
 3.11.3.1 Unary Lookup with bang
@@ -261,7 +268,7 @@ $mp[?name='Mike']
 
 (module 
  (main_module 
-  (bang_expr (var (EQName (identifier))) 
+  (bang_expr (var_ref (identifier)) 
    (comparison_expr 
     (unary_lookup (NCName (identifier))) 
     (string_literal)))))
