@@ -133,3 +133,9 @@ pr-merge:
 # headless:
 # 	@nvim --headless +PackerSync +qall
 	@#nvim --headless +TSUpdateSync +qall
+
+.PHONY: format
+format:  grammar.js
+	@#prettier --list-different grammar.js
+	@prettier  --write --no-config --no-editorconfig --single-quote --print-width 120  grammar.js
+	
