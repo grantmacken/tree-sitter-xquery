@@ -73,7 +73,7 @@ parse-spec:  ## parse all spec examples
 parse-qt3:  ## parse all app examples 
 	@$(TS) parse -q examples/qt3/app/Demos/*
 	@$(TS) parse -q examples/qt3/app/walmsley/*
-	@$(TS) parse -q examples/qt3/app/XMark/* || true
+	@$(TS) parse -q examples/qt3/app/XMark/*
 	@#$(TS) parse  examples/qt3/app/XMark/XMark_All.xq -D || true
 	@#firefox log.html
 

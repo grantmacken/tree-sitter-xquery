@@ -103,7 +103,9 @@ return
  (main_module 
   (flwor_expr 
    (for_clause (var_ref (identifier)) (var_ref (identifier))) 
-   (order_by_clause (path_expr (var_ref (identifier)) (name_test (identifier)))) 
+   (order_by_clause 
+    (path_expr (var_ref (identifier)) (name_test (identifier))) 
+    (order_direction))
    (count_clause (identifier)) 
    (where_clause (comparison_expr (var_ref (identifier)) (integer_literal))) 
    (return_clause (parenthesized_expr)))))
@@ -141,9 +143,8 @@ return $e/name
  (main_module 
   (flwor_expr 
    (for_clause (var_ref (identifier)) (var_ref (identifier))) 
-   (order_by_clause (path_expr (var_ref (identifier)) (name_test (identifier)))) 
+   (order_by_clause 
+    (path_expr (var_ref (identifier)) (name_test (identifier)))
+    (order_direction))
    (return_clause (path_expr (var_ref (identifier)) (name_test (identifier)))))))
-
-
-
 

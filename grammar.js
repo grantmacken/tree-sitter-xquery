@@ -356,18 +356,15 @@ module.exports = grammar({
         optional(seq('collation', field('uri', $.string_literal)))
       ), // 63
     // 3.12.8 Order By Clause
-    order_by_clause: ($) =>
-      prec.left(seq(choice(seq('order', 'by'), seq('stable', 'order', 'by')), commaSep($._order_spec))), // 65
-    _order_spec: ($) =>
-      seq(
-        field('order_expr', $._expr),
-        field(
-          'order_modifier',
-          optional(seq(choice('ascending', 'descending'))),
-          optional(seq('empty', choice('greatest', 'least'))),
-          optional(seq('collation', field('uri', $.string_literal)))
-        )
-      ),
+    order_by_clause: ($) => prec.left(seq( optional('stable'), 'order', 'by', $._order_spec_list)), // 65
+    _order_spec_list: ($) => seq($._order_spec, repeat(seq(',', $._order_spec))),
+    _order_spec: ($) => seq(
+      field('order_expr',$._expr ), // exprSingle
+      field('order_modifier', 
+        seq(optional($.order_direction),optional($.order_length), optional($.order_collaction)))),
+    order_direction: $ => seq(choice('ascending', 'descending')),
+    order_length: $ => seq('empty', choice('greatest', 'least')),
+    order_collaction: $ => seq('collation', field('uri', $.string_literal)),
     //3.12.9 Return Clause
     return_clause: ($) => seq('return', $._expr), // 69
     // end flwor

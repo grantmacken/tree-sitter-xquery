@@ -10034,7 +10034,7 @@
     "fields": {
       "order_expr": {
         "multiple": true,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "additive_expr",
@@ -10259,16 +10259,46 @@
         "required": false,
         "types": [
           {
-            "type": "ascending",
-            "named": false
+            "type": "order_collaction",
+            "named": true
           },
           {
-            "type": "descending",
-            "named": false
+            "type": "order_direction",
+            "named": true
+          },
+          {
+            "type": "order_length",
+            "named": true
           }
         ]
       }
     }
+  },
+  {
+    "type": "order_collaction",
+    "named": true,
+    "fields": {
+      "uri": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "order_direction",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "order_length",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "ordered_expr",
