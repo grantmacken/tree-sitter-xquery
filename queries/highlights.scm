@@ -44,31 +44,21 @@
 ; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
  [ "%" ";" ":" "," "|" "(:" ":)"] @punctuation.delimiter
 
- (var_ref) @constant
-  [
-  ns_builtin: (identifier) 
+[
   prefix: (identifier)
-  ] @namespace
+  ns_builtin: (identifier)
+] @namespace
 
-  [
-   local_part: (identifier)
-  unprefixed_name: (identifier)
-  ] @constant
+ (var_ref 
+   [ "$" @variable
+     local_part: (identifier) @variable
+     unprefixed: (identifier) @variable
+     ])
 
-(inline_function_expr "function" @function ) 
-(function_call
-  (_ 
-    [
-    local_part: (identifier)
-    unprefixed_name: (identifier)
-    ] @function))
 
-(arrow_function
-  (_ 
-    [
-    local_part: (identifier)
-    unprefixed_name: (identifier)
-    ] @function))
+(function_call) @function
+(inline_function_expr "function" @function )
+(arrow_function) @function
 
 ; PATH 
   (abbrev_reverse) @operator
