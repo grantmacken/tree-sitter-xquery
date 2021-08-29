@@ -61,7 +61,7 @@ parse:  ## parse a specific example nominated in .env
 	@$(TS) parse examples/spec/$(EXAMPLE).xq
 
 PHONY: parse-graph
-parse-graph:  ## parse a specific example nominated in .env
+parse-graph:  ## parse, then show svg grah in firefox
 	@$(TS) parse examples/spec/$(EXAMPLE).xq -D || true 
 	@firefox log.html
 
