@@ -1,5 +1,6 @@
 const UNICODE_LETTER = /\p{L}/,
   UNICODE_DIGIT = /[0-9]/,
+  KEYWORD_CHAR = /[a-z]/,
   NAME_START_CHAR = choice(UNICODE_LETTER, '_'),
   NAME_CHAR = choice(NAME_START_CHAR, '-', '.', UNICODE_DIGIT),
   INTEGER = repeat1(UNICODE_DIGIT),
@@ -14,10 +15,9 @@ const UNICODE_LETTER = /\p{L}/,
 
 module.exports = grammar({
   name: 'xquery',
-  //
   // Whitespace and Comments function as symbol separators
   extras: ($) => [$.comment, /\s/],
-  word: ($) => $.identifier,
+  // word: ($) => $.kw,
   conflicts: ($) => [[$._expr, $._step_expr]],
   supertypes: ($) => [$._prolog],
   rules: {
@@ -154,6 +154,7 @@ module.exports = grammar({
         19,
         choice(
           seq('/', optional($._relative_path_expr)), //parse-note-leading-lone-slash
+          //seq('//', $._node_test), // must have relative_path_expr
           seq('//', $._relative_path_expr), // must have relative_path_expr
           $._relative_path_expr // can stand alone
         )
@@ -178,8 +179,21 @@ module.exports = grammar({
         '::'
       ), //113
     reverse_axis: ($) => seq(choice('parent', 'ancestor', 'preceding-sibling', 'preceding', 'ancestor-or-self'), '::'), //116
-    //
-    _node_test: ($) => choice($._kind_test, $.name_test), // 118'
+    _node_test: ($) => prec.left(choice(
+      alias($._be_kind, $.name_test), // in this context allow any kind keywords 
+      $.name_test,
+      $._kind_test
+    )), // 118' 
+    _be_kind: ($) => choice( 
+      field('unprefixed',$._kind_list ),
+      seq(field('prefix', $.identifier), token.immediate(':'), field('local_part', $._kind_list)),
+      seq(field('prefix',  $._kind_list), token.immediate(':'), field('local_part', $.identifier)),
+      seq(field('prefix',  $._kind_list), token.immediate(':'), field('local_part', $._kind_list))
+      ),
+    _kind_list: $ => prec.left(alias( choice('document-node', 'element', 'schema-element', 
+      'attribute','schema-attribute','comment', 'namespace-node', 'text', 'node'), 
+      $.identifier)),
+// seq(field('prefix', $.identifier), token.immediate(':'), field('local_part', $.identifier))
     // end of path expr block
     or_expr: ($) => prec.left(3, seq(field('lhs', $._expr), 'or', field('rhs', $._expr))),
     and_expr: ($) => prec.left(4, seq(field('lhs', $._expr), 'and', field('rhs', $._expr))),
@@ -535,7 +549,7 @@ module.exports = grammar({
     atomic_or_union_type: ($) => $._EQName, // 187
     any_item: ($) => seq('item', '(', ')'),
     _kind_test: ($) =>
-      choice(
+      field('kind_test',choice(
         $.document_test,
         $.element_test,
         $.attribute_test,
@@ -547,7 +561,7 @@ module.exports = grammar({
         $.comment_test,
         $.namespace_node_test,
         $.text_test
-      ),
+      )),
     any_kind_test: ($) => seq('node', '(', ')'), // 189
     text_test: ($) => seq('text', '(', ')'), // 191
     comment_test: ($) => seq('comment', '(', ')'), // 192
@@ -581,7 +595,8 @@ module.exports = grammar({
     schema_attribute_test: ($) => seq('schema-attribute', '(', field('attribute_name', $._EQName), ')'), //201
     pi_test: ($) =>
       seq('processing-instruction', seq('(', optional(field('param', choice($.NCName, $.string_literal))), ')')), // 194
-    name_test: ($) => prec.left(choice($._EQName, $.wildcard)), // TODO 199
+    name_test: ($) => 
+     prec.left(field('name_test', choice( $._EQName, $.wildcard))), // TODO 199
     wildcard: ($) => choice('*', seq($.NCName, ':*'), seq('*:', $.NCName), seq($.braced_uri_literal, '*')), // 120
     any_function_test: ($) => seq(repeat($.annotation), 'function', seq('(', '*', ')')), //  // 207
     typed_function_test: ($) =>
@@ -606,13 +621,6 @@ module.exports = grammar({
     // instances of the grammatical production EQName.
     // EQName is identifier
     var_name: ($) => choice($._QName, $.uri_qualified_name),
-    _QName: ($) =>
-      prec.right(
-        choice(
-          field('unprefixed', $.identifier),
-          seq(field('prefix', $.identifier), token.immediate(':'), field('local_part', $.identifier))
-        )
-      ),
     _EQName: ($) =>
       choice(
         field('uri', $.uri_qualified_name),
@@ -623,15 +631,19 @@ module.exports = grammar({
         ),
         $._QName
       ),
+    _QName: ($) =>
+        choice(
+          field('unprefixed', $.identifier),
+          seq(field('prefix', $.identifier), token.immediate(':'), field('local_part', $.identifier))
+      ),
     // https://www.w3.org/TR/REC-xml-names/#Qualified%20Names
-    _QName: ($) => prec.right(choice(field('prefixed_name', $._prefixed_name), field('unprefixed_name', $.identifier))), // 234
-    _prefixed_name: ($) => seq(field('prefix', $.identifier), token.immediate(':'), field('local_part', $.identifier)),
+    //_QName: ($) => prec.right(choice(field('prefixed_name', $._prefixed_name), field('unprefixed_name', $.identifier))), // 234
     ns_builtin: ($) => choice('xml', 'xs', 'xsi', 'fn', 'map', 'array', 'math', 'err', 'output', 'local'),
-
+    kw: ($) => token(choice ('ancestor', 'ancestor-or-self', 'and', 'array', 'as', 'ascending', 'at', 'attribute', 'base-uri', 'boundary-space', 'by', 'case', 'cast', 'castable', 'catch', 'child', 'collation', 'comment', 'construction', 'context', 'copy-namespaces', 'count', 'decimal-format', 'decimal-separator', 'declare', 'default', 'descendant', 'descendant-or-self', 'descending', 'digit', 'div', 'document', 'document-node', 'element', 'else', 'empty', 'empty-sequence', 'encoding', 'end', 'eq', 'every', 'except', 'exponent-separator', 'external', 'following', 'following-sibling', 'for', 'function', 'ge', 'greatest', 'group', 'grouping-separator', 'gt', 'idiv', 'if', 'import', 'in', 'infinity', 'inherit', 'instance', 'intersect', 'is', 'item', 'lax', 'le', 'least', 'let', 'lt', 'map', 'minus-sign', 'mod', 'module', 'namespace', 'namespace-node', 'ne', 'next', 'no-inherit', 'no-preserve', 'node', 'of', 'only', 'option', 'or', 'order', 'ordered', 'ordering', 'parent', 'pattern-separator', 'per-mille', 'percent', 'preceding', 'preceding-sibling', 'preserve', 'previous', 'processing-instruction', 'return', 'satisfies', 'schema', 'schema-attribute', 'schema-element', 'self', 'sliding', 'some', 'stable', 'start', 'strict', 'strip', 'switch', 'text', 'then', 'to', 'treat', 'try', 'tumbling', 'type', 'typeswitch', 'union', 'unordered', 'validate', 'variable', 'version', 'when', 'where', 'window', 'xquery', 'zero-digit')),
     NCName: ($) => $.identifier, // 123
     uri_qualified_name: ($) => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
     braced_uri_literal: ($) => seq('Q{', repeat1(choice($.predefined_entity_ref, $.char_ref, /[^&{}]/)), '}'), // 224
-    identifier: ($) => /[_\p{L}]{1}[\-_\p{L}\p{N}]*/,
+    reserved: ($) => choice('array', 'attribute', 'comment', 'document-node', 'element', 'empty-sequence', 'function', 'if', 'item', 'map', 'namespace-node', 'node', 'processing-instruction', 'schema-attribute', 'schema-element', 'switch', 'text', 'typeswitch'),
     identifier: ($) => token(seq(NAME_START_CHAR, repeat(NAME_CHAR))),
     comment: ($) =>
       seq('(:', repeat(alias(token(repeat1(/[^:()]|[:][^)]|[(][^:]|[^:][)]|[)][:]/)), $.comment_content)), ':)'),
