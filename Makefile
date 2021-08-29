@@ -127,13 +127,13 @@ getTreeSitter:
 
 .PHONY: pr-create
 pr-create: 
-	gh pr create --help
-	gh pr create --fill
+	@#gh pr create --help
+	@gh pr create --fill
 
 .PHONY: pr-merge
 pr-merge: 
-	gh pr merge --help
-	gh pr merge -s -d
+	@#gh pr merge --help
+	@gh pr merge -s -d
 	git pull
 
 # .PHONY: headless
