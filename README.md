@@ -24,15 +24,13 @@ Clone and cd into this repo then run `make getTreeSitter` which will use npm to 
 The repo contains a Makefile as I use `make` for treeitter aliases.
 The default `make` target is an alias for `tree-sitter generate` which will create tree-sitter files from the grammar
 
-To see other make targets type
-```
-make help
-```
-## tests
+To see other make targets type `make help`
+
+## testing: 1, 2, 3 
 
 Tests are run via [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
 
-### parse xQuery examples without error
+1. parse xQuery examples without error
 
 The parser might be lax at what it accepts, so any parsed text might not be able to compile. 
 However the parser **SHOULD NOT** throw a parse error with any **valid** xQuery module text.
@@ -47,7 +45,7 @@ are found in the 'examples/spec' folder.
 
 Other parse examples are from the [qt3tests suite](https://github.com/w3c/qt3tests) and are in the examples/qt3tests folder
 
-### the test corpus
+2. run the test corpus
 
 ```
 make test-all
@@ -57,19 +55,17 @@ The `test/corpus/` tree-sitter tests are mainly organised around the sections ou
 [W3C xQuery recommendation](https://www.w3.org/TR/xquery-31).
 
 
- ### hightlight query examples
+ 3. show hightlight query examples
 
-At this stage only the highlights query is available
-The query examples should show the S-expresion *capture* items that can be highlighted in a
-text editor.
-
-To peek at tree-sitter highlight in action, I run some query examples in 
+*highlight query captures*: The highlight query examples should show the 
+S-expresion *capture* items that will be highlighted in a
+text editor. To peek at tree-sitter highlight in action, I run some query examples in 
 [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
 which you might want to look at. 
 
-# using tree-sitter with neovim
+## using tree-sitter with neovim
 
- -  [Video: Neovim Treesitter](https://www.youtube.com/watch?v=xQGbhiUbSmM)
+ - [Video: Neovim Treesitter](https://www.youtube.com/watch?v=xQGbhiUbSmM)
  - [Video: Tree sitter & LSP: Short Comparison](https://www.youtube.com/watch?v=c17j09vY5sw)
 
 Follow the instuctions at
@@ -85,15 +81,10 @@ parser_config.xquery = {
   }
 }
 
-dddd
 ```
 
+## Contributing, Discussions and Issues
 
-
-## Known limitations
-
-
-## Contributing, Issues, and Tests 
 
 [Contributions](CONTRIBUTING.md) and suggestions in form of 
 [issues](https://github.com/grantmacken/tree-sitter-xquery/issues) are welcome.
