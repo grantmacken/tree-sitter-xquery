@@ -1,5 +1,5 @@
 
-# WIP tree-sitter-xQuery WIP
+# tree-sitter-xQuery
 
 A tree-sitter grammar is built for an as-you-type experience in a text editor.
 It should provide identification of syntax tree parts that enable
@@ -28,11 +28,14 @@ To see other make targets type
 ```
 make help
 ```
+## tests
 
-## parse tests
+Tests are run via [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
+
+### parse xQuery examples without error
 
 The parser might be lax at what it accepts, so any parsed text might not be able to compile. 
-However the parser SHOULD NOT throw a parse error with any **valid** xQuery module text.
+However the parser **SHOULD NOT** throw a parse error with any **valid** xQuery module text.
 
 ```
 make parse-spec
@@ -44,18 +47,25 @@ are found in the 'examples/spec' folder.
 
 Other parse examples are from the [qt3tests suite](https://github.com/w3c/qt3tests) and are in the examples/qt3tests folder
 
-## test corpus
+### the test corpus
 
-The `test/corpus/` dir contains some tree-sitter tests.
-They are mainly organised around the sections outlined in the 
+```
+make test-all
+```
+Will test everything in the `test/corpus` directory.  
+The `test/corpus/` tree-sitter tests are mainly organised around the sections outlined in the 
 [W3C xQuery recommendation](https://www.w3.org/TR/xquery-31).
 
-```
-make test TEST_SECTION=Path
-```
 
-will test some xPath expressions 
+ ### hightlight query examples
 
+At this stage only the highlights query is available
+The query examples should show the S-expresion *capture* items that can be highlighted in a
+text editor.
+
+To peek at tree-sitter highlight in action, I run some query examples in 
+[github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
+which you might want to look at. 
 
 # using tree-sitter with neovim
 
@@ -75,22 +85,10 @@ parser_config.xquery = {
   }
 }
 
-
+dddd
 ```
-## queries
 
-$(HOME)/.config/nvim/queries/xquery
 
-At this stage only the highlights query is available
-
-To peek at tree-sitter in action, I also run some parse and query examples in 
-[github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
-which you might want to look at. The parse examples should show what can be parsed into 
-[S-expression](https://en.wikipedia.org/wiki/S-expression)
-nested list (tree-structured) data. The query examples should show the capture items that can be highlighted in a
-text editor.
-
-Please note: this is very much a work in progress. I am learning as I go.
 
 ## Known limitations
 
@@ -100,8 +98,4 @@ Please note: this is very much a work in progress. I am learning as I go.
 [Contributions](CONTRIBUTING.md) and suggestions in form of 
 [issues](https://github.com/grantmacken/tree-sitter-xquery/issues) are welcome.
 
-Tests are run via [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
-and follow the main sections in the 
-[xQuery 3.1](https://www.w3.org/TR/xquery-31/) W3C recomendation.
-My focus is getting tree sitter to parse how xQuery is commonly used, and not so
-much getting edge cases to work correctly.
+
