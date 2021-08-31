@@ -15,9 +15,7 @@ default: src/grammar.json $(NVIM_QUERIES)/xquery/highlights.scm $(NVIM_QUERIES)/
 # default: generate tree-sitter grammar
 generate: src/grammar.json ## generate tree-sitter files
 
-.PHONY: hl
-hl: ## hightlight query specific example nominated in .env
-	@$(TS) query --captures queries/highlights.scm examples/spec/$(EXAMPLE).xq
+
 
 .PHONY: help
 help: ## show this help	
@@ -56,14 +54,21 @@ test: ## test specific section nominated in .env
 test-all: ## test specific section nominated in .env
 	@$(TS) test
 
-.PHON: parse
+.PHONY: parse
 parse:  ## parse a specific example nominated in .env
 	@$(TS) parse examples/spec/$(EXAMPLE).xq
+
+.PHONY: parse-all
+parse-all:  parse-spec parse-qt3 ## parse all examples
+	
+
 
 PHONY: parse-graph
 parse-graph:  ## parse, then show svg grah in firefox
 	@$(TS) parse examples/spec/$(EXAMPLE).xq -D || true 
 	@firefox log.html
+
+
 
 .PHONY: parse-spec
 parse-spec:  ## parse all spec examples
@@ -77,8 +82,13 @@ parse-qt3:  ## parse all app examples
 	@#$(TS) parse  examples/qt3/app/XMark/XMark_All.xq -D || true
 	@#firefox log.html
 
+.PHONY: query-all
+query-all: ## query specific example nominated in .env
+	@echo 'hightlights'
+	@$(TS) query --captures queries/highlights.scm examples/spec/$(EXAMPLE).xq
+
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
-	@mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)y
 	@cp -v $< $@
 
 # playground: tree-sitter-xQuery.wasm
