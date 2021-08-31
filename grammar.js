@@ -123,7 +123,7 @@ module.exports = grammar({
     context_item_expr: ($) => prec.left(seq('.', optional($.path_expr))),
     //3.1.5 Static Function Calls
     function_call: ($) =>
-      prec.left(25, seq(choice(field('dynamic', $.var_ref), field('static', $._EQName)), $.arg_list)), // 137 spec deviation added $var
+      prec.left(25, seq(choice( $.var_ref , $._EQName ), $.arg_list)), // 137 spec deviation added $var
     // 3.1.6 Named Function References
     named_function_ref: ($) => seq(field('function_name', $._EQName), '#', field('signature', $.integer_literal)),
     // 3.1.7 Inline Function Expr

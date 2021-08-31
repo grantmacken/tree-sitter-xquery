@@ -5551,16 +5551,6 @@
     "type": "function_call",
     "named": true,
     "fields": {
-      "dynamic": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "var_ref",
-            "named": true
-          }
-        ]
-      },
       "local_part": {
         "multiple": false,
         "required": false,
@@ -5591,24 +5581,6 @@
           }
         ]
       },
-      "static": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
       "unprefixed": {
         "multiple": false,
         "required": false,
@@ -5631,11 +5603,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "arg_list",
+          "named": true
+        },
+        {
+          "type": "var_ref",
           "named": true
         }
       ]

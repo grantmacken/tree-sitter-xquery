@@ -556,20 +556,12 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "FIELD",
-                "name": "dynamic",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "var_ref"
-                }
+                "type": "SYMBOL",
+                "name": "var_ref"
               },
               {
-                "type": "FIELD",
-                "name": "static",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_EQName"
-                }
+                "type": "SYMBOL",
+                "name": "_EQName"
               }
             ]
           },
