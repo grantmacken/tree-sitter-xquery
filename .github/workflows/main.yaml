@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      #- parse-qt3-err
 env:
   ghSha: ${{ github.sha }}
   ghToken: ${{ secrets.GITHUB_TOKEN }}
@@ -113,5 +114,5 @@ jobs:
         run: bin/tree-sitter parse examples/spec/comments.xq 
       - name: TEST corpus
         run: bin/tree-sitter test
-      # - name: highlight queries
-      #   run: bin/tree-sitter query --captures queries/highlights.scm examples/spec/app/use_case_JSON.xq
+      - name: highlight queries
+        run: bin/tree-sitter query --captures queries/highlights.scm examples/qt3/app/use_case_JSON.xq || true
