@@ -2,16 +2,21 @@
 # tree-sitter-xQuery
 
 A tree-sitter grammar is built for an as-you-type experience in a text editor.
-It should provide identification of syntax tree parts that enable
-text highlighting, folding, scope info and more for a text editor.
+
+The aim is to provide fast identification of syntax tree parts that enable
+text highlighting, indenting, folding, scope info and more for a text editor.
+
 The incremental tree-sitter parse should be a step above text highlighting with regular
 expressions, however tree-sitter should not be confused with a validating parser. Unlike a 
-validating parser, tree-sitter will not stop on-error, but continue to parse. 
+validating parser, tree-sitter will not stop on-error, but continue to parse and provide
+a syntatic highlighting.
+
 
 
 - [tree-sitter presentation](https://www.youtube.com/watch?v=Jes3bD6P0To) - a new parsing system for programming tools
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
 - [awesome tree sitter](https://github.com/drom/awesome-tree-sitter)
+
 
 # [installing tree-sitter]( https://tree-sitter.github.io/tree-sitter/creating-parsers#installation )
 
@@ -26,40 +31,21 @@ The default `make` target is an alias for `tree-sitter generate` which will crea
 
 To see other make targets type `make help`
 
-## testing: 1, 2, 3 
+## testing gaols: 1, 2, 3 
+
+1. `make parse-all` The parser **SHOULD NOT** throw a parse error with any **valid** xQuery module text.
+2. `make test-all` All tree-sitter tests in the test/corpus **should not** error
+3. `make query-all` The query capture S-expressions **should not** error
 
 Tests are run via [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
 
-1. parse xQuery examples without error
-
-The parser might be lax at what it accepts, so any parsed text might not be able to compile. 
-However the parser **SHOULD NOT** throw a parse error with any **valid** xQuery module text.
-
-```
-make parse-spec
-make parse-qt3
-```
-
 The parsing examples that are derived from the [W3C xQuery recommendation](https://www.w3.org/TR/xquery-31)
-are found in the 'examples/spec' folder.
+are found in the 'examples/spec' folder. Other parse examples are from the [qt3tests suite](https://github.com/w3c/qt3tests) and are in the examples/qt3tests folder
 
-Other parse examples are from the [qt3tests suite](https://github.com/w3c/qt3tests) and are in the examples/qt3tests folder
-
-2. run the test corpus
-
-```
-make test-all
-```
-Will test everything in the `test/corpus` directory.  
 The `test/corpus/` tree-sitter tests are mainly organised around the sections outlined in the 
 [W3C xQuery recommendation](https://www.w3.org/TR/xquery-31).
 
-
- 3. show hightlight query examples
-
-*highlight query captures*: The highlight query examples should show the 
-S-expresion *capture* items that will be highlighted in a
-text editor. To peek at tree-sitter highlight in action, I run some query examples in 
+To peek at tree-sitter highlight captures in action, I run some query examples in 
 [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
 which you might want to look at. 
 
