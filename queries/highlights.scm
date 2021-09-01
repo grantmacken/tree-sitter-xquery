@@ -7,6 +7,10 @@
  (namespace_declaration)
  ] @namespace
 
+
+ (function_declaration "function" @keyword.function)
+ (variable_declaration "variable" @keyword)
+
 ; declarations TODO rm dups
 [
   "NaN"
@@ -40,7 +44,6 @@
   "schema" 
   "strip"
   "strip"
-  "variable"
   "version"  
   "xquery" 
   "zero-digit"
@@ -79,7 +82,6 @@
   )
 
 ; TODO
-  [ "function" ] @keyword.function
 
 ; 3.12 FLWOR Expressions
  [ 
@@ -107,7 +109,6 @@
    ] @keyword
 
 ["return"] @keyword.return
-["function"] @keyword.function
 
 [axis_movement: (_)]  @keyword.operator
   
@@ -208,30 +209,34 @@
 
 ; TSType`
 ; TSTypeBuiltin`
-    
-
-(sequence_type
-  (_
-    [
-     "item"
-     ; kind tests - complex
-     "attribute"
-     "element"
-     "processing-instruction"
-     "schema-attribute"
-     "schema-element"
-     ; kind tests - simple
-     "comment"
-     "namespace-node"
-     "node"
-     "text"
-     ; function tests
-     "function"
-     "map"
-     "array"
-     ] @type
-    ))
- 
+; item types 
+(any_item "item" @type)
+(empty_sequence "empty-sequence" @type)
+; kind tests - simple
+[ 
+  (any_kind_test "node")
+  (namespace_node_test "namespace-node")
+  (comment_test "comment")
+  (text_test "text")
+  ] @type
+; kind tests - complex
+[
+ (document_test "document-node")
+ (element_test "element")
+ (attribute_test "attribute")
+ (schema_element_test "schema-element")
+ (schema_attribute_test "schema-attribute")
+ (pi_test "processing-instruction")
+ ] @type
+; function tests
+[
+ (any_function_test "function")
+ (typed_function_test "function")
+ (any_map_test "map" )
+ (typed_map_test"map" )
+ (any_array_test "array" )
+ (typed_array_test "array")
+ ] @type
 
 ; direct XML constructors
 [(start_tag) (end_tag) (empty_tag)  ] @tag
