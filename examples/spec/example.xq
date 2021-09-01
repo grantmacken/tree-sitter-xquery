@@ -1,1 +1,1 @@
- $string=>replace('a','b')=>normalize-space()=>tokenize("\s")
+$N instance of element(person, xx)

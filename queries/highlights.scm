@@ -78,8 +78,6 @@
   (occurrence_indicator) @attribute
   )
 
-
-
 ; TODO
   [ "function" ] @keyword.function
 
