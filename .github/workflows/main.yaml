@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      #- parse-qt3-err
+      - show_and_tell
 env:
   ghSha: ${{ github.sha }}
   ghToken: ${{ secrets.GITHUB_TOKEN }}
