@@ -40,6 +40,7 @@ Apart from looking at how other grammar queries are constructed, I refer to the 
  * [syntax highlighting queries](https://tree-sitter.github.io/tree-sitter/syntax-highlighting#queries)
  * [emacs syntax highlighting query guide](https://emacs-tree-sitter.github.io/syntax-highlighting/queries/)↲
  * [neovim treesitter contributing](https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md)
+ * [neovim treesitter text](https://github.com/nvim-treesitter/nvim-treesitter/blob/master/doc/nvim-treesitter.txt)
 
 Captures will only capture if a query will resolve to a valid node in the grammer.
 So frequently running `make query-all` is a good idea, as it will throw an diagnostic error 
