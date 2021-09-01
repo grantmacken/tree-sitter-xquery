@@ -11,9 +11,22 @@ expressions, however tree-sitter should not be confused with a validating parser
 validating parser, tree-sitter will not stop on-error, but continue to parse and provide
 a syntatic highlighting.
 
-## highlighting example in neovim
+## better symantic highlighting: example in neovim
+
+depending on context symbols '\*' '+' have different meanings
 
 ![terminal screeshot](assets/2021-09-02_10-56.png)
+
+1. '\*' in the context of sequence_type/any_array_test/wildcard
+2. '+'  in the context of sequence_type/occurarance_operator
+3. '+'  in the context of additive_expr
+4. 'xs:date' in this context is a constuctor function so it is colored like 
+other function Elsewhere as the 2nd line 'xs:integer' this appears in the 
+sequence_type context so it will be colored as a type.
+
+There is more to see in this example: spot the semanitc color differences
+ - '[' ']' can be a square array constructors or delimit predicates
+ - '(' ')' can be a parenthesized expr or delimit parameter and argument lists
 
 ## more info about tree-sitter
 
