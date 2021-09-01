@@ -615,7 +615,7 @@ module.exports = grammar({
       seq('processing-instruction', seq('(', optional(field('param', choice($.NCName, $.string_literal))), ')')), // 194
     name_test: ($) => prec.left(field('name_test', choice($._EQName, $.wildcard))), // TODO 199
     wildcard: ($) => choice('*', seq($.NCName, ':*'), seq('*:', $.NCName), seq($.braced_uri_literal, '*')), // 120
-    any_function_test: ($) => seq(repeat($.annotation), 'function', seq('(', '*', ')')), //  // 207
+    any_function_test: ($) => seq(repeat($.annotation), 'function', seq('(', alias('*', $.wildcard), ')')), //  // 207
     typed_function_test: ($) =>
       seq(
         repeat($.annotation),
@@ -626,9 +626,9 @@ module.exports = grammar({
         ')',
         $.type_declaration
       ),
-    any_map_test: ($) => seq('map', '(', '*', ')'), // 210
+    any_map_test: ($) => seq('map', '(', alias('*', $.wildcard) , ')'), // 210
     typed_map_test: ($) => seq('map', '(', $.atomic_or_union_type, ',', $.sequence_type, ')'), // 212
-    any_array_test: ($) => seq('array', '(', '*', ')'),
+    any_array_test: ($) => seq('array', '(', alias('*', $.wildcard), ')'),
     typed_array_test: ($) => seq('array', '(', $.sequence_type, ')'),
     parenthesized_item_type: ($) => seq('(', $._item_type, ')'), // 216
     // END SequenceType Syntax
