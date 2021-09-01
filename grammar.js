@@ -154,7 +154,6 @@ module.exports = grammar({
         19,
         choice(
           seq('/', optional($._relative_path_expr)), //parse-note-leading-lone-slash
-          //seq('//', $._node_test), // must have relative_path_expr
           seq('//', $._relative_path_expr), // must have relative_path_expr
           $._relative_path_expr // can stand alone
         )

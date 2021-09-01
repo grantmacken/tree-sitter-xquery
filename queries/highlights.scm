@@ -1,17 +1,29 @@
 ; declared namespace indentifiers
- (module_import name: (identifier) @namespace)
- (schema_import name: (identifier) @namespace)
-
+(module_import
+  [
+   name: (identifier) @namespace
+   "import"  @include
+  ]
+)
+(schema_import
+  [
+   name: (identifier) @namespace
+   "element" @keyword
+   "import"  @include
+  ]
+)
+; highlight top level namespace
 [
  (module_declaration )
  (namespace_declaration)
  ] @namespace
 
-
  (function_declaration "function" @keyword.function)
+ (default_namespace_declaration [ "function"  "element"] @keyword)
+ (context_item_declaration [ "context"  "item"] @keyword)
  (variable_declaration "variable" @keyword)
 
-; declarations TODO rm dups
+; keywors in declarations
 [
   "NaN"
   "base-uri"
@@ -49,7 +61,6 @@
   "zero-digit"
   ] @keyword
 ; TSinclude:
- [ "import" ] @include
 
 ; expressions
 ;TSConditional
@@ -140,8 +151,7 @@
 (postfix_lookup "?" @operator ) 
 (unary_lookup "?" @operator )
 
-
-[ "/" "//" ] @punctuation.delimiter
+[ "$" "/" "//" ] @punctuation.delimiter
 ["{" "}" "(" ")"] @punctuation.bracket
 ; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
 ; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
@@ -189,7 +199,7 @@
     ])
 
  (var_ref 
-   [ "$" @variable
+   [ 
      local_part: (identifier) @variable
      unprefixed: (identifier) @variable
      ])

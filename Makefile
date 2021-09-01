@@ -59,14 +59,10 @@ parse:  ## parse a specific example nominated in .env
 .PHONY: parse-all
 parse-all:  parse-spec parse-qt3 ## parse all examples
 	
-
-
 PHONY: parse-graph
 parse-graph:  ## parse, then show svg grah in firefox
 	@$(TS) parse examples/spec/$(EXAMPLE).xq -D || true 
 	@firefox log.html
-
-
 
 .PHONY: parse-spec
 parse-spec:  ## parse all spec examples
