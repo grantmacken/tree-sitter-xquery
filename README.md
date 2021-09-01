@@ -11,11 +11,14 @@ expressions, however tree-sitter should not be confused with a validating parser
 validating parser, tree-sitter will not stop on-error, but continue to parse and provide
 a syntatic highlighting.
 
+## highlighting example in neovim
 
+![terminal screeshot](assets/2021-09-02_10-56.png)
+
+## more info about tree-sitter
 
 - [tree-sitter presentation](https://www.youtube.com/watch?v=Jes3bD6P0To) - a new parsing system for programming tools
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
-- [awesome tree sitter](https://github.com/drom/awesome-tree-sitter)
 
 
 # [installing tree-sitter]( https://tree-sitter.github.io/tree-sitter/creating-parsers#installation )
