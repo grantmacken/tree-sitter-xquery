@@ -45,7 +45,6 @@
   "xquery" 
   "zero-digit"
   ] @keyword
-  [ "function" ] @keyword.function
 ; TSinclude:
  [ "import" ] @include
 
@@ -74,8 +73,15 @@
   ] @repeat
 
 ; disambiguation
-(occurrence_indicator) @repeat
 (wildcard) @conditional
+(sequence_type
+  (occurrence_indicator) @attribute
+  )
+
+
+
+; TODO
+  [ "function" ] @keyword.function
 
 ; 3.12 FLWOR Expressions
  [ 
@@ -163,25 +169,34 @@
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
 [ (integer_literal) (decimal_literal) (double_literal) (lookup_digit) ] @number
 
+[
+ ns_builtin: (identifier)
+ prefix: (identifier) 
+ ] @namespace
 
+[
+ param: (NCName)
+ local_part: (identifier)
+ unprefixed: (identifier) 
+ ] @constant
 
-; [
-;   prefix: (identifier)
-;   ns_builtin: (identifier)
-; ] @namespace
+; when in the tree context of
+; sequence_type/item_type
+; then identify as a builtin type
+(atomic_or_union_type
+  [ 
+    local_part: (identifier) @type.builtin
+    unprefixed: (identifier) @type.builtin
+    ])
 
  (var_ref 
    [ "$" @variable
-     ns_builtin: (identifier) @namespace
-     prefix: (identifier) @namespace
      local_part: (identifier) @variable
      unprefixed: (identifier) @variable
      ])
 
  (arrow_function 
    [ 
-     ns_builtin: (identifier) @namespace
-     prefix: (identifier) @namespace
      local_part: (identifier) @function
      unprefixed: (identifier) @function
      ])
@@ -189,38 +204,36 @@
  
  (function_call
    [ 
-     ns_builtin: (identifier) @namespace
-     prefix: (identifier) @namespace
      local_part: (identifier) @function
      unprefixed: (identifier) @function
      ])
 
 ; TSType`
 ; TSTypeBuiltin`
- [ 
-  (any_item)
-  (any_function_test)
-  (typed_function_test)
-  (any_map_test)
-  (typed_map_test)
-  (any_array_test)
-  (typed_array_test)
-  (any_kind_test)
-  (comment_test)
-  (namespace_node_test)
-  (text_test)
-  (document_test)
-  (element_test)
-  (attribute_test)
-  (schema_element_test)
-  (schema_attribute_test)
-  (pi_test)
-  (name_test)
-] @type
+    
 
-
-
-
+(sequence_type
+  (_
+    [
+     "item"
+     ; kind tests - complex
+     "attribute"
+     "element"
+     "processing-instruction"
+     "schema-attribute"
+     "schema-element"
+     ; kind tests - simple
+     "comment"
+     "namespace-node"
+     "node"
+     "text"
+     ; function tests
+     "function"
+     "map"
+     "array"
+     ] @type
+    ))
+ 
 
 ; direct XML constructors
 [(start_tag) (end_tag) (empty_tag)  ] @tag
