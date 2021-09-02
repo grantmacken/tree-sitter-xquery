@@ -5889,8 +5889,13 @@
               "value": "("
             },
             {
-              "type": "STRING",
-              "value": "*"
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "*"
+              },
+              "named": true,
+              "value": "wildcard"
             },
             {
               "type": "STRING",
@@ -5960,8 +5965,13 @@
           "value": "("
         },
         {
-          "type": "STRING",
-          "value": "*"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "*"
+          },
+          "named": true,
+          "value": "wildcard"
         },
         {
           "type": "STRING",
@@ -6010,8 +6020,13 @@
           "value": "("
         },
         {
-          "type": "STRING",
-          "value": "*"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "*"
+          },
+          "named": true,
+          "value": "wildcard"
         },
         {
           "type": "STRING",

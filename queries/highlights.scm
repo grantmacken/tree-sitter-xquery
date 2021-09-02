@@ -1,13 +1,29 @@
 ; declared namespace indentifiers
- (module_import name: (identifier) @namespace)
- (schema_import name: (identifier) @namespace)
-
+(module_import
+  [
+   name: (identifier) @namespace
+   "import"  @include
+  ]
+)
+(schema_import
+  [
+   name: (identifier) @namespace
+   "element" @keyword
+   "import"  @include
+  ]
+)
+; highlight top level namespace
 [
  (module_declaration )
  (namespace_declaration)
  ] @namespace
 
-; declarations TODO rm dups
+ (function_declaration "function" @keyword.function)
+ (default_namespace_declaration [ "function"  "element"] @keyword)
+ (context_item_declaration [ "context"  "item"] @keyword)
+ (variable_declaration "variable" @keyword)
+
+; keywors in declarations
 [
   "NaN"
   "base-uri"
@@ -40,14 +56,11 @@
   "schema" 
   "strip"
   "strip"
-  "variable"
   "version"  
   "xquery" 
   "zero-digit"
   ] @keyword
-  [ "function" ] @keyword.function
 ; TSinclude:
- [ "import" ] @include
 
 ; expressions
 ;TSConditional
@@ -74,8 +87,12 @@
   ] @repeat
 
 ; disambiguation
-(occurrence_indicator) @repeat
 (wildcard) @conditional
+(sequence_type
+  (occurrence_indicator) @attribute
+  )
+
+; TODO
 
 ; 3.12 FLWOR Expressions
  [ 
@@ -103,7 +120,6 @@
    ] @keyword
 
 ["return"] @keyword.return
-["function"] @keyword.function
 
 [axis_movement: (_)]  @keyword.operator
   
@@ -135,8 +151,7 @@
 (postfix_lookup "?" @operator ) 
 (unary_lookup "?" @operator )
 
-
-[ "/" "//" ] @punctuation.delimiter
+[ "$" "/" "//" ] @punctuation.delimiter
 ["{" "}" "(" ")"] @punctuation.bracket
 ; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
 ; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
@@ -163,25 +178,34 @@
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
 [ (integer_literal) (decimal_literal) (double_literal) (lookup_digit) ] @number
 
+[
+ ns_builtin: (identifier)
+ prefix: (identifier) 
+ ] @namespace
 
+[
+ param: (NCName)
+ local_part: (identifier)
+ unprefixed: (identifier) 
+ ] @constant
 
-; [
-;   prefix: (identifier)
-;   ns_builtin: (identifier)
-; ] @namespace
+; when in the tree context of
+; sequence_type/item_type
+; then identify as a builtin type
+(atomic_or_union_type
+  [ 
+    local_part: (identifier) @type.builtin
+    unprefixed: (identifier) @type.builtin
+    ])
 
  (var_ref 
-   [ "$" @variable
-     ns_builtin: (identifier) @namespace
-     prefix: (identifier) @namespace
+   [ 
      local_part: (identifier) @variable
      unprefixed: (identifier) @variable
      ])
 
  (arrow_function 
    [ 
-     ns_builtin: (identifier) @namespace
-     prefix: (identifier) @namespace
      local_part: (identifier) @function
      unprefixed: (identifier) @function
      ])
@@ -189,38 +213,40 @@
  
  (function_call
    [ 
-     ns_builtin: (identifier) @namespace
-     prefix: (identifier) @namespace
      local_part: (identifier) @function
      unprefixed: (identifier) @function
      ])
 
 ; TSType`
 ; TSTypeBuiltin`
- [ 
-  (any_item)
-  (any_function_test)
-  (typed_function_test)
-  (any_map_test)
-  (typed_map_test)
-  (any_array_test)
-  (typed_array_test)
-  (any_kind_test)
-  (comment_test)
-  (namespace_node_test)
-  (text_test)
-  (document_test)
-  (element_test)
-  (attribute_test)
-  (schema_element_test)
-  (schema_attribute_test)
-  (pi_test)
-  (name_test)
-] @type
-
-
-
-
+; item types 
+(any_item "item" @type)
+(empty_sequence "empty-sequence" @type)
+; kind tests - simple
+[ 
+  (any_kind_test "node")
+  (namespace_node_test "namespace-node")
+  (comment_test "comment")
+  (text_test "text")
+  ] @type
+; kind tests - complex
+[
+ (document_test "document-node")
+ (element_test "element")
+ (attribute_test "attribute")
+ (schema_element_test "schema-element")
+ (schema_attribute_test "schema-attribute")
+ (pi_test "processing-instruction")
+ ] @type
+; function tests
+[
+ (any_function_test "function")
+ (typed_function_test "function")
+ (any_map_test "map" )
+ (typed_map_test"map" )
+ (any_array_test "array" )
+ (typed_array_test "array")
+ ] @type
 
 ; direct XML constructors
 [(start_tag) (end_tag) (empty_tag)  ] @tag

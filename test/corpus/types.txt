@@ -127,8 +127,7 @@ $N instance of function(*)
   (instance_of_expr 
    (var_ref (identifier)) 
    (sequence_type 
-    (any_function_test 
-     )))))
+    (any_function_test (wildcard))))))
 
 ==================
 2.5.5.7 Any Function Test with annotation
@@ -140,12 +139,12 @@ $N instance of %assertion function(*)
 
 (module 
  (main_module
- (instance_of_expr 
-  (var_ref (identifier)) 
-  (sequence_type 
-   (any_function_test 
-    (annotation (identifier))
-    )))))
+  (instance_of_expr 
+   (var_ref (identifier)) 
+   (sequence_type 
+    (any_function_test 
+     (annotation (identifier))
+     (wildcard))))))
 
 ==================
 2.5.5.7 Typed Function Test
@@ -229,7 +228,9 @@ map {} instance of map(*)
  (main_module 
   (instance_of_expr 
    (map_constructor) 
-   (sequence_type (any_map_test)))))
+   (sequence_type 
+    (any_map_test
+     (wildcard))))))
 
 ==================
 2.5.5.8 Typed Map Test 
@@ -259,7 +260,9 @@ $M instance of map(xs:integer, xs:string)
  (main_module 
   (instance_of_expr 
    (square_array_constructor) 
-   (sequence_type (any_array_test)))))
+   (sequence_type 
+    (any_array_test
+     (wildcard))))))
 
 ==================
 2.5.5.9 Typed Array Test square

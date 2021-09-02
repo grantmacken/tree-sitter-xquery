@@ -15,8 +15,6 @@ default: src/grammar.json $(NVIM_QUERIES)/xquery/highlights.scm $(NVIM_QUERIES)/
 # default: generate tree-sitter grammar
 generate: src/grammar.json ## generate tree-sitter files
 
-
-
 .PHONY: help
 help: ## show this help	
 	@cat $(MAKEFILE_LIST) | 
@@ -61,14 +59,10 @@ parse:  ## parse a specific example nominated in .env
 .PHONY: parse-all
 parse-all:  parse-spec parse-qt3 ## parse all examples
 	
-
-
 PHONY: parse-graph
 parse-graph:  ## parse, then show svg grah in firefox
 	@$(TS) parse examples/spec/$(EXAMPLE).xq -D || true 
 	@firefox log.html
-
-
 
 .PHONY: parse-spec
 parse-spec:  ## parse all spec examples
@@ -82,10 +76,13 @@ parse-qt3:  ## parse all app examples
 	@#$(TS) parse  examples/qt3/app/XMark/XMark_All.xq -D || true
 	@#firefox log.html
 
-.PHONY: query-all
-query-all: ## query specific example nominated in .env
-	@echo 'hightlights'
+.PHONY: hl
+hl: ## highlight query specific example nominated in .env
+	@echo 'query hightlight captures'
 	@$(TS) query --captures queries/highlights.scm examples/spec/$(EXAMPLE).xq
+
+.PHONY: query-all
+query-all:  hl ## queries example nominated in .env
 
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 	@mkdir -p $(dir $@)y
@@ -136,7 +133,7 @@ getTreeSitter:
 # 	@popd
 
 .PHONY: pr-create
-pr-create: 
+pr-create: parse-all test-all query-all 
 	@#gh pr create --help
 	@gh pr create --fill
 
@@ -155,4 +152,19 @@ pr-merge:
 format:  grammar.js
 	@#prettier --list-different grammar.js
 	@prettier  --write --no-config --no-editorconfig --single-quote --print-width 120  grammar.js
-	
+
+.PHONY: rec
+rec:
+	@mkdir -p ../tmp
+	@asciinema rec ../tmp/$(@).cast \
+ --overwrite \
+ --title='treesitter '\
+ --idle-time-limit 1
+
+PHONY: play
+play:
+	@asciinema play ../tmp/rec.cast
+
+.PHONY: upload
+upload:
+	asciinema upload ../tmp/rec.cast
