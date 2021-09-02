@@ -21,10 +21,10 @@ depending on context symbols '\*' '+' have different meanings
 2. '+'  in the context of sequence_type/occurarance_operator
 3. '+'  in the context of additive_expr
 4. 'xs:date' in this context is a constuctor function so it is colored like 
-other function Elsewhere as the 2nd line 'xs:integer' this appears in the 
+other function, whereas elsewhere as the 2nd line 'xs:integer' this appears in the 
 sequence_type context so it will be colored as a type.
 
-There is more to see in this example: spot the semanitc color differences
+More spot the symantic color differences
  - '[' ']' can be a square array constructors or delimit predicates
  - '(' ')' can be a parenthesized expr or delimit parameter and argument lists
 
