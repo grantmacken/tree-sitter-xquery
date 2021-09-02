@@ -11,8 +11,6 @@ expressions, however tree-sitter should not be confused with a validating parser
 validating parser, tree-sitter will not stop on-error, but continue to parse and provide
 a syntatic highlighting.
 
-## more info about tree-sitter
-
 - [tree-sitter presentation](https://www.youtube.com/watch?v=Jes3bD6P0To) - a new parsing system for programming tools
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
 
@@ -74,18 +72,14 @@ parser_config.xquery = {
 1. '\*' in the context of sequence_type/any_array_test/wildcard 
 2. '+'  in the context of sequence_type/occurarance_operator
 3. '+'  in the context of additive_expr so colored as an operator
-4. 'xs:date' in this context is a constuctor function so it is colored like 
-other function, whereas elsewhere as the 2nd line 'xs:integer' this appears in the 
+4. 'xs:date' in this context is a constuctor function so it is colored as a function, whereas elsewhere as the 2nd line 'xs:integer' this appears in the 
 sequence_type context so it will be colored as a type.
 
 More spot the semantic color differences
  - '[' ']' can be a square array constructors or delimit predicates
  - '(' ')' can be a parenthesized expr or delimit parameter and argument lists
 
-
-
 ## Contributing, Discussions and Issues
-
 
 [Contributions](CONTRIBUTING.md) and suggestions in form of 
 [issues](https://github.com/grantmacken/tree-sitter-xquery/issues) are welcome.
