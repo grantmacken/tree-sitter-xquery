@@ -133,7 +133,7 @@ getTreeSitter:
 # 	@popd
 
 .PHONY: pr-create
-pr-create: 
+pr-create: parse-all test-all query-all 
 	@#gh pr create --help
 	@gh pr create --fill
 
