@@ -4,7 +4,7 @@ SHELL=/bin/bash
 .DELETE_ON_ERROR:
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
-MAKEFLAGS += --dsilent
+MAKEFLAGS += --silent
 include .env
 TS := bin/tree-sitter
 NVIM_QUERIES := $(HOME)/.config/nvim/queries

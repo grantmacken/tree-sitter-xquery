@@ -13,26 +13,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grantmacken/tree-sitter-xquery.git"
+    "url": "https://github.com/grantmacken/tree-sitter-xquery.git"
   },
   "keywords": [
+    "parser",
     "xquery",
     "tree-sitter",
     "treesitter"
   ],
-  "author": "grantmacken",
-  "license": "ISC",
+  "author": "grantmacken  <grantmacken@gmail.com>",
+  "license": "MIT",
   "gypfile": true,
   "bugs": {
     "url": "https://github.com/grantmacken/tree-sitter-xquery/issues"
   },
   "homepage": "https://github.com/grantmacken/tree-sitter-xquery#readme",
   "dependencies": {
-    "nan": "^2.14.2",
+    "nan": "^2.16.0",
     "regenerate": "^1.4.2",
     "web-tree-sitter": "^0.19.4"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.0"
+    "prettier": "2.3.2",
+    "tree-sitter-cli": "^0.20.6"
   }
 }
