@@ -12,7 +12,7 @@ return ()
 (module 
  (main_module 
   (flwor_expr 
-   (let_clause (let_binding (identifier) (integer_literal))) 
+   (let_clause (let_binding (var_ref (identifier)) (integer_literal))) 
    (return_clause (parenthesized_expr)))))
 
 
@@ -29,8 +29,8 @@ return ()
  (main_module 
   (flwor_expr 
    (let_clause 
-    (let_binding (identifier) (integer_literal)) 
-    (let_binding (identifier) (function_call (identifier) (arg_list (var_ref (identifier)))))) 
+    (let_binding (var_ref (identifier)) (integer_literal)) 
+    (let_binding (var_ref (identifier)) (function_call (identifier) (arg_list (var_ref (identifier)))))) 
    (return_clause (parenthesized_expr)))))
  
 ==================
@@ -46,7 +46,7 @@ return  $salary
  (main_module 
   (flwor_expr 
    (let_clause 
-    (let_binding (identifier) 
+    (let_binding (var_ref (identifier)) 
      (type_declaration (sequence_type (atomic_or_union_type (identifier) (identifier))))
      (string_literal)))
    (return_clause (var_ref (identifier))))))
@@ -121,13 +121,30 @@ return $g1
 
 ---
 
-(module 
- (main_module 
- (flwor_expr 
-  (let_clause (let_binding (identifier) (var_ref (identifier)))) 
-  (let_clause (let_binding (identifier) (var_ref (identifier)))) 
-  (group_by_clause (identifier) (identifier) (identifier) (string_literal)) 
-  (return_clause (var_ref (identifier))))))
+(module
+(main_module
+  (flwor_expr
+    (let_clause
+      (let_binding
+        (var_ref
+          (identifier))
+        (var_ref
+          (identifier))))
+    (let_clause
+      (let_binding
+        (var_ref
+          (identifier))
+        (var_ref
+          (identifier))))
+    (group_by_clause
+      (identifier)
+      (identifier)
+      (identifier)
+      (string_literal))
+    (return_clause
+      (var_ref
+        (identifier))))))
+
 
 ==================
 3.12.8 Order By Clause 

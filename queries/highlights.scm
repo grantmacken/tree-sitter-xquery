@@ -198,11 +198,7 @@
     unprefixed: (identifier) @type.builtin
     ])
 
- (var_ref 
-   [ 
-     local_part: (identifier) @variable
-     unprefixed: (identifier) @variable
-     ])
+ (var_ref) @variable
 
  (arrow_function 
    [ 

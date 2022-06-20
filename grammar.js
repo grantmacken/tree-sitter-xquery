@@ -1,7 +1,7 @@
 const UNICODE_LETTER = /\p{L}/,
   UNICODE_DIGIT = /[0-9]/,
-  NAME_START_CHAR = choice(UNICODE_LETTER, "_"),
-  NAME_CHAR = choice(NAME_START_CHAR, "-", ".", UNICODE_DIGIT),
+  NAME_START_CHAR = /[_\p{XID_Start}]/, // choice(UNICODE_LETTER, "_"),
+  NAME_CHAR = /[-_\p{XID_Continue}]/, // choice(NAME_START_CHAR, "-", ".", UNICODE_DIGIT),
   INTEGER = repeat1(UNICODE_DIGIT),
   DOUBLE = seq(
     repeat(UNICODE_DIGIT),
@@ -11,12 +11,38 @@ const UNICODE_LETTER = /\p{L}/,
     repeat1(UNICODE_DIGIT)
   ), // TODO check
   DECIMAL = seq(repeat(UNICODE_DIGIT), ".", repeat(UNICODE_DIGIT));
+/*
+// https://www.w3.org/TR/xquery-31/#id-reserved-fn-names
+// https://github.com/tree-sitter/tree-sitter/pull/246
+//The reserved property
+/* In order improve this error recovery, the grammar author needs a way to explicitly indicate that certain keywords are reserved. That is - even if they are not technically valid, they should still be recognized as separate from any other tokens that would match that string (such as an identifier */
 
 module.exports = grammar({
   name: "xquery",
   // Whitespace and Comments function as symbol separators
   extras: ($) => [$.comment, /\s/],
+  reserved: ($) => [
+    "array",
+    "attribute",
+    "comment",
+    "document-node",
+    "element",
+    "empty-sequence",
+    "function",
+    "if",
+    "item",
+    "map",
+    "namespace-node",
+    "node",
+    "processing-instruction",
+    "schema-attribute",
+    "schema-element",
+    "switch",
+    "text",
+    "typeswitch",
+  ],
   // word: ($) => $.kw,
+  word: ($) => $.identifier,
   conflicts: ($) => [[$._expr, $._step_expr]],
   supertypes: ($) => [$._prolog],
   rules: {
@@ -149,6 +175,8 @@ module.exports = grammar({
         field("signature", $.integer_literal)
       ),
     // 3.1.7 Inline Function Expr
+    //    arg_list: ($) => prec(1, seq("(", commaSep($._argument), ")")), // 122
+    // _argument: ($) => prec.left(19, field("argument", choice($._expr, "?"))), // 138
     inline_function_expr: ($) =>
       seq(
         optional($.annotation),
@@ -157,10 +185,10 @@ module.exports = grammar({
         optional(field("result_type", $.type_declaration)),
         field("body", $.enclosed_expr)
       ), // 169
-    param_list: ($) => seq("(", commaSep($.parameter), ")"),
+    param_list: ($) => prec(1, seq("(", commaSep($.parameter), ")")), // seq("(", commaSep($.parameter), ")"),
     parameter: ($) =>
       seq(
-        field("param_name", seq("$", $._EQName)),
+        field("param_name", $.var_ref),
         optional(field("param_type", $.type_declaration))
       ),
     // 3.1.8 Enclosed Expressions: when content empty then empty parenthesized_expr {()} is assumed
@@ -556,8 +584,7 @@ module.exports = grammar({
     let_clause: ($) => seq("let", commaSep1($.let_binding)),
     let_binding: ($) =>
       seq(
-        "$",
-        field("var_name", $._EQName),
+        field("var_name", $.var_ref),
         optional($.type_declaration),
         ":=",
         $._expr
@@ -821,7 +848,7 @@ module.exports = grammar({
         "declare",
         repeat($.annotation),
         "variable",
-        field("name", seq("$", $._EQName)),
+        field("name", $.var_ref),
         optional($.type_declaration),
         choice(
           seq(":=", field("value", $._expr)),
@@ -1197,7 +1224,7 @@ module.exports = grammar({
         "text",
         "typeswitch"
       ),
-    identifier: ($) => token(seq(NAME_START_CHAR, repeat(NAME_CHAR))),
+    identifier: ($) => token(seq(NAME_START_CHAR, repeat(NAME_CHAR))), // /[_\p{XID_Start}][_\p{XID_Continue}]t
     comment: ($) =>
       seq(
         "(:",

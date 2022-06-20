@@ -137,7 +137,9 @@ $example:fruit
 
 (module 
  (main_module 
-  (var_ref (identifier) (identifier))))
+  (var_ref 
+    (identifier) 
+    (identifier))))
 
 ==================
 3.1.2 Variable References: URIQualifiedName 	
@@ -147,9 +149,10 @@ $Q{http://example.com/ns}invoice
 
 -------------------
 
-(module 
-  (main_module 
-  (var_ref (uri_qualified_name))))
+(module
+  (main_module
+    (var_ref
+      (uri_qualified_name))))
 
 ==================
 3.1.3 Parenthesized with constructed empty sequence
@@ -239,7 +242,7 @@ array:size()
 empty( $foo )
   ---
 
-  (module 
+(module 
  (main_module 
    (function_call (identifier) 
     (arg_list (argument (var_ref (identifier)))))))
@@ -248,17 +251,17 @@ empty( $foo )
 3.1.5 Static Function Call with identifier with hyphen
 ==================
 
-my:hyphen-function( $foo )
+hyphen-function( $foo )
 ---
 
 (module
  (main_module 
   (function_call 
-   (identifier) (identifier) 
+   (identifier)
    (arg_list (var_ref (identifier))))))
 
 ==================
-3.1.6 Named Function References: TODO
+3.1.6 Named Function References:
 ==================
 
 fn:abs#1
@@ -267,10 +270,9 @@ fn:abs#1
 
 (module
  (main_module 
- (named_function_ref 
-  (identifier) (identifier)
-  (integer_literal)
- ))) 
+   (named_function_ref 
+    (identifier) (identifier)
+    (integer_literal)))) 
 
 ==================
 3.1.7 Inline Function Expressions: simple
@@ -293,13 +295,17 @@ function ( $param1, $param2 )  {()}
 
 ---
 
-(module 
- (main_module 
-  (inline_function_expr 
-   (param_list 
-    (parameter (identifier)) 
-    (parameter (identifier))) 
-   (enclosed_expr (parenthesized_expr)))))
+(module
+  (main_module
+    (inline_function_expr
+      (param_list
+        (parameter
+          (var_ref (identifier)))
+        (parameter
+          (var_ref (identifier))))
+      (enclosed_expr
+        (parenthesized_expr)))))
+
 
 
 ==================
@@ -310,13 +316,17 @@ function( $a as empty-sequence() )  { () }
 
 ---
 
-(module 
- (main_module 
-  (inline_function_expr 
-   (param_list 
-    (parameter (identifier) 
-     (type_declaration (sequence_type (empty_sequence))))) 
-   (enclosed_expr (parenthesized_expr)))))
+(module
+  (main_module
+    (inline_function_expr
+      (param_list
+        (parameter
+          (var_ref (identifier))
+          (type_declaration
+            (sequence_type
+              (empty_sequence)))))
+      (enclosed_expr
+        (parenthesized_expr)))))
 
 ==================
 3.1.7 Inline Function:  with return type declaration
@@ -326,14 +336,21 @@ function( $a as item() ) as item()  { () }
 
 ---
 
-(module 
- (main_module 
-  (inline_function_expr 
-   (param_list 
-    (parameter (identifier) 
-     (type_declaration (sequence_type (any_item))))) 
-   (type_declaration (sequence_type (any_item))) 
-   (enclosed_expr (parenthesized_expr)))))
+(module
+  (main_module
+    (inline_function_expr
+      (param_list
+        (parameter
+          (var_ref (identifier))
+          (type_declaration
+            (sequence_type
+              (any_item)))))
+      (type_declaration
+        (sequence_type
+          (any_item)))
+      (enclosed_expr
+        (parenthesized_expr)))))
+
 
 ==================
 3.1.7 Inline Function: sequence type occurrance indicator
@@ -343,15 +360,67 @@ function( $a as item()* ) as item()+  { () }
 
 ---
 
-(module 
- (main_module 
-  (inline_function_expr 
-   (param_list 
-    (parameter (identifier) 
-     (type_declaration 
-      (sequence_type (any_item) 
-       (occurrence_indicator))))) 
-   (type_declaration 
-    (sequence_type (any_item) 
-     (occurrence_indicator))) 
-   (enclosed_expr (parenthesized_expr)))))
+(module
+  (main_module
+    (inline_function_expr
+      (param_list
+        (parameter
+          (var_ref (identifier))
+          (type_declaration
+            (sequence_type
+              (any_item)
+              (occurrence_indicator)))))
+      (type_declaration
+        (sequence_type
+          (any_item)
+          (occurrence_indicator)))
+      (enclosed_expr
+        (parenthesized_expr)))))
+
+
+==================
+3.1.7 Inline Function: illegal var - uses reserved function name
+==================
+
+let $getContent := function( $map as map(*) ) as map(*){()}
+return ()
+
+---
+
+ (module
+    (main_module
+      (flwor_expr
+        (let_clause
+          (let_binding
+            (var_ref
+              (identifier))
+            (inline_function_expr
+              (param_list
+                (ERROR
+                  (identifier)))
+              (type_declaration
+                (sequence_type
+                  (any_map_test
+                    (wildcard))))
+              (enclosed_expr
+                (parenthesized_expr)))))
+        (return_clause
+        (parenthesized_expr)))))
+
+==================
+3.1.7 Inline Function: illegal function name - uses reserved function name
+==================
+
+let $map := function(){}
+return ()
+
+---
+
+(module
+(ERROR
+  (path_expr
+    (inline_function_expr
+        (param_list)
+        (enclosed_expr))))
+  (main_module
+    (parenthesized_expr)))
