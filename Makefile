@@ -22,6 +22,10 @@ help: ## show this help
 	sort |
 	awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+.PHONY: meld
+meld:
+	meld queries/highlights.scm  ../nvim-treesitter/queries/xquery/highlights.scm
+
 .PHONY: clean 
 clean: ## remove tree-sitter generated artifacts
 	@rm -f Cargo.toml
@@ -85,7 +89,7 @@ hl: ## highlight query specific example nominated in .env
 query-all:  hl ## queries example nominated in .env
 
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
-	@mkdir -p $(dir $@)y
+	@mkdir -p $(dir $@)
 	@cp -v $< $@
 
 # playground: tree-sitter-xQuery.wasm

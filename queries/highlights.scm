@@ -19,11 +19,12 @@
  ] @namespace
 
  (function_declaration "function" @keyword.function)
+ (inline_function_expr "function" @keyword.function)
  (default_namespace_declaration [ "function"  "element"] @keyword)
  (context_item_declaration [ "context"  "item"] @keyword)
  (variable_declaration "variable" @keyword)
 
-; keywors in declarations
+; keywords in declarations
 [
   "NaN"
   "base-uri"
@@ -92,8 +93,6 @@
   (occurrence_indicator) @attribute
   )
 
-; TODO
-
 ; 3.12 FLWOR Expressions
  [ 
    "at" 
@@ -151,17 +150,11 @@
 (postfix_lookup "?" @operator ) 
 (unary_lookup "?" @operator )
 
-[ "$" "/" "//" ] @punctuation.delimiter
-["{" "}" "(" ")"] @punctuation.bracket
-; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
-; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
- [ "%" ";" ":" "," "|" "(:" ":)"] @punctuation.delimiter
 ; constructors 
 (square_array_constructor ["[" "]"] @constructor )
 (curly_array_constructor ["array" ] @constructor )
 (map_constructor ["map" ] @constructor )
 (string_constructor ["``[" "]``"] @constructor )
-(interpolation ["`{" "}`"] @constructor )
 (comp_elem_constructor ["element"] @constructor )
 (comp_attr_constructor ["attribute"] @constructor )
 (comp_doc_constructor ["document"] @yconstructor )
@@ -179,15 +172,15 @@
 [ (integer_literal) (decimal_literal) (double_literal) (lookup_digit) ] @number
 
 [
+ (var_ref "$") 
+ local_part: (identifier)
+ unprefixed: (identifier) 
+ ] @variable
+
+[
  ns_builtin: (identifier)
  prefix: (identifier) 
  ] @namespace
-
-[
- param: (NCName)
- local_part: (identifier)
- unprefixed: (identifier) 
- ] @constant
 
 ; when in the tree context of
 ; sequence_type/item_type
@@ -198,15 +191,12 @@
     unprefixed: (identifier) @type.builtin
     ])
 
- (var_ref) @variable
-
  (arrow_function 
    [ 
      local_part: (identifier) @function
      unprefixed: (identifier) @function
      ])
 
- 
  (function_call
    [ 
      local_part: (identifier) @function
@@ -252,7 +242,15 @@
   )
 
 
-[ 
+; MISC
+; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
+;
+ [ "%" ";" ":" "," "|" "(:" ":)"] @punctuation.delimiter
+[ "/" "//" ] @punctuation.delimiter ; ? TODO xpath path
+["{" "}" "(" ")"] @punctuation.bracket ; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
+(interpolation ["`{" "}`"] @punctuation.special )  ; within string constructors
+
+[
  (direct_comment)
  (comment)
  ] @comment

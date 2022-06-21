@@ -21,7 +21,7 @@ module.exports = grammar({
   name: "xquery",
   // Whitespace and Comments function as symbol separators
   extras: ($) => [$.comment, /\s/],
-  reserved: ($) => [
+  reserved: ($) => [ 
     "array",
     "attribute",
     "comment",
