@@ -60,7 +60,7 @@ tree-sitter-xquery.wasm: buildr
 docs: tree-sitter-xquery.wasm ## publish to gh pages
 	mkdir -p docs
 	cp -v $< docs/
-	# cp -v node_modules/web-tree-sitter/tree-sitter.wasm publish/
+	cp -v node_modules/web-tree-sitter/tree-sitter.wasm docs/
 	cp -v node_modules/web-tree-sitter/tree-sitter.js docs/
 	cp -v node_modules/web-tree-sitter/tree-sitter-web.d.ts docs/
 
