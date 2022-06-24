@@ -1,4 +1,4 @@
-name: 
+name:
 on:
   push:
     branches:
@@ -16,103 +16,108 @@ jobs:
       - name: install tree-sitter cli
         run: make install
       - name: build
-        run: |
-          yarn build
-          yarn build-wasm
+        run: yarn build
+      - name: build-wasm
+        run: yarn build-wasm
+      - name: Update parser files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Generate parser
+          file_pattern: src
       # - name: generate
       # - name: generate
       #   run: |
       #       echo "TERM=xterm" >> $GITHUB_ENV
       #       bin/tree-sitter generate
       #       printf %60s | tr ' ' '-' && echo
-      #       echo 'checks:  parse error will abort run'   
+      #       echo 'checks:  parse error will abort run'
       #       printf %60s | tr ' ' '-' && echo
       # - name: 2.5 Types
       #   run: bin/tree-sitter parse examples/spec/types.xq
       # - name: 3.1 Primary Expressions
-      #   run: bin/tree-sitter parse examples/spec/primary_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/primary_expressions.xq
       # - name: 3.2 Postfix Expressions
-      #   run: bin/tree-sitter parse examples/spec/postfix_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/postfix_expressions.xq
       # - name: 3.3 Path Expressions
-      #   run: bin/tree-sitter parse examples/spec/path_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/path_expressions.xq
       # - name: 3.4 Sequence Expressions
-      #   run: bin/tree-sitter parse examples/spec/sequence_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/sequence_expressions.xq
       # - name: 3.5 Arithmetic Expressions
-      #   run: bin/tree-sitter parse examples/spec/arithmetic_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/arithmetic_expressions.xq
       # - name: 3.5 Arithmetic Expressions
-      #   run: bin/tree-sitter parse examples/spec/arithmetic_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/arithmetic_expressions.xq
       # - name: 3.6 String Concatenation Expressions
-      #   run: bin/tree-sitter parse examples/spec/string_concatenation_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/string_concatenation_expressions.xq
       # - name: 3.7 Comparison Expressions
-      #   run: bin/tree-sitter parse examples/spec/comparison_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/comparison_expressions.xq
       # - name: 3.8 Logical Expressions
-      #   run: bin/tree-sitter parse examples/spec/logical_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/logical_expressions.xq
       # - name: 3.9 Node Constructors
-      #   run: bin/tree-sitter parse examples/spec/node_constructors.xq 
+      #   run: bin/tree-sitter parse examples/spec/node_constructors.xq
       # - name: 3.10 String Constructors
-      #   run: bin/tree-sitter parse examples/spec/string_constructors.xq 
-      # - name: 3.11 Maps and Arrays 
-      #   run: bin/tree-sitter parse examples/spec/maps_and_arrays.xq 
-      # - name: 3.12 FLWOR Expressions 
-      #   run: bin/tree-sitter parse examples/spec/FLWOR_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/string_constructors.xq
+      # - name: 3.11 Maps and Arrays
+      #   run: bin/tree-sitter parse examples/spec/maps_and_arrays.xq
+      # - name: 3.12 FLWOR Expressions
+      #   run: bin/tree-sitter parse examples/spec/FLWOR_expressions.xq
       # - name: 3.13 Ordered and Unordered Expressions
-      #   run: bin/tree-sitter parse examples/spec/ordered_and_unordered_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/ordered_and_unordered_expressions.xq
       # - name: 3.14 Conditional Expressions
-      #   run: bin/tree-sitter parse examples/spec/conditional_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/conditional_expressions.xq
       # - name: 3.15 Switch Expression
-      #   run: bin/tree-sitter parse examples/spec/switch_expression.xq 
+      #   run: bin/tree-sitter parse examples/spec/switch_expression.xq
       # - name: 3.16 Quantified Expressions
-      #   run: bin/tree-sitter parse examples/spec/quantified_expressions.xq 
+      #   run: bin/tree-sitter parse examples/spec/quantified_expressions.xq
       # - name: 3.17 Try Catch Expressions
-      #   run: bin/tree-sitter parse examples/spec/try_catch_expressions.xq 
-      # - name: 3.18 Expressions on SequenceTypes 
-      #   run: bin/tree-sitter parse examples/spec/expressions_on_sequence_types.xq 
-      # - name: 3.19 Simple map operator 
-      #   run: bin/tree-sitter parse examples/spec/bang.xq 
-      # - name: 3.19 Simple map operator 
-      #   run: bin/tree-sitter parse examples/spec/bang.xq 
+      #   run: bin/tree-sitter parse examples/spec/try_catch_expressions.xq
+      # - name: 3.18 Expressions on SequenceTypes
+      #   run: bin/tree-sitter parse examples/spec/expressions_on_sequence_types.xq
+      # - name: 3.19 Simple map operator
+      #   run: bin/tree-sitter parse examples/spec/bang.xq
+      # - name: 3.19 Simple map operator
+      #   run: bin/tree-sitter parse examples/spec/bang.xq
       # - name: 3.20 Arrow operator (=>)
-      #   run: bin/tree-sitter parse examples/spec/arrow.xq 
+      #   run: bin/tree-sitter parse examples/spec/arrow.xq
       # - name: 4.1 Version Declaration
-      #   run: bin/tree-sitter parse examples/spec/version_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/version_declaration.xq
       # - name: 4.2 Module Declaration
-      #   run: bin/tree-sitter parse examples/spec/module_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/module_declaration.xq
       # - name: 4.3 Boundary-space Declaration
-      #   run: bin/tree-sitter parse examples/spec/boundary_space_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/boundary_space_declaration.xq
       # - name: 4.4 Default Collation Declaration
-      #   run: bin/tree-sitter parse examples/spec/default_collation_declaration.xq 
-      # - name: 4.5 Base URI Declaration 
-      #   run: bin/tree-sitter parse examples/spec/base_URI_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/default_collation_declaration.xq
+      # - name: 4.5 Base URI Declaration
+      #   run: bin/tree-sitter parse examples/spec/base_URI_declaration.xq
       # - name: 4.6 Construction Declaration
-      #   run: bin/tree-sitter parse examples/spec/construction_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/construction_declaration.xq
       # - name: 4.7 Ordering Mode Declaration
-      #   run: bin/tree-sitter parse examples/spec/ordering_mode_declaration.xq 
-      # - name: 4.8 Empty Order Declaration 
-      #   run: bin/tree-sitter parse examples/spec/empty_order_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/ordering_mode_declaration.xq
+      # - name: 4.8 Empty Order Declaration
+      #   run: bin/tree-sitter parse examples/spec/empty_order_declaration.xq
       # - name: 4.9 Copy-Namespaces Declaration
-      #   run: bin/tree-sitter parse examples/spec/copy_namespaces_declaration.xq 
-      # - name: 4.10 Decimal Format Declaration 
-      #   run: bin/tree-sitter parse examples/spec/decimal_format_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/copy_namespaces_declaration.xq
+      # - name: 4.10 Decimal Format Declaration
+      #   run: bin/tree-sitter parse examples/spec/decimal_format_declaration.xq
       # - name: 4.11 Schema Import
-      #   run: bin/tree-sitter parse examples/spec/schema_import.xq 
+      #   run: bin/tree-sitter parse examples/spec/schema_import.xq
       # - name: 4.12 Module Import
-      #   run: bin/tree-sitter parse examples/spec/module_import.xq 
+      #   run: bin/tree-sitter parse examples/spec/module_import.xq
       # - name: 4.13 Namespace Declaration
-      #   run: bin/tree-sitter parse examples/spec/namespace_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/namespace_declaration.xq
       # - name: 4.14 Default Namespace Declaration
-      #   run: bin/tree-sitter parse examples/spec/default_namespace_declaration.xq 
-      # - name: 4.15 Annotations 
-      #   run: bin/tree-sitter parse examples/spec/annotations.xq 
+      #   run: bin/tree-sitter parse examples/spec/default_namespace_declaration.xq
+      # - name: 4.15 Annotations
+      #   run: bin/tree-sitter parse examples/spec/annotations.xq
       # - name: 4.16 Variable Declaration
-      #   run: bin/tree-sitter parse examples/spec/variable_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/variable_declaration.xq
       # - name: 4.17 Context Item Declaration
-      #   run: bin/tree-sitter parse examples/spec/context_item_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/context_item_declaration.xq
       # - name: 4.18 Function Declaration
-      #   run: bin/tree-sitter parse examples/spec/function_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/function_declaration.xq
       # - name: 4.19 Option Declaration
-      #   run: bin/tree-sitter parse examples/spec/option_declaration.xq 
+      #   run: bin/tree-sitter parse examples/spec/option_declaration.xq
       # - name: Comments
-      #   run: bin/tree-sitter parse examples/spec/comments.xq 
+      #   run: bin/tree-sitter parse examples/spec/comments.xq
       # - name: TEST corpus
       #   run: bin/tree-sitter test
       # - name: highlight queries
