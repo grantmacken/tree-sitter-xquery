@@ -14,9 +14,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      # - name: get tree-sitter cli
-      #   run: | 
-      #       make getTreeSitter 
+      - name: install tree-sitter cli
+        run: make install
       # - name: generate
       #   run: |
       #       echo "TERM=xterm" >> $GITHUB_ENV
