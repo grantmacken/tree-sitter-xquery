@@ -6,30 +6,34 @@ on:
 env:
   ghSha: ${{ github.sha }}
   ghToken: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
       - name: install tree-sitter cli
         run: make install
-      - name: build
-        run: yarn build
-      - name: build-wasm
-        run: yarn build-wasm
-      - name: Update parser files
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Generate parser
-          file_pattern: src
-      - name: Checkout gh-pages branch to ./gh-pages
-        uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-          path: ./gh-pages
-      - run: mv *.wasm ./gh-pages
+      # - name: build
+      #   run: yarn build
+      # - name: build-wasm
+      #   run: yarn build-wasm
+      #   uses: stefanzweifel/git-auto-commit-action@v4
+      #   with:
+      #     commit_message: Generate parser
+      #     file_pattern: src
+      # - name: Checkout gh-pages branch to ./gh-pages
+      # #   uses: actions/checkout@v2
+      #   with:
+      #     ref: gh-pages
+      #     path: ./gh-pages
+      # - run: mv *.wasm ./gh-pages
       # - name: generate
       # - name: generate
       #   run: |
