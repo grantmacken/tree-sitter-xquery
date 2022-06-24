@@ -1,10 +1,9 @@
 bin
-.local
+build/
 node_modules
-.git
+*.log
+log.html
 tree-sitter-xquery.wasm
-build
-src
-Cargo.toml
+temp
 tmp
-bindings
+.git

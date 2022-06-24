@@ -6,7 +6,6 @@ MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
 include .env
-TS := bin/tree-sitter
 NVIM_QUERIES := $(HOME)/.config/nvim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
 
@@ -28,17 +27,20 @@ meld:
 
 .PHONY: clean 
 clean: ## remove tree-sitter generated artifacts
-	@rm -f Cargo.toml
-	@rm -fr node_modules
-	@rm -f package*
-	@rm -f binding.gyp
-	@rm -fr bindings/
-	@rm -fr src/
+	rm -fr node_modules
+	rm -f package-lock.json
+	rm -fr build
+	rm -f log.html
+	rm -f tree-sitter-xquery.wasm
+	rm -fr bin
+
+
+
+
 
 src/grammar.json: grammar.js
 	@echo '==========================================='
-	@$(TS) generate
-	@#$(TS) parse examples/*.xq --quiet
+	@yarn generate
 	@echo '==========================================='
 
 .PHONY: watch-grammar
@@ -48,17 +50,25 @@ watch-grammar: ## if changes in grammar.js then generate
 	inotifywait -qre close_write ./  &>/dev/null;
 	done
 
+.PHONY: build
+build: ## build wasm
+	#yarn build
+	# source /home/gmack/projects/emsdk/emsdk_env.sh 
+	# yarn build-wasm
+	yarn web
+	
+
 .PHONY: test
 test: ## test specific section nominated in .env
-	@$(TS) test -f '$(TEST_SECTION)'
+	yarn test -f '$(TEST_SECTION)'
 
 .PHONY: test-all
 test-all: ## test specific section nominated in .env
-	@$(TS) test
+	yarn test
 
 .PHONY: parse
 parse:  ## parse a specific example nominated in .env
-	@$(TS) parse examples/spec/$(EXAMPLE).xq
+	@yarn parse examples/spec/$(EXAMPLE).xq
 
 .PHONY: parse-all
 parse-all:  parse-spec parse-qt3 ## parse all examples
@@ -70,34 +80,34 @@ parse-graph:  ## parse, then show svg grah in firefox
 
 .PHONY: parse-spec
 parse-spec:  ## parse all spec examples
-	@$(TS) parse -q examples/spec/*
+	yarn parse -q examples/spec/*
 
 .PHONY: parse-qt3
 parse-qt3:  ## parse all app examples 
-	@$(TS) parse -q examples/qt3/app/Demos/*
-	@$(TS) parse -q examples/qt3/app/walmsley/*
-	@$(TS) parse -q examples/qt3/app/XMark/*
-	@#$(TS) parse  examples/qt3/app/XMark/XMark_All.xq -D || true
-	@#firefox log.html
+	yarn parse -q examples/qt3/app/Demos/*
+	yarn parse -q examples/qt3/app/walmsley/*
+	yarn parse -q examples/qt3/app/XMark/*
+	# parse  examples/qt3/app/XMark/XMark_All.xq -D || true
+	#firefox log.html
 
 .PHONY: hl
 hl: ## highlight query specific example nominated in .env
-	@echo 'query hightlight captures'
-	@$(TS) query --captures queries/highlights.scm examples/spec/$(EXAMPLE).xq
-
-.PHONY: query-all
-query-all:  hl ## queries example nominated in .env
+	yarn highlight examples/spec/$(EXAMPLE).xq
 
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 	@mkdir -p $(dir $@)
 	@cp -v $< $@
 
 # playground: tree-sitter-xQuery.wasm
-# .PHONY: web
-# web:
-# 	@source /home/gmack/projects/emsdk/emsdk_env.sh &>/dev/null
-# 	@emcc --version
-# 	@rm -f tree-sitter-xquery.wasm
+.PHONY: web
+web:
+	# podman pull docker.io/emscripten/emsdk:2.0.24
+	
+
+xxxx:
+	# rm -f tree-sitter-xquery.wasm
+	# tree-sitter build-wasm 
+	# tree-sitter web-ui
 # 	@npx tree-sitter generate && \
 # 	npx node-gyp rebuild && \
 # 	npx tree-sitter build-wasm && \
@@ -109,24 +119,16 @@ stow:
 	@stow -v -t ~/.tree-sitter .
 	@popd
 
-.PHONY: getTreeSitter
-getTreeSitter:
+.PHONY: install
+install:
 	@mkdir -p bin
 	if [ -e node_modules/.bin/tree-sitter ]
 	then 
-	npm update
+	yarn update
 	else
-	#npm init --yes
-	npm install --save nan
-	npm install --save-dev tree-sitter-cli
+	yarn install
 	fi
-	if ! [ -L bin/tree-sitter ]
-	then
-	pushd bin
-	ln -s ../node_modules/.bin/tree-sitter
-	popd
-	fi
-	@bin/tree-sitter --version
+
 
 # .PHONY: after-push
 # after-push: cp

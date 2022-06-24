@@ -15,9 +15,8 @@ a syntatic highlighting.
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
 
 
-# [installing tree-sitter]( https://tree-sitter.github.io/tree-sitter/creating-parsers#installation )
-
-Clone and cd into this repo then run `make getTreeSitter` which will use npm to install the tree-sitter binary
+Both Make and Yarn are required to use this repo used so you will need to install both.
+Clone and cd into this repo then run `make install` which will use Yarn to install the tree-sitter cli.
 
 # building
 

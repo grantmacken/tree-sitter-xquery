@@ -1,40 +1,40 @@
 {
   "name": "tree-sitter-xquery",
-  "version": "1.0.0",
-  "description": "tree-sitter xquery",
-  "main": "grammar.js",
-  "directories": {
-    "example": "examples",
-    "test": "test"
-  },
-  "scripts": {
-    "test": "tree-sitter test",
-    "install": "node-gyp rebuild"
-  },
+  "version": "0.0.1",
+  "author": "Grant Mackenzie <grantmacken@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "parser",
+    "xquery"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/grantmacken/tree-sitter-xquery.git"
   },
-  "keywords": [
-    "parser",
-    "xquery",
-    "tree-sitter",
-    "treesitter"
-  ],
-  "author": "grantmacken  <grantmacken@gmail.com>",
-  "license": "MIT",
-  "gypfile": true,
-  "bugs": {
-    "url": "https://github.com/grantmacken/tree-sitter-xquery/issues"
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse",
+    "highlight": "tree-sitter query --captures queries/highlights.scm",
+    "build": "yarn generate && node-gyp build",
+    "build-wasm": "tree-sitter build-wasm",
+    "web": "tree-sitter web-ui"
   },
-  "homepage": "https://github.com/grantmacken/tree-sitter-xquery#readme",
   "dependencies": {
-    "nan": "^2.16.0",
-    "regenerate": "^1.4.2",
-    "web-tree-sitter": "^0.19.4"
+    "nan": "2.14.2",
+    "node-gyp": "^9.0.0"
   },
   "devDependencies": {
     "prettier": "2.3.2",
-    "tree-sitter-cli": "^0.20.6"
-  }
+    "tree-sitter-cli": "0.20.6"
+  },
+  "main": "bindings/node",
+  "tree-sitter": [
+    {
+      "scope": "source.xquery",
+      "file-types": [
+        "xquery"
+      ]
+    }
+  ]
 }
