@@ -35,9 +35,6 @@ clean: ## remove tree-sitter generated artifacts
 	rm -fr bin
 
 
-
-
-
 src/grammar.json: grammar.js
 	@echo '==========================================='
 	@yarn generate
@@ -50,13 +47,24 @@ watch-grammar: ## if changes in grammar.js then generate
 	inotifywait -qre close_write ./  &>/dev/null;
 	done
 
-.PHONY: build
-build: ## build wasm
-	#yarn build
-	# source /home/gmack/projects/emsdk/emsdk_env.sh 
-	# yarn build-wasm
-	yarn web
-	
+.PHONY: buildr
+buildr: ## build wasm the open web ui
+	yarn build
+
+tree-sitter-xquery.wasm: buildr
+	source /home/gmack/projects/emsdk/emsdk_env.sh 
+	yarn build-wasm
+
+
+.PHONY: publish
+publish: tree-sitter-xquery.wasm ## publish to gh pages
+	mkdir -p publish
+	cp -v $< publish/
+	cp -v node_modules/web-tree-sitter/tree-sitter.wasm publish/
+	cp -v node_modules/web-tree-sitter/tree-sitter.js publish/
+	cp -v node_modules/web-tree-sitter/tree-sitter-web.d.ts publish/
+
+
 
 .PHONY: test
 test: ## test specific section nominated in .env
