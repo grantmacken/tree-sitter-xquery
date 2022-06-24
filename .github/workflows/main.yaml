@@ -24,6 +24,12 @@ jobs:
         with:
           commit_message: Generate parser
           file_pattern: src
+      - name: Checkout gh-pages branch to ./gh-pages
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          path: ./gh-pages
+      - run: mv *.wasm ./gh-pages
       # - name: generate
       # - name: generate
       #   run: |
