@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - show_and_tell
 env:
   ghSha: ${{ github.sha }}
   ghToken: ${{ secrets.GITHUB_TOKEN }}
@@ -16,6 +15,11 @@ jobs:
         uses: actions/checkout@v3
       - name: install tree-sitter cli
         run: make install
+      - name: build
+        run: |
+          yarn build
+          yarn build-wasm
+      # - name: generate
       # - name: generate
       #   run: |
       #       echo "TERM=xterm" >> $GITHUB_ENV
