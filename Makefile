@@ -56,13 +56,13 @@ tree-sitter-xquery.wasm: buildr
 	yarn build-wasm
 
 
-.PHONY: publish
-publish: tree-sitter-xquery.wasm ## publish to gh pages
-	mkdir -p publish
-	cp -v $< publish/
-	cp -v node_modules/web-tree-sitter/tree-sitter.wasm publish/
-	cp -v node_modules/web-tree-sitter/tree-sitter.js publish/
-	cp -v node_modules/web-tree-sitter/tree-sitter-web.d.ts publish/
+.PHONY: docs
+docs: tree-sitter-xquery.wasm ## publish to gh pages
+	mkdir -p docs
+	cp -v $< docs/
+	# cp -v node_modules/web-tree-sitter/tree-sitter.wasm publish/
+	cp -v node_modules/web-tree-sitter/tree-sitter.js docs/
+	cp -v node_modules/web-tree-sitter/tree-sitter-web.d.ts docs/
 
 
 
