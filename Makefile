@@ -64,8 +64,6 @@ docs: tree-sitter-xquery.wasm ## publish to gh pages
 	cp -v node_modules/web-tree-sitter/tree-sitter.js docs/
 	cp -v node_modules/web-tree-sitter/tree-sitter-web.d.ts docs/
 
-
-
 .PHONY: test
 test: ## test specific section nominated in .env
 	yarn test -f '$(TEST_SECTION)'
