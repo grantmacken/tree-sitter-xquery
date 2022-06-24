@@ -3,7 +3,7 @@ build/
 node_modules
 *.log
 log.html
-tree-sitter-xquery.wasm
+/tree-sitter-xquery.wasm
 temp
 tmp
 .git
