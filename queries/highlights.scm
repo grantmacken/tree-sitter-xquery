@@ -17,13 +17,11 @@
  (module_declaration )
  (namespace_declaration)
  ] @namespace
-
 (function_declaration "function" @keyword.function)
 (inline_function_expr "function" @keyword.function)
 (default_namespace_declaration [ "function"  "element"] @keyword)
 (context_item_declaration [ "context"  "item"] @keyword)
 (variable_declaration "variable" @keyword)
-
 ; keywords in declarations
 [
  "NaN"
@@ -61,9 +59,6 @@
  "xquery" 
  "zero-digit"
  ] @keyword
-; TSinclude:
-
-; expressions
 ;TSConditional
 [
  "case"
@@ -79,20 +74,16 @@
  "then" 
  "try"
  ] @conditional
-
 [ "catch" ] @exeption
-
 [ 
   "for" 
   "typeswitch" 
   ] @repeat
-
 ; disambiguation
 (wildcard) @conditional
 (sequence_type
   (occurrence_indicator) @attribute
   )
-
 ; 3.12 FLWOR Expressions
 [ 
   "at" 
@@ -117,11 +108,8 @@
   "stable"
   "unordered"
   ] @keyword
-
 ["return"] @keyword.return
-
 [axis_movement: (_)]  @keyword.operator
-
 [":=" "="] @operator
 ; PATH 
 (abbrev_reverse) @operator
@@ -149,7 +137,6 @@
 (context_item_expr [ "." ] @operator)
 (postfix_lookup "?" @operator ) 
 (unary_lookup "?" @operator )
-
 ; constructors 
 (square_array_constructor ["[" "]"] @constructor )
 (curly_array_constructor ["array" ] @constructor )
@@ -165,23 +152,18 @@
 ; also say these are constuctors
 (parenthesized_expr ["(" ")"] @constructor)
 (predicate ["[" "]"] @constructor) 
-
-; declarations, direct_attribute and 'let' assignment operators
 ; literals
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
 [ (integer_literal) (decimal_literal) (double_literal) (lookup_digit) ] @number
-
 [
  (var_ref "$") 
  local_part: (identifier)
  unprefixed: (identifier) 
  ] @variable
-
 [
  ns_builtin: (identifier)
  prefix: (identifier) 
  ] @namespace
-
 ; when in the tree context of
 ; sequence_type/item_type
 ; then identify as a builtin type
@@ -190,21 +172,16 @@
     local_part: (identifier) @type.builtin
     unprefixed: (identifier) @type.builtin
     ])
-
 (arrow_function 
   [ 
     local_part: (identifier) @function
     unprefixed: (identifier) @function
     ])
-
 (function_call
   [ 
     local_part: (identifier) @function
     unprefixed: (identifier) @function
     ])
-
-; TSType`
-; TSTypeBuiltin`
 ; item types 
 (any_item "item" @type)
 (empty_sequence "empty-sequence" @type)
@@ -233,15 +210,12 @@
  (any_array_test "array" )
  (typed_array_test "array")
  ] @type
-
 ; direct XML constructors
 [(start_tag) (end_tag) (empty_tag)  ] @tag
 (direct_attribute 
   attr_name: (identifier) @tag.attribute
   attr_value: (direct_attribute_value) @string
   )
-
-
 ; MISC
 ; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
 ;
@@ -249,7 +223,6 @@
 [ "/" "//" ] @punctuation.delimiter ; ? TODO xpath path
 ["{" "}" "(" ")"] @punctuation.bracket ; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
 (interpolation ["`{" "}`"] @punctuation.special )  ; within string constructors
-
 [
  (direct_comment)
  (comment)
