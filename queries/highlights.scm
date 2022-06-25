@@ -3,82 +3,82 @@
   [
    name: (identifier) @namespace
    "import"  @include
-  ]
-)
+   ]
+  )
 (schema_import
   [
    name: (identifier) @namespace
    "element" @keyword
    "import"  @include
-  ]
-)
+   ]
+  )
 ; highlight top level namespace
 [
  (module_declaration )
  (namespace_declaration)
  ] @namespace
 
- (function_declaration "function" @keyword.function)
- (inline_function_expr "function" @keyword.function)
- (default_namespace_declaration [ "function"  "element"] @keyword)
- (context_item_declaration [ "context"  "item"] @keyword)
- (variable_declaration "variable" @keyword)
+(function_declaration "function" @keyword.function)
+(inline_function_expr "function" @keyword.function)
+(default_namespace_declaration [ "function"  "element"] @keyword)
+(context_item_declaration [ "context"  "item"] @keyword)
+(variable_declaration "variable" @keyword)
 
 ; keywords in declarations
 [
-  "NaN"
-  "base-uri"
-  "boundary-space"
-  "collation"
-  "construction"
-  "copy-namespaces"
-  "decimal-format"
-  "decimal-separator"
-  "declare"
-  "default"
-  "digit"
-  "encoding"
-  "exponent-separator"
-  "external"
-  "grouping-separator"
-  "infinity"
-  "inherit"
-  "minus-sign"
-  "module"
-  "namespace"
-  "no-inherit" 
-  "no-preserve"
-  "option"
-  "ordering" 
-  "pattern-separator"
-  "per-mille"
-  "percent"
-  "preserve"
-  "schema" 
-  "strip"
-  "strip"
-  "version"  
-  "xquery" 
-  "zero-digit"
-  ] @keyword
+ "NaN"
+ "base-uri"
+ "boundary-space"
+ "collation"
+ "construction"
+ "copy-namespaces"
+ "decimal-format"
+ "decimal-separator"
+ "declare"
+ "default"
+ "digit"
+ "encoding"
+ "exponent-separator"
+ "external"
+ "grouping-separator"
+ "infinity"
+ "inherit"
+ "minus-sign"
+ "module"
+ "namespace"
+ "no-inherit" 
+ "no-preserve"
+ "option"
+ "ordering" 
+ "pattern-separator"
+ "per-mille"
+ "percent"
+ "preserve"
+ "schema" 
+ "strip"
+ "strip"
+ "version"  
+ "xquery" 
+ "zero-digit"
+ ] @keyword
 ; TSinclude:
 
 ; expressions
 ;TSConditional
 [
-"case"
-"catch"
-"default"
-"else"
-"every"
-"if"
-"in"
-"satisfies"
-"some"
-"switch"
-"then" 
-"try"
-] @conditional
+ "case"
+ "catch"
+ "default"
+ "else"
+ "every"
+ "if"
+ "in"
+ "satisfies"
+ "some"
+ "switch"
+ "then" 
+ "try"
+ ] @conditional
 
 [ "catch" ] @exeption
 
@@ -94,11 +94,11 @@
   )
 
 ; 3.12 FLWOR Expressions
- [ 
-   "at" 
-   "in" 
-   "where"
-   ] @conditional
+[ 
+  "at" 
+  "in" 
+  "where"
+  ] @conditional
 [ 
   "allowing"
   "as"
@@ -116,12 +116,12 @@
   "ordered" 
   "stable"
   "unordered"
-   ] @keyword
+  ] @keyword
 
 ["return"] @keyword.return
 
 [axis_movement: (_)]  @keyword.operator
-  
+
 [":=" "="] @operator
 ; PATH 
 (abbrev_reverse) @operator
@@ -166,7 +166,7 @@
 (parenthesized_expr ["(" ")"] @constructor)
 (predicate ["[" "]"] @constructor) 
 
- ; declarations, direct_attribute and 'let' assignment operators
+; declarations, direct_attribute and 'let' assignment operators
 ; literals
 [(string_literal) (char_data) (char_ref) (char_group) ] @string
 [ (integer_literal) (decimal_literal) (double_literal) (lookup_digit) ] @number
@@ -191,17 +191,17 @@
     unprefixed: (identifier) @type.builtin
     ])
 
- (arrow_function 
-   [ 
-     local_part: (identifier) @function
-     unprefixed: (identifier) @function
-     ])
+(arrow_function 
+  [ 
+    local_part: (identifier) @function
+    unprefixed: (identifier) @function
+    ])
 
- (function_call
-   [ 
-     local_part: (identifier) @function
-     unprefixed: (identifier) @function
-     ])
+(function_call
+  [ 
+    local_part: (identifier) @function
+    unprefixed: (identifier) @function
+    ])
 
 ; TSType`
 ; TSTypeBuiltin`
@@ -245,7 +245,7 @@
 ; MISC
 ; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
 ;
- [ "%" ";" ":" "," "|" "(:" ":)"] @punctuation.delimiter
+[ "%" ";" ":" "," "|" "(:" ":)"] @punctuation.delimiter
 [ "/" "//" ] @punctuation.delimiter ; ? TODO xpath path
 ["{" "}" "(" ")"] @punctuation.bracket ; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
 (interpolation ["`{" "}`"] @punctuation.special )  ; within string constructors
