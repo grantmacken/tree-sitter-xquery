@@ -59,8 +59,11 @@
           <div id="code-container">
 <textarea id="code-input" style="display: none">
 "Hello, tree-sitter! ",
-current-time(),           
-for $v in $doc//video return $v
+``[ time:  `{current-time()}` ]``,
+ my:three-argument-function(1,2,3),
+ local:two-argument-function((1,2),3),
+ map {"A":1,"B":2},
+for $v in $doc//video return $v,
 </textarea>
           </div>
           <div id="query-container" style="">
