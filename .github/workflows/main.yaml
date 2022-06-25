@@ -1,12 +1,8 @@
-name: 
+name: main
 on:
   push:
     branches:
       - main
-env:
-  ghSha: ${{ github.sha }}
-  ghToken: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
