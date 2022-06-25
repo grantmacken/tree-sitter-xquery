@@ -93,8 +93,9 @@ parse-qt3:  ## parse all app examples
 	yarn parse -q examples/qt3/app/Demos/*
 	yarn parse -q examples/qt3/app/walmsley/*
 	yarn parse -q examples/qt3/app/XMark/*
-	# parse  examples/qt3/app/XMark/XMark_All.xq -D || true
-	#firefox log.html
+
+.PHONY: query-all
+query-all: hl ## check captures
 
 .PHONY: hl
 hl: ## highlight query specific example nominated in .env
@@ -107,17 +108,7 @@ $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 # playground: tree-sitter-xQuery.wasm
 .PHONY: web
 web:
-	# podman pull docker.io/emscripten/emsdk:2.0.24
-	
-
-xxxx:
-	# rm -f tree-sitter-xquery.wasm
-	# tree-sitter build-wasm 
-	# tree-sitter web-ui
-# 	@npx tree-sitter generate && \
-# 	npx node-gyp rebuild && \
-# 	npx tree-sitter build-wasm && \
-# 	npx tree-sitter web-ui
+	yarn web
 
 .PHONY: stow
 stow:
@@ -135,15 +126,6 @@ install:
 	yarn install
 	fi
 
-
-# .PHONY: after-push
-# after-push: cp
-# 	echo $@
-# 	@pushd $(HOME)/.local/share/nvim/site/pack/packer/opt/nvim-treesitter
-# 	@nvim --headless -c "luafile ./scripts/write-lockfile.lua"
-# 	@jq '.' lockfile.json 
-# 	@popd
-
 .PHONY: pr-create
 pr-create: parse-all test-all query-all 
 	@#gh pr create --help
@@ -154,11 +136,6 @@ pr-merge:
 	@#gh pr merge --help
 	@gh pr merge -s -d
 	git pull
-
-# .PHONY: headless
-# headless:
-# 	@nvim --headless +PackerSync +qall
-	@#nvim --headless +TSUpdateSync +qall
 
 .PHONY: format
 format:  grammar.js
