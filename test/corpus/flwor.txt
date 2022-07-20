@@ -64,8 +64,9 @@ return  $x
  (main_module 
   (flwor_expr 
    (for_clause 
-    (var_ref (identifier)) 
-    (var_ref (identifier))) 
+    (for_binding
+      (var_ref (identifier)) 
+      (var_ref (identifier))))
    (return_clause (var_ref (identifier))))))
 
 ==================
@@ -81,8 +82,10 @@ return $x
 (module 
  (main_module 
   (flwor_expr 
-   (for_clause (var_ref (identifier)) 
-    (var_ref (identifier)) (var_ref (identifier))) 
+   (for_clause 
+    (for_binding
+     (var_ref (identifier)) 
+     (var_ref (identifier)) (var_ref (identifier)))) 
    (where_clause (comparison_expr (multiplicative_expr (var_ref (identifier)) (integer_literal)) (integer_literal))) 
    (return_clause (var_ref (identifier))))))
 
@@ -102,7 +105,9 @@ return
 (module 
  (main_module 
   (flwor_expr 
-   (for_clause (var_ref (identifier)) (var_ref (identifier))) 
+   (for_clause 
+    (for_binding
+     (var_ref (identifier)) (var_ref (identifier))))
    (order_by_clause 
     (path_expr (var_ref (identifier)) (name_test (identifier))) 
     (order_direction))
@@ -159,7 +164,9 @@ return $e/name
 (module 
  (main_module 
   (flwor_expr 
-   (for_clause (var_ref (identifier)) (var_ref (identifier))) 
+   (for_clause 
+    (for_binding
+     (var_ref (identifier)) (var_ref (identifier))))
    (order_by_clause 
     (path_expr (var_ref (identifier)) (name_test (identifier)))
     (order_direction))

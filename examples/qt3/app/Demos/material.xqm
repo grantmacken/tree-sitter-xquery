@@ -1,5 +1,4 @@
 module namespace materials="http://www.xqsharp.com/raytracer/materials";
-
 declare function materials:material($name as xs:string,
                                     $position as xs:double*) as xs:double*
 {

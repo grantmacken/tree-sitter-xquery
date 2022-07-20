@@ -5315,12 +5315,12 @@
     }
   },
   {
-    "type": "for_clause",
+    "type": "for_binding",
     "named": true,
     "fields": {
       "binding_sequence": {
         "multiple": true,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "additive_expr",
@@ -5541,7 +5541,7 @@
         ]
       },
       "positional_variable": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
@@ -5553,7 +5553,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "type_declaration",
@@ -5561,6 +5561,21 @@
         },
         {
           "type": "var_ref",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "for_binding",
           "named": true
         }
       ]

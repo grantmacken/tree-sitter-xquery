@@ -570,8 +570,8 @@ module.exports = grammar({
         $.let_clause // 48
       ),
     //3.12.2 For Clause
-    for_clause: ($) => seq("for", commaSep($._for_binding)), // 44',
-    _for_binding: ($) =>
+    for_clause: ($) => seq("for", commaSep($.for_binding)), // 44',
+    for_binding: ($) =>
       seq(
         $.var_ref,
         optional($.type_declaration),

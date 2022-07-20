@@ -15,10 +15,17 @@ a syntatic highlighting.
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
 
 
+## tree-sitter web playground 
+
+Visit the interactive treesitter web [playground](https://grantmacken.github.io/tree-sitter-xquery) to see the 
+XQuery treesitter in action.
+
+
+## building
+
 Both Make and Yarn are required to use this repo used so you will need to install both.
 Clone and cd into this repo then run `make install` which will use Yarn to install the tree-sitter cli.
 
-# building
 
  All the work is done in the grammar.js file
 

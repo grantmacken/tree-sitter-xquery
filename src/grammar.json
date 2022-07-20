@@ -3101,7 +3101,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_for_binding"
+                  "name": "for_binding"
                 },
                 {
                   "type": "REPEAT",
@@ -3114,7 +3114,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "_for_binding"
+                        "name": "for_binding"
                       }
                     ]
                   }
@@ -3128,7 +3128,7 @@
         }
       ]
     },
-    "_for_binding": {
+    "for_binding": {
       "type": "SEQ",
       "members": [
         {
