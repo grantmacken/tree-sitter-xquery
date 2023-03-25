@@ -11,6 +11,25 @@ const UNICODE_LETTER = /\p{L}/,
     repeat1(UNICODE_DIGIT)
   ), // TODO check
   DECIMAL = seq(repeat(UNICODE_DIGIT), ".", repeat(UNICODE_DIGIT));
+
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(",", rule)));
+}
+
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}
+
+function regexOr(regex) {
+  if (arguments.length > 1) {
+    regex = Array.from(arguments).join('|');
+  }
+  return {
+    type: 'PATTERN',
+    value: regex
+  };
+}
+
 /*
 // https://www.w3.org/TR/xquery-31/#id-reserved-fn-names
 // https://github.com/tree-sitter/tree-sitter/pull/246
@@ -138,25 +157,16 @@ module.exports = grammar({
       ),
     // 3.1.1 Literals
     _literal: ($) => choice($.string_literal, $._numeric_literal),
-    string_literal: ($) =>
-      choice(
-        seq(
-          '"',
-          repeat(
-            choice($.predefined_entity_ref, $.char_ref, $.escape_quote, /[^"&]/)
-          ),
-          '"'
-        ),
-        seq(
-          "'",
-          repeat(
-            choice($.predefined_entity_ref, $.char_ref, $.escape_apos, /[^'&]/)
-          ),
-          "'"
-        )
-      ),
-    _numeric_literal: ($) =>
-      choice($.integer_literal, $.decimal_literal, $.double_literal),
+    string_literal: $ => choice(
+      seq( '"',repeat( choice( $._predefined_entity_ref,  $._char_ref ,$._escape_quote,/[^"&]/ )),token.immediate('"')),
+      seq( "'",repeat( choice( $._predefined_entity_ref, $._escape_apos, /[^'&]/ )),token.immediate("'"))),
+    _predefined_entity_ref: $ => /&(lt|gt|amp|quot|apos);/,
+    _escape_quote: $ => '""',
+    _escape_apos: $ => "''",
+    _numeric_literal: ($) => choice($.double_literal, $.decimal_literal,$.integer_literal,),
+    double_literal: $ => seq(regexOr( '[0-9]+','\.[0-9]+','[0-9]+\.[0-9]*' ) , token.immediate( /[eE][+-]{0,1}[0-9]+/)),
+    decimal_literal: $ => regexOr( '\.[0-9]+','[0-9]+\.[0-9]*' ) ,
+    integer_literal: $ => /[0-9]+/,
     //3.1.2 Variable References
     var_ref: ($) => seq("$", $._EQName),
     // note: a dynamic function call can consist of _postfix_expr [ var + arg_list ]
@@ -443,56 +453,24 @@ module.exports = grammar({
         ),
         $.empty_tag
       ),
-    start_tag: ($) =>
-      seq(
-        "<",
-        field("tag_name", alias($._QName, $.identifier)),
-        repeat($.direct_attribute),
-        ">"
-      ),
-    end_tag: ($) =>
-      seq("</", field("tag_name", alias($._QName, $.identifier)), ">"),
-    empty_tag: ($) =>
-      seq(
-        "<",
-        field("tag_name", alias($._QName, $.identifier)),
-        repeat($.direct_attribute),
-        "/>"
-      ),
+    start_tag: ($) => seq( "<", $.qname,repeat($.direct_attribute), ">"),
+    end_tag: ($) => seq("</", $.qname, ">"),
+    empty_tag: ($) => seq( "<", $.qname,repeat($.direct_attribute), "/>"),
     element_text: ($) => choice($._common_content, $.char_data),
-    direct_attribute: ($) =>
-      seq(
-        field("attr_name", alias($._QName, $.identifier)),
-        "=",
-        field("attr_value", $.direct_attribute_value)
-      ),
-    direct_attribute_value: ($) =>
-      choice(
-        seq(
-          '"',
-          repeat(choice($._common_content, $.escape_quote, /[^"&]/)),
-          '"'
-        ),
-        seq("'", repeat(choice($._common_content, $.escape_apos, /[^'&]/)), "'")
-      ),
+    direct_attribute: ($) => seq(field("attr_name",$.qname ),"=",field("attr_value", $.direct_attribute_value)),
+    direct_attribute_value: ($) => choice(
+      seq('"',repeat(choice($._common_content, $._escape_quote, /[^"&]/)),'"'),
+      seq("'", repeat(choice($._common_content, $._escape_apos, /[^'&]/)), "'")),
     _common_content: ($) =>
       choice(
-        $.predefined_entity_ref,
-        $.char_ref,
-        $.escape_curly,
+        $._predefined_entity_ref,
+        $._char_ref,
+        $._escape_curly,
         $.enclosed_expr
       ),
     char_data: ($) => /[^{}<&]+/,
-    char_ref: ($) =>
-      choice(
-        seq("&#", repeat1(/[0-9]/), ";"),
-        seq("&#x", repeat1(/[0-9a-fA-F]/), ";")
-      ),
-    escape_curly: ($) => choice("{{", "}}"),
-    predefined_entity_ref: ($) =>
-      seq("&", choice("lt", "gt", "amp", "quot", "apos"), ";"),
-    escape_apos: ($) => "''",
-    escape_quote: ($) => '""',
+    _char_ref: $ => regexOr('&#[0-9]+;','&#x[0-9a-fA-F]+;'),
+    _escape_curly: ($) => choice("{{", "}}"),
     // 3.9.3 Computed Constructors TODO make Computed Constructors a supertype
     _computed_constructor: ($) =>
       choice(
@@ -1024,22 +1002,13 @@ module.exports = grammar({
     typed_array_test: ($) => seq("array", "(", $.sequence_type, ")"),
     parenthesized_item_type: ($) => seq("(", $._item_type, ")"), // 216
     // END SequenceType Syntax
-    integer_literal: ($) => token(INTEGER),
-    decimal_literal: ($) => token(DECIMAL),
-    double_literal: ($) => token(DOUBLE),
+    //
     // instances of the grammatical production EQName.
     // EQName is identifier
-    var_name: ($) => choice($._QName, $.uri_qualified_name),
-    _EQName: ($) =>
-      choice(
-        field("uri", $.uri_qualified_name),
-        seq(
-          field("ns_builtin", alias($.ns_builtin, $.identifier)),
-          token.immediate(":"),
-          field("local_part", $.identifier)
-        ),
-        $._QName
-      ),
+    var_name: ($) => choice($.qname, $.uri_qualified_name),
+    _EQName: $ => choice( $.qname, $.uri_qualified_name ),
+    qname: $ => choice( field( 'unprefixed', $.identifier ), seq(field("prefix", $.identifier) , token.immediate(':'), field("local_name", $.identifier))),
+    /*
     _QName: ($) =>
       choice(
         field("unprefixed", $.identifier),
@@ -1049,9 +1018,12 @@ module.exports = grammar({
           field("local_part", $.identifier)
         )
       ),
+*/
     // https://www.w3.org/TR/REC-xml-names/#Qualified%20Names
     //_QName: ($) => prec.right(choice(field('prefixed_name', $._prefixed_name), field('unprefixed_name', $.identifier))), // 234
-    ns_builtin: ($) =>
+   /* 
+* TODO builin via captures
+* ns_builtin: ($) =>
       choice(
         "xml",
         "xs",
@@ -1064,6 +1036,7 @@ module.exports = grammar({
         "output",
         "local"
       ),
+    */
     kw: ($) =>
       token(
         choice(
@@ -1196,13 +1169,6 @@ module.exports = grammar({
         )
       ),
     NCName: ($) => $.identifier, // 123
-    uri_qualified_name: ($) => /Q[{][^}\s]+[}][\w]+/, // TODO too simple?
-    braced_uri_literal: ($) =>
-      seq(
-        "Q{",
-        repeat1(choice($.predefined_entity_ref, $.char_ref, /[^&{}]/)),
-        "}"
-      ), // 224
     reserved: ($) =>
       choice(
         "array",
@@ -1224,25 +1190,21 @@ module.exports = grammar({
         "text",
         "typeswitch"
       ),
-    identifier: ($) => token(seq(NAME_START_CHAR, repeat(NAME_CHAR))), // /[_\p{XID_Start}][_\p{XID_Continue}]t
-    comment: ($) =>
-      seq(
-        "(:",
-        repeat(
-          alias(
-            token(repeat1(/[^:()]|[:][^)]|[(][^:]|[^:][)]|[)][:]/)),
-            $.comment_content
-          )
-        ),
-        ":)"
-      ),
-  },
-});
+    uri_qualified_name: $ => seq( 
+       field("braced_uri_literal", alias( $.braced_uri_literal,$.identifier )) ,
+       field("local_name", $.identifier)), //ws explicitly
+    braced_uri_literal: $ => seq( "Q{", 
+      repeat1( regexOr( '&(#[0-9]+|#x[0-9a-fA-F]+);','&(lt|gt|amp|quot|apos);','[^&{}]')),
+      token.immediate('}')),
+    identifier: $ => /[_\p{XID_Start}][-_\p{XID_Continue}]*/,
+    comment: $ => seq(/[(][:]/,repeat($.comment_contents),token.immediate(/[:][)]/)),
+    comment_contents: $ => prec.right(repeat1( regexOr(
+        '[^:()]',  // any symbol except reserved
+        '[^:][)]', // closing parenthesis, which is not a comment end
+        '[(][^:]',// opening parenthesis, which is not a comment start
+        '[(][:][^:][^:]',// opening parenthesis
+        '[(][:][:][^)]',// opening parenthesis
+        '[:][^)]'))), //  : and anything but ) 
+}});
 
-function commaSep1(rule) {
-  return seq(rule, repeat(seq(",", rule)));
-}
 
-function commaSep(rule) {
-  return optional(commaSep1(rule));
-}

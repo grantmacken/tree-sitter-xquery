@@ -788,68 +788,14 @@
           }
         ]
       },
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
           {
             "type": "uri_qualified_name",
             "named": true
@@ -1390,58 +1336,7 @@
   {
     "type": "arrow_function",
     "named": true,
-    "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -1455,6 +1350,14 @@
           "named": true
         },
         {
+          "type": "qname",
+          "named": true
+        },
+        {
+          "type": "uri_qualified_name",
+          "named": true
+        },
+        {
           "type": "var_ref",
           "named": true
         }
@@ -1464,57 +1367,20 @@
   {
     "type": "atomic_or_union_type",
     "named": true,
-    "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "qname",
+          "named": true
+        },
+        {
+          "type": "uri_qualified_name",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1522,85 +1388,27 @@
     "named": true,
     "fields": {
       "attribute_name": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
           {
             "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "local_part": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
       },
       "type_name": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": true,
-        "required": false,
-        "types": [
           {
             "type": "uri_qualified_name",
             "named": true
@@ -2093,21 +1901,7 @@
   {
     "type": "braced_uri_literal",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "char_ref",
-          "named": true
-        },
-        {
-          "type": "predefined_entity_ref",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "cast_expr",
@@ -2620,11 +2414,6 @@
     }
   },
   {
-    "type": "char_ref",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "comment",
     "named": true,
     "fields": {},
@@ -2633,11 +2422,16 @@
       "required": false,
       "types": [
         {
-          "type": "comment_content",
+          "type": "comment_contents",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "comment_contents",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "comment_test",
@@ -2658,26 +2452,12 @@
           }
         ]
       },
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
         "multiple": true,
         "required": true,
         "types": [
           {
             "type": ",",
-            "named": false
-          },
-          {
-            "type": ":",
             "named": false
           },
           {
@@ -2781,10 +2561,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "if_expr",
             "named": true
           },
@@ -2838,6 +2614,10 @@
           },
           {
             "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "qname",
             "named": true
           },
           {
@@ -2911,46 +2691,6 @@
           {
             "type": "}",
             "named": false
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
-            "named": true
           }
         ]
       }
@@ -3002,26 +2742,12 @@
           }
         ]
       },
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
         "multiple": true,
         "required": true,
         "types": [
           {
             "type": ",",
-            "named": false
-          },
-          {
-            "type": ":",
             "named": false
           },
           {
@@ -3125,10 +2851,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "if_expr",
             "named": true
           },
@@ -3182,6 +2904,10 @@
           },
           {
             "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "qname",
             "named": true
           },
           {
@@ -3255,46 +2981,6 @@
           {
             "type": "}",
             "named": false
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
-            "named": true
           }
         ]
       }
@@ -4533,66 +4219,12 @@
     "type": "count_clause",
     "named": true,
     "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
       "var_name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
           {
@@ -4623,68 +4255,14 @@
     "type": "decimal_format_declaration",
     "named": true,
     "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
           {
             "type": "uri_qualified_name",
             "named": true
@@ -4744,7 +4322,7 @@
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           }
         ]
@@ -4770,27 +4348,7 @@
       "required": false,
       "types": [
         {
-          "type": "char_ref",
-          "named": true
-        },
-        {
           "type": "enclosed_expr",
-          "named": true
-        },
-        {
-          "type": "escape_apos",
-          "named": true
-        },
-        {
-          "type": "escape_curly",
-          "named": true
-        },
-        {
-          "type": "escape_quote",
-          "named": true
-        },
-        {
-          "type": "predefined_entity_ref",
           "named": true
         }
       ]
@@ -4855,6 +4413,11 @@
     }
   },
   {
+    "type": "double_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "element_test",
     "named": true,
     "fields": {
@@ -4882,40 +4445,16 @@
     "type": "element_test_params",
     "named": true,
     "fields": {
-      "local_part": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "param": {
         "multiple": true,
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "occurrence_indicator",
             "named": true
           },
           {
-            "type": "occurrence_indicator",
+            "type": "qname",
             "named": true
           },
           {
@@ -4924,36 +4463,6 @@
           },
           {
             "type": "wildcard",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -4966,26 +4475,14 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "char_data",
           "named": true
         },
         {
-          "type": "char_ref",
-          "named": true
-        },
-        {
           "type": "enclosed_expr",
-          "named": true
-        },
-        {
-          "type": "escape_curly",
-          "named": true
-        },
-        {
-          "type": "predefined_entity_ref",
           "named": true
         }
       ]
@@ -5004,24 +4501,17 @@
   {
     "type": "empty_tag",
     "named": true,
-    "fields": {
-      "tag_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "direct_attribute",
+          "named": true
+        },
+        {
+          "type": "qname",
           "named": true
         }
       ]
@@ -5257,23 +4747,17 @@
   {
     "type": "end_tag",
     "named": true,
-    "fields": {
-      "tag_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "qname",
+          "named": true
+        }
+      ]
     }
-  },
-  {
-    "type": "escape_curly",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "flwor_expr",
@@ -5589,64 +5073,21 @@
   {
     "type": "function_call",
     "named": true,
-    "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
           "type": "arg_list",
+          "named": true
+        },
+        {
+          "type": "qname",
+          "named": true
+        },
+        {
+          "type": "uri_qualified_name",
           "named": true
         },
         {
@@ -5674,68 +5115,14 @@
           }
         ]
       },
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
           {
             "type": "uri_qualified_name",
             "named": true
@@ -5766,56 +5153,12 @@
     "type": "group_by_clause",
     "named": true,
     "fields": {
-      "local_part": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "uri": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -5825,11 +5168,7 @@
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
           {
@@ -6069,38 +5408,7 @@
   {
     "type": "identifier",
     "named": true,
-    "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
+    "fields": {}
   },
   {
     "type": "if_expr",
@@ -9268,15 +8576,11 @@
         ]
       },
       "name_test": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
           {
@@ -9289,16 +8593,6 @@
           }
         ]
       },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "prefix": {
         "multiple": false,
         "required": false,
@@ -9315,16 +8609,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -9336,49 +8620,15 @@
     "named": true,
     "fields": {
       "function_name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
           {
             "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
@@ -9389,26 +8639,6 @@
         "types": [
           {
             "type": "integer_literal",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -9455,68 +8685,14 @@
     "type": "option_declaration",
     "named": true,
     "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
           {
             "type": "uri_qualified_name",
             "named": true
@@ -10911,11 +10087,6 @@
     }
   },
   {
-    "type": "predefined_entity_ref",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "predicate",
     "named": true,
     "fields": {
@@ -11141,6 +10312,42 @@
           },
           {
             "type": "var_ref",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "qname",
+    "named": true,
+    "fields": {
+      "local_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -12316,67 +11523,13 @@
     "named": true,
     "fields": {
       "attribute_name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
           {
             "type": "uri_qualified_name",
             "named": true
@@ -12390,67 +11543,13 @@
     "named": true,
     "fields": {
       "element_name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "qname",
             "named": true
           },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
           {
             "type": "uri_qualified_name",
             "named": true
@@ -12618,57 +11717,20 @@
   {
     "type": "single_type",
     "named": true,
-    "fields": {
-      "local_part": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ns_builtin": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "qname",
+          "named": true
+        },
+        {
+          "type": "uri_qualified_name",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -12901,24 +11963,17 @@
   {
     "type": "start_tag",
     "named": true,
-    "fields": {
-      "tag_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "direct_attribute",
+          "named": true
+        },
+        {
+          "type": "qname",
           "named": true
         }
       ]
@@ -13396,29 +12451,7 @@
   {
     "type": "string_literal",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "char_ref",
-          "named": true
-        },
-        {
-          "type": "escape_apos",
-          "named": true
-        },
-        {
-          "type": "escape_quote",
-          "named": true
-        },
-        {
-          "type": "predefined_entity_ref",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "switch_clause",
@@ -16137,12 +15170,12 @@
     }
   },
   {
-    "type": "var_ref",
+    "type": "uri_qualified_name",
     "named": true,
     "fields": {
-      "local_part": {
+      "braced_uri_literal": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -16150,46 +15183,35 @@
           }
         ]
       },
-      "ns_builtin": {
+      "local_name": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "uri": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "uri_qualified_name",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "var_ref",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "qname",
+          "named": true
+        },
+        {
+          "type": "uri_qualified_name",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -16946,27 +15968,11 @@
     "named": false
   },
   {
-    "type": "&",
-    "named": false
-  },
-  {
-    "type": "&#",
-    "named": false
-  },
-  {
-    "type": "&#x",
-    "named": false
-  },
-  {
     "type": "'",
     "named": false
   },
   {
     "type": "(",
-    "named": false
-  },
-  {
-    "type": "(:",
     "named": false
   },
   {
@@ -17011,10 +16017,6 @@
   },
   {
     "type": ":",
-    "named": false
-  },
-  {
-    "type": ":)",
     "named": false
   },
   {
@@ -17114,10 +16116,6 @@
     "named": false
   },
   {
-    "type": "amp",
-    "named": false
-  },
-  {
     "type": "ancestor",
     "named": false
   },
@@ -17127,10 +16125,6 @@
   },
   {
     "type": "and",
-    "named": false
-  },
-  {
-    "type": "apos",
     "named": false
   },
   {
@@ -17200,10 +16194,6 @@
   {
     "type": "comment",
     "named": false
-  },
-  {
-    "type": "comment_content",
-    "named": true
   },
   {
     "type": "construction",
@@ -17278,10 +16268,6 @@
     "named": false
   },
   {
-    "type": "double_literal",
-    "named": true
-  },
-  {
     "type": "element",
     "named": false
   },
@@ -17306,18 +16292,6 @@
     "named": false
   },
   {
-    "type": "err",
-    "named": false
-  },
-  {
-    "type": "escape_apos",
-    "named": true
-  },
-  {
-    "type": "escape_quote",
-    "named": true
-  },
-  {
     "type": "every",
     "named": false
   },
@@ -17331,10 +16305,6 @@
   },
   {
     "type": "external",
-    "named": false
-  },
-  {
-    "type": "fn",
     "named": false
   },
   {
@@ -17430,19 +16400,11 @@
     "named": false
   },
   {
-    "type": "local",
-    "named": false
-  },
-  {
     "type": "lt",
     "named": false
   },
   {
     "type": "map",
-    "named": false
-  },
-  {
-    "type": "math",
     "named": false
   },
   {
@@ -17506,10 +16468,6 @@
     "named": false
   },
   {
-    "type": "output",
-    "named": false
-  },
-  {
     "type": "parent",
     "named": false
   },
@@ -17539,10 +16497,6 @@
   },
   {
     "type": "processing-instruction",
-    "named": false
-  },
-  {
-    "type": "quot",
     "named": false
   },
   {
@@ -17618,10 +16572,6 @@
     "named": false
   },
   {
-    "type": "uri_qualified_name",
-    "named": true
-  },
-  {
     "type": "variable",
     "named": false
   },
@@ -17634,19 +16584,7 @@
     "named": false
   },
   {
-    "type": "xml",
-    "named": false
-  },
-  {
     "type": "xquery",
-    "named": false
-  },
-  {
-    "type": "xs",
-    "named": false
-  },
-  {
-    "type": "xsi",
     "named": false
   },
   {

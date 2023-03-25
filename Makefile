@@ -55,7 +55,6 @@ tree-sitter-xquery.wasm: buildr
 	source /home/gmack/projects/emsdk/emsdk_env.sh 
 	yarn build-wasm
 
-
 .PHONY: docs
 docs: tree-sitter-xquery.wasm ## publish to gh pages
 	mkdir -p docs
