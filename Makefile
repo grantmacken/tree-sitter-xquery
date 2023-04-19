@@ -6,13 +6,16 @@ MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
 include .env
-NVIM_QUERIES := $(HOME)/.config/nvim/queries
+NVIM_QUERIES := ../dotfiles/nvim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
+TS := tree-sitter
 
-default: src/grammar.json $(NVIM_QUERIES)/xquery/highlights.scm $(NVIM_QUERIES)/xquery/textobjects.scm
+default: src/grammar.json  
 
 # default: generate tree-sitter grammar
 generate: src/grammar.json ## generate tree-sitter files
+# $(NVIM_QUERIES)/xquery/textobjects.scm
+queries: $(NVIM_QUERIES)/xquery/highlights.scm
 
 .PHONY: help
 help: ## show this help	
@@ -36,13 +39,13 @@ clean: ## remove tree-sitter generated artifacts
 
 
 src/grammar.json: grammar.js
-	@echo '==========================================='
-	@yarn generate
-	@echo '==========================================='
+	echo '==========================================='
+	$(TS) generate
+	echo '==========================================='
 
 .PHONY: watch-grammar
 watch-grammar: ## if changes in grammar.js then generate
-	@while true;
+	while true;
 	do $(MAKE) || true;
 	inotifywait -qre close_write ./  &>/dev/null;
 	done
@@ -73,7 +76,11 @@ test-all: ## test specific section nominated in .env
 
 .PHONY: parse
 parse:  ## parse a specific example nominated in .env
-	@yarn parse examples/spec/$(EXAMPLE).xq
+	echo
+	$(TS) parse examples/spec/$(EXAMPLE).xq
+	echo
+	#$(TS) parse examples/spec/bang.xq
+	#$(TS) parse examples/spec/primary_expressions.xq
 
 .PHONY: parse-all
 parse-all:  parse-spec parse-qt3 ## parse all examples
@@ -98,10 +105,11 @@ query-all: hl ## check captures
 
 .PHONY: hl
 hl: ## highlight query specific example nominated in .env
-	yarn highlight examples/spec/$(EXAMPLE).xq
+	#tree-sitter highlight examples/spec/$(EXAMPLE).xq
+	tree-sitter query --captures queries/highlights.scm examples/spec/$(EXAMPLE).xq
 
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
-	@mkdir -p $(dir $@)
+	@mkdir -v -p $(dir $@)
 	@cp -v $< $@
 
 # playground: tree-sitter-xQuery.wasm
@@ -138,8 +146,8 @@ pr-merge:
 
 .PHONY: format
 format:  grammar.js
-	@#prettier --list-different grammar.js
-	@prettier  --write --no-config --no-editorconfig --single-quote --print-width 120  grammar.js
+	#prettier --list-different grammar.js
+	./node_modules/.bin/prettier  --write --no-config --no-editorconfig --single-quote --print-width 180  grammar.js
 
 .PHONY: rec
 rec:

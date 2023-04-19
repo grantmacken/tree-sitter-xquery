@@ -28,8 +28,8 @@
     "node-gyp": "^9.0.0"
   },
   "devDependencies": {
-    "prettier": "^2.7.1",
-    "tree-sitter-cli": "^0.20.7",
+    "prettier": "^2.8.7",
+    "tree-sitter-cli": "^0.20.8",
     "web-tree-sitter": "^0.20.5"
   },
   "main": "bindings/node",
