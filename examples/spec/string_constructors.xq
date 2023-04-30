@@ -3,7 +3,6 @@
 ``[ allow closing ] or ]` or ]] which is not a constructors end ]``,
 ``[ allow standalone ` or `[  or `` which is not a interpolation start]``,
 ``[ allow standalone { or {` or {{ or {[ which is not a interpolation start  ]``,
-
 ``[`{ $i, ``[literal text]``, $j, ``[more literal text]`` }`]``,
 ``[Hello `{$a?name}`
 You have just won `{$a?value}` dollars!

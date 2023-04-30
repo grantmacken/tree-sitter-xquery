@@ -128,10 +128,11 @@ install:
 	@mkdir -p bin
 	if [ -e node_modules/.bin/tree-sitter ]
 	then 
-	yarn update
+	npm install
 	else
-	yarn install
+	npm update
 	fi
+	which tree-sitter
 
 .PHONY: pr-create
 pr-create: parse-all test-all query-all 
