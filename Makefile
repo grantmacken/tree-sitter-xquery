@@ -129,7 +129,7 @@ install:
 	if [ -e node_modules/.bin/tree-sitter ]
 	then 
 	npm install
-	ln -s node_modules/.bin/tree-sitter tree-sitter
+	ln -s node_modules/.bin/tree-sitter ./tree-sitter
 	ls -al .
 	else
 	npm update
