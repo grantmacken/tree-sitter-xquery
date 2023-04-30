@@ -130,10 +130,11 @@ install:
 	then 
 	npm install
 	ln -s node_modules/.bin/tree-sitter tree-sitter
+	ls -al .
 	else
 	npm update
 	fi
-	tree-sitter --version
+	./tree-sitter --version
 	# which tree-sitter
 
 .PHONY: pr-create
