@@ -8,7 +8,6 @@ declare %eg:volatile variable $time as xs:time external;
 declare variable $sasl:username as xs:string := "jonathan@example.com";
 declare variable $a := local:f(); 
 declare variable $b := 1;
-declare function local:f() { $b };
 ()
 
 

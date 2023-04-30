@@ -1,4 +1,3 @@
-( 
  'path begins a node root',
  'stand alone lone slash',
  /, (/) * 5,
@@ -76,7 +75,6 @@ div1//para,
 ../title,
 para,
 *,
-text,
 text(),
 @name,
 @*,
@@ -97,7 +95,5 @@ para[5][@type="warning"],
 chapter[title="Introduction"],
 chapter[title],
 employee[@secretary and @assistant],
-book(chapter|appendix)/section,
-'END'
-)
+book(chapter|appendix)/section
 

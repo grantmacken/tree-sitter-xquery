@@ -92,6 +92,10 @@
         "named": true
       },
       {
+        "type": "parenthesized_item_type",
+        "named": true
+      },
+      {
         "type": "typed_array_test",
         "named": true
       },
@@ -146,10 +150,6 @@
     "named": true,
     "subtypes": [
       {
-        "type": "_computed_constructor",
-        "named": true
-      },
-      {
         "type": "_numeric_literal",
         "named": true
       },
@@ -162,15 +162,11 @@
         "named": true
       },
       {
-        "type": "direct_element",
-        "named": true
-      },
-      {
         "type": "function_call",
         "named": true
       },
       {
-        "type": "inline_function_expr",
+        "type": "function_item_expr",
         "named": true
       },
       {
@@ -178,7 +174,7 @@
         "named": true
       },
       {
-        "type": "named_function_ref",
+        "type": "node_constructor",
         "named": true
       },
       {
@@ -321,12 +317,40 @@
     "type": "additive_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -346,7 +370,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -386,6 +422,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -418,15 +458,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -474,7 +514,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -514,6 +566,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -546,15 +602,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -593,12 +649,40 @@
     "type": "and_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -618,7 +702,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -658,6 +754,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -690,15 +790,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -746,7 +846,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -786,6 +898,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -818,15 +934,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -1009,7 +1125,19 @@
         "required": false,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -1046,6 +1174,10 @@
           },
           {
             "type": "flwor_expr",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
             "named": true
           },
           {
@@ -1085,15 +1217,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -1126,12 +1258,40 @@
           }
         ]
       },
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -1162,6 +1322,24 @@
     "type": "arrow_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
@@ -1177,7 +1355,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -1217,6 +1407,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -1249,15 +1443,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -1286,6 +1480,16 @@
           },
           {
             "type": "union_expr",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -1512,12 +1716,42 @@
     "type": "bang_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_context": {
         "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -1557,6 +1791,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -1589,15 +1827,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -1640,6 +1878,16 @@
           }
         ]
       },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          }
+        ]
+      },
       "filter_expr": {
         "multiple": true,
         "required": false,
@@ -1665,7 +1913,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -1705,6 +1965,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -1737,15 +2001,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -1810,12 +2074,40 @@
     "type": "cast_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -1835,7 +2127,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -1875,6 +2179,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -1907,15 +2215,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -2016,12 +2324,40 @@
     "type": "castable_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -2041,7 +2377,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -2081,6 +2429,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -2113,15 +2465,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -2261,16 +2613,11 @@
       "required": false,
       "types": [
         {
-          "type": "comment_contents",
+          "type": "comment",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "comment_contents",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "comment_test",
@@ -2281,6 +2628,24 @@
     "type": "comp_attr_constructor",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "content": {
         "multiple": false,
         "required": true,
@@ -2297,6 +2662,16 @@
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -2330,11 +2705,23 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": ":",
             "named": false
           },
           {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -2374,6 +2761,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -2410,15 +2801,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -2531,6 +2922,24 @@
     "type": "comp_elem_constructor",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "content": {
         "multiple": false,
         "required": true,
@@ -2547,6 +2956,16 @@
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -2580,11 +2999,23 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": ":",
             "named": false
           },
           {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -2624,6 +3055,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -2660,15 +3095,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -2749,6 +3184,24 @@
     "type": "comp_namespace_constructor",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "content": {
         "multiple": false,
         "required": true,
@@ -2765,6 +3218,16 @@
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -2788,11 +3251,23 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "NCName",
             "named": true
           },
           {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -2832,6 +3307,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -2864,15 +3343,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -2929,6 +3408,24 @@
     "type": "comp_pi_constructor",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "content": {
         "multiple": false,
         "required": true,
@@ -2945,6 +3442,16 @@
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -2968,11 +3475,23 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "NCName",
             "named": true
           },
           {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -3012,6 +3531,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -3044,15 +3567,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -3125,12 +3648,40 @@
     "type": "comparison_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -3150,7 +3701,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -3190,6 +3753,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -3222,15 +3789,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -3278,7 +3845,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -3318,6 +3897,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -3350,15 +3933,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -3420,12 +4003,40 @@
     "type": "context_item_declaration",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -3459,7 +4070,19 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -3499,6 +4122,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -3531,15 +4158,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -3638,10 +4265,6 @@
           "named": true
         },
         {
-          "type": "qname",
-          "named": true
-        },
-        {
           "type": "quantified_expr",
           "named": true
         },
@@ -3692,55 +4315,16 @@
   {
     "type": "count_clause",
     "named": true,
-    "fields": {
-      "local": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "var_name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3931,6 +4515,11 @@
     }
   },
   {
+    "type": "direct_comment",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "direct_element",
     "named": true,
     "fields": {},
@@ -3938,6 +4527,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "direct_comment",
+          "named": true
+        },
         {
           "type": "direct_element",
           "named": true
@@ -4072,11 +4665,6 @@
     "fields": {}
   },
   {
-    "type": "empty_sequence",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "empty_tag",
     "named": true,
     "fields": {
@@ -4126,12 +4714,40 @@
     "type": "enclosed_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -4219,10 +4835,6 @@
         },
         {
           "type": "path_expr",
-          "named": true
-        },
-        {
-          "type": "qname",
           "named": true
         },
         {
@@ -4343,12 +4955,42 @@
     "type": "for_binding",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "binding_sequence": {
         "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -4388,6 +5030,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -4420,15 +5066,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -4471,6 +5117,16 @@
           }
         ]
       },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          }
+        ]
+      },
       "filter_expr": {
         "multiple": true,
         "required": false,
@@ -4486,7 +5142,7 @@
         "required": false,
         "types": [
           {
-            "type": "var_ref",
+            "type": "variable",
             "named": true
           }
         ]
@@ -4511,7 +5167,7 @@
           "named": true
         },
         {
-          "type": "var_ref",
+          "type": "variable",
           "named": true
         }
       ]
@@ -4629,30 +5285,22 @@
           }
         ]
       },
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
       "prefix": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_declaration",
             "named": true
           }
         ]
@@ -4681,7 +5329,26 @@
           "named": true
         },
         {
-          "type": "type_declaration",
+          "type": "uri_qualified_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_item_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "inline_function_expr",
+          "named": true
+        },
+        {
+          "type": "named_function_ref",
           "named": true
         }
       ]
@@ -4706,12 +5373,40 @@
     "type": "grouping_spec",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -4726,12 +5421,12 @@
           }
         ]
       },
-      "local": {
+      "grouping_var": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "variable",
             "named": true
           }
         ]
@@ -4746,50 +5441,12 @@
           }
         ]
       },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "uri": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "string_literal",
-            "named": true
-          }
-        ]
-      },
-      "var_name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "uri_qualified_name",
             "named": true
           }
         ]
@@ -4860,10 +5517,6 @@
           "named": true
         },
         {
-          "type": "qname",
-          "named": true
-        },
-        {
           "type": "quantified_expr",
           "named": true
         },
@@ -4915,12 +5568,40 @@
     "type": "if_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -4940,7 +5621,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -4980,6 +5673,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -5012,15 +5709,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -5058,7 +5755,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -5098,6 +5807,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -5130,15 +5843,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -5188,7 +5901,19 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -5228,6 +5953,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -5260,15 +5989,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -5317,12 +6046,22 @@
     "type": "inline_function_expr",
     "named": true,
     "fields": {
-      "function_body": {
+      "body": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "enclosed_expr",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_declaration",
             "named": true
           }
         ]
@@ -5347,12 +6086,40 @@
     "type": "instance_of_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -5372,7 +6139,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -5412,6 +6191,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -5444,15 +6227,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -5511,12 +6294,40 @@
     "type": "interpolation",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -5544,7 +6355,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "_primary_expr",
@@ -5607,10 +6418,6 @@
           "named": true
         },
         {
-          "type": "qname",
-          "named": true
-        },
-        {
           "type": "quantified_expr",
           "named": true
         },
@@ -5653,12 +6460,40 @@
     "type": "intersect_except_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -5678,7 +6513,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -5718,6 +6565,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -5750,15 +6601,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -5806,7 +6657,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -5846,6 +6709,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -5878,15 +6745,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -5920,6 +6787,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "keywords",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "kind_test",
@@ -5976,12 +6848,40 @@
     "type": "let_binding",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -6002,16 +6902,6 @@
         "types": [
           {
             "type": "lookup",
-            "named": true
-          }
-        ]
-      },
-      "var_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "var_ref",
             "named": true
           }
         ]
@@ -6082,10 +6972,6 @@
           "named": true
         },
         {
-          "type": "qname",
-          "named": true
-        },
-        {
           "type": "quantified_expr",
           "named": true
         },
@@ -6123,6 +7009,10 @@
         },
         {
           "type": "union_expr",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -6225,163 +7115,10 @@
   {
     "type": "main_module",
     "named": true,
-    "fields": {
-      "dynamic_function_call": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "arg_list",
-            "named": true
-          }
-        ]
-      },
-      "filter_expr": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "predicate",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
-      },
-      "query_body": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "_primary_expr",
-            "named": true
-          },
-          {
-            "type": "additive_expr",
-            "named": true
-          },
-          {
-            "type": "and_expr",
-            "named": true
-          },
-          {
-            "type": "arg_list",
-            "named": true
-          },
-          {
-            "type": "arrow_expr",
-            "named": true
-          },
-          {
-            "type": "bang_expr",
-            "named": true
-          },
-          {
-            "type": "cast_expr",
-            "named": true
-          },
-          {
-            "type": "castable_expr",
-            "named": true
-          },
-          {
-            "type": "comparison_expr",
-            "named": true
-          },
-          {
-            "type": "flwor_expr",
-            "named": true
-          },
-          {
-            "type": "if_expr",
-            "named": true
-          },
-          {
-            "type": "instance_of_expr",
-            "named": true
-          },
-          {
-            "type": "intersect_except_expr",
-            "named": true
-          },
-          {
-            "type": "lookup",
-            "named": true
-          },
-          {
-            "type": "multiplicative_expr",
-            "named": true
-          },
-          {
-            "type": "or_expr",
-            "named": true
-          },
-          {
-            "type": "path_expr",
-            "named": true
-          },
-          {
-            "type": "predicate",
-            "named": true
-          },
-          {
-            "type": "qname",
-            "named": true
-          },
-          {
-            "type": "quantified_expr",
-            "named": true
-          },
-          {
-            "type": "range_expr",
-            "named": true
-          },
-          {
-            "type": "string_concat_expr",
-            "named": true
-          },
-          {
-            "type": "switch_expr",
-            "named": true
-          },
-          {
-            "type": "treat_expr",
-            "named": true
-          },
-          {
-            "type": "try_catch_expr",
-            "named": true
-          },
-          {
-            "type": "typeswitch_expr",
-            "named": true
-          },
-          {
-            "type": "unary_expr",
-            "named": true
-          },
-          {
-            "type": "union_expr",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "_setter",
@@ -6409,6 +7146,10 @@
         },
         {
           "type": "option_declaration",
+          "named": true
+        },
+        {
+          "type": "query_body",
           "named": true
         },
         {
@@ -6441,12 +7182,40 @@
     "type": "map_entry",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -6466,7 +7235,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -6506,6 +7287,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -6538,15 +7323,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -6594,7 +7379,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -6634,6 +7431,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -6666,15 +7467,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -6798,12 +7599,40 @@
     "type": "multiplicative_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -6823,7 +7652,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -6863,6 +7704,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -6895,15 +7740,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -6951,7 +7796,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -6991,6 +7848,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -7023,15 +7884,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -7105,6 +7966,10 @@
       "multiple": false,
       "required": false,
       "types": [
+        {
+          "type": "keywords",
+          "named": true
+        },
         {
           "type": "uri_qualified_name",
           "named": true
@@ -7204,6 +8069,29 @@
     "fields": {}
   },
   {
+    "type": "node_constructor",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "_computed_constructor",
+          "named": true
+        },
+        {
+          "type": "direct_comment",
+          "named": true
+        },
+        {
+          "type": "direct_element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "occurrence_indicator",
     "named": true,
     "fields": {}
@@ -7276,12 +8164,40 @@
     "type": "or_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -7301,7 +8217,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -7341,6 +8269,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -7373,15 +8305,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -7429,7 +8361,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -7469,6 +8413,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -7501,15 +8449,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -7548,12 +8496,40 @@
     "type": "order_by_clause",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -7573,7 +8549,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -7613,6 +8601,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -7645,15 +8637,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -7771,7 +8763,7 @@
         "required": true,
         "types": [
           {
-            "type": "var_ref",
+            "type": "variable",
             "named": true
           }
         ]
@@ -7792,12 +8784,40 @@
     "type": "parenthesized_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -7888,10 +8908,6 @@
           "named": true
         },
         {
-          "type": "qname",
-          "named": true
-        },
-        {
           "type": "quantified_expr",
           "named": true
         },
@@ -7925,6 +8941,21 @@
         },
         {
           "type": "union_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parenthesized_item_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "_item_type",
           "named": true
         }
       ]
@@ -8033,12 +9064,40 @@
     "type": "predicate",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -8066,7 +9125,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "_primary_expr",
@@ -8129,10 +9188,6 @@
           "named": true
         },
         {
-          "type": "qname",
-          "named": true
-        },
-        {
           "type": "quantified_expr",
           "named": true
         },
@@ -8172,51 +9227,43 @@
     }
   },
   {
-    "type": "qname",
-    "named": true,
-    "fields": {
-      "local": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "quantified_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -8240,7 +9287,19 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -8277,6 +9336,10 @@
           },
           {
             "type": "flwor_expr",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
             "named": true
           },
           {
@@ -8316,15 +9379,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -8358,6 +9421,10 @@
           {
             "type": "union_expr",
             "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
           }
         ]
       },
@@ -8376,7 +9443,7 @@
         "required": true,
         "types": [
           {
-            "type": "var_ref",
+            "type": "variable",
             "named": true
           }
         ]
@@ -8386,7 +9453,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -8426,6 +9505,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -8458,15 +9541,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -8512,15 +9595,209 @@
     }
   },
   {
-    "type": "range_expr",
+    "type": "query_body",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          }
+        ]
+      },
+      "filter_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          }
+        ]
+      },
+      "postfix_lookup": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "lookup",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_primary_expr",
+          "named": true
+        },
+        {
+          "type": "additive_expr",
+          "named": true
+        },
+        {
+          "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "arrow_expr",
+          "named": true
+        },
+        {
+          "type": "bang_expr",
+          "named": true
+        },
+        {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
+          "type": "castable_expr",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
+          "named": true
+        },
+        {
+          "type": "flwor_expr",
+          "named": true
+        },
+        {
+          "type": "if_expr",
+          "named": true
+        },
+        {
+          "type": "instance_of_expr",
+          "named": true
+        },
+        {
+          "type": "intersect_except_expr",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expr",
+          "named": true
+        },
+        {
+          "type": "or_expr",
+          "named": true
+        },
+        {
+          "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "quantified_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "string_concat_expr",
+          "named": true
+        },
+        {
+          "type": "switch_expr",
+          "named": true
+        },
+        {
+          "type": "treat_expr",
+          "named": true
+        },
+        {
+          "type": "try_catch_expr",
+          "named": true
+        },
+        {
+          "type": "typeswitch_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
+        },
+        {
+          "type": "union_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "range_expr",
+    "named": true,
+    "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
+      "dynamic_function_call": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -8540,7 +9817,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -8580,6 +9869,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -8612,15 +9905,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -8668,7 +9961,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -8708,6 +10013,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -8740,15 +10049,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -8787,12 +10096,40 @@
     "type": "return_clause",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -8820,7 +10157,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "_primary_expr",
@@ -8880,10 +10217,6 @@
         },
         {
           "type": "path_expr",
-          "named": true
-        },
-        {
-          "type": "qname",
           "named": true
         },
         {
@@ -9131,14 +10464,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "_item_type",
-          "named": true
-        },
-        {
-          "type": "empty_sequence",
           "named": true
         },
         {
@@ -9152,12 +10481,40 @@
     "type": "square_array_constructor",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -9245,10 +10602,6 @@
         },
         {
           "type": "path_expr",
-          "named": true
-        },
-        {
-          "type": "qname",
           "named": true
         },
         {
@@ -9340,12 +10693,40 @@
     "type": "string_concat_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -9365,7 +10746,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -9405,6 +10798,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -9437,15 +10834,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -9493,7 +10890,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -9533,6 +10942,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -9565,15 +10978,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -9632,12 +11045,42 @@
     "type": "switch_clause",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "case_operand": {
         "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -9677,6 +11120,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -9709,15 +11156,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -9755,7 +11202,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -9795,6 +11254,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -9827,15 +11290,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -9874,6 +11337,16 @@
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -9904,12 +11377,42 @@
     "type": "switch_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "default_return": {
         "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -9949,6 +11452,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -9981,15 +11488,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -10028,6 +11535,16 @@
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -10083,7 +11600,19 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -10123,6 +11652,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -10155,15 +11688,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -10217,12 +11750,40 @@
     "type": "treat_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -10242,7 +11803,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -10282,6 +11855,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -10314,15 +11891,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -10487,12 +12064,42 @@
     "type": "typeswitch_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "case": {
         "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -10540,6 +12147,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -10572,10 +12183,6 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
@@ -10586,6 +12193,10 @@
           {
             "type": "return",
             "named": false
+          },
+          {
+            "type": "reverse_step",
+            "named": true
           },
           {
             "type": "sequence_type",
@@ -10620,6 +12231,10 @@
             "named": true
           },
           {
+            "type": "variable",
+            "named": true
+          },
+          {
             "type": "|",
             "named": false
           }
@@ -10630,7 +12245,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -10674,6 +12301,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -10706,10 +12337,6 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
@@ -10720,6 +12347,10 @@
           {
             "type": "return",
             "named": false
+          },
+          {
+            "type": "reverse_step",
+            "named": true
           },
           {
             "type": "string_concat_expr",
@@ -10748,6 +12379,10 @@
           {
             "type": "union_expr",
             "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
           }
         ]
       },
@@ -10757,6 +12392,16 @@
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -10788,7 +12433,19 @@
             "named": false
           },
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -10828,6 +12485,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -10860,15 +12521,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -10917,12 +12578,40 @@
     "type": "unary_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -10950,7 +12639,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "_primary_expr",
@@ -11010,10 +12699,6 @@
         },
         {
           "type": "path_expr",
-          "named": true
-        },
-        {
-          "type": "qname",
           "named": true
         },
         {
@@ -11087,12 +12772,40 @@
     "type": "union_expr",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -11112,7 +12825,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -11152,6 +12877,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -11184,15 +12913,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -11240,7 +12969,19 @@
         "required": true,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -11280,6 +13021,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -11312,15 +13057,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -11443,9 +13188,73 @@
     }
   },
   {
+    "type": "variable",
+    "named": true,
+    "fields": {
+      "local": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "unprefixed": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "uri_qualified_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "variable_declaration",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
@@ -11456,7 +13265,7 @@
           }
         ]
       },
-      "filter_expr": {
+      "filter": {
         "multiple": true,
         "required": false,
         "types": [
@@ -11466,12 +13275,12 @@
           }
         ]
       },
-      "name": {
-        "multiple": false,
-        "required": true,
+      "filter_expr": {
+        "multiple": true,
+        "required": false,
         "types": [
           {
-            "type": "var_ref",
+            "type": "predicate",
             "named": true
           }
         ]
@@ -11491,7 +13300,19 @@
         "required": false,
         "types": [
           {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "_primary_expr",
+            "named": true
+          },
+          {
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -11531,6 +13352,10 @@
             "named": true
           },
           {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
             "type": "if_expr",
             "named": true
           },
@@ -11563,15 +13388,15 @@
             "named": true
           },
           {
-            "type": "qname",
-            "named": true
-          },
-          {
             "type": "quantified_expr",
             "named": true
           },
           {
             "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
             "named": true
           },
           {
@@ -11607,7 +13432,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "_primary_expr",
@@ -11674,10 +13499,6 @@
           "named": true
         },
         {
-          "type": "qname",
-          "named": true
-        },
-        {
           "type": "quantified_expr",
           "named": true
         },
@@ -11716,6 +13537,10 @@
         {
           "type": "union_expr",
           "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
         }
       ]
     }
@@ -11739,12 +13564,40 @@
     "type": "where_clause",
     "named": true,
     "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "abbrev_forward_step",
+            "named": true
+          },
+          {
+            "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "reverse_step",
+            "named": true
+          }
+        ]
+      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
             "named": true
           }
         ]
@@ -11772,7 +13625,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "_primary_expr",
@@ -11832,10 +13685,6 @@
         },
         {
           "type": "path_expr",
-          "named": true
-        },
-        {
-          "type": "qname",
           "named": true
         },
         {
@@ -11929,6 +13778,10 @@
     "named": false
   },
   {
+    "type": "(:",
+    "named": false
+  },
+  {
     "type": ")",
     "named": false
   },
@@ -11953,6 +13806,10 @@
     "named": false
   },
   {
+    "type": "-->",
+    "named": false
+  },
+  {
     "type": "..",
     "named": false
   },
@@ -11973,6 +13830,10 @@
     "named": false
   },
   {
+    "type": ":)",
+    "named": false
+  },
+  {
     "type": ":*",
     "named": false
   },
@@ -11990,6 +13851,10 @@
   },
   {
     "type": "<",
+    "named": false
+  },
+  {
+    "type": "<!--",
     "named": false
   },
   {
@@ -12497,7 +14362,7 @@
     "named": false
   },
   {
-    "type": "try_target",
+    "type": "try",
     "named": false
   },
   {

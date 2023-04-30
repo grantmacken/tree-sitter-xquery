@@ -1,4 +1,4 @@
-('3.1 Primary Expressions',
+'3.1 Primary Expressions',
 '3.1.1 Literals',
 "12.5",
 12,
@@ -68,11 +68,4 @@ local:myfunc#2,
 function() as xs:integer+ { 2, 3, 5, 7, 11, 13 },
 function($a as xs:double, $b as xs:double) as xs:double { $a * $b },
 function($a) { $a },
-collection()/(let $a := . return function() { $a }),
-'3.1.8 Enclosed Expressions',
-{ 'hello'},
-{ 'hello', 'world'},
-{()},
-{},
-'END'
-)
+collection()/(let $a := . return function() { $a })

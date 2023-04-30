@@ -1,4 +1,3 @@
-(
 '3.18 Expressions on SequenceTypes',
 '3.18.1 Instance Of',
 5 instance of xs:integer,
@@ -35,4 +34,3 @@ xs:dayTimeDuration("P21D"),
 '3.18.6 Treat',
 $myaddress treat as element(*, USAddress),
 usa:zipcode("12345")
-)

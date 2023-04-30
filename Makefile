@@ -10,7 +10,8 @@ NVIM_QUERIES := ../dotfiles/nvim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
 TS := tree-sitter
 
-default: src/grammar.json  
+default: generate queries parse
+	echo ' => done'
 
 # default: generate tree-sitter grammar
 generate: src/grammar.json ## generate tree-sitter files
@@ -76,11 +77,10 @@ test-all: ## test specific section nominated in .env
 
 .PHONY: parse
 parse:  ## parse a specific example nominated in .env
+	echo 'examples/spec/$(EXAMPLE).xq'
 	echo
 	$(TS) parse examples/spec/$(EXAMPLE).xq
 	echo
-	#$(TS) parse examples/spec/bang.xq
-	#$(TS) parse examples/spec/primary_expressions.xq
 
 .PHONY: parse-all
 parse-all:  parse-spec parse-qt3 ## parse all examples

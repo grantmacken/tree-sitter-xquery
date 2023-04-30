@@ -1,3 +1,33 @@
+
+; declared namespace indentifiers
+(module_import
+  [
+   name: (identifier) @namespace
+   "import"  @include
+   ]
+  )
+(schema_import
+  [
+   name: (identifier) @namespace
+   "element" @keyword
+   "import"  @include
+   ]
+  )
+; highlight top level namespace
+[
+ (module_declaration )
+ (namespace_declaration)
+ ] @namespace
+
+
+(function_declaration "function" @keyword.function)
+(inline_function_expr "function" @keyword.function)
+(default_namespace_declaration [ "function"  "element"] @keyword)
+(context_item_declaration [ "context"  "item"] @keyword)
+(variable_declaration "variable" @keyword)
+
+;
+;
 ; lhs rhs binary statements
 
 (range_expr [ "to" ] @keyword.operator)
@@ -24,17 +54,79 @@
 ;(context_item_expr [ "." ] @operator)
 ;(postfix_lookup "?" @operator ) 
 ;(unary_lookup "?" @operator )
-;
-;
 
-[(var_ref)] @variable
+; 3.12 FLWOR Expressions
+[ 
+  "at" 
+  "in" 
+  "where"
+  ] @conditional
+[ 
+  "allowing"
+  "as"
+  "ascending"
+  "by"
+  "collation" 
+  "count"
+  "descending"
+  "empty"
+  "greatest"
+  "group"
+  "least"
+  "let"
+  "order"
+  "ordered" 
+  "stable"
+  "unordered"
+  ] @keyword
+["return"] @keyword.return
+;
+;
+[ 
+  (variable)
+  (var_ref)
+  ] @variable
+; (variable 
+;   [ 
+;     prefix: (identifier) @variable.namespace
+;     local: (identifier) @variable
+;     unprefixed: (identifier) @variable
+;   ])
+
+
+
+(function_call
+  [
+    prefix: (identifier) @function.namespace
+    local: (identifier) @function
+    unprefixed: (identifier) @function
+  ])
+
 (arrow_function 
   [
-  (identifier) @function
+    prefix: (identifier) @function.namespace
+    local: (identifier) @function
+    unprefixed: (identifier) @function
   ])
+; when in the tree context of
+; sequence_type/item_type
+; then identify as a builtin type
+(atomic_or_union_type
+  [ 
+    prefix: (identifier) @namespace
+    local: (identifier) @type.builtin
+    unprefixed: (identifier) @type.builtin
+    ])
+
+
 ;
-  ["{" "}" "(" ")"] @punctuation.bracket
-; literals
+; MISC
+; TODO! hightlight annotation  TSAnnotaion %private %updating and maybe restxq
+[ "%" ";" ":=" "," "|" ] @punctuation.delimiter
+[ "/" "//" ] @punctuation.delimiter ; ? TODO xpath path
+["{" "}" "(" ")"] @punctuation.bracket ; unless ( ) is used to *constuct* sequences eg ( 1 to 10 )
+(interpolation ["`{" "}`"] @punctuation.special )  ; within string constructors; literals
+
 [(string_literal)] @string
 [(integer_literal) (decimal_literal) (double_literal) ] @number
 (ERROR) @error

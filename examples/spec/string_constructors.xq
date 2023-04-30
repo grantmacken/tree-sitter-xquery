@@ -1,4 +1,9 @@
-('3.10 String Constructors',
+'3.10 String Constructors',
+``[ 3.10 String Constructors]``,
+``[ allow closing ] or ]` or ]] which is not a constructors end ]``,
+``[ allow standalone ` or `[  or `` which is not a interpolation start]``,
+``[ allow standalone { or {` or {{ or {[ which is not a interpolation start  ]``,
+
 ``[`{ $i, ``[literal text]``, $j, ``[more literal text]`` }`]``,
 ``[Hello `{$a?name}`
 You have just won `{$a?value}` dollars!
@@ -26,6 +31,4 @@ You have just won `{$a?value}` dollars!
   "taxed_value" : `{ $a?taxed_value }`]``  
   else ""
   }`
-}]``,
-'end'
-)
+]``
