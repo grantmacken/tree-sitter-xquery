@@ -132,7 +132,8 @@ install:
 	else
 	npm update
 	fi
-	which tree-sitter
+	ls node_modules/.bin
+	# which tree-sitter
 
 .PHONY: pr-create
 pr-create: parse-all test-all query-all 
