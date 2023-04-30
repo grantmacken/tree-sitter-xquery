@@ -8,7 +8,7 @@ MAKEFLAGS += --silent
 include .env
 NVIM_QUERIES := ../dotfiles/nvim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
-TS := ./tree-sitter
+TS := tree-sitter
 
 default: generate queries parse
 	echo ' => done'
@@ -129,11 +129,11 @@ install:
 	if [ -e node_modules/.bin/tree-sitter ]
 	then 
 	npm install
-	ln -s node_modules/.bin/tree-sitter $(TS)
+	ln -s node_modules/.bin/tree-sitter tree-sitter
 	else
 	npm update
 	fi
-	$(TS) --version
+	tree-sitter --version
 	# which tree-sitter
 
 .PHONY: pr-create
