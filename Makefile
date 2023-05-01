@@ -8,9 +8,9 @@ MAKEFLAGS += --silent
 include .env
 NVIM_QUERIES := ../dotfiles/nvim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
-TS := tree-sitter
 
-default: generate queries parse
+# default: generate queries parse
+default: generate
 	echo ' => done'
 
 # default: generate tree-sitter grammar
@@ -25,9 +25,9 @@ help: ## show this help
 	sort |
 	awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: meld
-meld:
-	meld queries/highlights.scm  ../nvim-treesitter/queries/xquery/highlights.scm
+# .PHONY: meld
+# meld:
+# 	meld queries/highlights.scm  ../nvim-treesitter/queries/xquery/highlights.scm
 
 .PHONY: clean 
 clean: ## remove tree-sitter generated artifacts
@@ -38,10 +38,9 @@ clean: ## remove tree-sitter generated artifacts
 	rm -f tree-sitter-xquery.wasm
 	rm -fr bin
 
-
 src/grammar.json: grammar.js
 	echo '==========================================='
-	$(TS) generate
+	yarn generate
 	echo '==========================================='
 
 .PHONY: watch-grammar
@@ -52,7 +51,7 @@ watch-grammar: ## if changes in grammar.js then generate
 	done
 
 .PHONY: buildr
-buildr: ## build wasm the open web ui
+buildr: ## build wasm then open web ui
 	yarn build
 
 tree-sitter-xquery.wasm: buildr
@@ -72,23 +71,23 @@ test: ## test specific section nominated in .env
 	yarn test -f '$(TEST_SECTION)'
 
 .PHONY: test-all
-test-all: ## test specific section nominated in .env
+test-all: ## test everyyhin in the test dir
 	yarn test
 
 .PHONY: parse
 parse:  ## parse a specific example nominated in .env
 	echo 'examples/spec/$(EXAMPLE).xq'
 	echo
-	$(TS) parse examples/spec/$(EXAMPLE).xq
+	yarn parse examples/spec/$(EXAMPLE).xq
 	echo
 
 .PHONY: parse-all
-parse-all:  parse-spec parse-qt3 ## parse all examples
+parse-all: parse-spec parse-qt3 ## parse all examples
 	
 PHONY: parse-graph
 parse-graph:  ## parse, then show svg grah in firefox
-	@$(TS) parse examples/spec/$(EXAMPLE).xq -D || true 
-	@firefox log.html
+	yarn parse examples/spec/$(EXAMPLE).xq -D || true 
+	firefox log.html
 
 .PHONY: parse-spec
 parse-spec:  ## parse all spec examples
@@ -100,13 +99,12 @@ parse-qt3:  ## parse all app examples
 	yarn parse -q examples/qt3/app/walmsley/*
 	yarn parse -q examples/qt3/app/XMark/*
 
-.PHONY: query-all
-query-all: hl ## check captures
+# .PHONY: query-all
+# query-all: hl # check captures
 
 .PHONY: hl
 hl: ## highlight query specific example nominated in .env
-	#tree-sitter highlight examples/spec/$(EXAMPLE).xq
-	tree-sitter query --captures queries/highlights.scm examples/spec/$(EXAMPLE).xq
+	yarn highlight examples/spec/$(EXAMPLE).xq
 
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 	@mkdir -v -p $(dir $@)
@@ -117,25 +115,17 @@ $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 web:
 	yarn web
 
-.PHONY: stow
-stow:
-	@pushd _config
-	@stow -v -t ~/.tree-sitter .
-	@popd
-
 .PHONY: install
 install:
 	@mkdir -p bin
 	if [ -e node_modules/.bin/tree-sitter ]
 	then 
-	npm install
-	ln -s node_modules/.bin/tree-sitter ./tree-sitter
-	ls -al .
+	echo ' - upgrading via package json'
+	yarn install
 	else
-	npm update
+	echo ' - upgrading via package json'
+	yarn upgrade
 	fi
-	./tree-sitter --version
-	# which tree-sitter
 
 .PHONY: pr-create
 pr-create: parse-all test-all query-all 
