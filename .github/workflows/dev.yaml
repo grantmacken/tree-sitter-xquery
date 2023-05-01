@@ -12,10 +12,10 @@ jobs:
       - name: install tree-sitter cli
         run: make install
       - name: generate
-        run: make
+        # run init to stop warnings
+        run: make && yarn tree-sitter init-config
       - name: parse
         run: make parse-all
-
       # - name: 2.5 Types
       #   run: yarn parse examples/spec/types.xq
       # - name: 3.1 Primary Expressions
