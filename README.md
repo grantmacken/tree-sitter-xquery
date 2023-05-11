@@ -34,6 +34,15 @@ The default `make` target is an alias for `tree-sitter generate` which will crea
 
 To see other make targets type `make help`
 
+## An attempt to eliminate semantic token ambiguity
+
+ - [x]  ` "["  "]" `  predicate in postfix expression
+ - [x]  ` "["  "]" `  predicate in axis step
+ - [x]  ` "["  "]" `  square array constructor
+
+
+
+
 ## testing gaols: 1, 2, 3 
 
 1. `make parse-all` The parser **SHOULD NOT** throw a parse error with any **valid** xQuery module text.
@@ -71,12 +80,12 @@ parser_config.xquery = {
 }
 
 ```
-## better symantic highlighting: example in neovim
+## better semantic highlighting: example in neovim
 
 ![terminal screeshot](assets/2021-09-02_10-56.png)
 
 1. '\*' in the context of sequence_type/any_array_test/wildcard 
-2. '+'  in the context of sequence_type/occurarance_operator
+2. '+'  in the context of sequence_type/occurrence
 3. '+'  in the context of additive_expr so colored as an operator
 4. 'xs:date' in this context is a constuctor function so it is colored as a function, whereas elsewhere as the 2nd line 'xs:integer' this appears in the 
 sequence_type context so it will be colored as a type.

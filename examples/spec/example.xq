@@ -1,1 +1,1 @@
-$test/text/text()
+<example>text</example>

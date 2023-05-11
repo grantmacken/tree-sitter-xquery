@@ -5,12 +5,13 @@ SHELL=/bin/bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
+
 include .env
-NVIM_QUERIES := ../dotfiles/nvim/queries
+NVIM_QUERIES := ../dotfiles/neovim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
 
-# default: generate queries parse
-default: generate
+# default: generate
+default: format generate queries parse hl
 	echo ' => done'
 
 # default: generate tree-sitter grammar
@@ -73,6 +74,13 @@ test: ## test specific section nominated in .env
 .PHONY: test-all
 test-all: ## test everyyhin in the test dir
 	yarn test
+
+.PHONY: tags
+tags:  ##  test out a tags query file nominated in .env
+	echo 'examples/spec/$(EXAMPLE).xq'
+	echo
+	yarn tags examples/example.xquery
+	echo
 
 .PHONY: parse
 parse:  ## parse a specific example nominated in .env

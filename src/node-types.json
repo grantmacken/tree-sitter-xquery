@@ -68,6 +68,10 @@
     "named": true,
     "subtypes": [
       {
+        "type": "_kind_test",
+        "named": true
+      },
+      {
         "type": "any_array_test",
         "named": true
       },
@@ -88,10 +92,6 @@
         "named": true
       },
       {
-        "type": "kind_test",
-        "named": true
-      },
-      {
         "type": "parenthesized_item_type",
         "named": true
       },
@@ -105,6 +105,52 @@
       },
       {
         "type": "typed_map_test",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_kind_test",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "any_kind_test",
+        "named": true
+      },
+      {
+        "type": "attribute_test",
+        "named": true
+      },
+      {
+        "type": "comment_test",
+        "named": true
+      },
+      {
+        "type": "document_test",
+        "named": true
+      },
+      {
+        "type": "element_test",
+        "named": true
+      },
+      {
+        "type": "namespace_node_test",
+        "named": true
+      },
+      {
+        "type": "pi_test",
+        "named": true
+      },
+      {
+        "type": "schema_attribute_test",
+        "named": true
+      },
+      {
+        "type": "schema_element_test",
+        "named": true
+      },
+      {
+        "type": "text_test",
         "named": true
       }
     ]
@@ -280,34 +326,68 @@
     ]
   },
   {
-    "type": "NCName",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "abbrev_forward_step",
     "named": true,
-    "fields": {},
+    "fields": {
+      "local": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name_test": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      },
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "kind_test",
-          "named": true
-        },
-        {
-          "type": "name_test",
+          "type": "_kind_test",
           "named": true
         }
       ]
@@ -1035,7 +1115,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1045,7 +1125,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1540,7 +1620,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1550,7 +1630,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1598,7 +1678,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1608,7 +1688,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1662,7 +1742,17 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed": {
         "multiple": true,
         "required": false,
         "types": [
@@ -1686,16 +1776,6 @@
           },
           {
             "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
@@ -2266,6 +2346,16 @@
           }
         ]
       },
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "postfix_lookup": {
         "multiple": true,
         "required": false,
@@ -2276,7 +2366,7 @@
           }
         ]
       },
-      "prefix": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -2304,16 +2394,6 @@
           },
           {
             "type": "uri_qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
@@ -2516,6 +2596,16 @@
           }
         ]
       },
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "postfix_lookup": {
         "multiple": true,
         "required": false,
@@ -2526,7 +2616,7 @@
           }
         ]
       },
-      "prefix": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -2557,16 +2647,6 @@
             "named": true
           }
         ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
       }
     }
   },
@@ -2592,16 +2672,59 @@
   {
     "type": "catch_error_list",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "name_test",
-          "named": true
-        }
-      ]
+    "fields": {
+      "local": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name_test": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      },
+      "ncname": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2854,6 +2977,16 @@
           }
         ]
       },
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "postfix_lookup": {
         "multiple": true,
         "required": false,
@@ -2864,17 +2997,7 @@
           }
         ]
       },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -3148,6 +3271,16 @@
           }
         ]
       },
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "postfix_lookup": {
         "multiple": true,
         "required": false,
@@ -3158,17 +3291,7 @@
           }
         ]
       },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -3259,10 +3382,6 @@
             "named": false
           },
           {
-            "type": "NCName",
-            "named": true
-          },
-          {
             "type": "_primary_expr",
             "named": true
           },
@@ -3308,6 +3427,10 @@
           },
           {
             "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "identifier",
             "named": true
           },
           {
@@ -3483,10 +3606,6 @@
             "named": false
           },
           {
-            "type": "NCName",
-            "named": true
-          },
-          {
             "type": "_primary_expr",
             "named": true
           },
@@ -3532,6 +3651,10 @@
           },
           {
             "type": "forward_axis",
+            "named": true
+          },
+          {
+            "type": "identifier",
             "named": true
           },
           {
@@ -4375,7 +4498,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -4385,7 +4508,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -4477,7 +4600,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -4487,7 +4610,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -4528,19 +4651,11 @@
       "required": true,
       "types": [
         {
-          "type": "direct_comment",
-          "named": true
-        },
-        {
-          "type": "direct_element",
+          "type": "direct_element_content",
           "named": true
         },
         {
           "type": "empty_tag",
-          "named": true
-        },
-        {
-          "type": "enclosed_expr",
           "named": true
         },
         {
@@ -4549,6 +4664,25 @@
         },
         {
           "type": "start_tag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "direct_element_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "direct_comment",
+          "named": true
+        },
+        {
+          "type": "direct_element",
           "named": true
         }
       ]
@@ -4576,25 +4710,16 @@
   {
     "type": "element_test",
     "named": true,
-    "fields": {
-      "type_params": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "element_test_params",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "element_test_params",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4611,9 +4736,51 @@
           }
         ]
       },
-      "param": {
+      "name": {
         "multiple": true,
         "required": true,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      },
+      "ncname": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": true,
+        "required": false,
         "types": [
           {
             "type": ":",
@@ -4629,30 +4796,6 @@
           },
           {
             "type": "uri_qualified_name",
-            "named": true
-          },
-          {
-            "type": "wildcard",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
@@ -4678,7 +4821,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -4688,7 +4831,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -4890,7 +5033,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -4900,7 +5043,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -5191,17 +5334,66 @@
   {
     "type": "forward_axis",
     "named": true,
-    "fields": {},
+    "fields": {
+      "local": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name_test": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      },
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "kind_test",
-          "named": true
-        },
-        {
-          "type": "name_test",
+          "type": "_kind_test",
           "named": true
         }
       ]
@@ -5221,7 +5413,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -5231,7 +5423,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -5285,7 +5477,17 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -5301,16 +5503,6 @@
         "types": [
           {
             "type": "type_declaration",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
@@ -5562,7 +5754,17 @@
   {
     "type": "identifier",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "if_expr",
@@ -6789,62 +6991,6 @@
     }
   },
   {
-    "type": "keywords",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "kind_test",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "any_kind_test",
-          "named": true
-        },
-        {
-          "type": "attribute_test",
-          "named": true
-        },
-        {
-          "type": "comment_test",
-          "named": true
-        },
-        {
-          "type": "document_test",
-          "named": true
-        },
-        {
-          "type": "element_test",
-          "named": true
-        },
-        {
-          "type": "namespace_node_test",
-          "named": true
-        },
-        {
-          "type": "pi_test",
-          "named": true
-        },
-        {
-          "type": "schema_attribute_test",
-          "named": true
-        },
-        {
-          "type": "schema_element_test",
-          "named": true
-        },
-        {
-          "type": "text_test",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "let_binding",
     "named": true,
     "fields": {
@@ -7088,12 +7234,12 @@
     "type": "lookup",
     "named": true,
     "fields": {
-      "Key": {
+      "key": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "NCName",
+            "type": "identifier",
             "named": true
           },
           {
@@ -7928,60 +8074,6 @@
     }
   },
   {
-    "type": "name_test",
-    "named": true,
-    "fields": {
-      "local": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "prefix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "keywords",
-          "named": true
-        },
-        {
-          "type": "uri_qualified_name",
-          "named": true
-        },
-        {
-          "type": "wildcard",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "named_function_ref",
     "named": true,
     "fields": {
@@ -7995,7 +8087,17 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -8011,16 +8113,6 @@
         "types": [
           {
             "type": "integer_literal",
-            "named": true
-          }
-        ]
-      },
-      "unprefixed": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
@@ -8128,7 +8220,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -8138,7 +8230,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -9044,7 +9136,7 @@
         "required": false,
         "types": [
           {
-            "type": "NCName",
+            "type": "identifier",
             "named": true
           },
           {
@@ -10261,17 +10353,66 @@
   {
     "type": "reverse_axis",
     "named": true,
-    "fields": {},
+    "fields": {
+      "local": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name_test": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "uri_qualified_name",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      },
+      "ncname": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prefixed": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "kind_test",
-          "named": true
-        },
-        {
-          "type": "name_test",
+          "type": "_kind_test",
           "named": true
         }
       ]
@@ -10324,7 +10465,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -10334,7 +10475,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -10378,7 +10519,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -10388,7 +10529,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -10657,7 +10798,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -10667,7 +10808,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -10688,6 +10829,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "string_apos_content",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "string_concat_expr",
@@ -11027,17 +11173,45 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "interpolation",
+          "named": true
+        },
+        {
+          "type": "string_constructor_chars",
           "named": true
         }
       ]
     }
   },
   {
+    "type": "string_constructor_chars",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_apos_content",
+          "named": true
+        },
+        {
+          "type": "string_quote_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_quote_content",
     "named": true,
     "fields": {}
   },
@@ -12240,152 +12414,6 @@
           }
         ]
       },
-      "default": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "/",
-            "named": false
-          },
-          {
-            "type": "//",
-            "named": false
-          },
-          {
-            "type": "_primary_expr",
-            "named": true
-          },
-          {
-            "type": "abbrev_forward_step",
-            "named": true
-          },
-          {
-            "type": "additive_expr",
-            "named": true
-          },
-          {
-            "type": "and_expr",
-            "named": true
-          },
-          {
-            "type": "arg_list",
-            "named": true
-          },
-          {
-            "type": "arrow_expr",
-            "named": true
-          },
-          {
-            "type": "bang_expr",
-            "named": true
-          },
-          {
-            "type": "cast_expr",
-            "named": true
-          },
-          {
-            "type": "castable_expr",
-            "named": true
-          },
-          {
-            "type": "comparison_expr",
-            "named": true
-          },
-          {
-            "type": "default",
-            "named": false
-          },
-          {
-            "type": "flwor_expr",
-            "named": true
-          },
-          {
-            "type": "forward_axis",
-            "named": true
-          },
-          {
-            "type": "if_expr",
-            "named": true
-          },
-          {
-            "type": "instance_of_expr",
-            "named": true
-          },
-          {
-            "type": "intersect_except_expr",
-            "named": true
-          },
-          {
-            "type": "lookup",
-            "named": true
-          },
-          {
-            "type": "multiplicative_expr",
-            "named": true
-          },
-          {
-            "type": "or_expr",
-            "named": true
-          },
-          {
-            "type": "path_expr",
-            "named": true
-          },
-          {
-            "type": "predicate",
-            "named": true
-          },
-          {
-            "type": "quantified_expr",
-            "named": true
-          },
-          {
-            "type": "range_expr",
-            "named": true
-          },
-          {
-            "type": "return",
-            "named": false
-          },
-          {
-            "type": "reverse_step",
-            "named": true
-          },
-          {
-            "type": "string_concat_expr",
-            "named": true
-          },
-          {
-            "type": "switch_expr",
-            "named": true
-          },
-          {
-            "type": "treat_expr",
-            "named": true
-          },
-          {
-            "type": "try_catch_expr",
-            "named": true
-          },
-          {
-            "type": "typeswitch_expr",
-            "named": true
-          },
-          {
-            "type": "unary_expr",
-            "named": true
-          },
-          {
-            "type": "union_expr",
-            "named": true
-          },
-          {
-            "type": "variable",
-            "named": true
-          }
-        ]
-      },
       "dynamic_function_call": {
         "multiple": true,
         "required": false,
@@ -12572,6 +12600,112 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_primary_expr",
+          "named": true
+        },
+        {
+          "type": "additive_expr",
+          "named": true
+        },
+        {
+          "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "arrow_expr",
+          "named": true
+        },
+        {
+          "type": "bang_expr",
+          "named": true
+        },
+        {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
+          "type": "castable_expr",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
+          "named": true
+        },
+        {
+          "type": "flwor_expr",
+          "named": true
+        },
+        {
+          "type": "if_expr",
+          "named": true
+        },
+        {
+          "type": "instance_of_expr",
+          "named": true
+        },
+        {
+          "type": "intersect_except_expr",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expr",
+          "named": true
+        },
+        {
+          "type": "or_expr",
+          "named": true
+        },
+        {
+          "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "quantified_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "string_concat_expr",
+          "named": true
+        },
+        {
+          "type": "switch_expr",
+          "named": true
+        },
+        {
+          "type": "treat_expr",
+          "named": true
+        },
+        {
+          "type": "try_catch_expr",
+          "named": true
+        },
+        {
+          "type": "typeswitch_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
+        },
+        {
+          "type": "union_expr",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -12749,7 +12883,7 @@
         "required": true,
         "types": [
           {
-            "type": "NCName",
+            "type": "identifier",
             "named": true
           },
           {
@@ -13128,17 +13262,17 @@
             "named": true
           }
         ]
-      },
-      "local": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -13155,7 +13289,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -13165,7 +13299,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -13201,7 +13335,7 @@
           }
         ]
       },
-      "prefix": {
+      "ncname": {
         "multiple": false,
         "required": false,
         "types": [
@@ -13211,7 +13345,7 @@
           }
         ]
       },
-      "unprefixed": {
+      "prefixed": {
         "multiple": false,
         "required": false,
         "types": [
@@ -13735,11 +13869,11 @@
       "required": false,
       "types": [
         {
-          "type": "NCName",
+          "type": "braced_uri_literal",
           "named": true
         },
         {
-          "type": "braced_uri_literal",
+          "type": "identifier",
           "named": true
         }
       ]

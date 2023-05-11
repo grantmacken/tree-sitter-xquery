@@ -15,7 +15,7 @@
  child::text(),
  child::comment(),
  child::namespace-node(),
- child::element(),
+ child::element(),-
  child::schema-element(person),
  child::element(person),
  child::element(person, surgeon),
