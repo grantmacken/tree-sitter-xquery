@@ -1,12 +1,16 @@
 ('3.9 Node Constructors',
 '3.9.1 Direct Element Constructors',
-<book isbn="isbn-0060229357">
+<book isbn='isbn-0060229357'>
     <title>Harold and the Purple Crayon</title>
     <author>
         <first>Crockett</first>
         <last>Johnson</last>
     </author>
 </book>,
+<example>test
+   <p> escape expr {{ char sequence</p>
+   <p> escape expr }} char sequence</p>
+</example>,
 <example>
    <p> Here is a query. </p>
    <eg> $b/title </eg>
@@ -47,7 +51,8 @@
     </author>
 </book>,
 <a>  {"abc"}  </a>,
-<a>&#x20;{"abc"}</a>,
+<p>char ref is string special &#x20;</p>,
+<p>predefined char ref also string special &lt; </p>
 <a>{"  "}</a>,
 <a>{ [ "one", "little", "fish" ] }</a>,
 'TODO! 3.9.2 Other Direct Constructors',

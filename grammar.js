@@ -46,7 +46,18 @@ module.exports = grammar({
   ],
   word: ($) => $.identifier,
   //conflicts: ($) => [],
-  supertypes: ($) => [$._setter, $._kind_test, $._primary_expr, $._value_comp, $._node_comp, $._general_comp, $._computed_constructor, $._item_type, $._numeric_literal],
+  supertypes: ($) => [
+    $._setter,
+    $._kind_test,
+    $._primary_expr,
+    $._value_comp,
+    $._node_comp,
+    $._general_comp,
+    $._computed_constructor,
+    $._item_type,
+    $._common_content,
+    $._numeric_literal,
+  ],
   rules: {
     module: ($) => seq(optional($.version_declaration), choice($.main_module, $.library_module)), // 1
     version_declaration: ($) => seq('xquery', choice(seq('encoding', $.string_literal), seq('version', $.string_literal, optional(seq('encoding', $.string_literal)))), ';'), // 2
@@ -274,7 +285,6 @@ module.exports = grammar({
       ),
     node_constructor: ($) => choice($._direct_constructor, $._computed_constructor), //140
     //_direct_constructor: ($) => choice($.direct_element, $.direct_comment, $.direct_pi), //141 TODO
-
     _direct_constructor: ($) => choice($.direct_element, $.direct_comment), //141
     direct_comment: ($) => seq('<!--', repeat(/[^->]|[^-]>|[^-]->/), '-->'), // 149
     // 1 '[^->] any symbol except reserved
@@ -282,16 +292,18 @@ module.exports = grammar({
     // 3 [^-]->  allow - when not a comment comment end
     // 4 -[^>]   allow - when not followes by >
     // TODO
-    direct_element: ($) => choice(seq($.start_tag, optional($.direct_element_content), $.end_tag), $.empty_tag),
-    direct_element_content: ($) => choice($._direct_constructor, $._element_content_char),
+    direct_element: ($) => choice(seq($.start_tag, repeat($._direct_element_content), $.end_tag), $.empty_tag),
+    _direct_element_content: ($) => choice($._direct_constructor, $._common_content, $._element_content_char),
+    _element_content_char: ($) => field('content', alias(/[^{}<&]+/, $.char_data)),
     start_tag: ($) => seq('<', $._allowed_qnames, repeat($.direct_attribute), '>'),
     end_tag: ($) => seq('</', $._allowed_qnames, '>'),
     empty_tag: ($) => seq('<', $._allowed_qnames, repeat($.direct_attribute), '/>'),
-    direct_attribute: ($) => seq(field('attr_name', $._allowed_qnames), '=', field('attr_value', $.direct_attribute_value)),
-    direct_attribute_value: ($) =>
-      choice(seq('"', repeat(choice($._common_content, $._escape_quote, /[^"&]/)), '"'), seq("'", repeat(choice($._common_content, $._escape_apos, /[^'&]/)), "'")),
-    _common_content: ($) => choice($._predefined_entity_ref, $._char_ref, '{{', '}}', $.enclosed_expr),
-    _element_content_char: ($) => /[^{}<&]+/,
+    direct_attribute: ($) => seq($._allowed_qnames, '=', $.attribute_value),
+    attribute_value: ($) => choice($._attr_quote_value, $._attr_apos_value),
+    _attr_quote_value: ($) => seq('"', repeat(choice($._common_content, $.escape_quote, alias(/[^"{}<&]+/, $.char_data))), '"'),
+    _attr_apos_value: ($) => seq("'", repeat(choice($._common_content, $.escape_apos, alias(/[^'{}<&]+/, $.char_data))), "'"),
+    _common_content: ($) => field('content', choice($.predefined_entity_ref, $.char_ref, $.escape_enclosed, $.enclosed_expr)),
+    escape_enclosed: ($) => field('content', choice('{{', '}}')),
     _computed_constructor: ($) =>
       choice(
         $.comp_doc_constructor, // 156
@@ -398,12 +410,21 @@ module.exports = grammar({
     // 6 `[^{] allow standalone ` which is not a interpolation start
 
     interpolation: ($) => seq('`{', $._expr, '}`'), // 180',
-    string_literal: ($) => choice(seq('"', $.string_quote_content, token.immediate('"')), seq("'", $.string_apos_content, token.immediate("'"))),
-    string_quote_content: ($) => repeat1(choice($._predefined_entity_ref, $._char_ref, $._escape_quote, /[^"&]/)),
-    string_apos_content: ($) => repeat1(choice($._predefined_entity_ref, $._escape_apos, /[^'&]/)),
-    _predefined_entity_ref: ($) => /&(lt|gt|amp|quot|apos);/,
-    _escape_quote: ($) => '""',
+    // string_literal: ($) => choice(seq('"', $.string_quote_content, token.immediate('"')), seq("'", $.string_apos_content, token.immediate("'"))),
+    //string_literal: ($) => choice(seq('"', $.string_quote_content, token.immediate('"')), seq("'", $.string_apos_content, token.immediate("'"))),
+    string_literal: ($) => choice($._string_quote, $._string_apos),
+
+    //_direct_attribute_value: ($) => choice($.attr_quote_value, $.attr_apos_value),
+    //attr_quote_value: ($) => seq('"', repeat(choice($._common_content, $.escape_quote, alias(/[^"{}<&]+/, $.char_data))), '"'),
+    //attr_apos_value: ($) => seq("'", repeat(choice($._common_content, $.escape_apos, alias(/[^'{}<&]+/, $.char_data))), "'"),
+
+    _string_quote: ($) => seq('"', choice($.predefined_entity_ref, $.char_ref, $.escape_quote, alias(/[^"&]+/, $.char_data)), '"'),
+    _string_apos: ($) => seq("'", choice($.predefined_entity_ref, $.char_ref, $.escape_apos, alias(/[^'&]+/, $.char_data)), "'"),
+    predefined_entity_ref: ($) => /&(lt|gt|amp|quot|apos);/,
+    escape_quote: ($) => '""',
     _escape_apos: ($) => "''",
+    escape_apos: ($) => "''",
+    char_ref: ($) => regexOr('&#[0-9]+;', '&#x[0-9a-fA-F]+;'),
     _char_ref: ($) => regexOr('&#[0-9]+;', '&#x[0-9a-fA-F]+;'),
     _numeric_literal: ($) => choice($.double_literal, $.decimal_literal, $.integer_literal),
     double_literal: ($) => /(\.\d+)|(\d+\.\d*|\d+)[eE][+-]{0,1}\d+/,
@@ -554,6 +575,9 @@ module.exports = grammar({
           $.identifier
         )
       ),
+    char_data: ($) => /[^\p{C}]/,
+    // ^\p{C}  no invisible control characters and unused code points
+
     identifier: ($) => /[_\p{XID_Start}][-_\p{XID_Continue}]*/,
     comment: ($) => seq('(:', repeat1(choice($.comment, prec.right(/[^:()]|[^:][)]|[(][^:]|[:][^)]/))), token.immediate(':)')),
     //'[^:()]', // any symbol except reserved

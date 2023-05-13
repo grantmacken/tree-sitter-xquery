@@ -245,6 +245,10 @@
   ]
   )
 
+(direct_attribute ["="] @operator.assignment)
+(attribute_value ["'" "\"" ] @punctuation.brackets.attr)
+
+
 (_
   [
     "map" @function.constructor
@@ -348,7 +352,17 @@
 (parenthesized_expr [ "(" ")" ] @punctuation.bracket)
 (string_literal [ "'" "\""] @punctuation.bracket ) 
 
-[ (string_apos_content) (string_quote_content) (string_constructor_chars) ] @string
+(string_constructor_chars) @string
+
+(char_data) @string
+[
+ (escape_quote)
+ (escape_apos)
+ (escape_enclosed)
+ (char_ref)
+ (predefined_entity_ref)
+ ] @string.special
+
 [(integer_literal) (decimal_literal) (double_literal) ] @number
 
 (comment) @comment
