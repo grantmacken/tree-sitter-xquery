@@ -6,20 +6,17 @@
 ;   "at"
 ;   "attribute"
 ;   "base-uri"
-;   "boundary-space"
 ;   "by"
 ;   "cast"
 ;   "castable"
 ;   "child"
 ;   "collation"
 ;   "comment"
-;   "construction"
 ;   "context"
 ;   "copy-namespaces"
 ;   "count"
 ;   "decimal-format"
 ;   "decimal-separator"
-;   "declare"
 ;   "descendant"
 ;   "descendant-or-self"
 ;   "descending"
@@ -33,9 +30,6 @@
 ;   "eq"
 ;   "except"
 ;   "exponent-separator"
-;   "external"
-;   "following"
-;   "following-sibling"
 ;   "for"
 ;   "function"
 ;   "ge"
@@ -51,14 +45,12 @@
 ;   "instance"
 ;   "intersect"
 ;   "is"
-;   "item"
 ;   "le"
 ;   "least"
 ;   "let"
 ;   "lt"
 ;   "minus-sign"
 ;   "mod"
-;   "module"
 ;   "namespace"
 ;   "namespace-node"
 ;   "ne"
@@ -75,7 +67,6 @@
 ;   "percent"
 ;   "preceding"
 ;   "preceding-sibling"
-;   "preserve"
 ;   "processing-instruction"
 ;   "return"
 ;   "schema"
@@ -83,7 +74,6 @@
 ;   "schema-element"
 ;   "self"
 ;   "stable"
-;   "strip"
 ;   "text"
 ;   "to"
 ;   "treat"
@@ -93,10 +83,43 @@
 ;   "where"
 ;   "zero-digit"
 ;
-; sequence types
- name_test: (_) @type.name_test
- kind_test: (_) @type.kind_test
-(occurrence_indicator) @type.occurrence
+(module_declaration
+  [
+  "module"  @keyword.declaration.module
+  "namespace" @keyword.declaration.module
+   "=" @operator.assignment.module
+    ";" @delimiter.declaration
+  (identifier) @namespace.define
+  ]
+ )
+
+(prolog
+  (_ 
+    [
+    "=" @operator.assignment.prolog 
+    ";" @delimiter.declaration.prolog
+    ]
+    ))
+(prolog
+  (_
+    [ 
+      "declare"
+      "function"
+      "variable"
+      "element"
+      "default"
+      "namespace"
+      "external"
+      "base-uri"
+      "boundary-space"
+      "preserve"
+      "construction"
+      "strip"
+      "context"  
+      "item"
+      ] @keyword.declaration.prolog
+    ))
+
 
  ncname: (identifier) @label.ncname
  prefixed: (identifier) @namespace
@@ -129,10 +152,6 @@
   ["xquery" "version" "encoding"] @keyword.declaration
   )
 
-
-
-
-
 (module_import
   [
    name: (identifier) @namespace
@@ -146,19 +165,8 @@
    "import"  @include
    ]
   )
-; highlight top level namespace
-[
- (module_declaration )
- (namespace_declaration)
- ] @namespace
 
-(function_declaration "function" @keyword.function)
 (inline_function_expr "function" @keyword.function)
-(default_namespace_declaration [ "function"  "element"] @keyword)
-(context_item_declaration [ "context"  "item"] @keyword)
-(variable_declaration "variable" @keyword)
-
-
 ; lhs rhs binary statements
 
 (range_expr [ "to" ] @operator.range)
@@ -209,9 +217,9 @@
   ])
 
 ;delimiting terminal symbols
- ;S, "!", "!=", StringLiteral, "#", "#)", "$", "%", "(", "(#", ")", "*", "*:", "+", (comma), "-", "-->", (dot), "..", "/", "//", "/>", (colon), ":*", "::", ":=", (semi-colon), "<", "<!--", "<![CDATA[", "</", "<<", "<=", "<?", "=", "=>", ">", ">=", ">>", "?", "?>", "@", BracedURILiteral, , "]]>", "]``", "``[", "`{", "{", "|", "||", "}", "}`" ] ;
+ ;S, "!", "!=", StringLiteral, "#", "#)", "$", "(", "(#", ")", "*", "*:", "+", (comma), "-", "-->", (dot), "..", "/", "//", "/>", (colon), ":*", "::", ":=", (semi-colon), "<", "<!--", "<![CDATA[", "</", "<<", "<=", "<?", "=", "=>", ">", ">=", ">>", "?", "?>", "@", BracedURILiteral, , "]]>", "]``", "``[", "`{", "{", "|", "||", "}", "}`" ] ;
 
-[ "%" ";" ":=" "," ] @punctuation.delimiter
+[ ";" ":=" "," ] @punctuation.delimiter
 
 ; constructors
 ; node, array, map string  
@@ -246,21 +254,10 @@
   )
 
 (direct_attribute ["="] @operator.assignment)
-(attribute_value ["'" "\"" ] @punctuation.brackets.attr)
+(attribute_value ["'" "\"" ] @punctuation.bracket.attr)
 
-
-(_
-  [
-    "map" @function.constructor
-   "array" 
-   ;"{" @punctuation.bracket.constructor
-   ;"}" @punctuation.bracket.constructor
-   ] @function.constructor
-  )
-
-(square_array_constructor
-  [ "[" "]" ] @function.constructor.brackets
-)
+constructor: (_) @function.constructor
+(interpolation [ "`{" "}`" ] @function.interpolation.bracket)
 
 (unary_lookup 
   [
@@ -275,36 +272,16 @@
 [ "[" "]" ] @punctuation.bracket.filter
 )
 
-(string_constructor [ "``[" "]``" ] @punctuation.bracket)
-(interpolation [ "`{" "}`" ] @punctuation.bracket.special)
-
-
-
 
 ; xpath
 [ "/" "//" ] @operator.path
+axis_movement: (_) @keyword.path
 ["::"] @punctuation.delimiter.path
-[
- "child"
- "descendant"
- "attribute"
- "self"
- "descendant-or-self"
- "following-sibling"
- "following"
- "parent"
- "ancestor"
- "preceding-sibling"  
- "preceding"
- "ancestor-or-self"
- "@"
- ]@keyword.path
 
-(reverse_step) @operator.path
 (context_item_expr) @operator.context
 
 ; vars
-(variable 
+(variable
   [
   "$" @variable
   ncname: (identifier) @variable.def
@@ -319,7 +296,6 @@
   ncname: (identifier) @variable.ref
   prefixed: (identifier) @namespace
   local: (identifier) @variable.ref
-
   ]
   )
 
@@ -335,7 +311,9 @@
     ncname: (identifier) @function
     ])
 
-["(" ")"] @punctuation.bracket
+
+[ ":" ] @punctuation.delimiter 
+
 ;     [          
 ;     prefixed: (identifier) @namespace
 ;     local: (identifier) @label.local
@@ -343,14 +321,28 @@
 ;     name: (wildcard) @label.wildcard
 ;     ]
 ;  )
+;
+(annotation  
+  [ 
+    "%" @punctuation.delimiter.anno
+    "(" @punctuation.bracket.anno
+    ")" @punctuation.bracket.anno
 
+  ])
 
+; sequence types
+ name_test: (_) @type.name_test
+ kind_test: (_) @type.kind_test
+ (any_item) @type.any_test
+ func_test: (_) @type.func_test
+(occurrence_indicator) @type.occurrence
 
 ; 
 ; pairs @punctuation.bracket
-(enclosed_expr  [ "{" "}" ] @punctuation.bracket)
-(parenthesized_expr [ "(" ")" ] @punctuation.bracket)
-(string_literal [ "'" "\""] @punctuation.bracket ) 
+(enclosed_expr  [ "{" "}" ] @punctuation.bracket.expr)
+(parenthesized_expr [ "(" ")" ] @punctuation.bracket.expr )
+(arg_list [ "(" ")" ] @punctuation.bracket.args )
+(string_literal [ "'" "\""] @punctuation.bracket.string ) 
 
 (string_constructor_chars) @string
 
@@ -364,6 +356,7 @@
  ] @string.special
 
 [(integer_literal) (decimal_literal) (double_literal) ] @number
+
 
 (comment) @comment
 

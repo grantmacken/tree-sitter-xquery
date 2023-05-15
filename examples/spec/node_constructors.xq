@@ -1,4 +1,4 @@
-('3.9 Node Constructors',
+'3.9 Node Constructors',
 '3.9.1 Direct Element Constructors',
 <book isbn='isbn-0060229357'>
     <title>Harold and the Purple Crayon</title>
@@ -52,7 +52,7 @@
 </book>,
 <a>  {"abc"}  </a>,
 <p>char ref is string special &#x20;</p>,
-<p>predefined char ref also string special &lt; </p>
+<p>predefined char ref also string special &lt; </p>,
 <a>{"  "}</a>,
 <a>{ [ "one", "little", "fish" ] }</a>,
 'TODO! 3.9.2 Other Direct Constructors',
@@ -96,6 +96,4 @@ return comment {fn:concat($homebase, ", we have a problem.")},
 namespace a {"http://a.example.com" },
 namespace {"a"} {"http://a.example.com" },
 namespace { "" } {"http://a.example.com" },
-element e { namespace {''} {'u'} },
-'end'
-)
+element e { namespace {''} {'u'} }

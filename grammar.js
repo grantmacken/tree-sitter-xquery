@@ -53,6 +53,7 @@ module.exports = grammar({
     $._value_comp,
     $._node_comp,
     $._general_comp,
+    $._node_constructor,
     $._computed_constructor,
     $._item_type,
     $._common_content,
@@ -61,9 +62,10 @@ module.exports = grammar({
   rules: {
     module: ($) => seq(optional($.version_declaration), choice($.main_module, $.library_module)), // 1
     version_declaration: ($) => seq('xquery', choice(seq('encoding', $.string_literal), seq('version', $.string_literal, optional(seq('encoding', $.string_literal)))), ';'), // 2
-    library_module: ($) => seq($.module_declaration, repeat($._prolog_part_one), repeat($._prolog_part_two)), // 4
-    main_module: ($) => seq(repeat($._prolog_part_one), repeat($._prolog_part_two), $.query_body), // 3
-    module_declaration: ($) => seq('module', 'namespace', field('name', $.identifier), '=', field('uri', $.string_literal), ';'), // 5
+    library_module: ($) => seq($.module_declaration, optional($.prolog)), // 4
+    main_module: ($) => seq(optional($.prolog), $.query_body), // 3
+    prolog: ($) => prec.left(choice(seq(repeat1($._prolog_part_one), repeat($._prolog_part_two)), seq(repeat($._prolog_part_one), repeat1($._prolog_part_two)))),
+    module_declaration: ($) => seq('module', 'namespace', field('name', $._ncname), '=', field('uri', $.string_literal), ';'), // 5
     _prolog_part_one: ($) => seq(choice($.default_namespace_declaration, $._setter, $.namespace_declaration, $.module_import, $.schema_import), ';'), // 6
     _prolog_part_two: ($) => seq(choice($.context_item_declaration, $.variable_declaration, $.function_declaration, $.option_declaration), ';'), // 6
     // separator: ($) => ';', // 7
@@ -275,17 +277,24 @@ module.exports = grammar({
         $.function_call, // 137
         $.ordered_expr, // 135
         $.unordered_expr, // 136
-        $.node_constructor, // 140 node constructors 140
-        $.function_item_expr, // 167
-        $.map_constructor, // 170
-        $.square_array_constructor, // 175 array_constructor 174
-        $.curly_array_constructor, // 176  array_constructor 174
-        $.string_constructor, // 177
+        $._node_constructor, // 140 node constructors 140
+        $._func_constructors,
+        field('constructor', $.string_constructor), // 177
         $.unary_lookup // 181
       ),
-    node_constructor: ($) => choice($._direct_constructor, $._computed_constructor), //140
+    _node_constructor: ($) => choice($.direct_constructor, $._computed_constructor), //140
+    _func_constructors: ($) =>
+      field(
+        'constructor',
+        choice(
+          $.function_item_expr, // 167
+          $.map_constructor, // 170
+          $.square_array_constructor, // 175 array_constructor 174
+          $.curly_array_constructor // 176  array_constructor 174
+        )
+      ),
     //_direct_constructor: ($) => choice($.direct_element, $.direct_comment, $.direct_pi), //141 TODO
-    _direct_constructor: ($) => choice($.direct_element, $.direct_comment), //141
+    direct_constructor: ($) => choice($.direct_element, $.direct_comment), //141
     direct_comment: ($) => seq('<!--', repeat(/[^->]|[^-]>|[^-]->/), '-->'), // 149
     // 1 '[^->] any symbol except reserved
     //'2 [^-]> allow > when not a comment end
@@ -293,7 +302,7 @@ module.exports = grammar({
     // 4 -[^>]   allow - when not followes by >
     // TODO
     direct_element: ($) => choice(seq($.start_tag, repeat($._direct_element_content), $.end_tag), $.empty_tag),
-    _direct_element_content: ($) => choice($._direct_constructor, $._common_content, $._element_content_char),
+    _direct_element_content: ($) => choice($.direct_constructor, $._common_content, $._element_content_char),
     _element_content_char: ($) => field('content', alias(/[^{}<&]+/, $.char_data)),
     start_tag: ($) => seq('<', $._allowed_qnames, repeat($.direct_attribute), '>'),
     end_tag: ($) => seq('</', $._allowed_qnames, '>'),
@@ -305,19 +314,22 @@ module.exports = grammar({
     _common_content: ($) => field('content', choice($.predefined_entity_ref, $.char_ref, $.escape_enclosed, $.enclosed_expr)),
     escape_enclosed: ($) => field('content', choice('{{', '}}')),
     _computed_constructor: ($) =>
-      choice(
-        $.comp_doc_constructor, // 156
-        $.comp_elem_constructor, // 157
-        $.comp_attr_constructor, // 158
-        $.comp_namespace_constructor, // 160
-        $.comp_text_constructor, // 164
-        $.comp_comment_constructor, // 165
-        $.comp_pi_constructor // 166
+      field(
+        'constructor',
+        choice(
+          $.comp_doc_constructor, // 156
+          $.comp_elem_constructor, // 157
+          $.comp_attr_constructor, // 158
+          $.comp_namespace_constructor, // 160
+          $.comp_text_constructor, // 164
+          $.comp_comment_constructor, // 165
+          $.comp_pi_constructor // 166
+        )
       ), // 155
     comp_doc_constructor: ($) => seq('document', field('content', $.enclosed_expr)), // 156
     comp_elem_constructor: ($) => prec.left(2, seq('element', $._construct)), //157
     comp_attr_constructor: ($) => prec.left(2, seq('attribute', $._construct)), //158
-    _construct: ($) => seq(field('name', choice($._EQName, seq('{', $._expr, '}'))), field('content', $.enclosed_expr)),
+    _construct: ($) => seq(choice($._EQName, seq('{', $._expr, '}')), field('content', $.enclosed_expr)),
     comp_text_constructor: ($) => seq('text', field('content', $.enclosed_expr)),
     comp_comment_constructor: ($) => seq('comment', field('content', $.enclosed_expr)),
     comp_pi_constructor: ($) => seq('processing-instruction', field('name', choice($._ncname, seq('{', $._expr, '}'))), field('content', $.enclosed_expr)), // 166
@@ -344,17 +356,13 @@ module.exports = grammar({
       choice(
         $._kind_test,
         $.any_item,
-        $.any_function_test,
-        $.typed_function_test,
-        $.any_map_test,
-        $.typed_map_test,
-        $.any_array_test,
-        $.typed_array_test,
+        $._func_test, // maps arrays are functions
         $.atomic_or_union_type,
         $.parenthesized_item_type // 216
       ), // 186
     occurrence_indicator: ($) => choice('?', '*', '+'), // 185
     atomic_or_union_type: ($) => $._EQName, // 187
+    _func_test: ($) => field('func_test', choice($.any_function_test, $.typed_function_test, $.any_map_test, $.typed_map_test, $.any_array_test, $.typed_array_test)),
     any_item: ($) => seq('item', '(', ')'),
     _kind_test: ($) =>
       field(
@@ -394,7 +402,7 @@ module.exports = grammar({
     typed_array_test: ($) => seq('array', '(', $.sequence_type, ')'),
     parenthesized_item_type: ($) => seq('(', $._item_type, ')'), // 216
     // END SequenceType Syntax
-    annotation: ($) => seq('%', field('anno_name', $._EQName), field('anno_body', optional(seq('(', $._literal, repeat(seq(',', $._literal)), ')')))), // 27
+    annotation: ($) => seq('%', $._EQName, optional(seq('(', $._literal, repeat(seq(',', $._literal)), ')'))), // 27
     enclosed_expr: ($) => seq('{', optional($._expr), '}'), // 5
     map_constructor: ($) => prec.left(2, seq('map', seq('{', optional($.map_entry), repeat(seq(',', $.map_entry)), '}'))), //170
     map_entry: ($) => seq(field('key', $._expr_single), ':', field('value', $._expr_single)),

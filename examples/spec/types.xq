@@ -7,7 +7,7 @@
 5 instance of element(*, po:address),
 5 instance of element(customer),
 5 instance of schema-element(customer),
-$n instance of node()*,
+<root/> instance of node()*,
 5 instance of item()+,
 5 instance of function(*),
 5 instance of function(node()) as xs:string,
@@ -35,5 +35,5 @@ map {} instance of map(*),
 $M instance of map(xs:integer, xs:string),
 array {} instance of array(*),
 [] instance of array(*),
-[] instance of array(xs:integer)
+[1] instance of array(xs:integer)
 )

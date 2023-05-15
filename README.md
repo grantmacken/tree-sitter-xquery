@@ -36,12 +36,24 @@ To see other make targets type `make help`
 
 ## An attempt to eliminate semantic token ambiguity
 
+### brackets
+
  - [x]  ` "["  "]" `  predicate in postfix expression
  - [x]  ` "["  "]" `  predicate in axis step
  - [x]  ` "["  "]" `  square array constructor
 
+### keywords
 
+ - [x]  `element`  in prolog declarations
+ - [x]  `element`  in computed element constructor
+ - [x]  `element`  in element kind test   
 
+ - [x]  `function`  in prolog declarations 'default namespace declaration' and 'function declaration'
+ - [x]  `function`  in inline function expression
+ - [x]  `function`  in any function test 
+
+ - [x]  `item`  in prolog declarations 'context item declarations'
+ - [x]  `item`  in any item test
 
 ## testing gaols: 1, 2, 3 
 
