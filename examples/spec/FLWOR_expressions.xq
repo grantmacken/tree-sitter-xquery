@@ -12,7 +12,7 @@ for $x at $i in $inputvalues
 where $i mod 100 = 0
 return $x,
 '3.12.6 Count Clause',
-for $p in $products
+for $p in $productsgg
 order by $p/sales descending
 count $rank
 where $rank <= 3

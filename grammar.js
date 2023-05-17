@@ -62,12 +62,12 @@ module.exports = grammar({
   rules: {
     module: ($) => seq(optional($.version_declaration), choice($.main_module, $.library_module)), // 1
     version_declaration: ($) => seq('xquery', choice(seq('encoding', $.string_literal), seq('version', $.string_literal, optional(seq('encoding', $.string_literal)))), ';'), // 2
-    library_module: ($) => seq($.module_declaration, optional($.prolog)), // 4
+    library_module: ($) => seq($.module_declaration, $.prolog), // 4
     main_module: ($) => seq(optional($.prolog), $.query_body), // 3
-    prolog: ($) => prec.left(choice(seq(repeat1($._prolog_part_one), repeat($._prolog_part_two)), seq(repeat($._prolog_part_one), repeat1($._prolog_part_two)))),
+    prolog: ($) => prec.right(choice(seq($._prolog_part_one, optional($._prolog_part_two)), seq(optional($._prolog_part_one), $._prolog_part_two))),
     module_declaration: ($) => seq('module', 'namespace', field('name', $._ncname), '=', field('uri', $.string_literal), ';'), // 5
-    _prolog_part_one: ($) => seq(choice($.default_namespace_declaration, $._setter, $.namespace_declaration, $.module_import, $.schema_import), ';'), // 6
-    _prolog_part_two: ($) => seq(choice($.context_item_declaration, $.variable_declaration, $.function_declaration, $.option_declaration), ';'), // 6
+    _prolog_part_one: ($) => repeat1(seq(choice($.default_namespace_declaration, $._setter, $.namespace_declaration, $.module_import, $.schema_import), ';')), // 6
+    _prolog_part_two: ($) => repeat1(seq(choice($.context_item_declaration, $.variable_declaration, $.function_declaration, $.option_declaration), ';')), // 6
     // separator: ($) => ';', // 7
     _setter: ($) =>
       choice(
@@ -88,7 +88,7 @@ module.exports = grammar({
     empty_order_declaration: ($) => seq('declare', 'default', 'order', 'empty', choice('greatest', 'least')),
     copy_namespaces_declaration: ($) => seq('declare', 'copy-namespaces', choice('preserve', 'no-preserve'), ',', choice('inherit', 'no-inherit')),
     decimal_format_declaration: ($) =>
-      seq('declare', choice(seq('decimal-format', field('name', $._EQName)), seq('default', 'decimal-format')), repeat(seq($._df_property_name, '=', $.string_literal))),
+      seq('declare', choice(seq('decimal-format', field('name', $._EQName)), seq('default', 'decimal-format')), repeat(seq($._df_property_name, '=', $.string_literal))),
     _df_property_name: ($) =>
       choice('decimal-separator', 'grouping-separator', 'infinity', 'minus-sign', 'NaN', 'percent', 'per-mille', 'zero-digit', 'digit', 'pattern-separator', 'exponent-separator'),
     schema_import: ($) =>
@@ -189,10 +189,10 @@ module.exports = grammar({
       seq(field('grouping_var', $.variable), optional(seq(optional($.type_declaration), ':=', $._expr_single)), optional(seq('collation', field('uri', $.string_literal)))), // 63
     order_by_clause: ($) => prec.left(seq(optional('stable'), 'order', 'by', $._order_spec_list)), // 65
     _order_spec_list: ($) => seq($._order_spec, repeat(seq(',', $._order_spec))), // 66
-    _order_spec: ($) => seq(field('order_expr', $._expr_single), field('order_modifier', seq(optional($.order_direction), optional($.order_length), optional($.order_collaction)))), // 67
+    _order_spec: ($) => seq(field('order_expr', $._expr_single), field('order_modifier', seq(optional($.order_direction), optional($.order_length), optional($.order_collation)))), // 67
     order_direction: ($) => seq(choice('ascending', 'descending')),
     order_length: ($) => seq('empty', choice('greatest', 'least')),
-    order_collaction: ($) => seq('collation', field('uri', $.string_literal)),
+    order_collation: ($) => seq('collation', field('uri', $.string_literal)),
     return_clause: ($) => seq('return', $._expr_single), // 69
     // end flwor
     quantified_expr: ($) =>

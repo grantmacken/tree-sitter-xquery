@@ -8637,7 +8637,7 @@
         "required": false,
         "types": [
           {
-            "type": "order_collaction",
+            "type": "order_collation",
             "named": true
           },
           {
@@ -8663,7 +8663,7 @@
     }
   },
   {
-    "type": "order_collaction",
+    "type": "order_collation",
     "named": true,
     "fields": {
       "uri": {
@@ -14085,6 +14085,10 @@
   {
     "type": "decimal_literal",
     "named": true
+  },
+  {
+    "type": "decla\u001cre",
+    "named": false
   },
   {
     "type": "declare",

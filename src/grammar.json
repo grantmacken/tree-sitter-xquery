@@ -105,16 +105,8 @@
           "name": "module_declaration"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "prolog"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "prolog"
         }
       ]
     },
@@ -140,7 +132,7 @@
       ]
     },
     "prolog": {
-      "type": "PREC_LEFT",
+      "type": "PREC_RIGHT",
       "value": 0,
       "content": {
         "type": "CHOICE",
@@ -149,18 +141,20 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_prolog_part_one"
-                }
+                "type": "SYMBOL",
+                "name": "_prolog_part_one"
               },
               {
-                "type": "REPEAT",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_prolog_part_two"
-                }
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_prolog_part_two"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
               }
             ]
           },
@@ -168,18 +162,20 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "REPEAT",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_prolog_part_one"
-                }
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_prolog_part_one"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
               },
               {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_prolog_part_two"
-                }
+                "type": "SYMBOL",
+                "name": "_prolog_part_two"
               }
             ]
           }
@@ -224,68 +220,74 @@
       ]
     },
     "_prolog_part_one": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "default_namespace_declaration"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_setter"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "namespace_declaration"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "module_import"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "schema_import"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": ";"
-        }
-      ]
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "default_namespace_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_setter"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "namespace_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "module_import"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "schema_import"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ";"
+          }
+        ]
+      }
     },
     "_prolog_part_two": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "context_item_declaration"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "variable_declaration"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "function_declaration"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "option_declaration"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": ";"
-        }
-      ]
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "context_item_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "variable_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "option_declaration"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ";"
+          }
+        ]
+      }
     },
     "_setter": {
       "type": "CHOICE",
@@ -530,7 +532,7 @@
       "members": [
         {
           "type": "STRING",
-          "value": "declare"
+          "value": "decla\u001cre"
         },
         {
           "type": "CHOICE",
@@ -1859,7 +1861,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "order_collaction"
+                    "name": "order_collation"
                   },
                   {
                     "type": "BLANK"
@@ -1911,7 +1913,7 @@
         }
       ]
     },
-    "order_collaction": {
+    "order_collation": {
       "type": "SEQ",
       "members": [
         {

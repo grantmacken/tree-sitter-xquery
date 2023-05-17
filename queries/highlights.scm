@@ -51,7 +51,6 @@
 ;   "lt"
 ;   "minus-sign"
 ;   "mod"
-;   "namespace"
 ;   "namespace-node"
 ;   "ne"
 ;   "no-inherit"
@@ -59,8 +58,6 @@
 ;   "of"
 ;   "option"
 ;   "order"
-;   "ordered"
-;   "ordering"
 ;   "parent"
 ;   "pattern-separator"
 ;   "per-mille"
@@ -68,7 +65,6 @@
 ;   "preceding"
 ;   "preceding-sibling"
 ;   "processing-instruction"
-;   "return"
 ;   "schema"
 ;   "schema-attribute"
 ;   "schema-element"
@@ -78,48 +74,84 @@
 ;   "to"
 ;   "treat"
 ;   "union"
-;   "unordered"
 ;   "variable"
 ;   "where"
-;   "zero-digit"
 ;
+;
+
+(version_declaration 
+  ["xquery" "version" "encoding"] @keyword.declaration.version
+  )
+(version_declaration ";" @punctuation.delimiter.separator)
+
+
 (module_declaration
-  [
   "module"  @keyword.declaration.module
   "namespace" @keyword.declaration.module
+  (identifier) @namespace.define.module
    "=" @operator.assignment.module
-    ";" @delimiter.declaration
-  (identifier) @namespace.define
-  ]
  )
 
 (prolog
-  (_ 
-    [
-    "=" @operator.assignment.prolog 
-    ";" @delimiter.declaration.prolog
-    ]
-    ))
-(prolog
   (_
-    [ 
-      "declare"
-      "function"
-      "variable"
-      "element"
-      "default"
-      "namespace"
-      "external"
-      "base-uri"
-      "boundary-space"
-      "preserve"
-      "construction"
-      "strip"
-      "context"  
-      "item"
-      ] @keyword.declaration.prolog
+    [
+     "NaN"
+     "base-uri"
+     "boundary-space"
+     "collation"
+     "construction"
+     "context"  
+     "copy-namespaces"
+     "decimal-format"
+     "decimal-separator"
+     "declare"
+     "default"
+     "digit"
+     "element"
+     "empty" 
+     "exponent-separator"
+     "external"
+     "function"
+     "greatest"  
+     "grouping-separator"
+     "import"
+     "infinity"
+     "inherit"
+     "item"
+     "least"
+     "minus-sign"
+     "module"
+     "namespace"
+     "no-inherit"
+     "no-preserve"
+     "order" 
+     "ordered"  
+     "ordering"  
+     "pattern-separator"
+     "per-mille"
+     "percent"
+     "preserve"
+     "preserve"
+     "schema"
+     "strip"
+     "unordered" 
+     "variable"
+     "zero-digit"
+     ] @keyword.declaration.prolog
     ))
 
+(prolog
+  (_
+   "namespace"
+    name: (identifier) @namespace.define.prolog 
+   ))
+
+(prolog ";" @punctuation.delimiter.prolog )
+
+(prolog
+  (_ 
+    ["=" ":="] @operator.assignment.prolog 
+    ))
 
  ncname: (identifier) @label.ncname
  prefixed: (identifier) @namespace
@@ -138,33 +170,16 @@
   "if"
   ] @keyword.block
 
-["case" "default" "return" "then" "else"  ] @keyword.clause
+; ["case" "default" "return" "then" "else"  ] @keyword.clause
 
-[ 
-  "at" 
-  "in"
-  "where"
-  "where"
-  "satisfies"
-  ] @keyword.conditional
+; [ 
+;   "at" 
+;   "in"
+;   "where"
+;   "where"
+;   "satisfies"
+;   ] @keyword.conditional
 
-(version_declaration 
-  ["xquery" "version" "encoding"] @keyword.declaration
-  )
-
-(module_import
-  [
-   name: (identifier) @namespace
-   "import"  @include
-   ]
-  )
-(schema_import
-  [
-   name: (identifier) @namespace
-   "element" @keyword
-   "import"  @include
-   ]
-  )
 
 (inline_function_expr "function" @keyword.function)
 ; lhs rhs binary statements
@@ -187,28 +202,65 @@
 (bang_expr [ "!" ] @operator.bang )
 (arrow_expr [ "=>" ]  @operator.arrow)
 
-
-
 ; 3.12 FLWOR Expressions
+; 
+(for_clause
+  "for" @keyword.flwor
+  )
 
-[ 
-  "allowing"
-  "as"
-  "ascending"
-  "by"
-  "collation" 
-  "count"
-  "descending"
-  "empty"
-  "greatest"
-  "group"
-  "least"
-  "let"
-  "order"
-  "ordered" 
-  "stable"
-  "unordered"
-  ] @keyword
+(for_binding 
+  ["allowing" "empty" "at" "in" ] @keyword.flwor.binding
+  )
+
+(let_clause
+  "let" @keyword.flwor
+  )
+
+(let_binding 
+  ":=" @operator.assignment.flwor
+  )
+
+[
+(count_clause "count")
+(where_clause "where")
+(order_by_clause 
+  [
+   "stable" 
+   "order" 
+   "by"
+   "ascending" 
+   "collation"
+   "descending"
+   "empty"
+   "greatest"
+   "least"
+   "collation"
+   ]@keyword.flwor.intermediate
+  )
+(group_by_clause "group" "by")
+] @keyword.flwor.intermediate
+
+(grouping_spec
+  [
+   ":=" @operator.assignment.flwor
+   "collation" @keyword.flwor.intermediate
+   ]
+  )
+
+(return_clause "return") @keyword.flwor.return
+
+; [ 
+;   "as"
+;   "ascending"
+;   "by"
+;   "collation" 
+;   "descending"
+;   "greatest"
+;   "group"
+;   "least"
+;   "ordered" 
+;   "unordered"
+;   ] @keyword
 ;
 
 (lookup
@@ -219,7 +271,7 @@
 ;delimiting terminal symbols
  ;S, "!", "!=", StringLiteral, "#", "#)", "$", "(", "(#", ")", "*", "*:", "+", (comma), "-", "-->", (dot), "..", "/", "//", "/>", (colon), ":*", "::", ":=", (semi-colon), "<", "<!--", "<![CDATA[", "</", "<<", "<=", "<?", "=", "=>", ">", ">=", ">>", "?", "?>", "@", BracedURILiteral, , "]]>", "]``", "``[", "`{", "{", "|", "||", "}", "}`" ] ;
 
-[ ";" ":=" "," ] @punctuation.delimiter
+[ "," ] @punctuation.delimiter
 
 ; constructors
 ; node, array, map string  
@@ -256,7 +308,7 @@
 (direct_attribute ["="] @operator.assignment)
 (attribute_value ["'" "\"" ] @punctuation.bracket.attr)
 
-constructor: (_) @function.constructor
+ constructor: (_) @function.constructor
 (interpolation [ "`{" "}`" ] @function.interpolation.bracket)
 
 (unary_lookup 
