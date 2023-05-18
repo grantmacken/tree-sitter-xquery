@@ -2187,12 +2187,8 @@
           {
             "type": "REPEAT1",
             "content": {
-              "type": "FIELD",
-              "name": "case",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_typeswitch_clause"
-              }
+              "type": "SYMBOL",
+              "name": "typeswitch_case_clause"
             }
           },
           {
@@ -2227,7 +2223,7 @@
         ]
       }
     },
-    "_typeswitch_clause": {
+    "typeswitch_case_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -3200,12 +3196,8 @@
               "type": "PREC_LEFT",
               "value": 20,
               "content": {
-                "type": "FIELD",
-                "name": "postfix_lookup",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "lookup"
-                }
+                "type": "SYMBOL",
+                "name": "postfix_lookup"
               }
             }
           ]
@@ -3233,7 +3225,7 @@
         ]
       }
     },
-    "lookup": {
+    "postfix_lookup": {
       "type": "PREC_LEFT",
       "value": 20,
       "content": {
@@ -4015,7 +4007,7 @@
     },
     "_computed_constructor": {
       "type": "FIELD",
-      "name": "constructor",
+      "name": "computed_constructor",
       "content": {
         "type": "CHOICE",
         "members": [

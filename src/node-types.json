@@ -554,10 +554,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -567,6 +563,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -611,16 +611,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -698,10 +688,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -711,6 +697,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -886,10 +876,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -899,6 +885,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -943,16 +933,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -1030,10 +1010,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -1043,6 +1019,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -1283,10 +1263,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -1300,6 +1276,10 @@
           },
           {
             "type": "placeholder",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -1392,16 +1372,6 @@
         "types": [
           {
             "type": "predicate",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -1513,10 +1483,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -1526,6 +1492,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -1590,16 +1560,6 @@
         "types": [
           {
             "type": "predicate",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -1924,10 +1884,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -1937,6 +1893,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -2015,16 +1975,6 @@
           }
         ]
       },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
-      },
       "sequence": {
         "multiple": true,
         "required": true,
@@ -2098,10 +2048,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -2111,6 +2057,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -2312,10 +2262,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -2325,6 +2271,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -2389,16 +2339,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -2562,10 +2502,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -2575,6 +2511,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -2639,16 +2579,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -2871,16 +2801,6 @@
           }
         ]
       },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
-      },
       "prefixed": {
         "multiple": false,
         "required": false,
@@ -2954,6 +2874,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -3113,16 +3037,6 @@
           }
         ]
       },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
-      },
       "prefixed": {
         "multiple": false,
         "required": false,
@@ -3196,6 +3110,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -3384,10 +3302,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -3397,6 +3311,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -3450,16 +3368,6 @@
           {
             "type": "}",
             "named": false
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
           }
         ]
       }
@@ -3608,10 +3516,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -3621,6 +3525,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -3674,16 +3582,6 @@
           {
             "type": "}",
             "named": false
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
           }
         ]
       }
@@ -3830,10 +3728,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -3843,6 +3737,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -3887,16 +3785,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -3974,10 +3862,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -3987,6 +3871,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -4112,16 +4000,6 @@
           }
         ]
       },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
-      },
       "var_value": {
         "multiple": true,
         "required": false,
@@ -4199,10 +4077,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -4212,6 +4086,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -4323,6 +4201,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -4828,16 +4710,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -4902,6 +4774,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -5138,10 +5014,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -5151,6 +5023,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -5235,16 +5111,6 @@
         "types": [
           {
             "type": "variable",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -5572,16 +5438,6 @@
           }
         ]
       },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
-      },
       "uri": {
         "multiple": false,
         "required": false,
@@ -5655,6 +5511,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -5840,10 +5700,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -5853,6 +5709,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -5974,10 +5834,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -5987,6 +5843,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -6120,10 +5980,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -6133,6 +5989,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -6177,16 +6037,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -6358,10 +6208,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -6371,6 +6217,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -6415,16 +6265,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -6492,16 +6332,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -6566,6 +6396,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -6732,10 +6566,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -6745,6 +6575,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -6789,16 +6623,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -6876,10 +6700,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -6889,6 +6709,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -6990,16 +6814,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -7064,6 +6878,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -7145,34 +6963,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "lookup",
-    "named": true,
-    "fields": {
-      "key": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "integer_literal",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expr",
-            "named": true
-          },
-          {
-            "type": "wildcard",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -7334,10 +7124,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -7347,6 +7133,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -7391,16 +7181,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -7478,10 +7258,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -7491,6 +7267,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -7751,10 +7531,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -7764,6 +7540,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -7808,16 +7588,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -7895,10 +7665,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -7908,6 +7674,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -8239,10 +8009,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -8252,6 +8018,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -8296,16 +8066,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -8383,10 +8143,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -8396,6 +8152,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -8571,10 +8331,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -8584,6 +8340,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -8646,16 +8406,6 @@
           },
           {
             "type": "order_length",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -8785,16 +8535,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -8859,6 +8599,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -8966,16 +8710,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -8984,6 +8718,10 @@
       "types": [
         {
           "type": "_primary_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         }
       ]
@@ -9013,6 +8751,34 @@
     "type": "placeholder",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "postfix_lookup",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expr",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "predicate",
@@ -9062,16 +8828,6 @@
         "types": [
           {
             "type": "predicate",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -9139,6 +8895,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -9360,10 +9120,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -9373,6 +9129,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -9425,16 +9185,6 @@
           },
           {
             "type": "variable",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -9522,10 +9272,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -9535,6 +9281,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -9646,16 +9396,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -9720,6 +9460,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -9886,10 +9630,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -9899,6 +9639,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -9943,16 +9687,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -10030,10 +9764,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -10043,6 +9773,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -10144,16 +9878,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -10218,6 +9942,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -10578,16 +10306,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -10652,6 +10370,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -10864,10 +10586,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -10877,6 +10595,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -10921,16 +10643,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -11008,10 +10720,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -11021,6 +10729,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -11221,10 +10933,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -11234,6 +10942,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -11355,10 +11067,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -11368,6 +11076,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -11442,16 +11154,6 @@
         "types": [
           {
             "type": "predicate",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -11553,10 +11255,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -11566,6 +11264,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -11640,16 +11342,6 @@
         "types": [
           {
             "type": "predicate",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -11753,10 +11445,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -11766,6 +11454,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -11956,10 +11648,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -11969,6 +11657,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -12013,16 +11705,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -12146,7 +11828,7 @@
     }
   },
   {
-    "type": "typeswitch_expr",
+    "type": "typeswitch_case_clause",
     "named": true,
     "fields": {
       "axis_movement": {
@@ -12167,68 +11849,162 @@
           }
         ]
       },
-      "case": {
+      "dynamic_function_call": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "/",
-            "named": false
-          },
-          {
-            "type": "//",
-            "named": false
-          },
-          {
-            "type": "_primary_expr",
-            "named": true
-          },
-          {
-            "type": "abbrev_forward_step",
-            "named": true
-          },
-          {
-            "type": "additive_expr",
-            "named": true
-          },
-          {
-            "type": "and_expr",
-            "named": true
-          },
           {
             "type": "arg_list",
             "named": true
-          },
+          }
+        ]
+      },
+      "filter": {
+        "multiple": true,
+        "required": false,
+        "types": [
           {
-            "type": "arrow_expr",
+            "type": "predicate",
             "named": true
-          },
+          }
+        ]
+      },
+      "filter_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
           {
-            "type": "as",
-            "named": false
-          },
-          {
-            "type": "bang_expr",
+            "type": "predicate",
             "named": true
-          },
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_primary_expr",
+          "named": true
+        },
+        {
+          "type": "additive_expr",
+          "named": true
+        },
+        {
+          "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "arrow_expr",
+          "named": true
+        },
+        {
+          "type": "bang_expr",
+          "named": true
+        },
+        {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
+          "type": "castable_expr",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
+          "named": true
+        },
+        {
+          "type": "flwor_expr",
+          "named": true
+        },
+        {
+          "type": "if_expr",
+          "named": true
+        },
+        {
+          "type": "instance_of_expr",
+          "named": true
+        },
+        {
+          "type": "intersect_except_expr",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expr",
+          "named": true
+        },
+        {
+          "type": "or_expr",
+          "named": true
+        },
+        {
+          "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "quantified_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "sequence_type",
+          "named": true
+        },
+        {
+          "type": "string_concat_expr",
+          "named": true
+        },
+        {
+          "type": "switch_expr",
+          "named": true
+        },
+        {
+          "type": "treat_expr",
+          "named": true
+        },
+        {
+          "type": "try_catch_expr",
+          "named": true
+        },
+        {
+          "type": "typeswitch_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
+        },
+        {
+          "type": "union_expr",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeswitch_expr",
+    "named": true,
+    "fields": {
+      "axis_movement": {
+        "multiple": true,
+        "required": false,
+        "types": [
           {
-            "type": "case",
-            "named": false
-          },
-          {
-            "type": "cast_expr",
-            "named": true
-          },
-          {
-            "type": "castable_expr",
-            "named": true
-          },
-          {
-            "type": "comparison_expr",
-            "named": true
-          },
-          {
-            "type": "flwor_expr",
+            "type": "abbrev_forward_step",
             "named": true
           },
           {
@@ -12236,92 +12012,8 @@
             "named": true
           },
           {
-            "type": "if_expr",
-            "named": true
-          },
-          {
-            "type": "instance_of_expr",
-            "named": true
-          },
-          {
-            "type": "intersect_except_expr",
-            "named": true
-          },
-          {
-            "type": "lookup",
-            "named": true
-          },
-          {
-            "type": "multiplicative_expr",
-            "named": true
-          },
-          {
-            "type": "or_expr",
-            "named": true
-          },
-          {
-            "type": "path_expr",
-            "named": true
-          },
-          {
-            "type": "predicate",
-            "named": true
-          },
-          {
-            "type": "quantified_expr",
-            "named": true
-          },
-          {
-            "type": "range_expr",
-            "named": true
-          },
-          {
-            "type": "return",
-            "named": false
-          },
-          {
             "type": "reverse_step",
             "named": true
-          },
-          {
-            "type": "sequence_type",
-            "named": true
-          },
-          {
-            "type": "string_concat_expr",
-            "named": true
-          },
-          {
-            "type": "switch_expr",
-            "named": true
-          },
-          {
-            "type": "treat_expr",
-            "named": true
-          },
-          {
-            "type": "try_catch_expr",
-            "named": true
-          },
-          {
-            "type": "typeswitch_expr",
-            "named": true
-          },
-          {
-            "type": "unary_expr",
-            "named": true
-          },
-          {
-            "type": "union_expr",
-            "named": true
-          },
-          {
-            "type": "variable",
-            "named": true
-          },
-          {
-            "type": "|",
-            "named": false
           }
         ]
       },
@@ -12440,10 +12132,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -12453,6 +12141,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -12500,21 +12192,11 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "_primary_expr",
@@ -12577,6 +12259,10 @@
           "named": true
         },
         {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
           "type": "quantified_expr",
           "named": true
         },
@@ -12598,6 +12284,10 @@
         },
         {
           "type": "try_catch_expr",
+          "named": true
+        },
+        {
+          "type": "typeswitch_case_clause",
           "named": true
         },
         {
@@ -12670,16 +12360,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -12744,6 +12424,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {
@@ -12938,10 +12622,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -12951,6 +12631,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -12995,16 +12679,6 @@
           },
           {
             "type": "union_expr",
-            "named": true
-          }
-        ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
             "named": true
           }
         ]
@@ -13082,10 +12756,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -13095,6 +12765,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -13330,16 +13004,6 @@
           }
         ]
       },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
-      },
       "value": {
         "multiple": true,
         "required": false,
@@ -13413,10 +13077,6 @@
             "named": true
           },
           {
-            "type": "lookup",
-            "named": true
-          },
-          {
             "type": "multiplicative_expr",
             "named": true
           },
@@ -13426,6 +13086,10 @@
           },
           {
             "type": "path_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_lookup",
             "named": true
           },
           {
@@ -13544,6 +13208,10 @@
           "named": true
         },
         {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
           "type": "quantified_expr",
           "named": true
         },
@@ -13656,16 +13324,6 @@
             "named": true
           }
         ]
-      },
-      "postfix_lookup": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "lookup",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -13730,6 +13388,10 @@
         },
         {
           "type": "path_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
           "named": true
         },
         {

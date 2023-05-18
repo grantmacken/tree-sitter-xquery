@@ -220,11 +220,8 @@ module.exports = grammar({
       ), // 71
     switch_clause: ($) => seq(repeat1(seq('case', field('case_operand', $._expr_single))), 'return', field('case_return', $._expr_single)), // 72
     typeswitch_expr: ($) =>
-      prec(
-        2,
-        seq('typeswitch', field('operand', seq('(', $._expr, ')')), repeat1(field('case', $._typeswitch_clause)), seq('default', optional($.variable), 'return', $._expr_single))
-      ), // 74
-    _typeswitch_clause: ($) => seq('case', optional(seq($.variable, 'as')), $.sequence_type, repeat(seq('|', $.sequence_type)), 'return', $._expr_single), // 75
+      prec(2, seq('typeswitch', field('operand', seq('(', $._expr, ')')), repeat1($.typeswitch_case_clause), seq('default', optional($.variable), 'return', $._expr_single))), // 74
+    typeswitch_case_clause: ($) => seq('case', optional(seq($.variable, 'as')), $.sequence_type, repeat(seq('|', $.sequence_type)), 'return', $._expr_single), // 75
     if_expr: ($) => prec(2, seq('if', field('if_test', seq('(', $._expr, ')')), 'then', field('if_consequence', $._expr_single), 'else', field('if_alternative', $._expr_single))), // 77
     try_catch_expr: ($) => prec(2, seq($.try_clause, $.catch_clause)), // 78
     try_clause: ($) => seq('try', $.enclosed_expr), // 79
@@ -252,10 +249,9 @@ module.exports = grammar({
     unary_expr: ($) => prec.right(17, seq(choice('+', '-'), $._expr_single)),
     bang_expr: ($) => prec.left(18, seq(field('sequence', $._expr_single), repeat1(seq('!', field('dynamic_context', $._expr_single))))), // 107
     _postfix_expr: ($) => prec.left(20, seq($._primary_expr, repeat($._postfix))),
-    _postfix: ($) =>
-      seq(choice(prec.left(20, field('filter_expr', $.predicate)), prec.left(20, field('dynamic_function_call', $.arg_list)), prec.left(20, field('postfix_lookup', $.lookup)))),
+    _postfix: ($) => seq(choice(prec.left(20, field('filter_expr', $.predicate)), prec.left(20, field('dynamic_function_call', $.arg_list)), prec.left(20, $.postfix_lookup))),
     predicate: ($) => prec.left(20, seq('[', $._expr_single, ']')), // 124
-    lookup: ($) => prec.left(20, seq('?', field('key', choice($._ncname, $.integer_literal, $.parenthesized_expr, alias('*', $.wildcard))))),
+    postfix_lookup: ($) => prec.left(20, seq('?', field('key', choice($._ncname, $.integer_literal, $.parenthesized_expr, alias('*', $.wildcard))))),
     path_expr: ($) => prec.left(19, choice(seq(choice('//', '/'), $._rel_path_expr), '/')), // initial xpath start
     _rel_path_expr: ($) => prec.left(19, seq($._step_expr, repeat(seq(choice('/', '//'), $._step_expr)))),
     _step_expr: ($) => prec.left(19, seq(choice($._postfix_expr, $._axis_step))),
@@ -315,7 +311,7 @@ module.exports = grammar({
     escape_enclosed: ($) => field('content', choice('{{', '}}')),
     _computed_constructor: ($) =>
       field(
-        'constructor',
+        'computed_constructor',
         choice(
           $.comp_doc_constructor, // 156
           $.comp_elem_constructor, // 157
