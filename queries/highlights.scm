@@ -174,8 +174,7 @@
 (or_expr [ "or" ] @operator.or)
 
 ; 3.1.6 Named Function References 
-; 3.1.7 Inline Function Expressions 
-; (inline_function_expr "function" ) @keyword.block.function
+
 
 
 ; expr blocks FLWOR, some, every, switch, typeswitch, try, if
@@ -272,11 +271,7 @@
 
 [ "," ] @punctuation.delimiter
 
-(function_call
-  [ 
-    local: (identifier) @function
-    ncname: (identifier) @function
-    ])
+
 ; 3.1.6 Named Function References 
 ;
 ;
@@ -306,6 +301,7 @@ computed_constructor: (_
 (interpolation "`{" "}`" ) @function.interpolation.bracket
 ; 3.11 Maps and Arrays 
 (map_constructor "map" "{" "}" ) @function.constructor.map
+(map_entry ":" @punctuation.delimiter.map )
 (square_array_constructor "[" "]" ) @function.constructor.array
 (curly_array_constructor "array" (enclosed_expr)) @function.constructor.array
 
@@ -330,7 +326,6 @@ computed_constructor: (_
 axis_movement: (_) @keyword.path
 ["::"] @punctuation.delimiter.path
 
-(context_item_expr) @operator.context
 
 ; vars
 (variable
@@ -342,16 +337,9 @@ axis_movement: (_) @keyword.path
   ]
   ) 
 
-(var_ref 
-  [
-  "$" @variable.reference
-  ncname: (identifier) @variable.ref
-  prefixed: (identifier) @namespace
-  local: (identifier) @variable.ref
-  ]
-  )
 
-[ ":" ] @punctuation.delimiter 
+
+; [ ":" ] @punctuation.delimiter 
 
 (annotation  
   "%" @punctuation.delimiter.anno
@@ -365,10 +353,80 @@ axis_movement: (_) @keyword.path
 (occurrence_indicator) @type.occurrence
 ; pairs @punctuation.bracket
 (enclosed_expr  [ "{" "}" ] @punctuation.bracket.enclosed_expr)
-(parenthesized_expr [ "(" ")" ] @punctuation.bracket.paren_expr)
 (arg_list [ "(" ")" ] @punctuation.bracket.args )
 
-; strings
+
+; 3.1.7 Inline Function Expressions 
+(inline_function_expr
+  (annotation)?
+  "function"  @function.inline
+  "(" @punctuation.bracket.params
+  ")" @punctuation.bracket.params
+  "as"? @type
+  body: (enclosed_expr)
+  )
+
+(type_declaration
+ "as" @type
+)
+
+; 3.1.6 Named Function References 
+(named_function_ref
+ ncname: (identifier) @function.name (#not-any-of? @function.name  "array" "attribute" "comment" "document-node" "element" "empty-sequence" "function" "if" "item" "map" "namespace-node" "node" "processing-instruction" "schema-attribute" "schema-element" "switch" "text" "typeswitch")
+"#" @punctuation.delimiter.func_ref
+(integer_literal)
+)
+(named_function_ref
+  prefixed: (identifier) @namespace 
+  ":" @punctuation.delimiter.qname
+  local: (identifier) @function.local_name
+  "#" @punctuation.delimiter.func_ref
+  (integer_literal)
+  )
+
+;3.1.5 Static Function Calls
+; A.3 Reserved Function Names
+(_ 
+  [ 
+  (function_call
+   ncname: (identifier) @function.name (#not-any-of? @function.name  "array" "attribute" "comment" "document-node" "element" "empty-sequence" "function" "if" "item" "map" "namespace-node" "node" "processing-instruction" "schema-attribute" "schema-element" "switch" "text" "typeswitch"))
+   (function_call
+     prefixed: (identifier) @namespace 
+     ":" @punctuation.delimiter.qname
+     local: (identifier) @function.local_name
+     )
+   ]
+  )
+
+; 3.2.2 Dynamic Function Calls
+; A dynamic function call consists of a base expression that returns 
+; the function and a parenthesized list of zero or more arguments 
+; (argument expressions or ArgumentPlaceholders).] 
+
+
+
+
+;3.1.4 Context Item Expression
+(context_item_expr) @operator.context
+;3.1.3 Parenthesized Expressions
+(parenthesized_expr [ "(" ")" ] @punctuation.bracket.paren_expr)
+; 3.1.2 Variable References
+;
+
+(_ 
+  [ 
+  (var_ref
+   "$" @variable.delimiter
+   ncname: (identifier) @variable.ref.name)
+   (var_ref 
+    "$" @variable.delimiter
+     prefixed: (identifier) @namespace 
+     ":" @punctuation.delimiter.qname
+     local: (identifier) @variable.ref.local_name
+     )
+   ]
+  )
+; 3.1.1 Literals 
 (string_literal [ "'" "\""] @punctuation.bracket.string ) 
 (string_constructor_chars) @string
 (char_data) @string
