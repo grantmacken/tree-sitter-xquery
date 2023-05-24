@@ -65,7 +65,8 @@ module.exports = grammar({
     library_module: ($) => seq($.module_declaration, $.prolog), // 4
     main_module: ($) => seq(optional($.prolog), $.query_body), // 3
     prolog: ($) => prec.right(choice(seq($._prolog_part_one, optional($._prolog_part_two)), seq(optional($._prolog_part_one), $._prolog_part_two))),
-    module_declaration: ($) => seq('module', 'namespace', field('name', $._ncname), '=', field('uri', $.string_literal), ';'), // 5
+    module_declaration: ($) => seq('module', $._namespace_define, field('uri', $.string_literal), ';'), // 5
+    _namespace_define: ($) => seq('namespace', $._ncname, '='), // repeated seq
     _prolog_part_one: ($) => repeat1(seq(choice($.default_namespace_declaration, $._setter, $.namespace_declaration, $.module_import, $.schema_import), ';')), // 6
     _prolog_part_two: ($) => repeat1(seq(choice($.context_item_declaration, $.variable_declaration, $.function_declaration, $.option_declaration), ';')), // 6
     // separator: ($) => ';', // 7
@@ -87,27 +88,32 @@ module.exports = grammar({
     ordering_mode_declaration: ($) => seq('declare', 'ordering', choice('ordered', 'unordered')),
     empty_order_declaration: ($) => seq('declare', 'default', 'order', 'empty', choice('greatest', 'least')),
     copy_namespaces_declaration: ($) => seq('declare', 'copy-namespaces', choice('preserve', 'no-preserve'), ',', choice('inherit', 'no-inherit')),
-    decimal_format_declaration: ($) =>
-      seq('declare', choice(seq('decimal-format', field('name', $._EQName)), seq('default', 'decimal-format')), repeat(seq($._df_property_name, '=', $.string_literal))),
-    _df_property_name: ($) =>
-      choice('decimal-separator', 'grouping-separator', 'infinity', 'minus-sign', 'NaN', 'percent', 'per-mille', 'zero-digit', 'digit', 'pattern-separator', 'exponent-separator'),
+    decimal_format_declaration: ($) => prec.right(seq('declare', choice(seq('decimal-format', $._EQName), seq('default', 'decimal-format')), repeat($.df_property_define))),
+    df_property_define: ($) =>
+      seq(
+        choice(
+          'decimal-separator',
+          'grouping-separator',
+          'infinity',
+          'minus-sign',
+          'NaN',
+          'percent',
+          'per-mille',
+          'zero-digit',
+          'digit',
+          'pattern-separator',
+          'exponent-separator'
+        ),
+        '=',
+        $.string_literal
+      ),
+    //choice(seq('decimal-format', field('name', $._EQName)), seq('default', 'decimal-format')), repeat(seq($._df_property_name, '=', $.string_literal))),
     schema_import: ($) =>
-      seq(
-        'import',
-        'schema',
-        optional(field('prefix', choice(seq('namespace', field('name', $._ncname), '='), seq('default', 'element', 'namespace')))),
-        field('uri', $.string_literal),
-        optional(seq('at', $.string_literal, repeat(seq(',', $.string_literal))))
-      ), // 21
-    module_import: ($) =>
-      seq(
-        'import',
-        'module',
-        optional(seq('namespace', field('name', $._ncname), '=')),
-        field('uri', $.string_literal),
-        optional(seq('at', $.string_literal, repeat(seq(',', $.string_literal))))
-      ), // 23
-    namespace_declaration: ($) => seq('declare', 'namespace', field('name', $._ncname), '=', field('uri', $.string_literal)), // 24
+      seq('import', 'schema', optional($.schema_prefix), field('uri', $.string_literal), optional(seq('at', $.string_literal, repeat(seq(',', $.string_literal))))), // 21
+    schema_prefix: ($) => choice($._namespace_define, seq('default', 'element', 'namespace')),
+    module_import: ($) => seq('import', 'module', optional($._namespace_define), field('uri', $.string_literal), optional($.source_at)), // 23
+    source_at: ($) => seq('at', $.string_literal, repeat(seq(',', $.string_literal))), // repeated seq
+    namespace_declaration: ($) => seq('declare', $._namespace_define, field('uri', $.string_literal)), // 24
     default_namespace_declaration: ($) => seq('declare', 'default', choice('element', 'function'), 'namespace', field('uri', $.string_literal)), // 25
     context_item_declaration: ($) =>
       seq('declare', 'context', 'item', optional($.type_declaration), choice(seq(':=', field('var_value', $._expr)), seq('external', optional(seq(':=', $._expr))))), // 31
@@ -161,9 +167,9 @@ module.exports = grammar({
         $.arrow_expr, // 96          prec: 16
         $.unary_expr, //  97         prec: 17 '-' '+' arithmetic prefix right to left */
         $.bang_expr, //107           prec: 18
-        seq($._postfix_expr, optional($.path_expr)),
-        $._rel_path_expr,
-        $.path_expr,
+        seq($._postfix_expr, optional($.absolute_path_expr)),
+        $.absolute_path_expr,
+        $.rel_path_expr,
         $._primary_expr
         //$.qname
       ),
@@ -252,11 +258,12 @@ module.exports = grammar({
     _postfix: ($) => seq(choice(prec.left(20, field('filter_expr', $.predicate)), prec.left(20, field('dynamic_function_call', $.arg_list)), prec.left(20, $.postfix_lookup))),
     predicate: ($) => prec.left(20, seq('[', $._expr_single, ']')), // 124
     postfix_lookup: ($) => prec.left(20, seq('?', field('key', choice($._ncname, $.integer_literal, $.parenthesized_expr, alias('*', $.wildcard))))),
-    path_expr: ($) => prec.left(19, choice(seq(choice('//', '/'), $._rel_path_expr), '/')), // initial xpath start
-    _rel_path_expr: ($) => prec.left(19, seq($._step_expr, repeat(seq(choice('/', '//'), $._step_expr)))),
+    // A path expression that starts with "/" or "//"is often referred to as an absolute path expression
+    absolute_path_expr: ($) => prec.left(19, choice(seq(choice('//', '/'), $.rel_path_expr), '/')),
+    rel_path_expr: ($) => prec.left(19, seq($._step_expr, repeat(seq(choice('/', '//'), $._step_expr)))),
     _step_expr: ($) => prec.left(19, seq(choice($._postfix_expr, $._axis_step))),
-    _axis_step: ($) => seq(field('axis_movement', choice($._forward_step, $.reverse_step)), repeat(prec.left(20, field('filter', $.predicate)))), //  predicate within steps 123
-    reverse_step: ($) => choice($.reverse_axis, '..'),
+    _axis_step: ($) => seq(field('axis', choice($._forward_step, $._reverse_step)), repeat(prec.left(20, field('filter', $.predicate)))), //  predicate within steps 123
+    _reverse_step: ($) => choice($.reverse_axis, '..'),
     _forward_step: ($) => choice($.forward_axis, $.abbrev_forward_step),
     forward_axis: ($) => seq(choice('child', 'descendant', 'attribute', 'self', 'descendant-or-self', 'following-sibling', 'following'), '::', $._node_test), //113
     reverse_axis: ($) => seq(choice('parent', 'ancestor', 'preceding-sibling', 'preceding', 'ancestor-or-self'), '::', $._node_test), //116

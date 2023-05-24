@@ -60,7 +60,7 @@ let $m := map {
 },
 $days := ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 return fn:filter($days,$m),
-'3.1.6 Named Function References',
+-'3.1.6 Named Function References',
 fn:abs#1,
 fn:concat#5,
 local:myfunc#2,

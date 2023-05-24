@@ -1,3 +1,2 @@
+1 instance of  ( ItemType )
 
-function($a as xs:double, $b as xs:double) as xs:double { $a * $b }
- 

@@ -1,7 +1,6 @@
 module namespace mod = "http://example.org/#mod";
 declare namespace foo = "http://example.org/#foo";
 declare default element namespace "http://example.org/names";
-OO
 import schema namespace geometry = "http://example.org/geo-schema-declarations";
 import module namespace geo = "http://example.org/geo-functions";
 

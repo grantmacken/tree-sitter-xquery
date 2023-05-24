@@ -1,4 +1,3 @@
-(
 '3.4 Sequence Expressions',
 (10, 1, 2, 3, 4),
 (10, (1, 2), (), (3, 4)),
@@ -12,5 +11,3 @@ fn:reverse(10 to 15),
 $seq1 union $seq2,
 $seq1 intersect $seq2,
 $seq2 except $seq3,
-'END'
-)

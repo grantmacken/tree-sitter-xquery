@@ -1,6 +1,7 @@
-(
 '2.5.4 SequenceType Syntax',
+() instance of empty-sequence(),
 5 instance of xs:date,
+5 instance of dummy:date,
 5 instance of attribute(),
 5 instance of element(),
 5 instance of element(po:shipto, po:address),
@@ -36,4 +37,3 @@ $M instance of map(xs:integer, xs:string),
 array {} instance of array(*),
 [] instance of array(*),
 [1] instance of array(xs:integer)
-)
