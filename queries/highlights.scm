@@ -1,42 +1,57 @@
+; https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/groups/integrations/treesitter.lua
 ; fallback identifiers
-ncname: (identifier) @property.ncname
-prefixed: (identifier) @namespace
-local: (identifier) @property.local
-(wildcard) @property.wildcard
+; ncname: (identifier) @property.ncname
+; prefixed: (identifier) @namespace
+; local: (identifier) @property.local
 ; where vars defined
-(variable
-  [
-  "$" @variable
-  ncname: (identifier) @variable.define
-  prefixed: (identifier) @namespace
-  local: (identifier) @variable.define
-  ]
+(variable . 
+  "$" @variable .
+ [ 
+    ((identifier) @namespace ":" @punctuation.delimiter (identifier) @variable.local)
+    ncname: (identifier) @variable
+    ]
   )
 
 ; 2.5.1 Predefined Schema Types 
-(atomic_or_union_type
-  (identifier) @namespace.builtin (#eq? @namespace.builtin  "xs")
-  ":"
-  (identifier) @type.builtin.atomic (#any-of? @type.builtin.atomic 
-                         "anyAtomicType" "untypedAtomic" "dateTime" "dateTimeStamp" "time" "date" "duration" "yearMonthDuration" "dayTimeDuration" "float" "double" "decimal" "integer" "nonPositiveInteger" "negativeInteger" "long" "int" "short" "byte" "nonNegativeInteger" "unsignedLong" "unsignedInt" "unsignedShort" "unsignedByte" "positiveInteger" "gYearMonth" "gYear" "gMonthDay" "gDay" "gMonth" "string" "normalizedString" "token" "language" "NMTOKEN" "Name" "NCName" "ID" "IDREF" "ENTITY" "boolean" "base64Binary" "hexBinary" "anyURI" "QName" "NOTATION"
-                         )
+(atomic_or_union_type .
+  [
+  ((identifier) @type.name .)
+  ((identifier) @namespace.local (#not-eq? @namespace.local  "xs") .
+  ":" .
+  (identifier) @type.local_name 
   )
-
-(atomic_or_union_type
-  (identifier) @namespace.local (#not-eq? @namespace.local  "xs")
-  ":"
-  (identifier) @type.local
+  ((identifier) @namespace.builtin (#eq? @namespace.builtin  "xs") .
+  ":" .
+  (identifier) @type.builtin.atomic (#any-of? @type.builtin.atomic 
+  "anyAtomicType" "untypedAtomic" "dateTime" "dateTimeStamp" "time" "date" "duration" "yearMonthDuration" "dayTimeDuration" "float" "double" "decimal" "integer" "nonPositiveInteger" "negativeInteger" "long" "int" "short" "byte" "nonNegativeInteger" "unsignedLong" "unsignedInt" "unsignedShort" "unsignedByte" "positiveInteger" "gYearMonth" "gYear" "gMonthDay" "gDay" "gMonth" "string" "normalizedString" "token" "language" "NMTOKEN" "Name" "NCName" "ID" "IDREF" "ENTITY" "boolean" "base64Binary" "hexBinary" "anyURI" "QName" "NOTATION"
+  ))
+  ]
   )
 
 ; 2.5.4 SequenceType Syntax
 (type_declaration  "as" @keyword.type_declaration)
-(parenthesized_item_type "(" ")" ) @type.parenthesized_item
+(parenthesized_item_type . "(" ")" ) @type.parenthesized_item
 (sequence_type "empty-sequence" "(" ")" ) @type.empty_sequence
  name_test: (_) @type.name_test
+; note: for name_test also 
+(wildcard .
+  [ 
+    "*" @type.wildcard 
+    ((identifier) @type.name . ":*" @type.wildcard)
+    ("*:" @type.wildcard . (identifier) @type.name) 
+    ((braced_uri_literal) @type.braced_uri . "*" @type.wildcard)
+    ]
+)
+
+; @type.braced_uri_wildcard
+
+
  kind_test: (_) @type.kind_test
  (any_item) @type.any_test
  func_test: (_) @type.func_test
 (occurrence_indicator) @type.occurrence
+
+
 
 ; 3.1 Primary Expressions
 ; 3.1.1 Literals 
@@ -51,21 +66,29 @@ local: (identifier) @property.local
  (predefined_entity_ref)
  ] @string.special
 ; numbers
-[(integer_literal) (decimal_literal) (double_literal) ] @number
+[(integer_literal) (decimal_literal) (double_literal)] @number
 ; 3.1.2 Variable References
-(_ 
+(var_ref .
+  "$" @variable.delimiter .
   [ 
-  (var_ref
-   "$" @variable.delimiter
-   ncname: (identifier) @variable.ref.name)
-   (var_ref 
-    "$" @variable.delimiter
-     prefixed: (identifier) @namespace 
-     ":" @punctuation.delimiter.qname
-     local: (identifier) @variable.ref.local_name
-     )
-   ]
-  )
+  ((identifier) @namespace . ":"  @punctuation.delimiter . (identifier) @variable.ref_local .)
+  ncname: (identifier) @variable.ref
+  ]
+)
+
+; (_ 
+;   [ 
+;   (var_ref
+;    "$" @variable.delimiter
+;    ncname: (identifier) @variable.ref.name)
+;    (var_ref 
+;     "$" @variable.delimiter
+;      prefixed: (identifier) @namespace 
+;      ":" @punctuation.delimiter.qname
+;      local: (identifier) @variable.ref.local_name
+;      )
+;    ]
+;   )
 ;3.1.3 Parenthesized Expressions
 (parenthesized_expr [ "(" ")" ] @punctuation.bracket.paren_expr)
 ;3.1.4 Context Item Expression
@@ -75,11 +98,11 @@ local: (identifier) @property.local
 (_ 
   [ 
   (function_call
-   ncname: (identifier) @function.name (#not-any-of? @function.name  "array" "attribute" "comment" "document-node" "element" "empty-sequence" "function" "if" "item" "map" "namespace-node" "node" "processing-instruction" "schema-attribute" "schema-element" "switch" "text" "typeswitch"))
+   ncname: (identifier) @function.call(#not-any-of? @function.call  "array" "attribute" "comment" "document-node" "element" "empty-sequence" "function" "if" "item" "map" "namespace-node" "node" "processing-instruction" "schema-attribute" "schema-element" "switch" "text" "typeswitch"))
    (function_call
      prefixed: (identifier) @namespace 
      ":" @punctuation.delimiter.qname
-     local: (identifier) @function.local_name
+     local: (identifier) @function.call.local
      )
    ]
   )
@@ -145,6 +168,15 @@ axis: (_
           ] @constant.builtin.path
         "::" @punctuation.delimiter.path
         )
+
+; TODO wildcard
+(abbrev_forward_step .
+  [
+  ((identifier) @namespace . ":" @punctuation.delimiter . (identifier) @variable.local)
+  ncname: (identifier) @variable
+  "@" @constant.builtin.path
+  ]
+  )
 (abbrev_forward_step "@" @constant.builtin.path)
 ; 3.4 Sequence Expressions 
 ; 3.4.1 Constructing Sequences 
@@ -167,10 +199,42 @@ axis: (_
 (or_expr [ "or" ] @operator.or)
 ; 3.9 Node Constructors 
 ;3.9.1 Direct Element Constructors 
-(start_tag "<" ">" ) @tag.start
-(end_tag "</" ">") @tag.end
-(empty_tag "<" "/>" )@tag.empty
-(direct_attribute ["="] @operator.assignment.attr)
+;
+; tag name
+; tag.attribute
+; tag.delimiter
+(start_tag .
+    "<"  @tag.delimiter
+    [
+     ((identifier) @namespace ":" @punctuation.delimiter (identifier) @tag.local)
+     ncname: (identifier) @tag
+     ]
+    ">" @tag.delimiter 
+    )
+(end_tag .
+    "</" @tag.delimiter
+    [
+    ((identifier) @namespace ":" @punctuation.delimiter (identifier) @tag.local)
+    ncname: (identifier) @tag
+    ]
+    ">" @tag.delimiter)
+(empty_tag .
+  "<" @tag.delimiter
+
+    [
+    ((identifier) @namespace ":" @punctuation.delimiter (identifier) @tag.local)
+    ncname: (identifier) @tag
+    ]
+    "/>" @tag.delimiter
+    )
+
+(direct_attribute .
+    [
+    ((identifier) @namespace ":" @punctuation.delimiter (identifier) @tag.attribute.local)
+    ncname: (identifier) @tag.attribute
+    ]
+  "=" @operator.assignment.attr
+  )
 (attribute_value ["'" "\"" ] @punctuation.bracket.attr)
 ; 3.9.3 Computed Constructors
 computed_constructor: (_
@@ -182,11 +246,11 @@ computed_constructor: (_
     "processing-instruction"
     "comment"
     "namespace" 
-    ] @tag.constructor
+    ] @constructor
   ) 
 ; 3.10 String Constructors 
-(string_constructor "``[" "]``" ) @function.constructor.string
-(interpolation "`{" "}`" ) @function.interpolation.bracket
+(string_constructor . "``[" "]``" ) @constructor.string
+(interpolation . "`{" "}`" ) @constructor.interpolation
 ; 3.11 Maps and Arrays 
 (map_constructor "map" "{" "}" ) @function.constructor.map
 (map_entry ":" @punctuation.delimiter.map )
@@ -284,9 +348,10 @@ computed_constructor: (_
 (arrow_expr [ "=>" ]  @operator.arrow )
 (arrow_function
   [ 
-    local: (identifier) @function
+    ((identifier) @namespace ":" @punctuation.delimiter (identifier) @function.local)
     ncname: (identifier) @function
-    ])
+    ]
+  )
 ; 3.21 Validate Expressions TODO?
 ; 3.22 Extension Expressions TODO?
 ;;4 Modules and Prologs 
@@ -351,7 +416,7 @@ computed_constructor: (_
   "namespace"
   ) @keyword.declaration
 ; 4.15 Annotations
-(function_declaration
+(function_declaration .
   "declare"  @keyword.declaration
   (annotation)?
   "function" @keyword.declaration
@@ -359,14 +424,14 @@ computed_constructor: (_
   ":" @punctuation.delimiter.qname
   local: (identifier) @function.local_name
  )
-(variable_declaration
+(variable_declaration .
   "declare"  @keyword.declaration
   (annotation)?
   "variable" @keyword.declaration
  )
 ;
-(_  
-  "namespace"  @keyword
+(_ . 
+  "namespace"  @keyword 
   (identifier) @define.namespace
    "=" @operator.assignment
 )
