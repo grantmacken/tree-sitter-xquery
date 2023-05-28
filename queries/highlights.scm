@@ -14,19 +14,18 @@
 
 ; 2.5.1 Predefined Schema Types 
 (atomic_or_union_type .
-  [
+  [                   
   ((identifier) @type.name .)
-  ((identifier) @namespace.local (#not-eq? @namespace.local  "xs") .
-  ":" .
-  (identifier) @type.local_name 
+  ((identifier) @namespace.local (#not-eq? @namespace.local  "xs") . ":" . (identifier) @type.local_name )
+  ]
   )
-  ((identifier) @namespace.builtin (#eq? @namespace.builtin  "xs") .
-  ":" .
+
+(atomic_or_union_type .
+  (identifier) @namespace.builtin (#eq? @namespace.builtin  "xs") . ":" .
   (identifier) @type.builtin.atomic (#any-of? @type.builtin.atomic 
   "anyAtomicType" "untypedAtomic" "dateTime" "dateTimeStamp" "time" "date" "duration" "yearMonthDuration" "dayTimeDuration" "float" "double" "decimal" "integer" "nonPositiveInteger" "negativeInteger" "long" "int" "short" "byte" "nonNegativeInteger" "unsignedLong" "unsignedInt" "unsignedShort" "unsignedByte" "positiveInteger" "gYearMonth" "gYear" "gMonthDay" "gDay" "gMonth" "string" "normalizedString" "token" "language" "NMTOKEN" "Name" "NCName" "ID" "IDREF" "ENTITY" "boolean" "base64Binary" "hexBinary" "anyURI" "QName" "NOTATION"
   ))
-  ]
-  )
+                     
 
 ; 2.5.4 SequenceType Syntax
 (type_declaration  "as" @keyword.type_declaration)
@@ -42,17 +41,10 @@
     ((braced_uri_literal) @type.braced_uri . "*" @type.wildcard)
     ]
 )
-
-; @type.braced_uri_wildcard
-
-
  kind_test: (_) @type.kind_test
  (any_item) @type.any_test
  func_test: (_) @type.func_test
 (occurrence_indicator) @type.occurrence
-
-
-
 ; 3.1 Primary Expressions
 ; 3.1.1 Literals 
 (string_literal [ "'" "\""] @punctuation.bracket.string ) 
@@ -360,7 +352,13 @@ computed_constructor: (_
  "xquery"  ["version" "encoding"]  ) @keyword.declaration.version
 ; namespace_define pattern
 ; 4.2 Module Declaration 
-(module_declaration . "module"  @keyword.declaration.module)
+(module_declaration . "module" @keyword.declaration.module )
+
+(_
+  "namespace"  @keyword 
+  (identifier) @namespace
+   "=" @operator.assignment
+)
 ; 4.3 Boundary-space Declaration
 (boundary_space_declaration .
   "declare" "boundary-space" [ "preserve" "strip"]
@@ -430,11 +428,7 @@ computed_constructor: (_
   "variable" @keyword.declaration
  )
 ;
-(_ . 
-  "namespace"  @keyword 
-  (identifier) @define.namespace
-   "=" @operator.assignment
-)
+
 (_ ";" @punctuation.declaration_separator .)
 ;4.2 Module Declaration
 "," @punctuation.delimiter

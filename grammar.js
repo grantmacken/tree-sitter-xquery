@@ -64,12 +64,12 @@ module.exports = grammar({
     version_declaration: ($) => seq('xquery', choice(seq('encoding', $.string_literal), seq('version', $.string_literal, optional(seq('encoding', $.string_literal)))), ';'), // 2
     library_module: ($) => seq($.module_declaration, $.prolog), // 4
     main_module: ($) => seq(optional($.prolog), $.query_body), // 3
-    prolog: ($) => prec.right(choice(seq($._prolog_part_one, optional($._prolog_part_two)), seq(optional($._prolog_part_one), $._prolog_part_two))),
+    prolog: ($) => prec.right(choice(seq($._prolog_part_one, optional($._prolog_part_two)), seq(optional($._prolog_part_one), $._prolog_part_two))), // 6
     module_declaration: ($) => seq('module', $._namespace_define, field('uri', $.string_literal), ';'), // 5
     _namespace_define: ($) => seq('namespace', $._ncname, '='), // repeated seq
     _prolog_part_one: ($) => repeat1(seq(choice($.default_namespace_declaration, $._setter, $.namespace_declaration, $.module_import, $.schema_import), ';')), // 6
     _prolog_part_two: ($) => repeat1(seq(choice($.context_item_declaration, $.variable_declaration, $.function_declaration, $.option_declaration), ';')), // 6
-    // separator: ($) => ';', // 7
+    // separator: ';'  // 7
     _setter: ($) =>
       choice(
         $.boundary_space_declaration, // 9
@@ -80,7 +80,7 @@ module.exports = grammar({
         $.empty_order_declaration, // 14
         $.copy_namespaces_declaration, // 15
         $.decimal_format_declaration // 18
-      ),
+      ), // 8
     boundary_space_declaration: ($) => seq('declare', 'boundary-space', choice('preserve', 'strip')),
     default_collation_declaration: ($) => seq('declare', 'default', 'collation', field('uri', $.string_literal)),
     base_uri_declaration: ($) => seq('declare', 'base-uri', field('uri', $.string_literal)),
