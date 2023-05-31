@@ -139,7 +139,7 @@ module.exports = grammar({
         field('body', choice($.enclosed_expr, 'external'))
       ), // 32
     param_list: ($) => seq($._param, repeat(seq(',', $._param))), // 33
-    _param: ($) => seq(field('param', $.variable), optional(field('param_type', $.type_declaration))), // 34
+    _param: ($) => seq('$', $._EQName, optional(field('param_type', $.type_declaration))), // 34
     option_declaration: ($) => seq('declare', 'option', field('name', $._EQName), field('value', $.string_literal)), // 37
     query_body: ($) => $._expr, // 38
     _expr: ($) => prec(1, seq($._expr_single, repeat(seq(',', $._expr_single)))), // 39
@@ -179,7 +179,8 @@ module.exports = grammar({
     for_clause: ($) => seq('for', $.for_binding, repeat(seq(',', $.for_binding))), // 44',
     for_binding: ($) =>
       seq(
-        $.variable,
+        '$',
+        $._EQName,
         optional($.type_declaration),
         optional(seq('allowing', 'empty')),
         optional(seq('at', field('positional_variable', $.variable))),
@@ -187,7 +188,7 @@ module.exports = grammar({
         field('binding_sequence', $._expr_single)
       ), // 45
     let_clause: ($) => seq('let', $.let_binding, repeat(seq(',', $.let_binding))), // 48
-    let_binding: ($) => seq($.variable, optional($.type_declaration), ':=', $._expr_single), // 49
+    let_binding: ($) => seq('$', $._EQName, optional($.type_declaration), ':=', $._expr_single), // 49
     count_clause: ($) => seq('count', $.variable), //   59
     where_clause: ($) => seq('where', $._expr_single), // 60
     group_by_clause: ($) => seq('group', 'by', $.grouping_spec, repeat(seq(',', $.grouping_spec))), // 61
@@ -232,7 +233,7 @@ module.exports = grammar({
     try_catch_expr: ($) => prec(2, seq($.try_clause, $.catch_clause)), // 78
     try_clause: ($) => seq('try', $.enclosed_expr), // 79
     catch_clause: ($) => seq('catch', $.catch_error_list, $.enclosed_expr), // 81
-    catch_error_list: ($) => seq($._name_test, repeat(seq('|', $._name_test))), // 82
+    catch_error_list: ($) => seq($.name_test, repeat(seq('|', $.name_test))), // 82
     or_expr: ($) => prec.left(3, seq(field('lhs', $._expr_single), 'or', field('rhs', $._expr_single))), // 83
     and_expr: ($) => prec.left(4, seq(field('lhs', $._expr_single), 'and', field('rhs', $._expr_single))), // 84
     comparison_expr: ($) => prec.left(5, seq(field('lhs', $._expr_single), $._comparison_ops, field('rhs', $._expr_single))), // 85
@@ -267,9 +268,9 @@ module.exports = grammar({
     _forward_step: ($) => choice($.forward_axis, $.abbrev_forward_step),
     forward_axis: ($) => seq(choice('child', 'descendant', 'attribute', 'self', 'descendant-or-self', 'following-sibling', 'following'), '::', $._node_test), //113
     reverse_axis: ($) => seq(choice('parent', 'ancestor', 'preceding-sibling', 'preceding', 'ancestor-or-self'), '::', $._node_test), //116
-    abbrev_forward_step: ($) => seq(optional('@'), $._node_test),
-    _node_test: ($) => choice($._name_test, $._kind_test), // 118
-    _name_test: ($) => field('name_test', choice($._EQName, $.wildcard)), //  199
+    abbrev_forward_step: ($) => prec.right(seq(optional('@'), $._node_test)),
+    _node_test: ($) => choice($.name_test, $._kind_test), // 118
+    name_test: ($) => choice($._EQName, $.wildcard), //  199
     wildcard: ($) => choice('*', seq($._ncname, ':*'), seq('*:', $._ncname), seq($.braced_uri_literal, '*')), // 120
     _primary_expr: ($) =>
       choice(
