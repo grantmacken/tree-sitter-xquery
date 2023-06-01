@@ -3379,10 +3379,14 @@
           "name": "reverse_axis"
         },
         {
-          "type": "STRING",
-          "value": ".."
+          "type": "SYMBOL",
+          "name": "abbrev_reverse_step"
         }
       ]
+    },
+    "abbrev_reverse_step": {
+      "type": "STRING",
+      "value": ".."
     },
     "_forward_step": {
       "type": "CHOICE",

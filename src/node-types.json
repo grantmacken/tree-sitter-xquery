@@ -8449,11 +8449,11 @@
         "required": false,
         "types": [
           {
-            "type": "..",
-            "named": false
+            "type": "abbrev_forward_step",
+            "named": true
           },
           {
-            "type": "abbrev_forward_step",
+            "type": "abbrev_reverse_step",
             "named": true
           },
           {
@@ -11660,10 +11660,6 @@
     "named": false
   },
   {
-    "type": "..",
-    "named": false
-  },
-  {
     "type": "/",
     "named": false
   },
@@ -11774,6 +11770,10 @@
   {
     "type": "`{",
     "named": false
+  },
+  {
+    "type": "abbrev_reverse_step",
+    "named": true
   },
   {
     "type": "allowing",

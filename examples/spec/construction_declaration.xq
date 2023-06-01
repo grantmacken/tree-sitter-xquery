@@ -1,2 +1,2 @@
-declare construction;
+declare construction preserve;
 ()

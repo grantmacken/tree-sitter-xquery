@@ -1,5 +1,4 @@
-
-# tree-sitter-xQuery
+# tree-sitter-xquery
 
 A tree-sitter grammar is built for an as-you-type experience in a text editor.
 
@@ -9,32 +8,32 @@ text highlighting, indenting, folding, scope info and more for a text editor.
 The incremental tree-sitter parse should be a step above text highlighting with regular
 expressions, however tree-sitter should not be confused with a validating parser. Unlike a 
 validating parser, tree-sitter will not stop on-error, but continue to parse and provide
-a syntatic highlighting.
+a syntax highlighting.
 
 - [tree-sitter presentation](https://www.youtube.com/watch?v=Jes3bD6P0To) - a new parsing system for programming tools
 - [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
-
 
 ## tree-sitter web playground 
 
 Visit the interactive treesitter web [playground](https://grantmacken.github.io/tree-sitter-xquery) to see the 
 XQuery treesitter in action.
 
-
 ## building
 
 Both Make and Yarn are required to use this repo used so you will need to install both.
-Clone and cd into this repo then run `make install` which will use Yarn to install the tree-sitter cli.
+Clone and `cd` into this repo then run `make install` which will use Yarn to install the tree-sitter cli.
 
 
  All the work is done in the grammar.js file
 
-The repo contains a Makefile as I use `make` for treeitter aliases.
+The repo contains a Makefile as I use `make` for treesitter aliases.
 The default `make` target is an alias for `tree-sitter generate` which will create tree-sitter files from the grammar
 
 To see other make targets type `make help`
 
 ## An attempt to eliminate semantic token ambiguity
+
+Note: This list is not complete
 
 ### brackets
 
@@ -55,6 +54,8 @@ To see other make targets type `make help`
  - [x]  `item`  in prolog declarations 'context item declarations'
  - [x]  `item`  in any item test
 
+
+
 ## testing gaols: 1, 2, 3 
 
 1. `make parse-all` The parser **SHOULD NOT** throw a parse error with any **valid** xQuery module text.
@@ -66,8 +67,10 @@ Tests are run via [github actions](https://github.com/grantmacken/tree-sitter-xQ
 The parsing examples that are derived from the [W3C xQuery recommendation](https://www.w3.org/TR/xquery-31)
 are found in the 'examples/spec' folder. Other parse examples are from the [qt3tests suite](https://github.com/w3c/qt3tests) and are in the examples/qt3tests folder
 
+<!-- TODO
 The `test/corpus/` tree-sitter tests are mainly organised around the sections outlined in the 
 [W3C xQuery recommendation](https://www.w3.org/TR/xquery-31).
+-->
 
 To peek at tree-sitter highlight captures in action, I run some query examples in 
 [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
@@ -92,6 +95,9 @@ parser_config.xquery = {
 }
 
 ```
+
+<!--
+
 ## better semantic highlighting: example in neovim
 
 ![terminal screeshot](assets/2021-09-02_10-56.png)
@@ -105,6 +111,8 @@ sequence_type context so it will be colored as a type.
 More spot the semantic color differences
  - '[' ']' can be a square array constructors or delimit predicates
  - '(' ')' can be a parenthesized expr or delimit parameter and argument lists
+
+-->
 
 ## Contributing, Discussions and Issues
 

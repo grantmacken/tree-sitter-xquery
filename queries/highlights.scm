@@ -1,27 +1,12 @@
 ; https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/groups/integrations/treesitter.lua
-
-; (_ .
-;   [
-;   ncname: (identifier) @constant.QName.unprefixed
-;   prefixed: (identifier) @namespace.QName.prefixed
-;   (uri_qualified_name) @constant.URIQualifiedName
-;   ]
-;   (":" @punctuation.delimiter.QName  .
-;    local: (identifier) @constant.QName.local
-;    )* 
-;   )
 ; 2.5.1 Predefined Schema Types 
-; (atomic_or_union_type
-;   (_)
-;   [
-;   ncname: (identifier) @constant.QName.unprefixed
-;   prefixed: (identifier) @namespace.QName.prefixed
-;   (uri_qualified_name) @constant.URIQualifiedName
-;   ]
-;   (":" @punctuation.delimiter.QName  .
-;   local: (identifier) @constant.QName.local
-;   )* 
-;   )
+
+; 2.5.4 SequenceType Syntax
+(type_declaration  "as" @keyword) @type.declaration
+(parenthesized_item_type . "(" ")" ) @type.parenthesized_item
+(sequence_type "empty-sequence" "(" ")" ) @type.empty_sequence
+(atomic_or_union_type) @type.atomic_or_union
+; TODO: maybe for builtins (atomic_or_union_type
 ; ; [                   
   ; ((identifier) @type.name .)
   ; ((identifier) @namespace.local (#not-eq? @namespace.local  "xs") . ":" . (identifier) @type.local_name )
@@ -31,29 +16,17 @@
 ;   (identifier) @type.builtin.atomic (#any-of? @type.builtin.atomic 
 ;   "anyAtomicType" "untypedAtomic" "dateTime" "dateTimeStamp" "time" "date" "duration" "yearMonthDuration" "dayTimeDuration" "float" "double" "decimal" "integer" "nonPositiveInteger" "negativeInteger" "long" "int" "short" "byte" "nonNegativeInteger" "unsignedLong" "unsignedInt" "unsignedShort" "unsignedByte" "positiveInteger" "gYearMonth" "gYear" "gMonthDay" "gDay" "gMonth" "string" "normalizedString" "token" "language" "NMTOKEN" "Name" "NCName" "ID" "IDREF" "ENTITY" "boolean" "base64Binary" "hexBinary" "anyURI" "QName" "NOTATION"
 ;   ))
-; 2.5.4 SequenceType Syntax
-(type_declaration  "as" @keyword.type_declaration)
-(parenthesized_item_type . "(" ")" ) @type.parenthesized_item
-(sequence_type "empty-sequence" "(" ")" ) @type.empty_sequence
-(atomic_or_union_type) @type.atomic_or_union
 (name_test) @type.name_test
  kind_test: (_) @type.kind_test
  (any_item) @type.any_test
  func_test: (_) @type.func_test
-(occurrence_indicator) @type.occurrence
+(occurrence_indicator) @symbol.occurrence_indicator
 (wildcard) @type.wildcard
 ; 3.1 Primary Expressions
 ; 3.1.1 Literals 
 (string_literal [ "'" "\""] @punctuation.bracket.string ) 
-(string_constructor_chars) @string
-(char_data) @string
-[
- (escape_quote)
- (escape_apos)
- (escape_enclosed)
- (char_ref)
- (predefined_entity_ref)
- ] @string.special
+[(char_data) (string_constructor_chars) ] @string
+[ (escape_quote) (escape_apos) (escape_enclosed) (char_ref) (predefined_entity_ref) ] @string.special
 ; numbers
 [(integer_literal) (decimal_literal) (double_literal)] @number
 ; 3.1.2 Variable References
@@ -75,24 +48,10 @@
    )*
   (arg_list) @function.call
 )
-(arg_list
-   arg: (placeholder) @parameter.placeholder
-  )
+(arg_list arg: (placeholder) @parameter.placeholder)
 ; 3.2.2 Dynamic Function Calls
-; A dynamic function call consists of a base expression that returns 
-; the function and a parenthesized list of zero or more arguments 
-; (argument expressions or ArgumentPlaceholders).] 
 ; 3.1.6 Named Function References 
-  ;ncname: (identifier) @function.QName.unprefixed
-  ; [
-  ; ncname: (identifier) @function.name (#not-any-of? @function.name  "array" "attribute" "comment" "document-node" "element" "empty-sequence" "function" "if" "item" "map" "namespace-node" "node" "processing-instruction" "schema-attribute" "schema-element" "switch" "text" "typeswitch")
-  ; prefixed: (identifier) @function.QName.prefixed
-  ; (uri_qualified_name) @function.URIQualifiedName
-  ; ]
- (named_function_ref
-  "#" @punctuation.delimiter .
-  (integer_literal) 
-   ) @function.named_function_ref
+(named_function_ref "#" @punctuation.delimiter . (integer_literal) ) @function.named_function_ref
 ; 3.1.7 Inline Function Expressions 
 (inline_function_expr
   ((annotation) @function.annotation)?
@@ -101,47 +60,16 @@
   (param_list)*
   ")" @punctuation.bracket.params
   ) @function.inline
-
 ; 3.1.8 Enclosed Expressions 
 (enclosed_expr  [ "{" "}" ] @punctuation.bracket.enclosed_expr)
 ; 3.2 Postfix Expressions
-(arg_list [ "(" ")" ] @punctuation.bracket.args )
+(arg_list [ "(" ")" ] @punctuation.bracket.arg_list )
 (predicate [ "[" "]" ] @punctuation.bracket.predicate)
 ; 3.11.3.2 Postfix Lookup 
-(postfix_lookup
-   "?" @keyword.postfix_lookup
-    key: (_) @constant.key_specifier
-   )
-;;
+(postfix_lookup "?" @operator.postfix_lookup key: (_) @constant.key_specifier)
 ; 3.3 Path Expressions
 [ "/" "//" ] @operator.path
-axis: ".." @constant.builtin.path
-axis: (_ 
-        [
-          "child" 
-          "descendant" 
-          "attribute" 
-          "self" 
-          "descendant-or-self" 
-          "following-sibling" 
-          "following"
-          "parent" 
-          "ancestor" 
-          "preceding-sibling" 
-          "preceding" 
-          "ancestor-or-self"
-          ] @constant.builtin.path
-        "::" @punctuation.delimiter.path
-        )
-
-; TODO wildcard
-(abbrev_forward_step .
-  [
-  "@" @constant.builtin.path
-  ncname: (identifier) @constant.name.path 
-  ((identifier) @namespace . ":" @punctuation.delimiter.path . (identifier) @constant.local_name.path ) 
-  ]
-  )
+axis: (_) @constant.axis_step
 ; 3.4 Sequence Expressions 
 ; 3.4.1 Constructing Sequences 
 ;@see parenthesized_expr
@@ -149,7 +77,6 @@ axis: (_
 ;3.4.2 Combining Node Sequences
 (union_expr [ "union" "|" ] @operator.union ); 
 (intersect_except_expr [ "intersect" "except"] @operator.intersect_except)
-;;
 ;3.5 Arithmetic Expressions 
 (additive_expr [ "-" "+"] @operator.additive)
 (multiplicative_expr [ "*" "div" "idiv" "mod"] @operator.multiplicative )
@@ -161,57 +88,16 @@ axis: (_
 ; 3.8 Logical Expressions 
 (and_expr [ "and" ] @operator.and)
 (or_expr [ "or" ] @operator.or)
-; 3.9 Node Constructors 
-;3.9.1 Direct Element Constructors 
-;
-; tag name
-; tag.attribute
-; tag.delimiter
-(start_tag .
-    "<"  @tag.delimiter
-    [
-     ((identifier) @namespace ":" @punctuation.delimiter (identifier) @tag.local)
-     ncname: (identifier) @tag
-     ]
-    ">" @tag.delimiter 
-    )
-(end_tag .
-    "</" @tag.delimiter
-    [
-    ((identifier) @namespace ":" @punctuation.delimiter (identifier) @tag.local)
-    ncname: (identifier) @tag
-    ]
-    ">" @tag.delimiter)
-(empty_tag .
-  "<" @tag.delimiter
-
-    [
-    ((identifier) @namespace ":" @punctuation.delimiter (identifier) @tag.local)
-    ncname: (identifier) @tag
-    ]
-    "/>" @tag.delimiter
-    )
-
-(direct_attribute .
-    [
-    ((identifier) @namespace ":" @punctuation.delimiter (identifier) @tag.attribute.local)
-    ncname: (identifier) @tag.attribute
-    ]
-  "=" @operator.assignment.attr
-  )
-(attribute_value ["'" "\"" ] @punctuation.bracket.attr)
+;3.9.1 Direct Element Constructors: tag tag.attribute tag.delimiter
+(start_tag . "<"  @tag.delimiter ">" @tag.delimiter ) @tag.start
+(end_tag . "</" @tag.delimiter ">" @tag.delimiter) @tag.end
+(empty_tag . "<" @tag.delimiter "/>" @tag.delimiter) @tag.empty
+(direct_attribute "=" @operator.assignment.attr) @tag.attribute
+(attribute_value ["'" "\"" ] @punctuation.bracket)
 ; 3.9.3 Computed Constructors
-computed_constructor: (_
-  [
-    "element"
-    "attribute" 
-    "document"
-    "text"
-    "processing-instruction"
-    "comment"
-    "namespace" 
-    ] @constructor
-  ) 
+computed_constructor: (_ .
+  [ "element" "attribute" "document" "text" "processing-instruction" 
+    "comment" "namespace" ] @keyword.computed_constructor ) @constructor.node
 ; 3.10 String Constructors 
 (string_constructor . "``[" "]``" ) @constructor.string
 (interpolation . "`{" "}`" ) @constructor.interpolation
@@ -223,62 +109,32 @@ computed_constructor: (_
 ; 3.11.3 The Lookup Operator ("?") for Maps and Arrays 
 ; Unary lookup is used in predicates (e.g. $map[?name='Mike'] or with the simple map operator
 ;3.11.3.1 Unary Lookup 
- (unary_lookup 
-   "?"  @operator.lookup.unary
-    key: (_) @constant.key_specifier
-   )
-;;
+(unary_lookup "?"  @operator.lookup.unary key: (_) @constant.key_specifier)
 ; 3.12 FLWOR Expressions TODO
-(for_clause . "for" @keyword.flwor.for_clause)
+(for_clause . "for") @keyword.for_clause
 (for_binding (["allowing" "empty" "at" "in" ] @keyword.for_binding)*) @variable.for_binding
-(let_clause . "let" @keyword.flwor.let_clause )
+(let_clause . "let" ) @keyword.let_clause 
 (let_binding) @variable.let_binding
-[
-(count_clause "count")
-(where_clause "where")
-(order_by_clause [ "stable" "order" "by" "ascending" "collation" "descending" "empty" "greatest" "least" "collation"] )
-(group_by_clause "group" "by")
-(grouping_spec)
+[ (count_clause "count") (where_clause "where")
+  (order_by_clause [ "stable" "order" "by" "ascending" "collation" "descending" "empty" "greatest" "least" "collation"] )
+  (group_by_clause "group" "by") (grouping_spec)
 ] @keyword.flwor.intermediate
 (return_clause "return" @keyword.return.flwor)
-; 3.13 Ordered and Unordered Expressions
-[
-(unordered_expr "unordered")
-(ordered_expr "ordered")
-] @keyword.block.order
+; 3.13 Ordered and Unordered Expressions 
+(unordered_expr "unordered") @keyword.unordered_expr 
+(ordered_expr "ordered") @keyword.ordered_expr
 ; 3.14 Conditional Expressions
-(if_expr
-  "if"
-  "then"
-  "else"
-  ) @keyword.block.conditional
+(if_expr "if" "then" "else") @keyword.if_expr
 ;3.15 Switch Expression
-(switch_expr
-  "switch"
-  "default"
-  "return"
-  ) @keyword.block.switch
-(switch_clause
-  "case" "return" 
-  ) @keyword.clause.switch_case
+(switch_expr "switch" "default" "return") @keyword.switch_expr
+(switch_clause "case" "return" ) @keyword.switch_clause
 ;3.16 Quantified Expressions 
-(quantified_expr
- ["some" "every"]
- "in"
-) @keyword.block.quantified
+(quantified_expr ["some" "every"] "in") @keyword.quantified_expr
 ;3.17 Try/Catch Expressions 
-(try_catch_expr
-  (try_clause "try")
-  (catch_clause "catch")
-) @keyword.block.try_catch
+(try_catch_expr (try_clause "try") (catch_clause "catch")) @keyword.try_catch_expr
 ;3.18 Expressions on SequenceTypes
 ;3.18.1 Instance Of 
-(instance_of_expr
-  lhs: (_)
-  "instance" @keyword.instance_of
-  "of" @keyword.instance_of
-  rhs: (_)
-  );
+(instance_of_expr) @keyword.instance_of;
 ;3.18.2 Typeswitch
 (typeswitch_expr "typeswitch"  "default" "return" ) @keyword.block.typeswitch
 (typeswitch_case_clause "case" "return" ) @keyword.case.typeswitch
@@ -287,17 +143,12 @@ computed_constructor: (_
 ;3.18.4 Castable 
 (castable_expr  "castable"  "as") @keyword.block.castable
 ;3.18.6 Treat
-(treat_expr  "treat"  "as"  ) @keyword.block.treat
+(treat_expr  "treat"  "as"  ) @keyword.block.treat_as
 ;3.19 Simple map operator (!) 
-(bang_expr [ "!" ] @operator.bang )
+(bang_expr  "!"  @operator.bang )
 ; 3.20 Arrow operator (=>) 
-(arrow_expr [ "=>" ]  @operator.arrow )
-; (arrow_function
-;   [ 
-;     ((identifier) @namespace ":" @punctuation.delimiter (identifier) @function.local)
-;     ncname: (identifier) @function
-;     ]
-;   )
+(arrow_expr  "=>"   @operator.arrow )
+(arrow_function) @function
 ; 3.21 Validate Expressions TODO?
 ; 3.22 Extension Expressions TODO?
 ;4 Modules and Prologs 
@@ -337,7 +188,8 @@ computed_constructor: (_
 ; 4.17 Context Item Declaration
 (context_item_declaration "context" @keyword "item" @keyword) @define.context_item
 ; 4.18 Function Declaration 
-(function_declaration ((annotation) @function.annotation)? "function" @keyword) @define.function
+(function_declaration ((annotation) @function.annotation)? "function" @keyword 
+                      "(" @punctuation.bracket ")" @punctuation.bracket) @define.function
 ; 33 ref by:  FunctionDecl InlineFunctionExpr
 (param_list) @parameter.param_list
 ; defaults in EQNames
@@ -348,11 +200,7 @@ prefixed: (identifier) @namespace.QName.prefixed
 ; ref ContextItemDecl VarDecl FunctionDecl
 "external" @import.external
 ; namespace define pattern in declarations
-(_
-  "namespace"  @keyword 
-  (identifier) @namespace
-   "=" @operator.namespace_assignment
-)
+(_ "namespace"  @keyword (identifier) @namespace "=" @operator.namespace_assignment)
 ; end of declaration delimiter
 (_ ";" @punctuation.delimiter.declaration_separator .)
 ;4.2 Module Declaration

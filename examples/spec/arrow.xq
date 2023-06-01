@@ -1,5 +1,7 @@
-$string => upper-case() => normalize-unicode() => tokenize("\s+"),
-'abc'=> substring(1,2),
-let $string := 'aa bb cc' 
-return
- $string=>replace('a','b')=>normalize-space()=>tokenize("\s")
+'3.20 Arrow operator (=>)', 
+U => F(A, B, C),
+'is the same as',
+F(U, A, B, C),
+tokenize((normalize-unicode(upper-case($string))),"\s+"),
+'is the same as',
+$string => upper-case() => normalize-unicode() => tokenize("\s+")
