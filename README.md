@@ -31,6 +31,30 @@ The default `make` target is an alias for `tree-sitter generate` which will crea
 
 To see other make targets type `make help`
 
+## Identifiers in XQuery
+
+An identifier in an XQuery is a Extended QName, aka an EQName.
+The aim of the XQuery highlight captures for identifiers is show their syntactic role.
+
+```
+my:salary(),
+(: highlight 'my' as 'namespace', 'salary' as 'function.call' :)
+(salary, bonus),
+(: highlight 'salary' and  'bonus' as type.name_test :)
+```
+
+I have attempted to make highlight captures indicates syntactic context
+
+```
+let $salary := 1000 return $salary
+(: 
+first '$salary' as  variable.let_binding 
+'return' as  keyword.return.flwor 
+next '$salary' as variable.reference 
+:)
+```
+
+
 ## An attempt to eliminate semantic token ambiguity
 
 Note: This list is incomplete
