@@ -133,7 +133,7 @@ install:
 	fi
 
 .PHONY: pr-create
-pr-create: parse-all test-all
+pr-create: parse-all
 	@#gh pr create --help
 	@gh pr create --fill
 
