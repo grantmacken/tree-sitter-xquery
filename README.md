@@ -1,4 +1,4 @@
-# tree-sitter-xquery
+# A tree-sitter for XQuery
 
 A tree-sitter grammar is built for an as-you-type experience in a text editor.
 
@@ -10,21 +10,21 @@ expressions, however tree-sitter should not be confused with a validating parser
 validating parser, tree-sitter will not stop on-error, but continue to parse and provide
 a syntax highlighting.
 
-- [tree-sitter presentation](https://www.youtube.com/watch?v=Jes3bD6P0To) - a new parsing system for programming tools
-- [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) - github semantic team
+- [tree-sitter presentation](https://www.youtube.com/watch?v=Jes3bD6P0To)  a new parsing system for programming tools
+- [why tree sitter](https://github.com/github/semantic/blob/master/docs/why-tree-sitter.md) GitHub semantic team
 
-## tree-sitter web playground 
+## A tree-sitter web playground 
 
 Visit the interactive treesitter web [playground](https://grantmacken.github.io/tree-sitter-xquery) to see the 
-XQuery treesitter in action.
+XQuery tree-sitter in action.
 
-## building
+## Building
 
-Both Make and Yarn are required to use this repo used so you will need to install both.
+Both Make and Yarn are required to use this repo, so you will need to install both.
 Clone and `cd` into this repo then run `make install` which will use Yarn to install the tree-sitter cli.
 
 
- All the work is done in the grammar.js file
+ All the work is done in the `grammar.js` file
 
 The repo contains a Makefile as I use `make` for treesitter aliases.
 The default `make` target is an alias for `tree-sitter generate` which will create tree-sitter files from the grammar
@@ -33,7 +33,7 @@ To see other make targets type `make help`
 
 ## An attempt to eliminate semantic token ambiguity
 
-Note: This list is not complete
+Note: This list is incomplete
 
 ### brackets
 
@@ -54,15 +54,13 @@ Note: This list is not complete
  - [x]  `item`  in prolog declarations 'context item declarations'
  - [x]  `item`  in any item test
 
+## Testing Goals: <!--1, 2  TODO , 3 -->
 
+1. `make parse-all` The parser **SHOULD NOT** throw a parse error with any **valid** XQuery module text.
+<!-- 3. `make query-all` The query capture S-expressions **should not** error -->
+<!-- 2. `make test-all` All tree-sitter tests in the test/corpus **should not** error -->
 
-## testing gaols: 1, 2, 3 
-
-1. `make parse-all` The parser **SHOULD NOT** throw a parse error with any **valid** xQuery module text.
-2. `make test-all` All tree-sitter tests in the test/corpus **should not** error
-3. `make query-all` The query capture S-expressions **should not** error
-
-Tests are run via [github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
+Tests are run via [GitHub actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
 
 The parsing examples that are derived from the [W3C xQuery recommendation](https://www.w3.org/TR/xquery-31)
 are found in the 'examples/spec' folder. Other parse examples are from the [qt3tests suite](https://github.com/w3c/qt3tests) and are in the examples/qt3tests folder
@@ -73,7 +71,7 @@ The `test/corpus/` tree-sitter tests are mainly organised around the sections ou
 -->
 
 To peek at tree-sitter highlight captures in action, I run some query examples in 
-[github actions](https://github.com/grantmacken/tree-sitter-xQuery/actions)
+[GitHub actions](https://github.com/grantmacken/tree-sitter-xQuery/actions), 
 which you might want to look at. 
 
 ## using tree-sitter with neovim
@@ -81,8 +79,8 @@ which you might want to look at.
  - [Video: Neovim Treesitter](https://www.youtube.com/watch?v=xQGbhiUbSmM)
  - [Video: Tree sitter & LSP: Short Comparison](https://www.youtube.com/watch?v=c17j09vY5sw)
 
-Follow the instuctions at
-[Github: nvim-treesitter ](https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers)
+Follow the instructions at
+[GitHub: nvim-treesitter ](https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers)
 to use the xquery treesitter
 
 ```
