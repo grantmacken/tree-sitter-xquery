@@ -107,9 +107,6 @@ parse-qt3:  ## parse all app examples
 	yarn parse -q examples/qt3/app/walmsley/*
 	yarn parse -q examples/qt3/app/XMark/*
 
-# .PHONY: query-all
-# query-all: hl # check captures
-
 .PHONY: hl
 hl: ## highlight query specific example nominated in .env
 	yarn highlight examples/spec/$(EXAMPLE).xq
@@ -136,7 +133,7 @@ install:
 	fi
 
 .PHONY: pr-create
-pr-create: parse-all test-all query-all 
+pr-create: parse-all test-all
 	@#gh pr create --help
 	@gh pr create --fill
 

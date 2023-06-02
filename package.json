@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-xquery",
   "description": "XQuery tree-sitter",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "author": "Grant Mackenzie <grantmacken@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -22,8 +22,7 @@
     "build": "yarn generate && node-gyp build",
     "build-wasm": "tree-sitter build-wasm",
     "web": "tree-sitter web-ui",
-    "tags": "tree-sitter tags", 
-    "snap": "tap --only test/foo.js"
+    "tags": "tree-sitter tags" 
   },
   "dependencies": {
     "nan": "^2.17.0",
@@ -31,7 +30,6 @@
   },
   "devDependencies": {
     "prettier": "^2.8.7",
-    "tap": "^16.3.4",
     "tree-sitter-cli": "^0.20.8",
     "web-tree-sitter": "^0.20.5"
   },
