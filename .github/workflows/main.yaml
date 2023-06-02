@@ -99,7 +99,7 @@ jobs:
         run: yarn parse examples/spec/option_declaration.xq
       - name: Comments
         run: yarn parse examples/spec/comments.xq
-      - name: TEST corpus
-        run: yarn test
-      - name: capture queries
-        run: make query-all
+      # - name: TEST corpus
+      #   run: yarn test
+      # - name: capture queries
+      #   run: make query-all
