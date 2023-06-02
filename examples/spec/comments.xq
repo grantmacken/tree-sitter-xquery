@@ -1,5 +1,5 @@
 (: before query body :)
-'txt' 
+'txt', 
 (: inside query body :)
 (: hi! (: xquery allows embed comments :) :)
 (:~

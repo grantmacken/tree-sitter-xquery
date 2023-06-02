@@ -2262,11 +2262,6 @@
     }
   },
   {
-    "type": "char_ref",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "comment",
     "named": true,
     "fields": {},
@@ -4162,11 +4157,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "escape_apos",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "escape_enclosed",
@@ -9327,8 +9317,8 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
           "type": "char_data",
@@ -11620,10 +11610,6 @@
     "named": false
   },
   {
-    "type": "''",
-    "named": false
-  },
-  {
     "type": "(",
     "named": false
   },
@@ -11844,6 +11830,10 @@
     "named": true
   },
   {
+    "type": "char_ref",
+    "named": true
+  },
+  {
     "type": "child",
     "named": false
   },
@@ -11950,6 +11940,10 @@
   {
     "type": "eq",
     "named": false
+  },
+  {
+    "type": "escape_apos",
+    "named": true
   },
   {
     "type": "escape_quote",

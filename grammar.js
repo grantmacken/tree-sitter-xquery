@@ -1,13 +1,3 @@
-function regexOr(regex) {
-  if (arguments.length > 1) {
-    regex = Array.from(arguments).join('|');
-  }
-  return {
-    type: 'PATTERN',
-    value: regex,
-  };
-}
-
 // https://www.w3.org/TR/xquery-31/#lexical-structure
 // When tokenizing, the longest possible match that is consistent with the EBNF is used.
 // Keywords are not reserved—that is, any lexical QName may duplicate a keyword except as noted in A.3 Reserved Function Names.
@@ -421,24 +411,21 @@ module.exports = grammar({
     // 4 [^`][{] allow { if not opening interpolation seq
     // 5 [{][`{\]] allow standalone { or {` or {{ or {[ which is not a interpolation start
     // 6 `[^{] allow standalone ` which is not a interpolation start
-
     interpolation: ($) => seq('`{', $._expr, '}`'), // 180',
     // string_literal: ($) => choice(seq('"', $.string_quote_content, token.immediate('"')), seq("'", $.string_apos_content, token.immediate("'"))),
     //string_literal: ($) => choice(seq('"', $.string_quote_content, token.immediate('"')), seq("'", $.string_apos_content, token.immediate("'"))),
     string_literal: ($) => choice($._string_quote, $._string_apos),
-
     //_direct_attribute_value: ($) => choice($.attr_quote_value, $.attr_apos_value),
     //attr_quote_value: ($) => seq('"', repeat(choice($._common_content, $.escape_quote, alias(/[^"{}<&]+/, $.char_data))), '"'),
     //attr_apos_value: ($) => seq("'", repeat(choice($._common_content, $.escape_apos, alias(/[^'{}<&]+/, $.char_data))), "'"),
-
-    _string_quote: ($) => seq('"', choice($.predefined_entity_ref, $.char_ref, $.escape_quote, alias(/[^"&]+/, $.char_data)), '"'),
-    _string_apos: ($) => seq("'", choice($.predefined_entity_ref, $.char_ref, $.escape_apos, alias(/[^'&]+/, $.char_data)), "'"),
+    _string_quote: ($) => seq('"', repeat($._string_quote_content), '"'),
+    _string_quote_content: ($) => choice($.predefined_entity_ref, $.char_ref, $.escape_quote, alias(/[^"&]+/, $.char_data)),
+    _string_apos: ($) => seq("'", repeat($._string_apos_content), "'"),
+    _string_apos_content: ($) => choice($.predefined_entity_ref, $.char_ref, $.escape_apos, alias(/[^'&]+/, $.char_data)),
     predefined_entity_ref: ($) => /&(lt|gt|amp|quot|apos);/,
     escape_quote: ($) => '""',
-    _escape_apos: ($) => "''",
     escape_apos: ($) => "''",
-    char_ref: ($) => regexOr('&#[0-9]+;', '&#x[0-9a-fA-F]+;'),
-    _char_ref: ($) => regexOr('&#[0-9]+;', '&#x[0-9a-fA-F]+;'),
+    char_ref: ($) => /&#[0-9]+;|&#x[0-9a-fA-F]+;/,
     _numeric_literal: ($) => choice($.double_literal, $.decimal_literal, $.integer_literal),
     double_literal: ($) => /(\.\d+)|(\d+\.\d*|\d+)[eE][+-]{0,1}\d+/,
     decimal_literal: ($) => /(\.\d+)|(\d+\.\d*)/,
@@ -451,7 +438,7 @@ module.exports = grammar({
     _allowed_qnames: ($) => choice(field('ncname', $._ncname), seq(field('prefixed', $._ncname), token.immediate(':'), field('local', $._ncname))),
     _ncname: ($) => choice($.identifier, alias($._non_delimiting_word, $.identifier)),
     uri_qualified_name: ($) => seq(field('braced_uri_literal', alias($.braced_uri_literal, $.identifier)), $._ncname), //ws explicitly
-    braced_uri_literal: ($) => seq('Q{', repeat1(regexOr('&(#[0-9]+|#x[0-9a-fA-F]+);', '&(lt|gt|amp|quot|apos);', '[^&{}]')), token.immediate('}')),
+    braced_uri_literal: ($) => seq('Q{', repeat1(/&(#[0-9]+|#x[0-9a-fA-F]+);|&(lt|gt|amp|quot|apos);|[^&{}]/), token.immediate('}')),
     _non_delimiting_word: ($) =>
       prec.right(
         alias(

@@ -60,4 +60,4 @@ array { $x, local:items(), <tautology>It is what it is.</tautology> },
 map { "first" : "Jenna", "last" : "Scott" }?first,
 [4, 5, 6]?2,
 (map {"first": "Tom"}, map {"first": "Dick"}, map {"first": "Harry"})?first,
-([1,2,3], [4,5,6])?2,
+([1,2,3], [4,5,6])?2

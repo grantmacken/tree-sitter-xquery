@@ -10,4 +10,4 @@ fn:reverse(10 to 15),
 '3.4.2 Combining Node Sequences',
 $seq1 union $seq2,
 $seq1 intersect $seq2,
-$seq2 except $seq3,
+$seq2 except $seq3
