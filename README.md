@@ -33,7 +33,7 @@ To see other make targets type `make help`
 
 ## Identifiers in XQuery
 
-An identifier in an XQuery is a Extended QName, aka an EQName.
+An identifier in XQuery is a Extended QName, aka an EQName.
 The aim of the XQuery highlight captures for identifiers is show their syntactic role.
 
 ```
