@@ -1,4 +1,4 @@
-xquery version "3.0" encoding "utf-8";
+xquery encoding "utf-8";
 ()
 
 

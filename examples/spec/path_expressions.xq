@@ -1,4 +1,3 @@
-( 
  'path begins a node root',
  'stand alone lone slash',
  /, (/) * 5,
@@ -16,7 +15,7 @@
  child::text(),
  child::comment(),
  child::namespace-node(),
- child::element(),
+ child::element(),-
  child::schema-element(person),
  child::element(person),
  child::element(person, surgeon),
@@ -73,10 +72,11 @@ section/attribute(id),
 section/@id,
 div1//para,
 //para[1],
+$n/para,
 ../title,
 para,
 *,
-text,
+xs:string,
 text(),
 @name,
 @*,
@@ -97,7 +97,5 @@ para[5][@type="warning"],
 chapter[title="Introduction"],
 chapter[title],
 employee[@secretary and @assistant],
-book(chapter|appendix)/section,
-'END'
-)
+book(chapter|appendix)/section
 

@@ -1,4 +1,4 @@
-( '3.12 FLWOR Expressions',
+'3.12 FLWOR Expressions',
 '3.12.2 For Clause',
 for $y allowing empty at $j in ($x to 3)
 return (),
@@ -12,7 +12,7 @@ for $x at $i in $inputvalues
 where $i mod 100 = 0
 return $x,
 '3.12.6 Count Clause',
-for $p in $products
+for $p in $productsgg
 order by $p/sales descending
 count $rank
 where $rank <= 3
@@ -84,5 +84,14 @@ return
 </big-dept>,
   let $i := 5,
   $j := 20 * $i
-return ($i, $j)
-)
+return ($i, $j),
+'@',
+$N[if (@x castable as xs:date)
+   then xs:date(@x) gt xs:date("2000-01-01")
+   else false()],
+let $vat := function($art) { $art/@vat + $art/@price }
+return shop/article/$vat(.),
+let $ctx := shop/article,
+$vat := function() { for $a in $ctx return $a/@vat + $a/@price }
+return $vat()
+

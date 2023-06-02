@@ -5,14 +5,19 @@ SHELL=/bin/bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --silent
+
 include .env
-NVIM_QUERIES := $(HOME)/.config/nvim/queries
+NVIM_QUERIES := ../dotfiles/neovim/queries
 Queries := $(NVIM_QUERIES)/xquery/$(notdir $(wildcard queries/*))
 
-default: src/grammar.json $(NVIM_QUERIES)/xquery/highlights.scm $(NVIM_QUERIES)/xquery/textobjects.scm
+# default: generate
+default: format generate queries parse hl
+	echo ' => done'
 
 # default: generate tree-sitter grammar
 generate: src/grammar.json ## generate tree-sitter files
+# $(NVIM_QUERIES)/xquery/textobjects.scm
+queries: $(NVIM_QUERIES)/xquery/highlights.scm
 
 .PHONY: help
 help: ## show this help	
@@ -21,9 +26,9 @@ help: ## show this help
 	sort |
 	awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: meld
-meld:
-	meld queries/highlights.scm  ../nvim-treesitter/queries/xquery/highlights.scm
+# .PHONY: meld
+# meld:
+# 	meld queries/highlights.scm  ../nvim-treesitter/queries/xquery/highlights.scm
 
 .PHONY: clean 
 clean: ## remove tree-sitter generated artifacts
@@ -34,27 +39,25 @@ clean: ## remove tree-sitter generated artifacts
 	rm -f tree-sitter-xquery.wasm
 	rm -fr bin
 
-
 src/grammar.json: grammar.js
-	@echo '==========================================='
-	@yarn generate
-	@echo '==========================================='
+	echo '==========================================='
+	yarn generate
+	echo '==========================================='
 
 .PHONY: watch-grammar
 watch-grammar: ## if changes in grammar.js then generate
-	@while true;
+	while true;
 	do $(MAKE) || true;
 	inotifywait -qre close_write ./  &>/dev/null;
 	done
 
 .PHONY: buildr
-buildr: ## build wasm the open web ui
+buildr: ## build wasm then open web ui
 	yarn build
 
 tree-sitter-xquery.wasm: buildr
 	source /home/gmack/projects/emsdk/emsdk_env.sh 
 	yarn build-wasm
-
 
 .PHONY: docs
 docs: tree-sitter-xquery.wasm ## publish to gh pages
@@ -69,20 +72,30 @@ test: ## test specific section nominated in .env
 	yarn test -f '$(TEST_SECTION)'
 
 .PHONY: test-all
-test-all: ## test specific section nominated in .env
+test-all: ## test everyyhin in the test dir
 	yarn test
+
+.PHONY: tags
+tags:  ##  test out a tags query file nominated in .env
+	echo 'examples/spec/$(EXAMPLE).xq'
+	echo
+	yarn tags examples/example.xquery
+	echo
 
 .PHONY: parse
 parse:  ## parse a specific example nominated in .env
-	@yarn parse examples/spec/$(EXAMPLE).xq
+	echo 'examples/spec/$(EXAMPLE).xq'
+	echo
+	yarn parse examples/spec/$(EXAMPLE).xq
+	echo
 
 .PHONY: parse-all
-parse-all:  parse-spec parse-qt3 ## parse all examples
+parse-all: parse-spec parse-qt3 ## parse all examples
 	
 PHONY: parse-graph
 parse-graph:  ## parse, then show svg grah in firefox
-	@$(TS) parse examples/spec/$(EXAMPLE).xq -D || true 
-	@firefox log.html
+	yarn parse examples/spec/$(EXAMPLE).xq -D || true 
+	firefox log.html
 
 .PHONY: parse-spec
 parse-spec:  ## parse all spec examples
@@ -94,15 +107,12 @@ parse-qt3:  ## parse all app examples
 	yarn parse -q examples/qt3/app/walmsley/*
 	yarn parse -q examples/qt3/app/XMark/*
 
-.PHONY: query-all
-query-all: hl ## check captures
-
 .PHONY: hl
 hl: ## highlight query specific example nominated in .env
 	yarn highlight examples/spec/$(EXAMPLE).xq
 
 $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
-	@mkdir -p $(dir $@)
+	@mkdir -v -p $(dir $@)
 	@cp -v $< $@
 
 # playground: tree-sitter-xQuery.wasm
@@ -110,24 +120,20 @@ $(NVIM_QUERIES)/xquery/%.scm: queries/%.scm
 web:
 	yarn web
 
-.PHONY: stow
-stow:
-	@pushd _config
-	@stow -v -t ~/.tree-sitter .
-	@popd
-
 .PHONY: install
 install:
 	@mkdir -p bin
 	if [ -e node_modules/.bin/tree-sitter ]
 	then 
-	yarn update
-	else
+	echo ' - upgrading via package json'
 	yarn install
+	else
+	echo ' - upgrading via package json'
+	yarn upgrade
 	fi
 
 .PHONY: pr-create
-pr-create: parse-all test-all query-all 
+pr-create: parse-all
 	@#gh pr create --help
 	@gh pr create --fill
 
@@ -139,8 +145,8 @@ pr-merge:
 
 .PHONY: format
 format:  grammar.js
-	@#prettier --list-different grammar.js
-	@prettier  --write --no-config --no-editorconfig --single-quote --print-width 120  grammar.js
+	#prettier --list-different grammar.js
+	./node_modules/.bin/prettier  --write --no-config --no-editorconfig --single-quote --print-width 180  grammar.js
 
 .PHONY: rec
 rec:

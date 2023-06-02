@@ -1,8 +1,0 @@
-{
-  "files": ["grammar.js", "grammar.d.ts"],
-  "exclude": ["node_modules/"],
-  "compilerOptions": {
-    "checkJs": true,
-    "strictNullChecks": true
-  }
-}

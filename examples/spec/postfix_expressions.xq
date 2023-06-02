@@ -1,4 +1,3 @@
-(
 '3.2 Postfix Expressions',
 '3.2.1 Filter Expressions',
 $products[price gt 100],
@@ -9,5 +8,5 @@ $book/(chapter | appendix)[fn:last()],
 '3.2.2 Dynamic Function Calls',
 $f(2, 3),
 $f[2]("Hi there"),
-$f()[2]
-)
+$f()[2],
+$map[?name='Mike']

@@ -1,4 +1,4 @@
-('3.1 Primary Expressions',
+'3.1 Primary Expressions',
 '3.1.1 Literals',
 "12.5",
 12,
@@ -26,6 +26,8 @@ my:two-argument-function((1, 2), 3),
 my:one-argument-function((1, 2, 3)),
 my:one-argument-function(( )),
 my:zero-argument-function( ),
+array(),
+myFunc(?),
 '3.1.5.1 Evaluating Static and Dynamic Function Calls',
 'Example: Partial Application of an Anonymous Function ',
 let $f := function ($seq, $delim) { 
@@ -60,19 +62,15 @@ let $m := map {
 },
 $days := ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 return fn:filter($days,$m),
-'3.1.6 Named Function References',
+-'3.1.6 Named Function References',
+abs#1,
 fn:abs#1,
 fn:concat#5,
 local:myfunc#2,
 '3.1.7 Inline Function Expressions',
+%local:inline ('ss')
 function() as xs:integer+ { 2, 3, 5, 7, 11, 13 },
+%public
 function($a as xs:double, $b as xs:double) as xs:double { $a * $b },
 function($a) { $a },
-collection()/(let $a := . return function() { $a }),
-'3.1.8 Enclosed Expressions',
-{ 'hello'},
-{ 'hello', 'world'},
-{()},
-{},
-'END'
-)
+collection()/(let $a := . return function() { $a })

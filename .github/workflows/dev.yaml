@@ -1,0 +1,108 @@
+name: main
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: install tree-sitter cli
+        run: make install
+      - name: generate
+        # run init to stop warnings
+        run: make && yarn tree-sitter init-config
+      - name: parse
+        run: make parse-all
+      # - name: 2.5 Types
+      #   run: yarn parse examples/spec/types.xq
+      # - name: 3.1 Primary Expressions
+      #   run: yarn parse examples/spec/primary_expressions.xq
+      # - name: 3.2 Postfix Expressions
+      #   run: yarn parse examples/spec/postfix_expressions.xq
+      # - name: 3.3 Path Expressions
+      #   run: yarn parse examples/spec/path_expressions.xq
+      # - name: 3.4 Sequence Expressions
+      #   run: yarn parse examples/spec/sequence_expressions.xq
+      # - name: 3.5 Arithmetic Expressions
+      #   run: yarn parse examples/spec/arithmetic_expressions.xq
+      # - name: 3.5 Arithmetic Expressions
+      #   run: yarn parse examples/spec/arithmetic_expressions.xq
+      # - name: 3.6 String Concatenation Expressions
+      #   run: yarn parse examples/spec/string_concatenation_expressions.xq
+      # - name: 3.7 Comparison Expressions
+      #   run: yarn parse examples/spec/comparison_expressions.xq
+      # - name: 3.8 Logical Expressions
+      #   run: yarn parse examples/spec/logical_expressions.xq
+      # - name: 3.9 Node Constructors
+      #   run: yarn parse examples/spec/node_constructors.xq
+      # - name: 3.10 String Constructors
+      #   run: yarn parse examples/spec/string_constructors.xq
+      # - name: 3.11 Maps and Arrays
+      #   run: yarn parse examples/spec/maps_and_arrays.xq
+      # - name: 3.12 FLWOR Expressions
+      #   run: yarn parse examples/spec/FLWOR_expressions.xq
+      # - name: 3.13 Ordered and Unordered Expressions
+      #   run: yarn parse examples/spec/ordered_and_unordered_expressions.xq
+      # - name: 3.14 Conditional Expressions
+      #   run: yarn parse examples/spec/conditional_expressions.xq
+      # - name: 3.15 Switch Expression
+      #   run: yarn parse examples/spec/switch_expression.xq
+      # - name: 3.16 Quantified Expressions
+      #   run: yarn parse examples/spec/quantified_expressions.xq
+      # - name: 3.17 Try Catch Expressions
+      #   run: yarn parse examples/spec/try_catch_expressions.xq
+      # - name: 3.18 Expressions on SequenceTypes
+      #   run: yarn parse examples/spec/expressions_on_sequence_types.xq
+      # - name: 3.19 Simple map operator
+      #   run: yarn parse examples/spec/bang.xq
+      # - name: 3.19 Simple map operator
+      #   run: yarn parse examples/spec/bang.xq
+      # - name: 3.20 Arrow operator (=>)
+      #   run: yarn parse examples/spec/arrow.xq
+      # - name: 4.1 Version Declaration
+      #   run: yarn parse examples/spec/version_declaration.xq
+      # - name: 4.2 Module Declaration
+      #   run: yarn parse examples/spec/module_declaration.xq
+      # - name: 4.3 Boundary-space Declaration
+      #   run: yarn parse examples/spec/boundary_space_declaration.xq
+      # - name: 4.4 Default Collation Declaration
+      #   run: yarn parse examples/spec/default_collation_declaration.xq
+      # - name: 4.5 Base URI Declaration
+      #   run: yarn parse examples/spec/base_URI_declaration.xq
+      # - name: 4.6 Construction Declaration
+      #   run: yarn parse examples/spec/construction_declaration.xq
+      # - name: 4.7 Ordering Mode Declaration
+      #   run: yarn parse examples/spec/ordering_mode_declaration.xq
+      # - name: 4.8 Empty Order Declaration
+      #   run: yarn parse examples/spec/empty_order_declaration.xq
+      # - name: 4.9 Copy-Namespaces Declaration
+      #   run: yarn parse examples/spec/copy_namespaces_declaration.xq
+      # - name: 4.10 Decimal Format Declaration
+      #   run: yarn parse examples/spec/decimal_format_declaration.xq
+      # - name: 4.11 Schema Import
+      #   run: yarn parse examples/spec/schema_import.xq
+      # - name: 4.12 Module Import
+      #   run: yarn parse examples/spec/module_import.xq
+      # - name: 4.13 Namespace Declaration
+      #   run: yarn parse examples/spec/namespace_declaration.xq
+      # - name: 4.14 Default Namespace Declaration
+      #   run: yarn parse examples/spec/default_namespace_declaration.xq
+      # - name: 4.15 Annotations
+      #   run: yarn parse examples/spec/annotations.xq
+      # - name: 4.16 Variable Declaration
+      #   run: yarn parse examples/spec/variable_declaration.xq
+      # - name: 4.17 Context Item Declaration
+      #   run: yarn parse examples/spec/context_item_declaration.xq
+      # - name: 4.18 Function Declaration
+      #   run: yarn parse examples/spec/function_declaration.xq
+      # - name: 4.19 Option Declaration
+      #   run: yarn parse examples/spec/option_declaration.xq
+      # - name: Comments
+      #   run: yarn parse examples/spec/comments.xq
+      # - name: TEST corpus
+      #   run: yarn test
+      # - name: capture queries
+      #   run: make query-all
