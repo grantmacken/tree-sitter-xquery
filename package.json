@@ -1,13 +1,18 @@
 {
   "name": "tree-sitter-xquery",
   "description": "XQuery tree-sitter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Grant Mackenzie <grantmacken@gmail.com>",
   "license": "MIT",
   "keywords": [
-    "parser",
+    "XQuery",
     "treesitter",
-    "XQuery"
+    "tree-sitter",
+    "parser",
+    "grammar",
+    "tooling",
+    "XML",
+    "JSON"
   ],
   "homepage": "https://grantmacken.github.io/tree-sitter-xquery",
   "repository": {
