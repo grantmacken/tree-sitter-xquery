@@ -56,7 +56,7 @@ buildr: ## build wasm then open web ui
 	yarn build
 
 tree-sitter-xquery.wasm: buildr
-	source /home/gmack/projects/emsdk/emsdk_env.sh 
+	source /home/gmack/projects/emsdk/emsdk_env.sh &&
 	yarn build-wasm
 
 .PHONY: docs
@@ -66,6 +66,10 @@ docs: tree-sitter-xquery.wasm ## publish to gh pages
 	cp -v node_modules/web-tree-sitter/tree-sitter.wasm docs/
 	cp -v node_modules/web-tree-sitter/tree-sitter.js docs/
 	cp -v node_modules/web-tree-sitter/tree-sitter-web.d.ts docs/
+
+.PHONY: docs-clean
+docs-clean: 
+	rm -f tree-sitter-xquery.wasm
 
 .PHONY: test
 test: ## test specific section nominated in .env

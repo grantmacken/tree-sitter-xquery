@@ -1,11 +1,4 @@
-; https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/groups/integrations/treesitter.lua
-; 2.5.1 Predefined Schema Types 
 
-; 2.5.4 SequenceType Syntax
-(type_declaration  "as" @keyword) @type.declaration
-(parenthesized_item_type . "(" ")" ) @type.parenthesized_item
-(sequence_type "empty-sequence" "(" ")" ) @type.empty_sequence
-(atomic_or_union_type) @type.atomic_or_union
 ; TODO: maybe for builtins (atomic_or_union_type
 ; ; [                   
   ; ((identifier) @type.name .)
@@ -16,6 +9,12 @@
 ;   (identifier) @type.builtin.atomic (#any-of? @type.builtin.atomic 
 ;   "anyAtomicType" "untypedAtomic" "dateTime" "dateTimeStamp" "time" "date" "duration" "yearMonthDuration" "dayTimeDuration" "float" "double" "decimal" "integer" "nonPositiveInteger" "negativeInteger" "long" "int" "short" "byte" "nonNegativeInteger" "unsignedLong" "unsignedInt" "unsignedShort" "unsignedByte" "positiveInteger" "gYearMonth" "gYear" "gMonthDay" "gDay" "gMonth" "string" "normalizedString" "token" "language" "NMTOKEN" "Name" "NCName" "ID" "IDREF" "ENTITY" "boolean" "base64Binary" "hexBinary" "anyURI" "QName" "NOTATION"
 ;   ))
+; 2.5.1 Predefined Schema Types 
+; 2.5.4 SequenceType Syntax
+(type_declaration  "as" @keyword) @type.declaration
+(parenthesized_item_type . "(" ")" ) @type.parenthesized_item
+(sequence_type "empty-sequence" "(" ")" ) @type.empty_sequence
+(atomic_or_union_type) @type.atomic_or_union
 (name_test) @type.name_test
  kind_test: (_) @type.kind_test
  (any_item) @type.any_test

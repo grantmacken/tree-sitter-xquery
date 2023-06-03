@@ -1,6 +1,10 @@
-'3.3.5 Abbreviated Syntax',
-'NameTest/WildCard',
-*,
-ncname:*,
-*:ncname,
- Q{http://example.com/ns}*
+"Hello, tree-sitter! ",
+``[ time:  `{current-time()}` ]``,
+ my:three-argument-function(1,2,3),
+ local:two-argument-function((1,2),3),
+ map {"A":1,"B":2},
+ ['1',2, 3 ],
+ ( 1 to 10 ) => sum(),
+for $v in $doc//video return $v,
+doc("books.xml")/bookstore/book[price<30],
+element date { current-date()}
