@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-xquery",
   "description": "XQuery tree-sitter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Grant Mackenzie <grantmacken@gmail.com>",
   "license": "MIT",
   "keywords": [
