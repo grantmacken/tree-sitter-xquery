@@ -16,7 +16,7 @@ return <window>{ $w }</window>,
 for sliding window $w in (2, 4, 6, 8, 10, 12, 14)
     start at $s when fn:true()
     only end at $e when $e - $s eq 2
-return avg($w)
+return avg($w),
 '3.12.5 Where Clause',
 for $x at $i in $inputvalues
 where $i mod 100 = 0
