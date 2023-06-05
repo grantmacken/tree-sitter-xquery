@@ -1,10 +1,9 @@
-"Hello, tree-sitter! ",
-``[ time:  `{current-time()}` ]``,
- my:three-argument-function(1,2,3),
- local:two-argument-function((1,2),3),
- map {"A":1,"B":2},
- ['1',2, 3 ],
- ( 1 to 10 ) => sum(),
-for $v in $doc//video return $v,
-doc("books.xml")/bookstore/book[price<30],
-element date { current-date()}
+'3.12.4 Window Clause',
+for tumbling window $w in (2, 4, 6, 8, 10, 12, 14)
+    start at $s when fn:true()
+    only end at $e when $e - $s eq 2
+return avg($w),
+for sliding window $w in (2, 4, 6, 8, 10, 12, 14)
+    start at $s when fn:true()
+    only end at $e when $e - $s eq 2
+return <window>{ $w }</window>
