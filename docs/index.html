@@ -168,7 +168,20 @@ computed_constructor: (_ .
 ; Unary lookup is used in predicates (e.g. $map[?name='Mike'] or with the simple map operator
 ;3.11.3.1 Unary Lookup 
 (unary_lookup "?"  @operator.lookup.unary key: (_) @constant.key_specifier)
-; 3.12 FLWOR Expressions TODO
+; 3.12 FLWOR Expressions
+(tumbling_window_clause . "for" "tumbling" "window" "in" ) @keyword.tumbling_window_clause
+(sliding_window_clause . "for" "sliding" "window" "in" )  @keyword.sliding_window_clause 
+(window_start_condition "start" "at""previous" "next" "when"  @keyword.window_start_condition ) 
+(window_end_condition "end" "at" "previous" "next" "when" @keyword.window_end_condition) 
+ (_ 
+   [
+   current_item: (variable) @variable.current
+   positional_variable: (variable) @variable.positional
+   previous_item: (variable) @variable.previous
+   next_item: (variable) @variable.next
+   ]
+   )
+
 (for_clause . "for") @keyword.for_clause
 (for_binding (["allowing" "empty" "at" "in" ] @keyword.for_binding)*) @variable.for_binding
 (let_clause . "let" ) @keyword.let_clause 
