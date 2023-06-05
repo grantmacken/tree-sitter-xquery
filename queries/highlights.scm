@@ -9,7 +9,6 @@
 ;   (identifier) @type.builtin.atomic (#any-of? @type.builtin.atomic 
 ;   "anyAtomicType" "untypedAtomic" "dateTime" "dateTimeStamp" "time" "date" "duration" "yearMonthDuration" "dayTimeDuration" "float" "double" "decimal" "integer" "nonPositiveInteger" "negativeInteger" "long" "int" "short" "byte" "nonNegativeInteger" "unsignedLong" "unsignedInt" "unsignedShort" "unsignedByte" "positiveInteger" "gYearMonth" "gYear" "gMonthDay" "gDay" "gMonth" "string" "normalizedString" "token" "language" "NMTOKEN" "Name" "NCName" "ID" "IDREF" "ENTITY" "boolean" "base64Binary" "hexBinary" "anyURI" "QName" "NOTATION"
 ;   ))
-; 2.5.1 Predefined Schema Types 
 ; 2.5.4 SequenceType Syntax
 (type_declaration  "as" @keyword) @type.declaration
 (parenthesized_item_type . "(" ")" ) @type.parenthesized_item
@@ -110,6 +109,18 @@ computed_constructor: (_ .
 ;3.11.3.1 Unary Lookup 
 (unary_lookup "?"  @operator.lookup.unary key: (_) @constant.key_specifier)
 ; 3.12 FLWOR Expressions TODO
+(tumbling_window_clause . "for" "tumbling" "window" "in" ) @keyword.tumbling_window_clause
+(sliding_window_clause . "for" "sliding" "window" "in" )  @keyword.sliding_window_clause 
+(window_start_condition "start" "at""previous" "next" "when"  @keyword.window_start_condition ) 
+(window_end_condition "end" "at" "previous" "next" "when" @keyword.window_end_condition) 
+ (_ 
+   [
+   current_item: (variable) @variable.current
+   positional_variable: (variable) @variable.positional
+   previous_item: (variable) @variable.previous
+   next_item: (variable) @variable.next
+   ]
+   )
 (for_clause . "for") @keyword.for_clause
 (for_binding (["allowing" "empty" "at" "in" ] @keyword.for_binding)*) @variable.for_binding
 (let_clause . "let" ) @keyword.let_clause 

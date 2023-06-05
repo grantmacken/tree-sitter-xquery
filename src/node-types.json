@@ -4211,6 +4211,14 @@
           "named": true
         },
         {
+          "type": "sliding_window_clause",
+          "named": true
+        },
+        {
+          "type": "tumbling_window_clause",
+          "named": true
+        },
+        {
           "type": "where_clause",
           "named": true
         }
@@ -8830,6 +8838,158 @@
     }
   },
   {
+    "type": "sliding_window_clause",
+    "named": true,
+    "fields": {
+      "dynamic_function_call": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_primary_expr",
+          "named": true
+        },
+        {
+          "type": "absolute_path_expr",
+          "named": true
+        },
+        {
+          "type": "additive_expr",
+          "named": true
+        },
+        {
+          "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "arrow_expr",
+          "named": true
+        },
+        {
+          "type": "bang_expr",
+          "named": true
+        },
+        {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
+          "type": "castable_expr",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
+          "named": true
+        },
+        {
+          "type": "flwor_expr",
+          "named": true
+        },
+        {
+          "type": "if_expr",
+          "named": true
+        },
+        {
+          "type": "instance_of_expr",
+          "named": true
+        },
+        {
+          "type": "intersect_except_expr",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expr",
+          "named": true
+        },
+        {
+          "type": "or_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "quantified_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "rel_path_expr",
+          "named": true
+        },
+        {
+          "type": "string_concat_expr",
+          "named": true
+        },
+        {
+          "type": "switch_expr",
+          "named": true
+        },
+        {
+          "type": "treat_expr",
+          "named": true
+        },
+        {
+          "type": "try_catch_expr",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
+          "named": true
+        },
+        {
+          "type": "typeswitch_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
+        },
+        {
+          "type": "union_expr",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "window_end_condition",
+          "named": true
+        },
+        {
+          "type": "window_start_condition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_at",
     "named": true,
     "fields": {},
@@ -10091,6 +10251,158 @@
       "types": [
         {
           "type": "enclosed_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tumbling_window_clause",
+    "named": true,
+    "fields": {
+      "dynamic_function_call": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_primary_expr",
+          "named": true
+        },
+        {
+          "type": "absolute_path_expr",
+          "named": true
+        },
+        {
+          "type": "additive_expr",
+          "named": true
+        },
+        {
+          "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "arrow_expr",
+          "named": true
+        },
+        {
+          "type": "bang_expr",
+          "named": true
+        },
+        {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
+          "type": "castable_expr",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
+          "named": true
+        },
+        {
+          "type": "flwor_expr",
+          "named": true
+        },
+        {
+          "type": "if_expr",
+          "named": true
+        },
+        {
+          "type": "instance_of_expr",
+          "named": true
+        },
+        {
+          "type": "intersect_except_expr",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expr",
+          "named": true
+        },
+        {
+          "type": "or_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "quantified_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "rel_path_expr",
+          "named": true
+        },
+        {
+          "type": "string_concat_expr",
+          "named": true
+        },
+        {
+          "type": "switch_expr",
+          "named": true
+        },
+        {
+          "type": "treat_expr",
+          "named": true
+        },
+        {
+          "type": "try_catch_expr",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
+          "named": true
+        },
+        {
+          "type": "typeswitch_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
+        },
+        {
+          "type": "union_expr",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "window_end_condition",
+          "named": true
+        },
+        {
+          "type": "window_start_condition",
           "named": true
         }
       ]
@@ -11582,6 +11894,362 @@
     }
   },
   {
+    "type": "window_end_condition",
+    "named": true,
+    "fields": {
+      "current_item": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "dynamic_function_call": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          }
+        ]
+      },
+      "next_item": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "positional_variable": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "previous_item": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_primary_expr",
+          "named": true
+        },
+        {
+          "type": "absolute_path_expr",
+          "named": true
+        },
+        {
+          "type": "additive_expr",
+          "named": true
+        },
+        {
+          "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "arrow_expr",
+          "named": true
+        },
+        {
+          "type": "bang_expr",
+          "named": true
+        },
+        {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
+          "type": "castable_expr",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
+          "named": true
+        },
+        {
+          "type": "flwor_expr",
+          "named": true
+        },
+        {
+          "type": "if_expr",
+          "named": true
+        },
+        {
+          "type": "instance_of_expr",
+          "named": true
+        },
+        {
+          "type": "intersect_except_expr",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expr",
+          "named": true
+        },
+        {
+          "type": "or_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "quantified_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "rel_path_expr",
+          "named": true
+        },
+        {
+          "type": "string_concat_expr",
+          "named": true
+        },
+        {
+          "type": "switch_expr",
+          "named": true
+        },
+        {
+          "type": "treat_expr",
+          "named": true
+        },
+        {
+          "type": "try_catch_expr",
+          "named": true
+        },
+        {
+          "type": "typeswitch_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
+        },
+        {
+          "type": "union_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "window_start_condition",
+    "named": true,
+    "fields": {
+      "current_item": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "dynamic_function_call": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "arg_list",
+            "named": true
+          }
+        ]
+      },
+      "filter_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          }
+        ]
+      },
+      "next_item": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "positional_variable": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "previous_item": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_primary_expr",
+          "named": true
+        },
+        {
+          "type": "absolute_path_expr",
+          "named": true
+        },
+        {
+          "type": "additive_expr",
+          "named": true
+        },
+        {
+          "type": "and_expr",
+          "named": true
+        },
+        {
+          "type": "arrow_expr",
+          "named": true
+        },
+        {
+          "type": "bang_expr",
+          "named": true
+        },
+        {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
+          "type": "castable_expr",
+          "named": true
+        },
+        {
+          "type": "comparison_expr",
+          "named": true
+        },
+        {
+          "type": "flwor_expr",
+          "named": true
+        },
+        {
+          "type": "if_expr",
+          "named": true
+        },
+        {
+          "type": "instance_of_expr",
+          "named": true
+        },
+        {
+          "type": "intersect_except_expr",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expr",
+          "named": true
+        },
+        {
+          "type": "or_expr",
+          "named": true
+        },
+        {
+          "type": "postfix_lookup",
+          "named": true
+        },
+        {
+          "type": "quantified_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "rel_path_expr",
+          "named": true
+        },
+        {
+          "type": "string_concat_expr",
+          "named": true
+        },
+        {
+          "type": "switch_expr",
+          "named": true
+        },
+        {
+          "type": "treat_expr",
+          "named": true
+        },
+        {
+          "type": "try_catch_expr",
+          "named": true
+        },
+        {
+          "type": "typeswitch_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
+        },
+        {
+          "type": "union_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "",
+    "named": false
+  },
+  {
     "type": "!",
     "named": false
   },
@@ -11938,6 +12606,10 @@
     "named": false
   },
   {
+    "type": "end",
+    "named": false
+  },
+  {
     "type": "eq",
     "named": false
   },
@@ -12090,6 +12762,10 @@
     "named": false
   },
   {
+    "type": "next",
+    "named": false
+  },
+  {
     "type": "no-inherit",
     "named": false
   },
@@ -12103,6 +12779,10 @@
   },
   {
     "type": "of",
+    "named": false
+  },
+  {
+    "type": "only",
     "named": false
   },
   {
@@ -12158,6 +12838,10 @@
     "named": false
   },
   {
+    "type": "previous",
+    "named": false
+  },
+  {
     "type": "processing-instruction",
     "named": false
   },
@@ -12186,11 +12870,19 @@
     "named": false
   },
   {
+    "type": "sliding",
+    "named": false
+  },
+  {
     "type": "some",
     "named": false
   },
   {
     "type": "stable",
+    "named": false
+  },
+  {
+    "type": "start",
     "named": false
   },
   {
@@ -12222,6 +12914,10 @@
     "named": false
   },
   {
+    "type": "tumbling",
+    "named": false
+  },
+  {
     "type": "typeswitch",
     "named": false
   },
@@ -12242,7 +12938,15 @@
     "named": false
   },
   {
+    "type": "when",
+    "named": false
+  },
+  {
     "type": "where",
+    "named": false
+  },
+  {
+    "type": "window",
     "named": false
   },
   {

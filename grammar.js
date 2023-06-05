@@ -164,21 +164,44 @@ module.exports = grammar({
         //$.qname
       ),
     flwor_expr: ($) => prec(2, seq($._initial_clause, repeat($._intermediate_clause), $.return_clause)), // 41
-    _initial_clause: ($) => choice($.for_clause, $.let_clause), // 42
+    _initial_clause: ($) => choice($.for_clause, $.let_clause, $._window_clause), // 42
     _intermediate_clause: ($) => choice($._initial_clause, $.where_clause, $.group_by_clause, $.order_by_clause, $.count_clause), // 43',
     for_clause: ($) => seq('for', $.for_binding, repeat(seq(',', $.for_binding))), // 44',
     for_binding: ($) =>
-      seq(
-        '$',
-        $._EQName,
-        optional($.type_declaration),
-        optional(seq('allowing', 'empty')),
-        optional(seq('at', field('positional_variable', $.variable))),
-        'in',
-        field('binding_sequence', $._expr_single)
-      ), // 45
+      seq('$', $._EQName, optional($.type_declaration), optional(seq('allowing', 'empty')), optional($._positional_var), 'in', field('binding_sequence', $._expr_single)), // 45
     let_clause: ($) => seq('let', $.let_binding, repeat(seq(',', $.let_binding))), // 48
     let_binding: ($) => seq('$', $._EQName, optional($.type_declaration), ':=', $._expr_single), // 49
+    _window_clause: ($) => choice($.tumbling_window_clause, $.sliding_window_clause),
+    //, optional($.type_declaration), 'in'
+    tumbling_window_clause: ($) =>
+      seq('for', 'tumbling', 'window', $.variable, optional($.type_declaration), 'in', $._expr_single, $.window_start_condition, optional($.window_end_condition)),
+    sliding_window_clause: ($) =>
+      seq('for', 'sliding', 'window', $.variable, optional($.type_declaration), 'in', $._expr_single, $.window_start_condition, optional($.window_end_condition)),
+    window_start_condition: ($) =>
+      seq(
+        'start',
+        optional(field('current_item', $.variable)),
+        optional($._positional_var),
+        optional(seq('previous', field('previous_item', $.variable))),
+        optional(seq('next', field('next_item', $.variable))),
+        'when',
+        $._expr_single
+      ),
+    window_end_condition: ($) =>
+      seq(
+        optional('only'),
+        'end',
+        optional(field('current_item', $.variable)),
+        optional($._positional_var),
+        optional(seq('previous', field('previous_item', $.variable))),
+        optional(seq('next', field('next_item', $.variable))),
+        'when',
+        $._expr_single
+      ),
+    _positional_var: ($) => seq('at', field('positional_variable', $.variable)),
+    current_item: ($) => seq('$', $._EQName),
+    previous_item: ($) => seq(''),
+    next_item: ($) => seq(''),
     count_clause: ($) => seq('count', $.variable), //   59
     where_clause: ($) => seq('where', $._expr_single), // 60
     group_by_clause: ($) => seq('group', 'by', $.grouping_spec, repeat(seq(',', $.grouping_spec))), // 61
@@ -412,12 +435,7 @@ module.exports = grammar({
     // 5 [{][`{\]] allow standalone { or {` or {{ or {[ which is not a interpolation start
     // 6 `[^{] allow standalone ` which is not a interpolation start
     interpolation: ($) => seq('`{', $._expr, '}`'), // 180',
-    // string_literal: ($) => choice(seq('"', $.string_quote_content, token.immediate('"')), seq("'", $.string_apos_content, token.immediate("'"))),
-    //string_literal: ($) => choice(seq('"', $.string_quote_content, token.immediate('"')), seq("'", $.string_apos_content, token.immediate("'"))),
     string_literal: ($) => choice($._string_quote, $._string_apos),
-    //_direct_attribute_value: ($) => choice($.attr_quote_value, $.attr_apos_value),
-    //attr_quote_value: ($) => seq('"', repeat(choice($._common_content, $.escape_quote, alias(/[^"{}<&]+/, $.char_data))), '"'),
-    //attr_apos_value: ($) => seq("'", repeat(choice($._common_content, $.escape_apos, alias(/[^'{}<&]+/, $.char_data))), "'"),
     _string_quote: ($) => seq('"', repeat($._string_quote_content), '"'),
     _string_quote_content: ($) => choice($.predefined_entity_ref, $.char_ref, $.escape_quote, alias(/[^"&]+/, $.char_data)),
     _string_apos: ($) => seq("'", repeat($._string_apos_content), "'"),
